@@ -1,6 +1,6 @@
-<!--##52917b0a-85d5-4617-a069-ecee5fc0711e##-->
+<!--##ccd61c2d-09ab-4b14-b707-7d11ff99b64e##-->
 <!--##PAMMPM00200##-->
-<!--##CKEedvTR+5r8Vhoj/JZ5GZDumbI6KEYk+jKruQYTGk4=##-->
+<!--##X4vi/0iUQfieKsuuMKQ6i8b7igPKaW4Dp1Rjyp8wtjw=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -16,13 +16,13 @@
     <li>
       <label class="dews-ui-multilingual">등록일</label>
       <span>
-        <span id="monthperiodpicker1" class="dews-ui-periodpicker required"></span>
+        <span id="s_WRT_DT" class="dews-ui-periodpicker required"></span>
       </span>
     </li>
     <li>
       <label class="dews-ui-multilingual">신청종류</label>
       <span>
-        <select id="dropdownlist1" name="dropdownlist1" class="dews-ui-dropdownlist basic" data-dews-show-tooltip="true" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+        <select id="s_IDNFR_FG" name="s_IDNFR_FG" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-show-tooltip="true" data-dews-option-label-value="" data-dews-option-label-text="" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
       </span>
     </li>
     <li>
@@ -38,9 +38,9 @@
   <button class="dews-ui-button">마감</button>
   <button class="dews-ui-button">마감취소</button>
 </div>
-<div class="dews-ui-container-panel">
-  <div class="dews-container-item" data-dews-position="left" data-dews-width="1073px">
-    <div id="grid2" class="dews-ui-grid"></div>
+<div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="left" data-dews-width="484px">
+    <div id="mtnityidnfMaster_grid" class="dews-ui-grid"></div>
   </div>
   <div class="dews-container-item" data-dews-position="normal" data-dews-width="600px">
     <div class="dews-ui-form-panel" data-dews-item-width="723">
@@ -235,7 +235,7 @@
             <button class="dews-ui-button small">추가</button>
             <button class="dews-ui-button small">삭제</button>
           </div>
-          <div id="grid3" class="dews-ui-grid"></div>
+          <div id="MtnityidnfDtl_grid" class="dews-ui-grid"></div>
         </li>
       </ul>
     </div>
@@ -257,43 +257,149 @@
 
     
     
-    self.dataSource1 = dews.ui.dataSource('dataSource1', {
+    self.mtnityidnfMaster_ds = dews.ui.dataSource('mtnityidnfMaster_ds', {
       grid: true,
-      schema: {
-        model: {
-          fields: [
-            { field: 'KOR_NM', editable: false, dataType: 'string' }, 
-            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
-            { field: 'DEPT_NM', editable: false, dataType: 'string' }, 
-            { field: 'REQ_KND_FG', editable: false, dataType: 'string' }
-          ]
-    
+      transport: {
+        read: {
+          type: 'post',
+          url: dews.url.getApiUrl('HR', 'PAMMPM00200_Service', 'pammpm00200_selectAllData'),
+          data: function () {
+            return {
+              wrtDt_start: self.s_WRT_DT.getStartDate(),
+              wrtDt_end: self.s_WRT_DT.getEndDate(),
+              req_knd_fg: self.s_IDNFR_FG.value()
+            };
+          }
         }
       },
-      data: []
-    });
-    self.dataSource2 = dews.ui.dataSource('dataSource2', {
-      grid: true,
       schema: {
         model: {
           fields: [
-            { field: 'TERMFG_CD', editable: false, dataType: 'string' }, 
+            { field: 'COMPANY_CD', editable: false, dataType: 'string' }, 
+            { field: 'WRT_DT', editable: false, dataType: 'string' }, 
+            { field: 'wrtDt_start', editable: false, dataType: 'string' }, 
+            { field: 'wrtDt_end', editable: false, dataType: 'string' }, 
+            { field: 'CLOSE_YN', editable: false, dataType: 'string' }, 
+            { field: 'REQ_KND_FG', editable: false, dataType: 'string' }, 
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'KOR_NM', editable: false, dataType: 'string' }, 
+            { field: 'DOC_NO', editable: false, dataType: 'string' }, 
+            { field: 'DECL_DT', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_MNG_NO', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_CD', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_NM', editable: false, dataType: 'string' }, 
+            { field: 'POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'ADDR_TP', editable: false, dataType: 'string' }, 
+            { field: 'BASE_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'DTL_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'PSPTCOM_YN', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_EMP_NM', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_EMAIL_NM', editable: false, dataType: 'string' }, 
+            { field: 'RES_NO', editable: false, dataType: 'string' }, 
+            { field: 'CHLDBRTH_DT', editable: false, dataType: 'string' }, 
+            { field: 'DIVD_YN', editable: false, dataType: 'string' }, 
+            { field: 'TERM_CD', editable: false, dataType: 'string' }, 
+            { field: 'MLTPPRGN_YN', editable: false, dataType: 'string' }, 
+            { field: 'USL_WAGE_CD', editable: false, dataType: 'string' }, 
+            { field: 'USL_WAGE_AMT', editable: false, dataType: 'number' }, 
+            { field: 'MM_FIXED_LABORTM_DY', editable: false, dataType: 'number' }, 
+            { field: '_uid', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_ID', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_IP', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_DTS', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_ID', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_DTS', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_IP', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_MCADDR_NM', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_MCADDR_NM', editable: false, dataType: 'string' }, 
+            { field: 'SQ_NO', editable: false, dataType: 'string' }, 
+            { field: 'RVERS_YM', editable: false, dataType: 'string' }, 
             { field: 'START_DT', editable: false, dataType: 'string' }, 
             { field: 'END_DT', editable: false, dataType: 'string' }, 
-            { field: 'DT_CNT', editable: false, dataType: 'string' }, 
-            { field: 'USL_WAGE_AMT', editable: false, dataType: 'string' }
+            { field: 'BWRK_DY', editable: false, dataType: 'number' }, 
+            { field: 'PAY_YN', editable: false, dataType: 'string' }, 
+            { field: 'PAY_AMT', editable: false, dataType: 'number' }
           ]
     
         }
-      },
-      data: []
+      }
     });
-    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_ci_codeDtl_list'),{
+    self.MtnityidnfDtl_ds = dews.ui.dataSource('MtnityidnfDtl_ds', {
+      grid: true,
+      transport: {
+        read: {
+          type: 'post',
+          url: dews.url.getApiUrl('HR', 'PAMMPM00200_Service', 'pammpm00200_selectHrMtnityidnfDtl'),
+          data: function () {
+            return {
+              emp_no: '2015020001',
+              doc_no: 'MPC2021060003'
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'COMPANY_CD', editable: false, dataType: 'string' }, 
+            { field: 'WRT_DT', editable: false, dataType: 'string' }, 
+            { field: 'wrtDt_start', editable: false, dataType: 'string' }, 
+            { field: 'wrtDt_end', editable: false, dataType: 'string' }, 
+            { field: 'CLOSE_YN', editable: false, dataType: 'string' }, 
+            { field: 'REQ_KND_FG', editable: false, dataType: 'string' }, 
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'KOR_NM', editable: false, dataType: 'string' }, 
+            { field: 'DOC_NO', editable: false, dataType: 'string' }, 
+            { field: 'DECL_DT', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_MNG_NO', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_CD', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_NM', editable: false, dataType: 'string' }, 
+            { field: 'POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'ADDR_TP', editable: false, dataType: 'string' }, 
+            { field: 'BASE_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'DTL_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'PSPTCOM_YN', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_EMP_NM', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_EMAIL_NM', editable: false, dataType: 'string' }, 
+            { field: 'RES_NO', editable: false, dataType: 'string' }, 
+            { field: 'CHLDBRTH_DT', editable: false, dataType: 'string' }, 
+            { field: 'DIVD_YN', editable: false, dataType: 'string' }, 
+            { field: 'TERM_CD', editable: false, dataType: 'string' }, 
+            { field: 'MLTPPRGN_YN', editable: false, dataType: 'string' }, 
+            { field: 'USL_WAGE_CD', editable: false, dataType: 'string' }, 
+            { field: 'USL_WAGE_AMT', editable: false, dataType: 'number' }, 
+            { field: 'MM_FIXED_LABORTM_DY', editable: false, dataType: 'number' }, 
+            { field: '_uid', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_ID', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_IP', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_DTS', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_ID', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_DTS', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_IP', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_MCADDR_NM', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_MCADDR_NM', editable: false, dataType: 'string' }, 
+            { field: 'SQ_NO', editable: false, dataType: 'string' }, 
+            { field: 'RVERS_YM', editable: false, dataType: 'string' }, 
+            { field: 'START_DT', editable: false, dataType: 'string' }, 
+            { field: 'END_DT', editable: false, dataType: 'string' }, 
+            { field: 'BWRK_DY', editable: false, dataType: 'number' }, 
+            { field: 'PAY_YN', editable: false, dataType: 'string' }, 
+            { field: 'PAY_AMT', editable: false, dataType: 'number' }
+          ]
+    
+        }
+      }
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'),{
       async: false,
       data: {
           end_dt: '',
           foreign_yn: '',
-          field_cd_pipe: 'P00520|P02010',
+          field_cd_pipe: 'P00520|P02010|P03500',
           module_cd: 'HR',
           syscode_yn: '',
           keyword: '',
@@ -302,6 +408,7 @@
     }).done(function (data) {
       var ar_P00520 = new Array();
       var ar_P02010 = new Array();
+      var ar_P03500 = new Array();
     
       for (var i = 0; i < data.length; i++) {
         if (data[i].FIELD_CD == "P00520") { 
@@ -312,9 +419,14 @@
           ar_P02010.push(data[i]); 
     
         }
+        else if (data[i].FIELD_CD == "P03500") { 
+          ar_P03500.push(data[i]); 
+    
+        }
       }
       self.pipeDataSource1_P00520 = dews.ui.dataSource('pipeDataSource1_P00520',  { data: ar_P00520 });
       self.pipeDataSource1_P02010 = dews.ui.dataSource('pipeDataSource1_P02010',  { data: ar_P02010 });
+      self.pipeDataSource1_P03500 = dews.ui.dataSource('pipeDataSource1_P03500',  { data: ar_P03500 });
       self.pipeDataSource1 = dews.ui.dataSource('pipeDataSource1', { data: data });
       
     });
@@ -355,7 +467,8 @@
     }
     );
     dews.ui.mainbuttons.search.click(/*3dceaecc-319c-43e3-a6bb-327bcace4a48*/ function () {
-    
+        self.mtnityidnfMaster_ds.read();
+        self.MtnityidnfDtl_ds.read();
     }
     );
     dews.ui.mainbuttons.delete.click(/*1703f0ef-4051-4ffd-962e-11990ff25225*/ function () {
@@ -370,8 +483,9 @@
         });
     }
     );
-    dews.ui.grid(self.$grid2, {
-      dataSource: self.dataSource1,
+    self.s_IDNFR_FG.setDataSource(self.pipeDataSource1_P03500);
+    dews.ui.grid(self.$mtnityidnfMaster_grid, {
+      dataSource: self.mtnityidnfMaster_ds,
       height: 691,
       sortable: false,
       autoBind: false,
@@ -426,8 +540,8 @@
         rightColCount: 0
       }
     });
-    dews.ui.grid(self.$grid3, {
-      dataSource: self.dataSource2,
+    dews.ui.grid(self.$MtnityidnfDtl_grid, {
+      dataSource: self.MtnityidnfDtl_ds,
       sortable: false,
       autoBind: false,
       checkable: false,
@@ -522,11 +636,11 @@
     });
     
     
-    self.grid2.setDetail(self.grid3);
     
     
     /*d2692eed-91c6-4644-b7ca-3eed2f04ec7b*/ 
     //# sourceURL=PAMMPM0200.js
+    self.mainButtons.delete.useDefaultConfirm = false;
     
     
 
