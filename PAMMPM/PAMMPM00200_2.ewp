@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <page title="출산휴가확인서등록" name="PAMMPM00200" type="page">
-  <canvas uid="canvas-1485142915100" type="page" title="출산휴가확인서등록" preReady="686d6dfe-5aef-496d-847d-f8b9362d31da" ready="d2692eed-91c6-4644-b7ca-3eed2f04ec7b" preDesignSummary="1da32f7e-0821-4a3b-875a-fda0fea8d22a" postDesignSummary="f6ef59c6-4047-41c2-befd-0244374ad770" component="" function="">
+  <canvas uid="canvas-1485142915100" type="page" title="출산휴가확인서등록" ready="d2692eed-91c6-4644-b7ca-3eed2f04ec7b" postDesignSummary="f6ef59c6-4047-41c2-befd-0244374ad770" component="" function="">
     <pageInformation>
       <version>1.0</version>
-      <create>tjqkd0912</create>
+      <create>minaci00093</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-25T23:52:06.0531218+09:00</builddate>
-      <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-25T23:52:06.0531218+09:00</modifieddate>
+      <builddate>2023-08-25T20:16:00.7280979+09:00</builddate>
+      <createdate>2023-08-24T15:03:14.8801551+09:00</createdate>
+      <modifieddate>2023-08-25T20:16:00.7280979+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -39,12 +39,12 @@
       <button uid="button-1579582718434" text="마감" buttonType="normal" useemphasize="false" emphasize="" disabled="false" />
       <button uid="button-1579582732532" text="마감취소" buttonType="normal" useemphasize="false" emphasize="" disabled="false" />
     </buttonGroup>
-    <containerPanel uid="containerPanel-1579481711463" height_type="px" containerResize="false">
-      <containerItem uid="containerItem-1579481711859" width_type="px" width="495" location="left">
-        <grid uid="grid-1579581960515" mockupData="" id="mtnityidnfMaster_grid" dataSource="mtnityidnfMaster_ds" height_type="px" height="889" editable="false" movable="false" rowNo="true" selectable="false" checkable="true" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+    <containerPanel uid="containerPanel-1579481711463" height_type="px" fitBottom="true" containerResize="false">
+      <containerItem uid="containerItem-1579481711859" width_type="px" width="287" location="left">
+        <grid uid="grid-1579581960515" mockupData="" id="mtnityidnfMaster_grid" dataSource="mtnityidnfMaster_ds" height_type="px" height="691" editable="false" movable="false" rowNo="true" selectable="true" checkable="true" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
           <mockupText>MjAyMC0wMS0yMSxZZXMs7Lac7IKw7KCE7Zy07Zy06rCALDExMTExLO2Zjeq4uOuPmQ==</mockupText>
           <columns>
-            <column uid="deae003c-248b-44d6-a7e3-b4cc5ccc1fb3" field="WRT_DT" title="등록일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="required" footerType="object" headerType="object">
+            <column uid="deae003c-248b-44d6-a7e3-b4cc5ccc1fb3" field="WRT_DT" title="등록일" width="60" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -55,11 +55,15 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
-            <column uid="561a2fe0-8aac-4884-9b4f-73884879755c" field="CLOSE_YN" title="마감여부" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="561a2fe0-8aac-4884-9b4f-73884879755c" field="CLOSE_YN" title="마감여부" width="60" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -70,11 +74,15 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
-            <column uid="b0d68e2b-0d24-42c9-a274-bda82fa3f4b3" field="REQ_KND_FG" title="신청종류" width="80" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="b0d68e2b-0d24-42c9-a274-bda82fa3f4b3" field="REQ_KND_FG" title="신청종류" width="60" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -85,11 +93,15 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
-            <column uid="87445365-df9b-4e52-a402-53acc9db6df0" field="EMP_NO" title="사원번호" width="80" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="87445365-df9b-4e52-a402-53acc9db6df0" field="EMP_NO" title="사원번호" width="60" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -100,7 +112,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <codepicker helpCode="H_HR_EMP_MST_S02" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpTitle="사원도움창" helpSize="big" useAjax="true" validation="true" editable_type="value">
                   <mapping>
@@ -114,7 +128,7 @@
               </editor>
               <customExport check="" />
             </column>
-            <column uid="6b3f747e-d276-429a-a638-29c19c6718a2" field="KOR_NM" title="한글명" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="6b3f747e-d276-429a-a638-29c19c6718a2" field="KOR_NM" title="한글명" width="60" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -125,8 +139,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="a3a95b1a-6d2b-4176-a827-8b2d96291aee" field="DEPT_NM" title="부서명" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -140,23 +158,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
-              <customExport check="" />
-            </column>
-            <column uid="b9828932-7716-49d2-8cca-0b5d52b8c19b" field="DOC_NO" title="문서번호" align="center" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="false" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
-              <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
-                <referenceFieldArray />
-              </mergeObject>
-              <headerCheck used="false" location="right" />
-              <footer predefined="false" currency_type="value" currency="" align="center">
-                <group predefined="false" />
-              </footer>
-              <footerCollection />
-              <headerSummary predefined="false" currency_type="value" currency="" align="center" />
-              <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
           </columns>
@@ -179,8 +186,8 @@
           </note>
         </grid>
       </containerItem>
-      <containerItem uid="containerItem-1579481719684" width_type="px" width="" location="normal">
-        <formPanel uid="formPanel-1579582358720" columnLength="2" labelAlign="right">
+      <containerItem uid="containerItem-1579481719684" width_type="px" width="600" location="normal">
+        <formPanel uid="formPanel-1579582358720" columnLength="2" labelAlign="right" itemwidth="723">
           <formGroup uid="formGroup-1579582359003">
             <formItem uid="formItem-96fc66c0436948228ad4e6b2df6d5520" columnSize="0" text="신청번호">
               <textbox uid="textbox-db81a1f9a0c0491caa5ddf8df0b95687" id="REQNO" disabled="false" readonly="true" predefined="false" useSecureMask="false" multiline="false" width_type="px" width="132" height_type="px" rows="0" maxlength="0" password="false" />
@@ -188,8 +195,8 @@
             </formItem>
           </formGroup>
           <formGroup uid="formGroup-1579656309684">
-            <formItem uid="formItem-1579656458311" columnSize="1" text="등록일">
-              <datepicker uid="datepicker-1579656458584" id="datepicker2" disabled="false" readonly="false" state="required" min_type="value" max_type="value" predefined="false" width_type="px" />
+            <formItem uid="formItem-1579656458311" columnSize="0" text="등록일">
+              <datepicker uid="datepicker-1579656458584" style="text-align: right" id="datepicker2" disabled="false" readonly="false" state="required" min_type="value" max_type="value" predefined="false" width_type="px" />
             </formItem>
             <formItem uid="formItem-1579656473197" columnSize="1" text="신고일">
               <datepicker uid="datepicker-1579656473495" id="datepicker3" disabled="false" readonly="false" state="basic" min_type="value" max_type="value" predefined="false" width_type="px" />
@@ -310,7 +317,7 @@
               <button uid="button-1579672585493" text="추가" buttonType="small" useemphasize="false" emphasize="" disabled="false" />
               <button uid="button-1579672587763" text="삭제" buttonType="small" useemphasize="false" emphasize="" disabled="false" />
             </buttonGroup>
-            <grid uid="grid-1579672607629" mockupData="" id="MtnityidnfDtl_grid" dataSource="MtnityidnfDtl_ds" height_type="px" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" masterGrid="mtnityidnfMaster_grid" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+            <grid uid="grid-1579672607629" mockupData="" id="MtnityidnfDtl_grid" dataSource="MtnityidnfDtl_ds" height_type="px" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" masterGrid="" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
               <mockupText>MjAxOS0xMS0wMSwyMDE5LTExLTMwLDMwLE5vLA0KMjAxOS0xMi0wMSwyMDE5LTEyLTMxLDMxLE5vLA0KMjAyMC0wMS0wMSwyMDIwLTAxLTI5LDI5LFllcywzMDAwMDAw</mockupText>
               <columns>
                 <column uid="cefc6a66-f8a1-43b3-b28a-eb0336832cd9" field="TERMFG_CD" title="기간구분" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -325,10 +332,14 @@
                   <headerSummary predefined="false" currency_type="value" currency="" align="center" />
                   <headerSummaryCollection />
                   <formats />
-                  <editor />
+                  <editor>
+                    <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" dataPipe="P00520" useDefault="false" defaultValue="" defaultText="">
+                      <dataSelectable />
+                    </dropdownlist>
+                  </editor>
                   <customExport check="" />
                 </column>
-                <column uid="a54d8bda-ddaf-4edc-a1fc-30d3f00b3380" field="START_DT" title="시작일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="required" footerType="object" headerType="object">
+                <column uid="a54d8bda-ddaf-4edc-a1fc-30d3f00b3380" field="START_DT" title="시작일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
                   <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                     <referenceFieldArray />
                   </mergeObject>
@@ -347,7 +358,7 @@
                   </editor>
                   <customExport check="" />
                 </column>
-                <column uid="b8c7d82d-863d-4e46-824e-d6d5257959c7" field="END_DT" title="종료일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="required" footerType="object" headerType="object">
+                <column uid="b8c7d82d-863d-4e46-824e-d6d5257959c7" field="END_DT" title="종료일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
                   <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                     <referenceFieldArray />
                   </mergeObject>
@@ -368,7 +379,7 @@
                   </editor>
                   <customExport check="" />
                 </column>
-                <column uid="1bd45a59-4fc6-4c07-b190-dd3b89415e82" field="BWRK_DY" title="일수" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
+                <column uid="1bd45a59-4fc6-4c07-b190-dd3b89415e82" field="DT_CNT" title="일수" width="80" align="right" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
                   <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                     <referenceFieldArray />
                   </mergeObject>
@@ -383,7 +394,9 @@
                     <date predefined="false" format="yyyy-MM-dd" />
                   </formats>
                   <editor>
-                    <numerictextbox predefined="false" currency_type="value" currency="" increaseType="multiple" increaseValue="" round="round" maxLength="" editable_type="value" />
+                    <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" dataPipe="P02010" useDefault="false" defaultValue="" defaultText="">
+                      <dataSelectable />
+                    </dropdownlist>
                   </editor>
                   <customExport check="" />
                 </column>
@@ -400,7 +413,9 @@
                   <headerSummaryCollection />
                   <formats />
                   <editor>
-                    <textbox maxLength="0" editable_type="value" />
+                    <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" useDefault="false" defaultValue="" defaultText="">
+                      <dataSelectable />
+                    </dropdownlist>
                   </editor>
                   <customExport check="" />
                 </column>
@@ -504,10 +519,10 @@
       </columns>
       <widgetSampleDatas />
     </datasource>
-    <datasource uid="datasource-81935a2df08b44a58f55345aaf2cd04c" id="MtnityidnfDtl_ds" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PAMMPM00200_Service" urlpattern="pammpm00200_selectHrMtnityidnfDtl" params_type="javascript" params="b8e44014-9b48-4870-8e86-a9ef771175d3" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="true">
+    <datasource uid="datasource-81935a2df08b44a58f55345aaf2cd04c" id="MtnityidnfDtl_ds" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PAMMPM00200_Service" urlpattern="pammpm00200_selectHrMtnityidnfDtl" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="true">
       <mapping>
-        <param parameter="emp_no" applyType="control" dataType="mtnityidnfMaster_grid" value="checkedRows.EMP_NO" defaultValue="1" />
-        <param parameter="doc_no" applyType="control" dataType="mtnityidnfMaster_grid" value="checkedRows.DOC_NO" defaultValue="2" />
+        <param parameter="emp_no" applyType="constant" dataType="string" value="2015020001" />
+        <param parameter="doc_no" applyType="constant" dataType="string" value="MPC2021060003" />
       </mapping>
       <columns>
         <column field="COMPANY_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="회사코드" useAggregate="false" aggregate="" useGroup="false" />
@@ -559,7 +574,7 @@
       </columns>
       <widgetSampleDatas />
     </datasource>
-    <datasource uid="datasource-d19e334ba677422da9b226bcd4d9681d" id="pipeDataSource1" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="dataservice" module="CM" service="CommonCodeDtlService" urlpattern="common_ci_codeDtl_list" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="true" pipeparam="field_cd_pipe" pipecolumn="FIELD_CD" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+    <datasource uid="datasource-d19e334ba677422da9b226bcd4d9681d" id="pipeDataSource1" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="dataservice" module="CM" service="CommonCodeDtlService" urlpattern="common_codeDtl_list" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="true" pipeparam="field_cd_pipe" pipecolumn="FIELD_CD" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
       <mapping>
         <param parameter="end_dt" applyType="constant" dataType="string" />
         <param parameter="foreign_yn" applyType="constant" dataType="string" />
@@ -615,53 +630,20 @@
 ]]></javascript>
     <javascript id="1a3067fb-7e4f-4c2c-a900-7f6dfa9d490d"><![CDATA[function () {
 
-    self.grid1.addRow();
+    self.grid2.addRow();
 
 }
 ]]></javascript>
     <javascript id="1703f0ef-4051-4ffd-962e-11990ff25225"><![CDATA[function () {
 
-    self.grid1.removeRow(self.grid1.select());
+    self.grid2.removeRow(self.grid2.select());
 
 }
 ]]></javascript>
     <javascript id="d2692eed-91c6-4644-b7ca-3eed2f04ec7b"><![CDATA[
-
-]]></javascript>
-    <javascript id="686d6dfe-5aef-496d-847d-f8b9362d31da"><![CDATA[//# sourceURL=PAMMPM00200.js
-
-/* 
-  * 출산휴가확인서등록
-  * 작성자 : 서장대
-  * 작성일 : 2023-08-25
-  */
-//self.cdp1~~~
-
-
-// 메인버튼 삭제 버튼의 기본 확인 메시지 사용 여부 설정
+//# sourceURL=PAMMPM0200.js
 self.mainButtons.delete.useDefaultConfirm = false;
-
-
 ]]></javascript>
-    <javascript id="b8e44014-9b48-4870-8e86-a9ef771175d3"><![CDATA[function(e) {
-    // self.MtnityidnfDtl_ds = dews.ui.dataSource('MtnityidnfDtl_ds', {
-    //   grid: true,
-    //   transport: {
-    //     read: {
-    //       url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementMPMService', 'Pammpm00200_selectHrMtnityidnfDtl'),
-    //       data: /*0376eab7-1e59-4c91-9947-6c02b98249ad*/ function() {
-    //   var currentRow = self.mtnityidnfMaster_grid.select();
-    //     return{
-    //     // doc_no: self.mtnityidnfMaster_grid.dataItems(self.mtnityidnfMaster_grid.select()).DOC_NO,
-    //     // doc_no: grid.getCellValue(grid.select(),'DOC_NO'),
-    //     // emp_no: grid.getCellValue(grid.select(),'EMP_NO')
-    //     doc_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'DOC_NO'),
-    //     emp_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'EMP_NO')
-    //   }
-    // }
-    console.log((typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'DOC_NO'));
-    console.log(typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'EMP_NO'));
-}]]></javascript>
   </javascripts>
   <settings />
   <datas />
