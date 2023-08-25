@@ -1,0 +1,196 @@
+<!--##e11c3382-d617-4159-8fc6-112a1547570e##-->
+<!--##PAMPHM00100_slstCd_POP##-->
+<!--##G5+qLlw/IvwGKMP2GhvKhVyXMnkymx2huwJJhdOJ837V4V2uBiEnd9W887s5THrj##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: PAMPHM00100_slstCd_POP
+  # PageTitle: 호봉
+  # Server: http://localhost:8090/
+-->
+<!--
+
+-->
+
+<div class="dews-dialog-contents-area" id="">
+  <div id="conditionpanel1" class="dews-ui-condition-panel">
+    <ul class="required-area">
+      <li id="keyword" class="col-2">
+        <label class="dews-ui-multilingual">검색어</label>
+        <span>
+          <input id="keyword" name="keyword" type="text" class="dews-ui-textbox basic" />
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div id="containerpanel1" class="dews-ui-container-panel" data-dews-fit-bottom="true">
+    <div id="containerpanelitem1" class="dews-container-item" data-dews-position="normal">
+      <div id="grid1" class="dews-ui-grid"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+    
+</style>
+
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.0';
+
+
+    /*4433528f-4ad9-47ed-aeef-004faea6a915*/ 
+    var addField = [], addColumn = [];
+    
+    
+    addField = [
+                  { field: 'SLST_CD', editable: false, dataType: 'string' }
+                ];
+    
+    
+    
+    self.ds1 = dews.ui.dataSource('ds1', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_selectSlstCd'),
+          data: /*87fd3599-3912-4700-8c9e-d200d5c813f8*/ function() {
+        return {
+            'keyword' : self.keyword.text(),
+            'pstn_cd' : self.initData.params.pstn_cd   // 직급코드
+        }
+    }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'SLST_CD', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      },
+      error: /*2810995b-37a4-498a-ab8e-3a3b09381e98*/ function (e) {
+        console.log(e);
+        // e.error 에러
+        // e.message 에러 메시지
+        // e.state 에러 상태 (ex) 400
+        dews.ui.loading.hide();
+        dews.error(e.message);
+    }
+    });
+    
+    
+    self.$keyword.on('keydown', /*e75d1ffb-8fde-41bc-a6af-16dd47d68434*/ function(e) {
+      try {
+            if (e.keyCode == 13) {
+              dews.ui.loading.show();
+              self.ds1.read();
+            }
+          } catch (error) {
+            dews.error(error);
+          }
+    });
+    dews.ui.grid(self.$grid1, {
+      dataSource: self.ds1,
+      sortable: 'multiple',
+      autoBind: false,
+      checkable: false,
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'SLST_CD',
+          title: '호봉',
+          width: 80
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      dataBound: /*ac275dba-0389-4f40-a0e0-6506f2c47757*/ function(e) {
+      dews.ui.loading.hide();
+      if(e.row.data.length == 0) {
+        dews.ui.snackbar.warning("조회된 데이터가 없습니다.");
+      }
+    },
+      dblClicked: /*5004a328-ade7-48bd-a974-bb70dce6c311*/ function(e) {
+      self.ok(self.grid1.dataItem(self.grid1.select()));
+    }
+    });
+    
+    
+    
+    
+    /*f3aaf471-0287-4886-a9ea-a53dd4e47fa8*/ function initSetting() {
+      addField = [
+                { field: 'SLST_CD', editable: false, dataType: 'string' }
+              ];
+      
+      addColumn = [
+            {
+              field: 'SLST_CD',
+              title: '호봉',
+              width: 80
+            },
+          ];
+    }
+    
+    
+    function getDynamicGridName(){
+      dews.api.get(dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00100_selectSlstCdHeaderName"), {
+        async: false,
+      }).done(function (data) {
+        console.log("data:", data);
+    
+        var flag = false;
+    
+        $.each(data, function(idx, val){
+          addField.push({field: 'COL' +val.SYSDEF_CD}); // 데이터소스에 필드 추가
+          addColumn.push({field: 'COL' + val.SYSDEF_CD,  // 그리드에 컬럼 추가
+                          title: val.SYSDEF_NM,
+                          align: "right",
+                          width: 100,
+                          formats: {
+                            type: 'number',
+                            format: 'MA00003',
+                            predefined: true
+                          }
+                        });
+    
+        });
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+    }
+    
+    dews.ui.loading.show();
+    initSetting();
+    getDynamicGridName();
+    
+    self.ds1.setFields(addField);
+    self.grid1.setColumns(addColumn);
+    
+    self.keyword.text(self.initData.params.keyword);
+    self.ds1.read();
+    
+    self.buttons.ok.on('click', function (e) {
+        if(self.grid1.select() > 0) {
+            self.ok(self.grid1.dataItem(self.grid1.select()));
+        }else{
+          dews.alert('선택된 데이터가 없습니다.', 'warning');
+        }
+    });
+    
+    
+    //# sourceURL=PAMPHM00100_slstCd_POP.js
+    
+    
+
+  
+  });
+
+</script>

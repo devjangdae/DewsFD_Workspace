@@ -1,0 +1,154 @@
+﻿<!--
+  메뉴명: 사원등록(NEW) 첨부파일등록
+  수정내역:
+  2019.01.29 성승익 : 신규작성
+  -->
+<div class="dews-dialog-contents-area">
+  <!-- 컨테이너 패널 -->
+  <div class="dews-container-panel" data-dews-container-height="170">
+    <div class="dews-container-item" data-dews-position="left" style="width: 100%;">
+      <div id="multiFileUploader" class="dews-ui-multifile" data-dews-file-count="6" data-dews-download-temp-url="/download/tempfile"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 버튼 html 영역 -->
+<div class="dews-dialog-button-group bottom">
+  <button id="apply" class="dews-ui-button confirm" data-dews-localize-key="D0000267">적용</button>
+  <button id="close" class="dews-ui-button confirm" data-dews-localize-key="D0000255">닫기</button>
+</div>
+
+
+<style>
+</style>
+<script>
+  console.log('[최종수정일 : 2020.07.03]');
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      var dialog = dews.ui.dialog('PAMPHM00100_fileUpload_POP');
+      var emp_no = dialog.initData['emp_no'];
+      // 멀티파일업로더
+      var multiFileUploader;
+      var multiFileDataSource;
+    }
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      multiFileDataSource = dews.ui.dataSource('multi', {
+        async: false,
+        transport: {
+          read: {
+            url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_empFile_list'),
+            data: function () {
+              // dews.ui.loading.show();
+              return {
+                emp_no: emp_no,
+              }
+            }
+          }
+        },
+        schema: {
+          model: {
+            id: 'MF_EMP',
+            fields: [
+              {field: 'FILE_DC'},
+              {field: 'FILE_SQ'},
+              {field: 'NEW_FILE_DC'},
+              {field: 'FILE_NM'},
+              {field: 'FILE_EXTSN_DC'},
+              {field: 'FILE_VR'},
+            ]
+          }
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+      multiFileUploader = dews.ui.multifile(dewself.$multiFileUploader, {
+        dataSource: multiFileDataSource,
+        binding: {
+          fileKey: 'NEW_FILE_DC',
+          filename: 'FILE_NM',
+          extension: 'FILE_EXTSN_DC',
+          size: 'FILE_VR'
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 팝업기본버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 닫기 버튼
+      dewself.$close.on('click', function (e) {
+        dialog.cancel();
+      });
+
+      // 적용 버튼
+      dewself.$apply.on('click', function (e) {
+        dews.api.post(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_empFile_save'), {
+          async: false,
+          data: {
+            emp_no: emp_no,
+            items: JSON.stringify(multiFileDataSource.getDirtyData())
+          }
+        }).done(function (data) {
+          dews.ui.snackbar.ok(dews.localize.get('저장되었습니다.', 'M0000031'));
+          multiFileDataSource.read();
+          dialog.ok(multiFileDataSource.data());
+        }).fail(function (xhr, status, error) {
+          dews.ui.snackbar.error(dews.localize.get('저장에 실패했습니다.', 'M0005315'));
+          console.log(xhr, status, error);
+        });
+      });
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+      // multiFileUploader.on('uploaded', function (e) {
+      //   console.log('abc');
+      // });
+    }
+
+    // ▦▦▦▦▦▦ 실행 영역 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+    function getCopiedObject(object) {
+      return $.extend(true, {}, object);
+    }
+    function getCopiedArray(array) {
+      return $.extend(true, [], array);
+    }
+  });
+  //# sourceURL=PAMPHM00100_fileUpload_POP.js
+</script>

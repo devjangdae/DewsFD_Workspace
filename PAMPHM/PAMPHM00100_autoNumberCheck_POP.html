@@ -1,0 +1,172 @@
+﻿<!-- <div class="dews-dialog-contents-area"> -->
+  <!-- <div class="dews-ui-form-panel" style="min-width: 100%;"> -->
+  <div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+    <div class="dews-container-item" data-dews-position="left" style="width: 100%;">
+      <div class="dews-ui-grid" id="PopupGrid"></div>
+    </div>
+  </div>
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- 버튼 html 영역 -->
+<div class="dews-dialog-button-group bottom">
+  <button id="ok_btn" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000255">적용</button>
+</div>
+<script src="/view/js/HR/hr.common.js"></script>
+<style>
+</style>
+
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      var objCodeDtl = {};
+      var dialog = dews.ui.dialog('PAMPHM00100_autoNumberCheck_POP');
+      var PopupGrid, PopupGridDataSource;
+      var initData = dialog.initData;
+      console.log('initData', initData);
+    }
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      PopupGridDataSource = dews.ui.dataSource('items', {
+        grid: true,
+        error: function (data, message) {
+          if (!message) {
+            dews.error(data.error);
+          } else {
+            dews.error(message);
+          }
+        },
+        schema: {
+          model: {
+            //id: '',
+            fields: [
+              { field: 'UID' },
+              { field: 'BIZAREA_NM' },
+              { field: 'DEPT_NM' },
+              { field: 'EMP_NO' },
+              { field: 'KOR_NM' },
+            ]
+          }
+        },
+      });
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+      PopupGrid = dews.ui.grid(dewself.$PopupGrid, {
+        dataSource: PopupGridDataSource,
+        rowNo: false,
+        checkable: false,
+        editable: true,
+        selectable: true,
+        sortable: false,
+        height: 300,
+        columns: [
+          { field: 'UID', title: '_uid', visible: false },
+          { field: 'BIZAREA_NM', title: dews.localize.get('사업장', 'D0000069') },
+          { field: 'DEPT_NM', title: dews.localize.get('부서', 'D0000071') },
+          { field: 'KOR_NM', title: dews.localize.get('성명', 'D0001231') },
+          {
+            field: 'EMP_NO', title: dews.localize.get('사원번호', 'D0000074'),
+            attributes: {
+              class: "required"
+            },
+            align: 'center',
+            editor: { type: 'string', maxLength: 0 }
+          },
+        ],
+        validationCheck: function(e) {
+        },
+        save: function(e) {
+          if(e.cell.field == 'EMP_NO'){
+            $.each(initData.totalData, function(key, value){
+              if(key == e.row.data.UID){
+                value.HR_EMP_MST.EMP_NO = e.row.data.EMP_NO;
+              }
+            });
+          }
+        },
+        change: function(e) {
+        },
+        dataBound: function(e) {
+        },
+        pasted: function (e) {
+          if(e.columns == "EMP_NO"){
+            $.each(e.grid.dataItems(), function(i, data){
+              $.each(initData.totalData, function(key, value){
+                if(key == data.UID){
+                  value.HR_EMP_MST.EMP_NO = data.EMP_NO;
+                }
+              });
+            });
+          }
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 저장 버튼
+      dewself.$ok_btn.on('click', function (e) {
+        /// 사원등록의 데이터 저장
+        if(dewself.PopupGrid.validate({}).result){
+          dews.api.post(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_empData_save'), {
+            data: {
+              totalData: JSON.stringify(initData.totalData),
+              menuID: 'PAMPHM00100'
+            }
+          }).done(function (data) {
+            dialog.ok();
+          }).fail(function (xhr, status, error) {
+            // dews.ui.error(error);
+            dews.alert(error, "error");
+          });
+        }else{
+          dews.ui.snackbar.warning(dews.localize.get("필수값을 입력해 주세요.", 'M0022209'));
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 실행 영역 ▦▦▦▦▦▦
+    {
+      PopupGridDataSource.data(initData.autoRuleListArray);
+      PopupGridDataSource.read();
+    }
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+    // function searchUser(value) {
+    //   let options = {
+    //     fields:['EMP_NO', 'KOR_NM'],
+    //     value: value
+    //   };
+    //   dewself.PopupGrid.searchCell(options);
+    // }
+  });
+//# sourceURL=PAMPHM00100_autoNumberCheck_POP.js
+</script>

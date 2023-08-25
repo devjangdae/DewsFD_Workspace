@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page title="직급별사원구분체크" name="PAMPHM00300_classCheck_POP" type="dialog">
+  <canvas uid="canvas-1485142915113" type="dialog" dialogsize="big" title="직급별사원구분체크" ready="216fbeec-5d21-4015-89a8-b3346fc5cd22" component="" function="">
+    <pageInformation>
+      <version>1.0.22012101</version>
+      <create>Education</create>
+      <modify>rtg951118</modify>
+      <builddate>2022-01-21T14:50:58.6584936+09:00</builddate>
+      <createdate>2021-12-12T17:02:42.5925815+09:00</createdate>
+      <modifieddate>2022-01-21T16:32:18.4722201+09:00</modifieddate>
+      <service>PersonalAdministrationManagementPHMService</service>
+    </pageInformation>
+    <conditionPanel uid="conditionPanel-1639296179787" margin="false" optional="false" optionalcollapsed="true" columnLength="3" labelAlign="right">
+      <conditionGroup uid="conditionGroup-1639296180105" type="required">
+        <conditionItem uid="conditionItem-1639297908795" columnSize="1" text="검색">
+          <textbox uid="textbox-1639297909232" id="keyword" disabled="false" readonly="false" state="basic" placeholder="사번/성명 검색" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" keyDown="e76cc1b2-1c6b-4e56-a359-065ddf1f966c" />
+        </conditionItem>
+        <conditionItem uid="conditionItem-1639297948104" columnSize="1" text="">
+          <checkbox uid="checkbox-1639297948507" id="diffCheck" text="불일치건 조회" bindCheckedValue="Y" bindUnCheckedValue="N" disabled="false" checked="true" change="c032129b-28bf-42b0-9a01-7258f72b65ec" />
+        </conditionItem>
+      </conditionGroup>
+    </conditionPanel>
+    <containerPanel uid="containerPanel-1639296182636" height_type="px">
+      <containerItem uid="containerItem-1639296183557" width_type="px" location="normal">
+        <buttonGroup uid="buttonGroup-1639296326553" align="right" bottom="false">
+          <button uid="button-1639296331871" id="changeBtn" text="일괄변경" buttonType="normal" useemphasize="false" emphasize="" disabled="false" click="de074333-b4f5-42c5-8c5e-0b83c5782bb7" />
+        </buttonGroup>
+        <grid uid="grid-1639296187783" mockupData="" id="grid1" dataSource="dataSource1" height_type="px" height="384" editable="false" movable="false" rowNo="true" selectable="false" checkable="true" sortable="multiple" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" useGridUserGroup="false" dataBound="83ce27da-627e-498e-a45a-3f71e1d398f7">
+          <mockupText>MTIzMzMs7ZmN6ri464+ZLOyEnOyauOyngOu2gCzrhbjrrLTqtIDrpqztjIAsM+q4iSzsl7DrtInsoJws7Zi467SJ7KCc</mockupText>
+          <columns>
+            <column uid="6467a821-ebc2-4561-a102-2d860d6bbff7" field="EMP_NO" title="사원번호" width="70" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" attributes="none" footerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceField="" />
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+            <column uid="eeb8d483-fa0f-42c0-9438-fabea2d4d133" field="KOR_NM" title="성명" width="70" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" attributes="none" footerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceField="" />
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+            <column uid="9181d038-9dae-4fb7-a983-f58f2db86e9c" field="BIZAREA_NM" title="사업장" width="120" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" attributes="none" footerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceField="" />
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+            <column uid="8430b421-e4cd-49c0-9997-f087ad3dc37a" field="DEPT_NM" title="부서" width="100" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" attributes="none" footerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceField="" />
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+            <column uid="3376e44b-2293-466c-a35c-4b4370b13818" field="PSTN_NM" title="직급" width="70" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" attributes="none" footerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceField="" />
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+            <column uid="0594c2c5-493a-4dd2-ad36-f15c596dd6fd" field="EMP_TP_NM" title="사원구분" width="70" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" attributes="none" footerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceField="" />
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+            <column uid="4f535e63-0f20-4997-9bb7-25016d134c12" field="EMP_TP_NM_STD" title="사원구분(기준)" width="90" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" attributes="none" footerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceField="" />
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+          </columns>
+          <filter filterType="Boolean" filter="true" iconVisible="false" />
+          <contextObject excelDownload="true" fixed="true" search="true">
+            <gridContextItems />
+          </contextObject>
+          <gridGroupColumns />
+          <fixed colCount="0" rightColCount="0" />
+          <styles heightTyp="string">
+            <rowNo />
+            <cellBorder />
+            <font bold="false" />
+            <padding />
+            <heightObject />
+          </styles>
+        </grid>
+      </containerItem>
+    </containerPanel>
+    <buttonGroup uid="buttonGroup-1485142915200" align="center" bottom="true">
+      <button uid="button-1485142973000" id="closeBtn" text="닫기" buttonType="confirm" useemphasize="false" emphasize="" disabled="false" click="88ee39fb-16ca-4b3d-9252-e6ea6a65ba47" />
+    </buttonGroup>
+  </canvas>
+  <dataSources>
+    <datasource uid="datasource-149d708480ba4be990b285d645cea84a" id="dataSource1" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PersonalAdministrationManagementPHMService" urlpattern="Pamphm00300_pop_selectClassChk" params_type="javascript" params="da83cca0-b0e0-49f0-b381-69152ea98267" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping />
+      <columns>
+        <column field="EMP_NO" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="사원번호" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="KOR_NM" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="성명" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="BIZAREA_NM" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="사업장" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="DEPT_NM" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="부서" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="PSTN_NM" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="직급" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="EMP_TP_NM" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="사원구분" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="EMP_TP_CD_STD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="사원구분(기준) 코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="EMP_TP_NM_STD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="사원구분(기준) 명" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+  </dataSources>
+  <pageMarkDown><![CDATA[]]></pageMarkDown>
+  <pageCssStyle><![CDATA[]]></pageCssStyle>
+  <stylesheets />
+  <javascripts>
+    <javascript id="da83cca0-b0e0-49f0-b381-69152ea98267"><![CDATA[function() {
+    return {
+        keyword : self.keyword.text(),
+        diff_check : self.diffCheck.value()
+    }
+}]]></javascript>
+    <javascript id="e76cc1b2-1c6b-4e56-a359-065ddf1f966c"><![CDATA[function (e) {
+  if (window.event.keyCode == 13) {
+    // 엔터키가 눌렸을 때 실행할 내용
+    dews.ui.loading.show();
+    self.dataSource1.read();
+  }
+}]]></javascript>
+    <javascript id="83ce27da-627e-498e-a45a-3f71e1d398f7"><![CDATA[function (e) {
+    if (e.row.data.length == 0) {
+      dews.ui.snackbar.warning("조회된 데이터가 없습니다.");
+    } else {
+      $.each(e.grid.dataItems(), function (i, data) {
+        if (data.PSTN_NM == null || data.PSTN_NM == "") {
+          e.grid.setCellValue(i, "EMP_TP_CD_STD", "6");
+          e.grid.setCellValue(i, "EMP_TP_NM_STD", "기간제계직");
+        }
+      });
+    }
+    self.keyword.focus();
+    dews.ui.loading.hide();
+  }
+]]></javascript>
+    <javascript id="de074333-b4f5-42c5-8c5e-0b83c5782bb7"><![CDATA[function (e) {
+  if (self.grid1.getCheckedRows().length > 0) {
+    dews.api.post(dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "Pamphm00300_pop_changeClassChk"), {
+      async: false,
+      data: {
+        dataSource: JSON.stringify(self.grid1.getCheckedRows())
+      }
+    }).done(function (data) {
+      dews.ui.snackbar.ok("일괄 변경되었습니다.");
+      dews.ui.loading.show();
+      self.dataSource1.read();
+    }).fail(function (data) {
+      dews.ui.snackbar.warning("일괄 변경 중 오류가 발생하였습니다.");
+    });
+  } else {
+    dews.ui.snackbar.warning("체크된 데이터가 없습니다.");
+  }
+}]]></javascript>
+    <javascript id="88ee39fb-16ca-4b3d-9252-e6ea6a65ba47"><![CDATA[function (e) {
+  e.preventDefault();
+  dews.ui.dialog('PAMPHM00300_classCheck_POP').close();
+}]]></javascript>
+    <javascript id="216fbeec-5d21-4015-89a8-b3346fc5cd22"><![CDATA[//# sourceURL=PAMPHM00300_classCheck_POP.js
+]]></javascript>
+    <javascript id="c032129b-28bf-42b0-9a01-7258f72b65ec"><![CDATA[function (e) {
+  dews.ui.loading.show();
+  self.dataSource1.read();
+}]]></javascript>
+  </javascripts>
+  <settings />
+  <datas />
+</page>

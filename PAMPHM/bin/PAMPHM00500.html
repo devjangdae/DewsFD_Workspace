@@ -1,0 +1,1700 @@
+<!--##3614e7d6-f8d5-4f71-ab5f-2cdc9ebb419f##-->
+<!--##PAMPHM00500##-->
+<!--##zoM74YvzI2UbVXK/bI8DJ10He+XKw0UV3gXIkq1ojmI=##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: PAMPHM00500
+  # PageTitle: 계약갱신관리
+  # Server: http://localhost:8090/
+-->
+<!--
+
+-->
+
+<div class="dews-ui-container-panel">
+  <div class="dews-container-item" data-dews-position="normal">
+    <div class="dews-button-group" style="text-align: right;">
+      <button id="btn_empSelect" class="dews-ui-button">대상자선정</button>
+      <button id="btn_payFixApply" class="dews-ui-button">책정임금반영</button>
+      <button id="btn_payFixCancel" class="dews-ui-button">반영취소</button>
+      <button id="btn_appointApply" class="dews-ui-button">발령적용</button>
+      <button id="btn_appointCancel" class="dews-ui-button">발령취소</button>
+    </div>
+  </div>
+</div>
+<div class="dews-ui-condition-panel">
+  <ul class="required-area">
+    <li id="pp_date">
+      <label class="dews-ui-multilingual">계약종료일</label>
+      <span>
+        <span id="pp_period" class="dews-ui-periodpicker required" style="width: 169px;"></span>
+      </span>
+    </li>
+    <li>
+      <label class="dews-ui-multilingual">재직구분</label>
+      <span>
+        <select id="dd_hlofFg" name="dd_hlofFg" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-show-tooltip="true" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+      </span>
+    </li>
+    <li>
+      <label class="dews-ui-multilingual">고용형태</label>
+      <span>
+        <select id="dd_empyTpCd" name="dd_empyTpCd" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-show-tooltip="true" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+      </span>
+    </li>
+  </ul>
+  <ul class="optional-area">
+    <li>
+      <label class="dews-ui-multilingual">사원구분</label>
+      <span>
+        <select id="dd_empTp" name="dd_empTp" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-show-tooltip="true" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+      </span>
+    </li>
+    <li>
+      <label class="dews-ui-multilingual">검색어</label>
+      <span>
+        <input id="txt_search" name="txt_search" type="text" class="dews-ui-textbox basic" placeholder="사원번호 / 성명" />
+      </span>
+    </li>
+    <li>
+      <label class="dews-ui-multilingual">조회구분</label>
+      <span>
+        <input id="chk_gubun" name="chk_gubun" type="checkbox" class="dews-ui-checkbox" />
+        <label for="chk_gubun">계약 갱신 대상자만 조회</label>
+      </span>
+    </li>
+  </ul>
+</div>
+<div class="dews-button-group" style="text-align: right;">
+  <h4 class="dews-ui-title dews-ui-multilingual">최종계약내역</h4>
+</div>
+<div id="masterGrid" class="dews-ui-grid"></div>
+<div class="dews-button-group" style="text-align: right;">
+  <h4 class="dews-ui-title dews-ui-multilingual">계약내역관리</h4>
+  <button id="btn_detailAdd" class="dews-ui-button">추가</button>
+</div>
+<div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="normal">
+    <div id="detailGrid" class="dews-ui-grid"></div>
+  </div>
+</div>
+
+<style>
+    Uncaught ReferenceError: GetScript is not defined
+  @ about:blank:1:0
+</style>
+
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.0.23030601';
+    self.version.service='PAMPHM00500_SERVICE';
+
+
+    /*ce82b386-7e86-4a85-8a18-79dd9692a72f*/ //필수셋팅
+    {
+      var objCodeDtl = {};
+      self._cgo = {}; // custom global object
+      self._cgo.loadJS = function (moduleName, js) { // load JS
+        self.$content.append('<script src=\'/view/js/' + moduleName + '/' + js + '\'><\/script>');
+      }
+      self._cgo.loadJS('HR', 'hr.getCodeData.js');
+      self._cgo.loadJS('HR', 'hr.dateUtil.js');
+    }
+    
+    //codeDtl 가져오기.
+    {
+      objCodeDtl = derp.HR.codeData('HR', 'P00200|P00220|P00630|P00640|P00650|P00750|P00010|');   // 책정임금, 사원구분, 남녀구분, 직위, 직급, 재직구분, 고용형태
+    }
+    
+    {
+      self.gnfdDataSource_temp = dews.ui.dataSource('gnfdDataSource_temp', {
+        data: []
+      });
+    
+      dews.api.get(dews.url.getApiUrl("HR", "PAMPHM00500_SERVICE", "Pamphm00500_dropDownGnfd"), {
+        async: false,
+        data: {
+          menu_cd: '11',
+          mcls_cd: 'H00',
+          mcls_dc: '22'
+        }
+      }).done(function (data) {
+        self.gnfdDataSource_temp.data(data);
+      });
+    }
+    
+    
+    
+    
+    self.masterDataSource = dews.ui.dataSource('masterDataSource', {
+      grid: true,
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      },
+      data: []
+    });
+    self.detailDataSource = dews.ui.dataSource('detailDataSource', {
+      grid: true,
+      schema: {
+        model: {
+          fields: [
+            { field: 'TEST_SCHEMA', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      },
+      data: []
+    });
+    self.ynDataSource = dews.ui.dataSource('ynDataSource', {
+      schema: {
+        model: {
+          fields: [
+            { field: 'value', editable: false, type: 'string' }, 
+            { field: 'text', editable: false, type: 'string' }
+          ]
+    
+        }
+      },
+      data: [
+      {
+        "value": "N",
+        "text": "NO"
+      },
+      {
+        "value": "Y",
+        "text": "YES"
+      }
+    ]
+    });
+    self.gnfdDataSource = dews.ui.dataSource('gnfdDataSource', {
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'PAMPHM00500_SERVICE', 'Pamphm00500_dropDownGnfd'),
+          data: function () {
+            return {
+              menu_cd: '11',
+              mcls_cd: 'H00',
+              mcls_dc: '22'
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'HR_CD', editable: false, type: 'string' }, 
+            { field: 'HR_CD_NM', editable: false, type: 'string' }
+          ]
+    
+        }
+      }
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_ci_codeDtl_list'),{
+      async: false,
+      data: {
+          end_dt: '',
+          foreign_yn: '',
+          field_cd_pipe: 'P00750',
+          module_cd: 'HR',
+          syscode_yn: '',
+          keyword: '',
+          base_yn: ''
+      }
+    }).done(function (data) {
+      var ar_P00750 = new Array();
+    
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].FIELD_CD == "P00750") { 
+          ar_P00750.push(data[i]); 
+    
+        }
+      }
+      self.hlofCdDataSource_P00750 = dews.ui.dataSource('hlofCdDataSource_P00750',  { data: ar_P00750 });
+      self.hlofCdDataSource = dews.ui.dataSource('hlofCdDataSource', { data: data });
+      
+    });
+    self.empyTpCdDataSource = dews.ui.dataSource('empyTpCdDataSource', {
+      data: []
+    });
+    self.empTpDataSource = dews.ui.dataSource('empTpDataSource', {
+      data: []
+    });
+    
+    
+    dews.ui.mainbuttons.localize.hide();
+    dews.ui.mainbuttons.approval.hide();
+    dews.ui.mainbuttons.etnapproval.hide();
+    dews.ui.mainbuttons.search.click(/*71d44a62-6a64-4ead-a3fb-17cf2ebd6bf4*/ function () {
+    
+      if (self.pp_period.getStartDate() == "" || self.pp_period.getStartDate() == null || self.pp_period.getStartDate() == undefined ||
+        self.pp_period.getEndDate() == "" || self.pp_period.getEndDate() == null || self.pp_period.getEndDate() == undefined) {
+    
+        dews.ui.requiredTooltip.show(self.$pp_period);
+        return false;
+      }
+    
+      // TODO: 저장여부를 확인한 후 데이터소스를 조회합니다.
+      if (self.detailDataSource.getDirtyDataCount() != 0) {
+        dews.confirm('저장하지 않은 데이터가 있습니다.\n조회를 계속하시겠습니까?', 'ico2').yes(function () {
+          // 마스터그리드 read
+          self.masterGrid.dataSource.data([]);
+          self.detailGrid.dataSource.data([]);
+          masterGridRead();
+        }).no(function () {
+          dews.ui.snackbar.warning('취소되었습니다.');
+          return false;
+        });
+      } else {
+        // 마스터그리드 read
+        self.masterGrid.dataSource.data([]);
+        self.detailGrid.dataSource.data([]);
+        masterGridRead();
+      }
+    });
+    dews.ui.mainbuttons.delete.click(/*13580c59-cd5d-43fc-aa41-f6b79898a29d*/ function () {
+      // TODO: 삭제시 강제 팝업에 대한 알림창을 끕니다.
+      // self.mainButtons.delete.useDefaultConfirm = false;
+    
+      var tempDetailGrid = self.detailGrid;
+    
+      // TODO: 그리드에서 체크된 항목을 삭제합니다.
+      if (tempDetailGrid.dataSource.data().length == 0) {
+        dews.ui.snackbar.error("선택된 데이터가 없습니다.");
+        return false;
+      }
+    
+      //확정여부와 발령처리여부가 둘다 N이어야 삭제할 수 있음
+      if (self.detailGrid.dataSource.data()[self.detailGrid.select()].RFLT_YN == "N" && self.detailGrid.dataSource.data()[self.detailGrid.select()].GNFD_APLY_YN == "N") {
+        tempDetailGrid.removeRow(tempDetailGrid.select());
+        dews.ui.snackbar.ok(dews.localize.get('저장을 해야 삭제가 완료됩니다.', 'M0005945'));
+      }
+      else {
+        dews.ui.snackbar.error("책정임금반영여부와 발령적용여부가 N인 데이터만 삭제됩니다.");
+        return false;
+      }
+    
+      // 20191219 체크버튼 삭제로 인해 다중 삭제 불가능.
+      /*
+      var checkData = self.detailGrid.getCheckedIndex();
+      var tempDetailGrid = self.detailGrid;
+      for (var i = checkData.length - 1; i > -1; i--) {
+        if (tempDetailGrid.dataSource.data()[checkData[i]].RFLT_YN == "N" && tempDetailGrid.dataSource.data()[checkData[i]].GNFD_APLY_YN == "N") {
+          tempDetailGrid.removeRow(tempDetailGrid.getCheckedIndex()[i])
+        }
+      }
+      */
+    
+      //self.detailGrid.removeRow(self.detailGrid.getCheckedIndex());
+    
+      // TODO: 그리드에 선택된 항목을 삭제합니다.
+      // self.grid1.removeRow(self.grid1.select());
+    });
+    dews.ui.mainbuttons.print.hide();
+    dews.ui.mainbuttons.save.click(/*a1499091-59c5-4ca7-826b-71bef750b5d6*/ function () {
+      if (IsChanged()) {
+        if (IsValidated()) {
+          saveData();
+        }
+      } else {
+        dews.ui.snackbar.ok('변경된 사항이 없습니다.');
+      }
+    });
+    self.$btn_empSelect.on('click', /*eabe783a-8362-4a8b-9060-255e75426bcb*/ function (e) {
+      var dialog;
+      /*
+      var initData = {
+        eval_step_cd: self.stepDdl.value(),  // 필수
+        eval_yy: curData.EVAL_YY,  // 필수
+        emp_no: curData.EMP_NO, // 필수
+        kor_nm: curData.KOR_NM, // 필수
+        pk_sq: curData.PK_SQ, // 필수
+        kpi_mng_cd: curData.KPI_MNG_CD, // 필수
+        kpi_def_txt: curData.KPI_DEF_TXT, // 필수
+        bss_data_fg_cd: curData.BSS_DATA_FG_CD, // 필수
+        eval_tp_cd: self.eval_tp_cd // 필수
+      };
+      */
+    
+      dialog = dews.ui.dialog('PAMPHM00500_EMP_POP', {
+        url: '/view/HR/PAMPHM00500_EMP_POP',
+        title: '사원선정 도움창',
+        width: 1050,
+        height: 410,
+        //initData: initData,
+        ok: function (data) {
+          self.masterGrid.dataSource.data([]);
+          self.detailGrid.dataSource.data([]);
+          masterGridRead();
+        }
+      });
+    
+      dialog.open();
+    });
+    self.$btn_payFixApply.on('click', /*540494e6-807b-4f78-a349-36e8d78d308f*/ function (e) {
+      var dialog;
+      var initData = calDate();
+      if (initData == false) {
+        return false;
+      }
+    
+      dialog = dews.ui.dialog('PAMPHM00500_PAYFIX_APPLY', {
+        url: '/view/HR/PAMPHM00500_PAYFIX_APPLY',
+        title: '책정임금반영',
+        width: 1050,
+        height: 410,
+        initData: initData,
+        ok: function (data) {
+          self.masterGrid.dataSource.data([]);
+          self.detailGrid.dataSource.data([]);
+          masterGridRead();
+        }
+      });
+    
+      dialog.open();
+    });
+    self.$btn_payFixCancel.on('click', /*108fadcd-86a6-46de-9c2e-285a39e4155d*/ function (e) {
+      var dialog;
+      var initData = calDate();
+      if (initData == false) {
+        return false;
+      }
+      dialog = dews.ui.dialog('PAMPHM00500_PAYFIX_CANCEL', {
+        url: '/view/HR/PAMPHM00500_PAYFIX_CANCEL',
+        title: '책정임금반영취소',
+        width: 1050,
+        height: 430,
+        initData: initData,
+        ok: function (data) {
+          self.masterGrid.dataSource.data([]);
+          self.detailGrid.dataSource.data([]);
+          masterGridRead();
+        }
+      });
+    
+      dialog.open();
+    });
+    self.$btn_appointApply.on('click', /*a751f252-2133-4984-91cd-a11b03f6cd39*/ function (e) {
+      var dialog;
+      var initData = calDate();
+      if (initData == false) {
+        return false;
+      }
+      dialog = dews.ui.dialog('PAMPHM00500_APPOINT_APPLY', {
+        url: '/view/HR/PAMPHM00500_APPOINT_APPLY',
+        title: '발령적용',
+        width: 1050,
+        height: 460,
+        initData: initData,
+        ok: function (data) {
+          self.masterGrid.dataSource.data([]);
+          self.detailGrid.dataSource.data([]);
+          masterGridRead();
+        }
+      });
+    
+      dialog.open();
+    });
+    self.$btn_appointCancel.on('click', /*e7399626-00f9-47e5-8f61-ff8067cfa7df*/ function (e) {
+      var dialog;
+      var initData = calDate();
+      if (initData == false) {
+        return false;
+      }
+      dialog = dews.ui.dialog('PAMPHM00500_APPOINT_CANCEL', {
+        url: '/view/HR/PAMPHM00500_APPOINT_CANCEL',
+        title: '발령취소',
+        width: 1050,
+        height: 430,
+        initData: initData,
+        ok: function (data) {
+          self.masterGrid.dataSource.data([]);
+          self.detailGrid.dataSource.data([]);
+          masterGridRead();
+        }
+      });
+    
+      dialog.open();
+    });
+    self.dd_hlofFg.setDataSource(self.hlofCdDataSource);
+    self.dd_empyTpCd.setDataSource(self.empyTpCdDataSource);
+    self.dd_empTp.setDataSource(self.empTpDataSource);
+    dews.ui.grid(self.$masterGrid, {
+      dataSource: self.masterDataSource,
+      height: 303,
+      selectable: true,
+      sortable: 'multiple',
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다.',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'TEST_SCHEMA',
+          title: '동적그리드 출력을 위한 테스트 스키마',
+          width: 60
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      change: /*a10ceca4-7c79-480a-ad63-194ab3a62be2*/ function (e) {
+        var tempMasterGrid = self.masterGrid;
+        var tempMasterDataSource = self.masterDataSource;
+        var tempDetailGrid = self.detailGrid;
+        var tempDetailDataSource = self.detailDataSource;
+    
+        console.log("마스터그리드 체인지");
+        /*
+            if (e.row.data != null) {
+              console.log("디테일 read");
+        
+              detailGridRead(e.row.data.EMP_NO);
+            }
+            else {
+        
+            }
+        */
+      }
+    ,
+      changing: /*d10a7656-c0fd-4c67-a626-fcdc5c0eca78*/ function (e) {
+        var tempMasterGrid = self.masterGrid;
+        var tempMasterDataSource = self.masterDataSource;
+        var tempDetailGrid = self.detailGrid;
+        var tempDetailDataSource = self.detailDataSource;
+    
+        console.log("마스터그리드 체인징");
+    
+        tempDetailGrid.commitCell();
+        //self.masterGrid.addRow();
+      }
+    ,
+      dataBound: /*ca4394f3-5db1-4d5b-af8c-cd1d54311425*/ function (e) {
+    
+        if (e.row.data.length == 0) {
+          self.detailDataSource.data([]);
+        }
+        console.log("마스터그리드 데이터바운드");
+      }
+    ,
+      save: /*b37e2a5e-33d0-4c5e-a46c-f70d850c6fd3*/ function (e) {
+    
+      }
+    
+    });
+    self.$btn_detailAdd.on('click', /*e7fb0f50-7a60-41f3-866d-9dd75f20d654*/ function (e) {
+      var masterDataSourceLength = self.masterGrid.dataSource.data().length;
+      if (self.masterGrid.focused) {
+    
+        if (masterDataSourceLength == 0) {
+          dews.ui.snackbar.warning('최초 대상자선정시, 대상자선정 버튼을 이용해 추가하시기 바랍니다.');
+          return false;
+        }
+    
+        dews.ui.snackbar.warning('최종계약내역에는 추가할 수 없습니다.');
+      }
+      else {
+        var grid = self.detailGrid
+        var size = grid.dataItems().length - 1;
+    
+        if (masterDataSourceLength == 0) {
+          dews.ui.snackbar.warning('최초 대상자선정시, 대상자선정 버튼을 이용해 추가하시기 바랍니다.');
+          return false;
+        }
+    
+        if (size > -1) {
+          var lastDtStart = grid.getCellValue(size, 'CONT_START_DT');
+          if (!lastDtStart) {
+            dews.ui.snackbar.warning('이전 계약시작일을 먼저 입력해 주세요.');
+          } else {
+            grid.addRow();
+          }
+        } else {
+          grid.addRow();
+        }
+      }
+    });
+    dews.ui.grid(self.$detailGrid, {
+      dataSource: self.detailDataSource,
+      height: 302,
+      editable: true,
+      selectable: true,
+      sortable: 'multiple',
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다.',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'TEST_SCHEMA',
+          title: '동적그리드 출력을 위한 테스트 스키마',
+          width: 60
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      change: /*3a8b5681-cc2c-4941-a042-782e3bf40289*/ function (e) {
+        var tempMasterGrid = self.masterGrid;
+        var tempMasterDataSource = self.masterDataSource;
+        var tempDetailGrid = self.detailGrid;
+        var tempDetailDataSource = self.detailDataSource;
+        var tempGnfdDataSource = self.gnfdDataSource;
+    
+        if (e.row.data == null) {
+          /*
+          tempDetailGrid.addRow();
+          tempDetailGrid.setCellValue(0, 'RFLY_YN', 'N');
+          tempDetailGrid.setCellValue(0, 'GNFD_APLY_YN', 'N');
+          tempDetailGrid.setCellValue(0, 'EMP_NO', tempMasterDataSource.data()[tempMasterGrid.select()].EMP_NO);
+          tempDetailGrid.setCellValue(0, 'KOR_NM', tempMasterDataSource.data()[tempMasterGrid.select()].KOR_NM);
+          tempDetailGrid.setCellValue(0, 'DEPT_CD', tempMasterDataSource.data()[tempMasterGrid.select()].DEPT_NM);
+          tempDetailGrid.setCellValue(0, 'DEPT_NM', tempMasterDataSource.data()[tempMasterGrid.select()].DEPT_NM);
+          tempDetailGrid.setCellValue(0, 'EMP_TP', tempMasterDataSource.data()[tempMasterGrid.select()].DEPT_NM);
+          tempDetailGrid.setCellValue(0, 'EMP_TP_NM', tempMasterDataSource.data()[tempMasterGrid.select()].DEPT_NM);
+          tempDetailGrid.setCellValue(0, 'CONT_START_DT', tempMasterDataSource.data()[tempMasterGrid.select()].JNCO_DT);
+          */
+        }
+    
+        console.log("디테일 체인지 이벤트");
+      }
+    ,
+      dataBound: /*4806b912-9be3-488a-a4c7-a52dd8209687*/ function (e) {
+        self.detailGrid.refresh();
+      }
+    ,
+      save: /*0a6729cd-6aa5-40f4-9d85-fd175145a1e7*/ function (e) {
+    
+        //계약총액 계산
+        if (e.cell.field.indexOf("APRP_WAGE_CD") > -1) {
+          var obj = JSON.parse(e.row.data.APRP_WAGE_CD),
+            sum = 0;
+    
+          obj[e.cell.field] = e.row.data[e.cell.field] ? e.row.data[e.cell.field] : 0;
+    
+          e.grid.setCellValue(e.row.index, 'APRP_WAGE_CD', JSON.stringify(obj), false);
+          $.each(e.row.data, function (column, value) {
+            if (column.indexOf("APRP_WAGE_CD_") > -1) {
+              sum += Number(value) ? Number(value) : 0;
+            }
+          });
+    
+          e.grid.setCellValue(e.row.index, 'APRP_WAGE_SUM', sum, false);
+        }
+    
+        //계약시작일 수정시
+        if (e.cell.field == 'CONT_START_DT') {
+          if (e.row.index > 0) {
+            var before_startDate = dews.date.format(e.grid.getCellValue(e.row.index - 1, 'CONT_START_DT'), 'yyyyMMdd');
+            var before_endDate = dews.date.format(e.grid.getCellValue(e.row.index - 1, 'CONT_END_DT'), 'yyyyMMdd');
+            var current_startDate = dews.date.format(e.row.data.CONT_START_DT, 'yyyyMMdd');
+    
+            //이전 계약시작일 존재여부 파악후 warning!!
+            if (!before_startDate) {
+              dews.ui.snackbar.warning(dews.string.format("{0}을(를) 먼저 입력해 주세요.", "이전 계약시작일")).done(function () {
+                e.grid.setCellValue(e.row.index, 'CONT_START_DT', null, false);
+              });
+            }
+            else {
+              if (before_startDate > current_startDate) {
+                dews.ui.snackbar.warning('입력값이 이전 계약시작일보다 작을 수 없습니다.').done(function () {
+                  e.grid.setCellValue(e.row.index, 'CONT_START_DT', null, false);
+                });
+              } else {
+                $.each(e.grid.dataItems(), function (i, d) {
+                  if (i != e.row.index) {
+                    if (dews.date.format(d.CONT_START_DT, 'yyyyMMdd') == current_startDate) {
+                      dews.ui.snackbar.warning('계약시작일이 중복되었습니다.').done(function () {
+                        e.grid.setCellValue(e.row.index, 'CONT_START_DT', null, false);
+                      });
+                    }
+                  }
+                });
+              }
+            }
+    
+            //이전 계약종료일 존재여부 파악후 warning!!
+            if (!before_endDate) {
+              //추가로직생기면....ㅎㅎ
+            }
+            else {
+              if (before_endDate >= current_startDate) {
+                dews.ui.snackbar.warning('계약시작일은 이전 계약종료일보다 작을 수 없습니다.').done(function () {
+                  e.grid.setCellValue(e.row.index, 'CONT_START_DT', null, false);
+                });
+              }
+            }
+    
+            //추가해서 계약 시작일 변경시 이전 계약 종료일에 자동으로 해당 일 -1 일 반영 
+            if (before_endDate == "" || before_endDate == null) {
+              if (before_endDate < current_startDate) {
+                var tempDate = new Date(e.row.data.CONT_START_DT.getFullYear(), e.row.data.CONT_START_DT.getMonth(), e.row.data.CONT_START_DT.getDate() - 1);
+                e.grid.commitCell();
+                e.grid.setCellValue(e.row.index - 1, 'CONT_END_DT', tempDate, false);
+              }
+            }
+    
+          }
+        }
+    
+        //계약종료일 수정시
+        if (e.cell.field == 'CONT_END_DT') {
+          if (e.row.index > -1) {
+            var current_startDate = dews.date.format(e.row.data.CONT_START_DT, 'yyyyMMdd');
+            var current_endDate = dews.date.format(e.row.data.CONT_END_DT, 'yyyyMMdd');
+            var after_startDate = dews.date.format(e.grid.getCellValue(e.row.index + 1, 'CONT_START_DT'), 'yyyyMMdd');
+    
+            if (current_startDate == null || current_startDate == "") {
+              dews.ui.snackbar.warning('계약시작일을 먼저 입력해주세요.').done(function () {
+                e.grid.setCellValue(e.row.index, 'CONT_END_DT', null, false);
+              });
+            }
+            else {
+              if (current_startDate > current_endDate) {
+                dews.ui.snackbar.warning('계약종료일은 계약시작일보다 작을 수 없습니다.').done(function () {
+                  e.grid.setCellValue(e.row.index, 'CONT_END_DT', null, false);
+                });
+              }
+            }
+    
+            //이후 계약시작일 존재여부 파악후 warning!!
+            if (!after_startDate) {
+              //추가로직생기면....ㅎㅎ
+            }
+            else {
+              if (after_startDate < current_endDate) {
+                dews.ui.snackbar.warning('계약종료일은 다음 계약시작일보다 클 수 없습니다.').done(function () {
+                  e.grid.setCellValue(e.row.index, 'CONT_END_DT', null, false);
+                });
+              }
+              else {
+                //추가로직생기면....ㅎㅎ
+              }
+            }
+          }
+        }
+      }
+    ,
+      rowAdd: /*33d8133a-6ada-4043-a1bd-2bf543745c80*/ function (e) {
+        var main = self.masterGrid;
+        var currentRow = main.select();
+        e.grid.setCellValue(e.row.index, 'RFLT_YN', 'N', false);
+        e.grid.setCellValue(e.row.index, 'GNFD_APLY_YN', 'N', false);
+        e.grid.setCellValue(e.row.index, 'EMP_NO', main.getCellValue(currentRow, 'EMP_NO'), false);
+        e.grid.setCellValue(e.row.index, 'KOR_NM', main.getCellValue(currentRow, 'KOR_NM'), false);
+        e.grid.setCellValue(e.row.index, 'DEPT_CD', main.getCellValue(currentRow, 'DEPT_CD'), false);
+        e.grid.setCellValue(e.row.index, 'DEPT_NM', main.getCellValue(currentRow, 'DEPT_NM'), false);
+        e.grid.setCellValue(e.row.index, 'EMP_TP', main.getCellValue(currentRow, 'EMP_TP'), false);
+        e.grid.setCellValue(e.row.index, 'EMP_TP_NM', main.getCellValue(currentRow, 'EMP_TP_NM'), false);
+        e.grid.setCellValue(e.row.index, 'POSI_CD', main.getCellValue(currentRow, 'POSI_CD'), false);
+        e.grid.setCellValue(e.row.index, 'POSI_NM', main.getCellValue(currentRow, 'POSI_NM'), false);
+        e.grid.setCellValue(e.row.index, 'PSTN_CD', main.getCellValue(currentRow, 'PSTN_CD'), false);
+        e.grid.setCellValue(e.row.index, 'PSTN_NM', main.getCellValue(currentRow, 'PSTN_NM'), false);
+        e.grid.setCellValue(e.row.index, 'APRP_WAGE_CD', JSON.stringify({}), false);
+    
+        // 추가시 이전행이 있으면 계약시작일을 이전 계약종료일 다음일자로 디폴트설정
+        if (e.row.index - 1 >= 0) {
+          var before_endDate = dews.date.format(e.grid.getCellValue(e.row.index - 1, 'CONT_END_DT'), 'yyyyMMdd');
+    
+          if (before_endDate) {
+            var new_startDate = derp.HR.dateUtil().addDate(before_endDate, 1);
+            e.grid.setCellValue(e.row.index, 'CONT_START_DT', new_startDate, false);
+          }
+        }
+        else {
+    
+        }
+    
+      }
+    
+    });
+    
+    
+    
+    
+    /*98db197d-f9a0-49db-a29a-e09e3270a55b*/ initPageData();
+    
+    //검색어 컨트롤에서 ENTER키 입력
+    {
+      self.$txt_search.on('keydown', function (e) {
+        var keycode = event.keyCode ? event.keyCode : e.which;
+        if (keycode == 13) {
+          dews.ui.mainbuttons.search.click();
+        }
+      });
+    }
+    
+    //페이지 닫기 버튼
+    {
+      self.closing.on(function (e) {
+        if (self.detailDataSource.getDirtyDataCount() != 0) {
+          return dews.confirm('저장하지 않은 변경사항이 존재합니다.\n그래도 닫기를 계속하시겠습니까?').no(function () {
+            e.preventDefault();
+          });
+        }
+      });
+    }
+    
+    //setDetail 적용
+    {
+      setCrossDetail(self.masterGrid, self.detailGrid);
+    }
+    
+    //페이지 초기화
+    function initPageData() {
+    
+      //계약종료일 디폴트 셋팅
+      {
+        self.pp_period.setMonth(); // periodpicker에 당월의 1일부터 말일까지의 기간을 설정
+    
+        // 계약종료일 시작일자 -6개월로 설정
+        var startDate = new Date(self.pp_period.getStartText().toString().substr(0, 7));
+        startDate.setMonth(startDate.getMonth() - 5);
+        self.pp_period.setStartDate(startDate);
+        self.pp_period.setEndDate("99991231");
+      }
+      //재직구분 컨트롤 셋팅
+      {
+        objCodeDtl.HR.P00750.unshift({
+          SYSDEF_CD: "",
+          SYSDEF_NM: ""
+        });
+        self.hlofCdDataSource.data(objCodeDtl.HR.P00750);
+        self.dd_hlofFg.value("1");
+      }
+      //고용형태 컨트롤 셋팅
+      {
+        objCodeDtl.HR.P00010.unshift({
+          SYSDEF_CD: "",
+          SYSDEF_NM: ""
+        });
+        self.empyTpCdDataSource.data(objCodeDtl.HR.P00010);
+        self.dd_empyTpCd.value("0");
+      }
+    
+    
+      //사원구분 컨트롤 셋팅
+      {
+        objCodeDtl.HR.P00220.unshift({
+          SYSDEF_CD: "",
+          SYSDEF_NM: ""
+        });
+        self.empTpDataSource.data(objCodeDtl.HR.P00220);
+        self.dd_empTp.value("0");
+      }
+    
+      //디폴트 버튼만 남기고 숨김처리
+      {
+        dews.ui.mainbuttons.localize.hide();
+        dews.ui.mainbuttons.approval.hide();
+        dews.ui.mainbuttons.add.hide();
+        dews.ui.mainbuttons.print.hide();
+      }
+    
+      //그리드(Master, Detail) 셋팅
+      {
+        settingMasterGridFieldAndColumn();
+        settingDetailGridFieldAndColumn();
+      }
+    
+      //마스터그리드 READ
+      dews.ui.mainbuttons.search.click();
+    
+    }
+    
+    // setDetail.
+    function setCrossDetail(masterGridTemp, detailGridTemp) {
+    
+      var master = masterGridTemp,
+        detail = detailGridTemp,
+        masterDataSource = master.options.dataSource,
+        detailDataSource = detail.options.dataSource;
+    
+      detailDataSource.options.detail = true;
+      detailDataSource.options.lineDataSources = {};
+      masterDataSource.options.master = {};
+    
+      masterGridTemp.on('change', function (e) {
+        var select = e.grid.select(), uid = e.grid.getCellValue(select, '_uid');
+        if (select != -1) {
+          if ($.type(detailDataSource.options.lineDataSources[uid]) === "undefined") {
+            dews.api.get(dews.url.getApiUrl("HR", "PAMPHM00500_SERVICE", "Pamphm00500_listDetail"), {
+              async: false,
+              data: {
+                emp_no: e.row.data.EMP_NO
+              }
+            }).done(function (data) {
+              console.log(data);
+              detailDataSource = $.extend({}, detailDataSource);
+              var crossDataSource = dews.ui.dataSource("__ds_" + uid, detailDataSource.options);
+              $.each(data, function (index, row) {
+                $.each(JSON.parse(row.APRP_WAGE_CD), function (col, value) {
+                  row[col] = value;
+                });
+                row.APRP_WAGE_CD = JSON.stringify({});
+              });
+              //crossDataSource.setFields(fls);
+              crossDataSource.data(data);
+              detailDataSource.options.lineDataSources[uid] = crossDataSource;
+              detailDataSource.options.id = uid;
+              detail.setDataSource(detailDataSource.options.lineDataSources[uid]);
+              detailDataSource.options.lineDataSources[uid].read();
+              masterDataSource.options.master[detailDataSource.options.id] = detailDataSource;
+            });
+          } else {
+            detail.commitCell();
+            detail.setDataSource(detailDataSource.options.lineDataSources[uid]);
+            masterDataSource.options.master[detailDataSource.options.id] = detailDataSource;
+          }
+        }
+      });
+    
+      masterGridTemp.on('dataBound', function (e) {
+        if (e.grid.dataItems().length < 1) {
+          if ($.type(detail.dataSource) != "undefined") {
+            detail.dataSource.data([]);
+          }
+        }
+      });
+    
+      masterGridTemp.on('rowAdd', function (e) {
+        var data = master.dataItem(master.select());
+        data._uid = guid();
+        master.updateRow(master.select(), data);
+      });
+    
+      function guid() {
+        return 'xxxxxxxx-xxxx-4xxx-9xxx-xxxxxxxxxxxx'.replace(/[xy]/g,
+          function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+          });
+      }
+    };
+    
+    //동적으로 masterGrid 컬럼 셋팅
+    function settingMasterGridFieldAndColumn() {
+    
+      var payFixDataSource = objCodeDtl.HR.P00200;
+      var testDataSource = objCodeDtl.HR.P00220;
+    
+      if (payFixDataSource) {
+        fields = [];
+        columns = [];
+    
+        fields.push(
+          { field: '_uid', editable: false, dataType: 'string' },
+          { field: 'DEPT_CD', editable: false, dataType: 'string' },
+          { field: 'DEPT_NM', editable: false, dataType: 'string' },
+          { field: 'EMP_NO', editable: false, dataType: 'string' },
+          { field: 'KOR_NM', editable: false, dataType: 'string' },
+          { field: 'EMP_TP', editable: false, dataType: 'string' },
+          { field: 'EMP_TP_NM', editable: false, dataType: 'string' },
+          { field: 'POSI_CD', editable: false, dataType: 'string' },
+          { field: 'POSI_NM', editable: false, dataType: 'string' },
+          { field: 'PSTN_CD', editable: false, dataType: 'string' },
+          { field: 'PSTN_NM', editable: false, dataType: 'string' },
+          { field: 'SLST_CD', editable: false, dataType: 'string' },
+          { field: 'SEX_CD', editable: false, dataType: 'string' },
+          { field: 'SEX_NM', editable: false, dataType: 'string' },
+          { field: 'HLOF_FG_CD', editable: false, dataType: 'string' },
+          { field: 'HLOF_FG_NM', editable: false, dataType: 'string' },
+          { field: 'JNCO_DT', editable: false, dataType: 'string' },
+          { field: 'CONT_START_DT', editable: false, dataType: 'string' },
+          { field: 'CONT_END_DT', editable: false, dataType: 'string' },
+          { field: 'WK_FIXED_LABOR_TM', editable: false, dataType: 'string' },
+          { field: 'APRP_WAGE_SUM', editable: false, dataType: 'number' }
+        );
+    
+        columns.push(
+          {
+            field: "_uid",
+            title: "_uid",
+            visible: false,
+          },
+          {
+            field: 'DEPT_CD',
+            title: '부서코드',
+            width: 80,
+            visible: false
+          },
+          {
+            field: 'DEPT_NM',
+            title: '부서명',
+            width: 80,
+            align: 'left'
+          },
+          {
+            field: 'EMP_NO',
+            title: '사원번호',
+            width: 80,
+            align: 'left'
+          },
+          {
+            field: 'KOR_NM',
+            title: '사원명',
+            width: 70,
+            align: 'left'
+          },
+          {
+            field: 'EMP_TP',
+            title: '사원구분코드',
+            width: 60,
+            visible: false,
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00220,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            },
+          },
+          {
+            field: 'EMP_TP_NM',
+            title: '사원구분',
+            width: 80,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+            /*
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00220,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            },
+            */
+          },
+          {
+            field: 'POSI_CD',
+            title: '직위코드',
+            width: 80,
+            visible: false,
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00640,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            }
+          },
+          {
+            field: 'POSI_NM',
+            title: '직위',
+            width: 70,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+            /*
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00640,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            }
+            */
+          },
+          {
+            field: 'PSTN_CD',
+            title: '직급코드',
+            width: 80,
+            visible: false,
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00650,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            }
+          },
+          {
+            field: 'PSTN_NM',
+            title: '직급',
+            width: 70,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+            /*
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00650,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            }
+            */
+          },
+          {
+            field: 'SLST_CD',
+            title: '호봉',
+            width: 70,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'SEX_CD',
+            title: '성별',
+            width: 80,
+            visible: false,
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00630,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            }
+          },
+          {
+            field: 'SEX_NM',
+            title: '성별',
+            width: 60,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+            /*
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00630,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            }
+            */
+          },
+          {
+            field: 'HLOF_FG_CD',
+            title: '재직상태',
+            width: 70,
+            visible: false,
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00750,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            }
+          },
+          {
+            field: 'HLOF_FG_NM',
+            title: '재직상태',
+            align: 'left',
+            width: 80,
+            editor: {
+              type: 'string',
+              editable: false
+            }
+            /*
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00750,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            }
+            */
+          },
+          {
+            field: 'JNCO_DT',
+            title: '입사일자',
+            width: 80,
+            align: 'center',
+            formats: {
+              type: 'date',
+              format: 'yyyy-MM-dd'
+            }
+          },
+          {
+            field: 'CONT_START_DT',
+            title: '계약시작일',
+            width: 100,
+            align: 'center',
+            formats: {
+              type: 'date',
+              format: 'yyyy-MM-dd'
+            }
+          },
+          {
+            field: 'CONT_END_DT',
+            title: '계약종료일',
+            width: 100,
+            align: 'center',
+            formats: {
+              type: 'date',
+              format: 'yyyy-MM-dd'
+            }
+          }
+        );
+    
+        if(self.mainEnv.drsCode == "10130") {
+          columns.push(
+            {
+              field: 'WK_FIXED_LABOR_TM',
+              title: '주근로시간',
+              width: 100,
+              align: 'right',
+              formats: {
+                type: 'string'
+              }
+            }
+          );
+        }
+    
+        columns.push(
+          {
+            field: 'APRP_WAGE_SUM',
+            title: '총액',
+            width: 70,
+            align: 'right',
+            formats: {
+              type: 'number',
+              format: '#,##0'
+            }
+          }
+        );
+    
+        // 책정임금 코드 field, columns 동적추가
+        $.each(payFixDataSource, function (i, v) {
+          fields.push(
+            {
+              field: "APRP_WAGE_CD" + "_" + v.SYSDEF_CD,
+              type: "number",
+              formats: {
+                type: 'number',
+                format: '#,##0'
+              }
+            }
+          );
+          columns.push(
+            {
+              field: "APRP_WAGE_CD" + "_" + v.SYSDEF_CD,
+              title: v.SYSDEF_NM,
+              width: v.SYSDEF_NM.length * 20 > 80 ? v.SYSDEF_NM.length * 20 : 80,
+              // width: 70,
+              align: "right",
+              editor: {
+                type: "number",
+                editable: false
+              },
+              formats: {
+                type: 'number',
+                format: '#,##0'
+              }
+            }
+          );
+        });
+    
+        fields.push(
+          { field: 'RMK_DC', editable: false, dataType: 'string' }
+        );
+        columns.push(
+          {
+            field: 'RMK_DC',
+            title: '비고',
+            width: 60,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          }
+        );
+    
+        self.masterDataSource.setFields(fields);
+        self.masterGrid.setColumns(columns);
+      }
+      else {
+        dews.ui.snackbar.error('공통입력코드에 책정임금 코드가 등록되어 있지 않습니다.');
+        return false;
+      }
+    }
+    
+    //동적으로 detailGrid 컬럼 셋팅
+    function settingDetailGridFieldAndColumn() {
+    
+      var payFixDataSource = objCodeDtl.HR.P00200;
+    
+      if (payFixDataSource) {
+        fields = [];
+        columns = [];
+    
+        fields.push(
+          { field: 'RFLT_YN', editable: false, dataType: 'string' },
+          { field: 'GNFD_APLY_YN', editable: false, dataType: 'string' },
+          { field: 'GNFD_CD', editable: false, dataType: 'string' },
+          { field: 'GNFD_NM', editable: false, dataType: 'string' },
+          { field: 'GNFD_DT', editable: false, dataType: 'string' },
+          { field: 'DEPT_CD', editable: false, dataType: 'string' },
+          { field: 'DEPT_NM', editable: false, dataType: 'string' },
+          { field: 'EMP_NO', editable: false, dataType: 'string' },
+          { field: 'KOR_NM', editable: false, dataType: 'string' },
+          { field: 'EMP_TP', editable: false, dataType: 'string' },
+          { field: 'EMP_TP_NM', editable: false, dataType: 'string' },
+          { field: 'POSI_CD', editable: false, dataType: 'string' },
+          { field: 'POSI_NM', editable: false, dataType: 'string' },
+          { field: 'PSTN_CD', editable: false, dataType: 'string' },
+          { field: 'PSTN_NM', editable: false, dataType: 'string' },
+          { field: 'CONT_START_DT', editable: false, dataType: 'string' },
+          { field: 'CONT_END_DT', editable: false, dataType: 'string' },
+          { field: 'WK_FIXED_LABOR_TM', editable: false, dataType: 'string' },
+          { field: 'APRP_WAGE_SUM', editable: false, dataType: 'number' },
+          { field: 'APRP_WAGE_CD' }
+        );
+    
+        columns.push(
+          {
+            field: 'RFLT_YN',
+            title: '책정임금반영여부',
+            width: 120,
+            align: 'center',
+            formats: {
+              type: 'dropDown',
+              dataSource: self.ynDataSource,
+              dataValueField: 'value',
+              dataTextField: 'text'
+            },
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'GNFD_APLY_YN',
+            title: '발령적용여부',
+            width: 100,
+            align: 'center',
+            formats: {
+              type: 'dropDown',
+              dataSource: self.ynDataSource,
+              dataValueField: 'value',
+              dataTextField: 'text'
+            },
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'GNFD_CD',
+            title: '발령구분',
+            width: 150,
+            align: 'left',
+            /*
+            formats: {
+              type: 'dropDown',
+              dataSource: self.gnfdDataSource,
+              dataValueField: 'HR_CD',
+              dataTextField: 'HR_CD_NM'
+            },
+            */
+            editor: {
+              type: 'dropDown',
+              dataSource: self.gnfdDataSource_temp,
+              dataValueField: 'HR_CD',
+              dataTextField: 'HR_CD_NM',
+              editable: false
+            }
+          },
+          {
+            field: 'GNFD_NM',
+            title: '발령명',
+            width: 80,
+            visible: false
+          },
+          {
+            field: 'GNFD_DT',
+            title: '발령일자',
+            width: 80,
+            align: 'center',
+            formats: {
+              type: 'date',
+              format: 'yyyy-MM-dd'
+            },
+            editor: {
+              type: 'date',
+              editable: false
+            }
+          },
+          {
+            field: 'DEPT_CD',
+            title: '부서코드',
+            width: 80,
+            visible: false
+          },
+          {
+            field: 'DEPT_NM',
+            title: '부서명',
+            width: 70,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'EMP_NO',
+            title: '사원번호',
+            width: 80,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'KOR_NM',
+            title: '사원명',
+            width: 70,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'EMP_TP',
+            title: '사원구분코드',
+            width: 60,
+            visible: false,
+            formats: {
+              type: 'dropDown',
+              dataSource: objCodeDtl.HR.P00220,
+              dataValueField: 'SYSDEF_CD',
+              dataTextField: 'SYSDEF_NM'
+            },
+          },
+          {
+            field: 'EMP_TP_NM',
+            title: '사원구분',
+            width: 80,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'POSI_CD',
+            title: '직위코드',
+            width: 80,
+            visible: false,
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'PSTN_CD',
+            title: '직급코드',
+            width: 80,
+            visible: false,
+            editor: {
+              type: 'string',
+              editable: false
+            }
+          },
+          {
+            field: 'CONT_START_DT',
+            title: '계약시작일',
+            attributes: { class: 'required' },
+            width: 100,
+            align: 'center',
+            sortable: true,
+            formats: {
+              type: 'date',
+              format: 'yyyy-MM-dd'
+            },
+            editor: {
+              type: 'date',
+              format: 'yyyy-MM-dd',
+              editable: function (e) {
+                return e.grid.getRowState(e.row.index) === "added";
+              }
+            }
+          },
+          {
+            field: 'CONT_END_DT',
+            title: '계약종료일',
+            width: 100,
+            align: 'center',
+            formats: {
+              type: 'date',
+              format: 'yyyy-MM-dd'
+            },
+            editor: {
+              type: 'date',
+              format: 'yyyy-MM-dd',
+              editable: function (e) {
+                return e.row.data.RFLT_YN === "N";
+              }
+            }
+          }
+        );
+    
+        if(self.mainEnv.drsCode == "10130") {
+          columns.push(
+            {
+              field: "WK_FIXED_LABOR_TM",
+              title: '주근로시간',
+              width: 100,
+              align: 'right',
+              editor: {
+                type: "string",
+                editable: function (e) {
+                  return e.row.data.RFLT_YN === "N";
+                }
+              },
+              formats: {
+                type: 'string'
+              }
+            }
+          );
+        }
+    
+        columns.push(
+          {
+            field: 'APRP_WAGE_SUM',
+            title: '계약총액',
+            width: 120,
+            align: 'right',
+            attributes: { class: "readonly" },
+            formats: {
+              type: 'number',
+              format: '#,##0'
+            },
+            editor: {
+              type: "number",
+              editable: false
+            },
+          },
+          {
+            field: 'APRP_WAGE_CD',
+            visible: false
+          }
+        );
+    
+        // 책정임금 코드 field, columns 동적추가
+        $.each(payFixDataSource, function (i, v) {
+          fields.push(
+            {
+              field: "APRP_WAGE_CD" + "_" + v.SYSDEF_CD,
+              type: "number",
+              formats: {
+                type: 'number',
+                format: '#,##0'
+              }
+            }
+          );
+          columns.push(
+            {
+              field: "APRP_WAGE_CD" + "_" + v.SYSDEF_CD,
+              title: v.SYSDEF_NM,
+              width: v.SYSDEF_NM.length * 20 > 80 ? v.SYSDEF_NM.length * 20 : 80,
+              align: 'right',
+              editor: {
+                type: "number",
+                editable: function (e) {
+                  return e.row.data.RFLT_YN === "N";
+                }
+              },
+              formats: {
+                type: 'number',
+                format: '#,##0'
+              }
+            }
+          );
+        });
+    
+        fields.push(
+          { field: 'RMK_DC', editable: false, dataType: 'string' }
+        );
+        columns.push(
+          {
+            field: 'RMK_DC',
+            title: '비고',
+            width: 60,
+            align: 'left',
+            editor: {
+              type: 'string',
+              editable: true
+            }
+          }
+        );
+    
+        self.detailDataSource.setFields(fields);
+        self.detailGrid.setColumns(columns);
+      }
+      else {
+        dews.ui.snackbar.error('공통입력코드에 책정임금 코드가 등록되어 있지 않습니다.');
+        return false;
+      }
+    }
+    
+    //MASTER GRID 데이터 바인딩
+    function masterGridRead() {
+      var checkBox = self.chk_gubun.target[0].checked;
+    
+      dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00500_SERVICE', 'Pamphm00500_listMaster'), {
+        async: false,
+        data: {
+          pp_start: self.pp_period.getStartDate(),
+          pp_end: self.pp_period.getEndDate(),
+          checkBox: checkBox,
+          hlof_fg_cd: self.dd_hlofFg.value(),
+          empy_tp_cd: self.dd_empyTpCd.value(),
+          emp_tp: self.dd_empTp.value(),
+          txt_search: self.txt_search.text()
+        }
+      }).done(function (data) {
+        var tempMasterGrid = self.masterGrid;
+        var tempMasterDataSource = self.masterDataSource;
+        var tempDetailGrid = self.detailGrid;
+        var tempDetailDataSource = self.detailDataSource;
+    
+        console.log(data);
+    
+        $.each(data, function (index, row) {
+          $.each(JSON.parse(row.APRP_WAGE_CD), function (col, value) {
+            row[col] = value;
+          });
+          row.APRP_WAGE_CD = JSON.stringify({});
+        });
+    
+        tempMasterDataSource.data(data);
+    
+        if (data.length == 0) {
+    
+        }
+        console.log("조회버튼 클릭 성공 20191127");
+    
+      }).fail(function (xhr, status, error) {
+        //tempMasterDataSource.data([]);
+        console.log("조회버튼 클릭 실패 20191127");
+      });
+    
+    }
+    
+    //DETAIL GRID 데이터 바인딩
+    function detailGridRead(emp_no) {
+      dews.api.get(dews.url.getApiUrl("HR", "PAMPHM00500_SERVICE", "Pamphm00500_listDetail"), {
+        data: {
+          emp_no: emp_no
+        }
+      }).done(function (data) {
+        console.log(data);
+    
+        $.each(data, function (index, row) {
+          $.each(JSON.parse(row.APRP_WAGE_CD), function (col, value) {
+            row[col] = value;
+          });
+          row.APRP_WAGE_CD = JSON.stringify({});
+        });
+    
+        self.detailDataSource.data(data);
+        self.detailGrid.refresh();
+      });
+    }
+    
+    //저장
+    function saveData() {
+    
+      var deferred = $.Deferred();
+      dews.api.post(dews.url.getApiUrl("HR", "PAMPHM00500_SERVICE", "pamphm00500_save"), {
+        data: {
+          detailDataSource: JSON.stringify(self.detailDataSource.getDirtyData())
+        }
+      }).done(function (data) {
+        dews.ui.snackbar.ok('저장이 완료되었습니다.').done(function () {
+          self.masterGrid.dataSource.data([]);
+          self.detailGrid.dataSource.data([]);
+          masterGridRead();
+          deferred.resolve(true);
+        });
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message).done(function () {
+          deferred.resolve(false);
+        });
+      });
+      return deferred.promise();
+    }
+    
+    function IsValidated() {
+      var detailGrid = self.detailGrid;
+    
+      var items = detailGrid.options.dataSource.options.lineDataSources;
+      var returnFlag = true;
+      var msg;
+    
+      $.each(detailGrid.dataItems(), function (idx, item) {
+        if (!item.CONT_START_DT) {
+          msg = dews.string.format('계약시작일이 없습니다.');
+          returnFlag = false;
+          return false;
+        }
+        /*
+        else if (!item.APRP_WAGE_SUM) {
+          msg = dews.string.format('계약금액이 없습니다.');
+          returnFlag = false;
+          return false;
+        }
+        */
+      });
+    
+      if (!returnFlag) {
+        dews.ui.snackbar.warning(msg);
+      }
+    
+      return returnFlag;
+    }
+    
+    function IsChanged() {
+    
+      self.detailGrid.commitCell();
+      if (self.detailDataSource.getDirtyDataCount() > 0) {
+        return true;
+      }
+      return false;
+    }
+    
+    //20200109 added
+    function calDate() {
+      if (self.pp_period.getEndDate() == "" || self.pp_period.getStartDate() == "") {
+        dews.ui.snackbar.warning("계약종료일을 입력해주세요.");
+        return false;
+      }
+      var endDate = new Date(self.pp_period.getStartText().toString().substr(0, 7));
+      endDate.setMonth(endDate.getMonth() + 2);
+      endDate.setDate(endDate.getDate() - 1);
+    
+      var initData = {
+        startDate: self.pp_period.getStartDate() || "",
+        endDate: endDate || ""
+      }
+      return initData;
+    }
+    
+    //# sourceURL=PAMPHM00500.js
+    
+    
+    
+    
+    
+
+  
+  });
+
+</script>

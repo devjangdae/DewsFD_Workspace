@@ -1,0 +1,2725 @@
+<!--
+  메뉴명: 사원등록(NEW) 도움창
+  수정내역:
+  2018.12.14 성승익 : 신규작성
+  -->
+<div class="dews-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="left" data-dews-width="300">
+    <div class="custom-ui-condition-panel" id="CardListCondition" style="width: 300px; height: 47px;">
+      <select id="cdt_hlofFgCd_ddl" class="dews-ui-dropdownlist" style="float: left; width: 83px; margin-right: 2px;"
+        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00750" custom-dropdown-add-all="true"
+        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+      </select>
+      <input id="cdt_keyword_tb" type="text" class="dews-ui-textbox" style="float: left; width: 162px; margin-right: 2px;"
+        placeholder="성명 및 사번 검색">
+      <button id="btn_search" class="dews-ui-button ico-search"></button>
+    </div>
+    <div class="dews-ui-cardlist" id="EmpCardList"></div>
+  </div>
+  <div class="dews-container-item" data-dews-position="normal">
+    <div class="dews-ui-tab-panel sub" id="mainTab">
+      <!-- 프로필 패널 시작 -->
+      <div class="dews-container-panel" data-dews-container-height="98" style="border: 1px solid #ccc; border-bottom: none; margin: 6px 0px 0px 0px;">
+        <div class="dews-container-item" style="width:100%;" data-dews-position="left">
+          <div class="dews-custom-profile-panel">
+            <!-- 프로필사진 프레임 -->
+            <div class="dews-custom-profile-photo-frame">
+              <span class="dews-custom-profile-photo">
+                <!-- 사진등록 포토업로더 -->
+                <div style="display:none;">
+                  <input id="photoUploader" type="file" class="dews-ui-file" data-dews-download-use="false" data-dews-file-key="customFileKey">
+                </div>
+                <img id="photoArea">
+                <span class="dews-custom-profile-photo-edit-icon"></span>
+              </span>
+            </div>
+            <div class="dews-custom-profile-info-frame">
+              <div class="dews-custom-profile-employee">
+                <span class="dews-custom-profile-name"></span>
+                <span class="dews-custom-profile-position"></span>
+              </div>
+              <span class="dews-custom-profile-division">
+                <span class="dews-custom-profile-bizarea no-space"></span>
+                <span class="dews-custom-profile-updept no-space"></span>
+                <span class="dews-custom-profile-dept no-space"></span>
+                <span class="dews-custom-profile-duty no-space"></span>
+              </span>
+            </div>
+            <div class="dews-custom-profile-button-frame">
+              <span id="btn_edit" class="dews-custom-profile-button">
+                <span class="dews-custom-profile-info-edit-icon"></span>
+                <span id="editBtnText" class="dews-custom-profile-button-frame-text">수정</span>
+              </span>
+              <span id="btn_fileUpload" class="dews-custom-profile-button">
+                <span class="dews-custom-profile-file-upload-icon"></span>
+                <span class="dews-custom-profile-button-frame-text">파일</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 프로필 패널 끝 -->
+      <ul class="dews-tab-items">
+        <!-- 기본정보1 탭 시작 -->
+        <li class="dews-tab-item" id="BasicInfo1Tab" data-dews-title="기본정보1">
+          <div id="BasicInfo1FormPanel" class="dews-ui-form-panel">
+            <ul>
+              <li>
+                <label>사원번호</label>
+                <span>
+                  <input id="fp_empNo_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="EMP_NO" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>주민등록번호</label>
+                <span>
+                  <input id="fp_resNo_mtb" type="text" class="dews-ui-maskedtextbox" data-dews-mask="000000-0000000"
+                    data-custom-bind-column="RES_NO" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>성명</label>
+                <span>
+                  <input id="fp_korNm_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="KOR_NM" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>성별</label>
+                <span>
+                  <select id="fp_sexCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00630"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="SEX_CD" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>사업장</label>
+                <span>
+                  <input type="text" id="fp_bizareaCd_cp" class="dews-ui-codepicker"
+                    data-dews-code-field="BIZAREA_CD" data-dews-text-field="BIZAREA_NM" data-dews-help-code="H_MA_BIZAREA_MST_S"
+                    data-dews-help-size="medium" data-dews-help-params=""
+                    data-custom-bind-column="BIZAREA_CD" data-custom-bind-text="BIZAREA_NM" data-custom-bind-table="HR_EMP_MST">
+                  </input>
+                </span>
+              </li>
+              <li>
+                <label>부서</label>
+                <span>
+                  <input type="text" id="fp_deptCd_cp" class="dews-ui-codepicker"
+                    data-dews-code-field="DEPT_CD" data-dews-text-field="DEPT_NM" data-dews-help-code="H_MA_DEPT_MST_S"
+                    data-dews-help-size="medium" data-dews-help-params=""
+                    data-custom-bind-column="DEPT_CD" data-custom-bind-text="DEPT_NM" data-custom-bind-table="HR_EMP_MST">
+                  </input>
+                </span>
+              </li>
+              <li>
+                <label>그룹입사일</label>
+                <span>
+                  <input id="fp_groupecnyDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="GROUPECNY_DT" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>입사일</label>
+                <span>
+                  <input id="fp_jncoDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="JNCO_DT" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>퇴직기산일</label>
+                <span>
+                  <input id="fp_retireStdr_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="RETIRESTDR_DT" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>퇴직일자</label>
+                <span>
+                  <input id="fp_retrDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="RETR_DT" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>재직구분</label>
+                <span>
+                  <select id="fp_hlofFgCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00750"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="HLOF_FG_CD" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>퇴직사유</label>
+                <span>
+                  <input id="fp_retrDtlReasonDc_tb" type="text" class="dews-ui-textbox" maxlength="90"
+                    data-custom-bind-column="RETR_DTL_REASON_DC" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>사원구분</label>
+                <span>
+                  <select id="fp_empTp_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00220"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="EMP_TP" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>비용센터</label>
+                <span>
+                  <input id="fp_ccCd_cp" type="text" class="dews-ui-codepicker"
+                    data-dews-code-field="CC_CD" data-dews-text-field="CC_NM" data-dews-help-code="H_MA_CC_MST_S"
+                    data-dews-help-size="big" data-dews-help-params=""
+                    data-custom-bind-column="CC_CD" data-custom-bind-text="CC_NM" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li>
+                <label>내외국인</label>
+                <span>
+                  <select id="fp_frgnrCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="MA" custom-dropdown-data-code="P00200"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="FRGNR_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>국적</label>
+                <span>
+                  <input id="fp_ntnlCd_cp" type="text" class="dews-ui-codepicker"
+                    data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S"
+                    data-dews-help-size="medium" data-dews-help-title='국적' data-dews-help-params="module_cd=MA&field_cd=P00170"
+                    data-custom-bind-column="NTNL_CD" data-custom-bind-text="NTNL_NM" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li>
+                <label>외국인식별번호</label>
+                <span>
+                  <input id="fp_frnrInsertNo_mtb" type="text" class="dews-ui-maskedtextbox"
+                    data-custom-bind-column="FRNR_INSERT_NO" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li>
+                <label>직위</label>
+                <span>
+                  <select id="fp_posiCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00640"
+                    data-dews-text-field="SYSDEF_NM" data-dews-value-field="SYSDEF_CD"
+                    data-custom-bind-column="POSI_CD" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>직급</label>
+                <span>
+                  <select id="fp_pstnCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00650"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="PSTN_CD" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>호봉</label>
+                <span>
+                  <input id="fp_slstCd_cp" type="text" class="dews-ui-codepicker"
+                    data-dews-code-field="SLST_CD" data-dews-text-field="SLST_CD" data-dews-help-code="H_HR_PAYSTEP_INFO_S"
+                    data-dews-help-size="medium" data-dews-help-params=""
+                    data-custom-bind-column="SLST_CD" data-custom-bind-text="SLST_CD" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>직책</label>
+                <span>
+                  <select id="fp_odtyCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00980"
+                    data-dews-text-field="SYSDEF_NM" data-dews-value-field="SYSDEF_CD"
+                    data-custom-bind-column="ODTY_CD" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>직무</label>
+                <span>
+                  <select id="fp_dutyCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00920"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="DUTY_CD" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>비상연락</label>
+                <span>
+                  <input id="fp_emgncCntcNo_tb" type="text" class="dews-ui-textbox" data-custom-bind-column="EMGNC_CNTC_NO" data-custom-bind-table="HR_EMPINFO_DTL" maxlength="20">
+                </span>
+              </li>
+              <li>
+                <label>메일주소</label>
+                <span>
+                  <input id="fp_emailNm_tb" type="text" class="dews-ui-textbox" data-custom-bind-column="EMAIL_NM" data-custom-bind-table="HR_EMPINFO_DTL" maxlength="40">
+                </span>
+              </li>
+              <li class="li-rowspan-2">
+                <label class="rowspan-2">주민등록주소</label>
+                <span class="colspan-2">
+                  <input id="fp_resPostNo_zcp" type="text" class="dews-ui-zipcodepicker" style="width: 100px;"
+                    data-dews-bind-code="RES_POST_NO" data-dews-address-type="street" data-dews-address-bind="fp_baseResAddr_tb"
+                    data-custom-bind-column="RES_POST_NO" data-custom-bind-text="BASE_RES_ADDR" data-custom-bind-table="HR_EMPINFO_DTL">
+                  <input id="fp_baseResAddr_tb" type="text" class="dews-ui-textbox" maxlength="90" style="width: 403px; z-index: 1;"
+                    data-custom-bind-column="BASE_RES_ADDR" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+                <span class="colspan-2">
+                  <input id="fp_dtlResAddr_tb" type="text" class="dews-ui-textbox cols-2" maxlength="90" style="width: 506px; margin-top: -9px;"
+                    data-custom-bind-column="DTL_RES_ADDR" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li class="li-invisible-cols-2"></li>
+            </ul>
+          </div>
+        </li>
+        <!-- 기본정보2탭 시작 -->
+        <li id="BasicInfo2Tab" class="dews-tab-item" data-dews-title="기본정보2">
+          <div id="BasicInfo2FormPanel" class="dews-ui-form-panel">
+            <ul>
+              <li>
+                <label>한자성명</label>
+                <span>
+                  <input id="fp_chcrtNm2_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="CHCRT_NM2" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>영문성명</label>
+                <span>
+                  <input id="fp_engFnmNm2_tb" type="text" class="dews-ui-textbox half-size" placeholder="First Name"
+                    data-custom-bind-column="ENG_FNM_NM2" data-custom-bind-table="HR_EMP_MST">
+                  <input id="fp_engLnmNm2_tb" type="text" class="dews-ui-textbox half-size" placeholder="Last Name"
+                    data-custom-bind-column="ENG_LNM_NM2" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li class="li-rowspan-2">
+                <label class="rowspan-2">영문주소</label>
+                <span class="colspan-2">
+                  <input id="fp_engAddr2_tb" type="text" class="dews-ui-textbox cols-2" maxlength="90"
+                    data-custom-bind-column="ENG_ADDR2" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+                <span class="colspan-2">
+                  <input id="fp_engDtlAddr2_tb" type="text" class="dews-ui-textbox cols-2" maxlength="90" style="margin-top: -9px;"
+                    data-custom-bind-column="ENG_DTL_ADDR2" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li class="li-invisible-cols-2"></li>
+              <li>
+                <label>직군</label>
+                <span>
+                  <select id="fp_ogrpCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00660"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="OGRP_CD" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>직종</label>
+                <span>
+                  <select id="fp_jkndCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00990"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="JKND_CD" data-custom-bind-table="HR_EMP_MST">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>프로젝트</label>
+                <span>
+                  <input type="text" id="fp_pjtCd_cp" class="dews-ui-codepicker"
+                    data-dews-code-field="PJT_NO" data-dews-text-field="PJT_NM" data-dews-help-code="H_PS_PROJ_MST_S"
+                    data-dews-help-size="extra" data-dews-help-params=""
+                    data-custom-bind-column="PJT_CD" data-custom-bind-text="PJT_NM" data-custom-bind-table="HR_EMPINFO_DTL">
+                  </input>
+                </span>
+              </li>
+              <li>
+                <label>최종학력</label>
+                <span>
+                  <select id="fp_lastLeduCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P00670"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="LAST_LEDU_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>생년월일</label>
+                <span>
+                  <input id="fp_biryymmDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="BIRYYMM_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li>
+                <label>양음구분</label>
+                <span>
+                  <select id="fp_atscolcCd_ddl" class="dews-ui-dropdownlist"
+                    custom-dropdown-data-module="HR" custom-dropdown-data-code="P01020"
+                    data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                    data-custom-bind-column="ATSCOLC_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                  </select>
+                </span>
+              </li>
+              <li>
+                <label>근속기준일</label>
+                <span>
+                  <input id="fp_cnwkstdrDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="CNWKSTDR_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li>
+                <label>연차기산일</label>
+                <span>
+                  <input id="fp_anctRecknDt_dp" type="text" class="dews-ui-datepicker" style="width: 110px;"
+                    data-custom-bind-column="ANCT_RECKN_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                  <input id="fp_anctAddnumDy_tb" type="text" class="dews-ui-numerictextbox" style="width: 57px;"
+                    data-custom-bind-column="ANCT_ADDNUM_DY" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li>
+                <label>승호기준일</label>
+                <span>
+                  <input id="fp_mltplcStdDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="MLTPLC_STD_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li>
+                <label>최종승호일</label>
+                <span>
+                  <input id="fp_lastMltplcDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="LAST_MLTPLC_DT" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>승급기준일</label>
+                <span>
+                  <input id="fp_ugrdStdDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="UGRD_STD_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li>
+                <label>최종승급일</label>
+                <span>
+                  <input id="fp_lastUgrdDt_dp" type="text" class="dews-ui-datepicker"
+                    data-custom-bind-column="LAST_UGRD_DT" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>유연근무시간코드</label>
+                <span>
+                  <input id="fp_fleBwrkTmCdNm_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="FLE_BWRK_TM_CD_NM" data-custom-bind-table="HR_EMP_MST" data-custom-readonly="true">
+                </span>
+              </li>
+              <li>
+                <label>직무이력</label>
+                <span>
+                  <input id="fp_dutyHstNm_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="DUTY_HST_NM" data-custom-bind-table="HR_EMP_MST" data-custom-readonly="true">
+                </span>
+              </li>
+              <li>
+                <label>비고</label>
+                <span>
+                  <input id="fp_rmkDc_tb" type="text" class="dews-ui-textbox cols-2"
+                    data-custom-bind-column="RMK_DC" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li class="li-invisible"></li>
+              <li>
+                <label>비고1</label>
+                <span>
+                  <input id="fp_rmkDc1_tb" type="text" class="dews-ui-textbox cols-2"
+                    data-custom-bind-column="RMK_DC1" data-custom-bind-table="HR_EMPINFO_DTL">
+                </span>
+              </li>
+              <li class="li-invisible"></li>
+              <li>
+                <label>비고2</label>
+                <span>
+                  <input id="fp_rmkDc2_tb" type="text" class="dews-ui-textbox cols-2"
+                    data-custom-bind-column="RMK_DC2" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li class="li-invisible"></li>
+              <li>
+                <label>사용자정의1</label>
+                <span>
+                  <input id="fp_custom1_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="CUSTOM" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>사용자정의2</label>
+                <span>
+                  <input id="fp_custom2_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="CUSTOM" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>사용자정의3</label>
+                <span>
+                  <input id="fp_custom3_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="CUSTOM" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+              <li>
+                <label>직렬</label>
+                <span>
+                  <input id="fp_none3_tb" type="text" class="dews-ui-textbox"
+                    data-custom-bind-column="NONE" data-custom-bind-table="HR_EMP_MST">
+                </span>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- 급여기초 탭 -->
+        <li id="PayBaseTab" class="dews-tab-item" data-dews-title="급여기초">
+          <div class="custom-tab-container">
+              <p>
+                <button id="btn_calcFamily" class="dews-ui-button">부양가족계산</button>
+              </p>
+              <div id="PayBaseFormPanel" class="dews-ui-form-panel">
+                <ul>
+                  <li>
+                    <label>배우자공제</label>
+                    <span>
+                      <select id="fp_spoCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="SPO_CD"  data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>부양가족20세</label>
+                    <span>
+                      <input id="fp_familyteyCnt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="FAMILYTEY_CNT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>부녀자공제</label>
+                    <span>
+                      <select id="fp_ladyHshrCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="LADY_HSHR_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>부양가족60세</label>
+                    <span>
+                      <input id="fp_familysiyCnt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="FAMILYSIY_CNT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>세대주여부</label>
+                    <span>
+                      <select id="fp_hshrYnCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="HSHR_YN_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>장애인</label>
+                    <span>
+                      <input id="fp_dspsnFamlCnt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="DSPSN_FAML_CNT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>생산직해당</label>
+                    <span>
+                      <select id="fp_prDrctWkrCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="PR_DRCT_WKR_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>수급자/위탁아동</label>
+                    <span>
+                      <input id="fp_spdmTrstChilCnt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="SPDM_TRST_CHIL_CNT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>연봉2500이하</label>
+                    <span>
+                      <select id="fp_prFrmlaM2500Yn_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="PR_FRMLA_M2500_YN" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>다자녀추가공제</label>
+                    <span>
+                      <input id="fp_childSuppDdctCnt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="CHILD_SUPP_DDCT_CNT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>파견근로여부</label>
+                    <span>
+                      <select id="fp_dsptcLaborYn_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="DSPTC_LABOR_YN" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>외국인단일세율</label>
+                    <span>
+                      <select id="fp_frnrSinglTrteCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00040"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="FRNR_SINGL_TRTE_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>국외근로여부</label>
+                    <span>
+                      <select id="fp_ocwCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="OCW_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>국외근로비과세</label>
+                    <span>
+                      <select id="fp_noabrodCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="ETC" custom-dropdown-data-code="ABROADTAX"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="NOABROD_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>학자금대상여부</label>
+                    <span>
+                      <select id="fp_sceprepayTrgtCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="SCEPREPAY_TRGT_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>학자금상환액</label>
+                    <span>
+                      <input id="fp_sceprepayAmt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="SCEPREPAY_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>거주자여부</label>
+                    <span>
+                      <select id="fp_residntCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="RESIDNT_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="1">Yes</option>
+                        <option value="2">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>거주지국</label>
+                    <span>
+                      <input id="fp_resdncCd_cp" type="text" class="dews-ui-codepicker"
+                        data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S"
+                        data-dews-help-size="medium" data-dews-help-title="거주지국" data-dews-help-params="module_cd=MA&field_cd=P00170"
+                        data-custom-bind-column="RESDNC_CD" data-custom-bind-text="RESDNC_NM" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>국민연금해당</label>
+                    <span>
+                      <select id="fp_npncrrenncCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="ETC" custom-dropdown-data-code="PENSION"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="NPNCRRENNC_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>국민(사학)연금료</label>
+                    <span>
+                      <input id="fp_npnAmt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="NPN_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>건강보험해당</label>
+                    <span>
+                      <select id="fp_hlthinsInsCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="HLTHINS_INS_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>건강보험료</label>
+                    <span>
+                      <input id="fp_hlthinsAmt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="HLTHINS_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>고용보험해당</label>
+                    <span>
+                      <select id="fp_empyinsfoTargnoCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="EMPYINSFO_TARGNO_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>고용보험료</label>
+                    <span>
+                      <input id="fp_empyinsfoAmt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="EMPYINSFO_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>산재보험해당</label>
+                    <span>
+                      <select id="fp_indusacInsuTrgtCd_rdo" class="dews-ui-radio-group"
+                        data-custom-bind-column="INDUSAC_INSU_TRGT_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>수습종료일</label>
+                    <span>
+                      <input id="fp_apntcExpyDt_dp" type="text" class="dews-ui-datepicker"
+                        data-custom-bind-column="APNTC_EXPY_DT" data-custom-bind-table="HR_EMP_MST">
+                    </span>
+                  </li>
+                  <li>
+                    <label>감면유형</label>
+                    <span>
+                      <select id="fp_reductTpCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P01480"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="REDUCT_TP_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>감면종료일</label>
+                    <span>
+                      <input id="fp_reductEndDt_dp" type="text" class="dews-ui-datepicker"
+                        data-custom-bind-column="REDUCT_END_DT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>세액조정</label>
+                    <span>
+                      <select id="fp_taxamtDdctRt_ddl" class="dews-ui-dropdownlist"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="TAXAMT_DDCT_RT" data-custom-bind-table="HR_EMPPAY_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>과표조정금액</label>
+                    <span>
+                      <input id="fp_taxstdSuppAmt_tb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="TAXSTD_SUPP_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>은행(급여)</label>
+                    <span>
+                      <input id="fp_bank1Cd_cp" type="text" class="dews-ui-codepicker"
+                        data-dews-code-field="BANK_CD" data-dews-text-field="FNLT_NM" data-dews-help-code="H_CI_BANK_MST_S"
+                        data-dews-help-size="largebig" data-dews-help-title="은행(급여)" data-dews-help-params=""
+                        data-custom-bind-column="BANK1_CD" data-custom-bind-text="BANK1_NM" data-custom-bind-table="HR_EMPPAY_DTL">
+                      <input id="fp_accnt1No_tb" type="text" class="dews-ui-textbox" style="width: 157px; margin: 0px 2px 0px 2px; z-index: 1;"
+                        maxlength="30" placeholder="계좌번호"
+                        data-custom-bind-column="ACCNT1_NO" data-custom-bind-table="HR_EMPPAY_DTL">
+                      <input id="fp_dpsr1Nm_tb" type="text" class="dews-ui-textbox" style="width: 170px; z-index: 1;"
+                        maxlength="50" placeholder="예금주"
+                        data-custom-bind-column="DPSR1_NM" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li class="li-invisible"></li>
+                  <li>
+                    <label>은행(경비)</label>
+                    <span>
+                      <input id="fp_bank2Cd_cp" type="text" class="dews-ui-codepicker"
+                        data-dews-code-field="BANK_CD" data-dews-text-field="FNLT_NM" data-dews-help-code="H_CI_BANK_MST_S"
+                        data-dews-help-size="largebig" data-dews-help-title="은행(경비)" data-dews-help-params=""
+                        data-custom-bind-column="BANK2_CD" data-custom-bind-text="BANK2_NM" data-custom-bind-table="HR_EMPPAY_DTL">
+                      <input id="fp_accnt2No_tb" type="text" class="dews-ui-textbox" style="width: 157px; margin: 0px 2px 0px 2px; z-index: 1;"
+                        maxlength="30" placeholder="계좌번호"
+                        data-custom-bind-column="ACCNT2_NO" data-custom-bind-table="HR_EMPPAY_DTL">
+                      <input id="fp_dpsr2Nm_tb" type="text" class="dews-ui-textbox" style="width: 170px; z-index: 1;"
+                        maxlength="50" placeholder="예금주"
+                        data-custom-bind-column="DPSR2_NM" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li class="li-invisible"></li>
+                  <li>
+                    <label>계정유형</label>
+                    <span>
+                      <select id="fp_accttypeCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00310"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="ACCTTYPE_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label></label>
+                    <span>
+                      <!-- <select id="fp_loctaxAplcntarCd_ddl" class="dews-ui-dropdownlist"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="LOCTAX_APLCNTAR_CD" data-custom-bind-table="HR_EMPPAY_DTL">
+                      </select> -->
+                    </span>
+                  </li>
+                  <li>
+                    <label>연봉</label>
+                    <span>
+                      <input id="fp_anicAmt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="ANIC_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>월급</label>
+                    <span>
+                      <input id="fp_mntslrAmt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="MNTSLR_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>일급</label>
+                    <span>
+                      <input id="fp_fstclssAmt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="FSTCLSS_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>시급</label>
+                    <span>
+                      <input id="fp_tmpayAmt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="TMPAY_AMT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                </ul>
+              </div>
+          </div>
+        </li>
+        <li id="PersonalInfoTab" class="dews-tab-item" data-dews-title="인적사항">
+          <div class="custom-tab-container">
+              <div id="PersonalInfoFormPanel" class="dews-ui-form-panel">
+                <ul>
+                  <li>
+                    <label>채용구분</label>
+                    <span>
+                      <select id="fp_hireFgCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00730" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="HIRE_FG_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>입사구분</label>
+                    <span>
+                      <select id="fp_jncoFgCd_ddl" class="dews-ui-dropdownlist" style="width: 110px;"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00720" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="JNCO_FG_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                      <input id="fp_jncoExtgCnt_ntb" type="text" class="dews-ui-numerictextbox" style="width: 57px;"
+                        data-custom-bind-column="JNCO_EXTG_CNT" data-custom-bind-table="HR_EMPPAY_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>거주구분</label>
+                    <span>
+                      <select id="fp_liveFgCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="ETC" custom-dropdown-data-code="LIVEFG" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="LIVE_FG_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>결혼여부</label>
+                    <span>
+                      <select id="fp_mrrgYn_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P01140"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="MRRG_YN" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>종교</label>
+                    <span>
+                      <select id="fp_rlgnFgCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00880"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="RLGN_FG_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>결혼일</label>
+                    <span>
+                      <input id="fp_mrrgDt_dp" type="text" class="dews-ui-datepicker"
+                        data-custom-bind-column="MRRG_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>신장</label>
+                    <span>
+                      <input id="fp_sttrQt_ntb" type="text" class="dews-ui-numerictextbox"
+                        data-custom-bind-column="STTR_QT" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>체중</label>
+                    <span>
+                        <input id="fp_wghtQt_ntb" type="text" class="dews-ui-numerictextbox"
+                          data-custom-bind-column="WGHT_QT" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>시력(좌/우)</label>
+                    <span>
+                      <input id="fp_sghtLeftQt_ntb" type="text" class="dews-ui-numerictextbox" style="width: 80px;"
+                        data-custom-bind-column="SGHT_LEFT_QT" data-custom-bind-table="HR_EMPINFO_DTL">
+                        /
+                      <input id="fp_sghtRghtQt_ntb" type="text" class="dews-ui-numerictextbox" style="width: 80px;"
+                        data-custom-bind-column="SGHT_RGHT_QT" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>혈액형</label>
+                    <span>
+                      <select id="fp_bldtpCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00830"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="BLDTP_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>취미</label>
+                    <span>
+                      <input id="fp_hobCd_cp" type="text" class="dews-ui-codepicker"
+                        data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S"
+                        data-dews-help-size="medium" data-dews-help-title="취미" data-dews-help-params="module_cd=HR&field_cd=P00890"
+                        data-custom-bind-column="HOB_CD" data-custom-bind-text="HOB_CD_NM" data-custom-bind-table="HR_EMPINFO_DTL">
+                      <input id="fp_hobNm_tb" type="text" class="dews-ui-textbox" style="width: 331px; margin: 0px 2px 0px 2px; z-index: 1;"
+                        data-custom-bind-column="HOB_NM" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li class="li-invisible"></li>
+                  <li>
+                    <label>특기</label>
+                    <span>
+                      <input id="fp_tlntCd_cp" type="text" class="dews-ui-codepicker"
+                        data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S"
+                        data-dews-help-size="medium" data-dews-help-title="특기" data-dews-help-params="module_cd=HR&field_cd=P00890"
+                        data-custom-bind-column="TLNT_CD" data-custom-bind-text="TLNT_CD_NM" data-custom-bind-table="HR_EMPINFO_DTL">
+                      <input id="fp_tlntNm_tb" type="text" class="dews-ui-textbox" style="width: 331px; margin: 0px 2px 0px 2px; z-index: 1;"
+                        data-custom-bind-column="TLNT_NM" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li class="li-invisible"></li>
+                  <li class="li-rowspan-2">
+                    <label class="rowspan-2">현재주소</label>
+                    <span class="colspan-2">
+                      <input id="fp_curPostNo_zcp" type="text" class="dews-ui-zipcodepicker" style="width: 100px;"
+                        data-dews-bind-code="CUR_POST_NO" data-dews-address-type="street" data-dews-address-bind="fp_baseCurAddr_tb"
+                        data-custom-bind-column="CUR_POST_NO" data-custom-bind-text="BASE_CUR_ADDR" data-custom-bind-table="HR_EMPINFO_DTL">
+                      <input id="fp_baseCurAddr_tb" type="text" class="dews-ui-textbox" maxlength="90" style="width: 403px; z-index: 1;"
+                        data-custom-bind-column="BASE_CUR_ADDR" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                    <span class="colspan-2">
+                      <input id="fp_dtlCurAddr_tb" type="text" class="dews-ui-textbox cols-2" maxlength="90" style="width: 506px; margin-top: -9px;"
+                        data-custom-bind-column="DTL_CUR_ADDR" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li class="li-invisible-cols-2"></li>
+                  <li>
+                    <label>장애인여부</label>
+                    <span>
+                      <select id="fp_dsbYnCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="ETC" custom-dropdown-data-code="YN" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="DSB_YN_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>장애구분</label>
+                    <span>
+                      <select id="fp_dsbTp_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P01150"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="DSB_TP" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>장애종류</label>
+                    <span>
+                      <select id="fp_dsbFgCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00860"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="DSB_FG_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>장애등급</label>
+                    <span>
+                      <select id="fp_dsbGrdCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00870"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="DSB_GRD_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>장애인정일</label>
+                    <span>
+                      <input id="fp_dsbAckDt_dp" type="text" class="dews-ui-datepicker"
+                      data-custom-bind-column="DSB_ACK_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>병역구분</label>
+                    <span>
+                      <select id="fp_mtrscFgCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00760" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="MTRSC_FG_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>제대구분</label>
+                    <span>
+                      <select id="fp_dmblzFgCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00810" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="DMBLZ_FG_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>군별</label>
+                    <span>
+                      <select id="fp_amftCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00770" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="AMFT_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>계급</label>
+                    <span>
+                      <select id="fp_mlhCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00800" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="MLH_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>미필사유</label>
+                    <span>
+                      <select id="fp_exmtReasonCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00790" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="EXMT_REASON_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>입대일자</label>
+                    <span>
+                      <input id="fp_enstDt_dp" type="text" class="dews-ui-datepicker"
+                        data-custom-bind-column="ENST_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>제대일자</label>
+                    <span>
+                      <input id="fp_layoffDt_dp" type="text" class="dews-ui-datepicker"
+                        data-custom-bind-column="LAYOFF_DT" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                  <li>
+                    <label>보훈여부</label>
+                    <span>
+                      <select id="fp_vtrnTrgtCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="ETC" custom-dropdown-data-code="YN" custom-dropdown-add-all="true"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="VTRN_TRGT_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>보훈관계</label>
+                    <span>
+                      <select id="fp_vtrnRelCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00710"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="VTRN_REL_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>보훈등급</label>
+                    <span>
+                      <select id="fp_vtrnGrdCd_ddl" class="dews-ui-dropdownlist"
+                        custom-dropdown-data-module="HR" custom-dropdown-data-code="P00850"
+                        data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                        data-custom-bind-column="VTRN_GRD_CD" data-custom-bind-table="HR_EMPINFO_DTL">
+                      </select>
+                    </span>
+                  </li>
+                  <li>
+                    <label>보훈번호</label>
+                    <span>
+                      <input id="fp_vtrnNo_tb" type="text" class="dews-ui-textbox" maxlength="90"
+                        data-custom-bind-column="VTRN_NO" data-custom-bind-table="HR_EMPINFO_DTL">
+                    </span>
+                  </li>
+                </ul>
+              </div>
+          </div>
+
+        </li>
+        <li id="AdditionalInfoTab" class="dews-tab-item" data-dews-title="추가정보"></li>
+        <li id="LookupTab" class="dews-tab-item" data-dews-title="조회사항"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="/view/js/HR/hr.common.js"></script>
+<script>
+  //# sourceURL=grid.base.html.rowNo.js
+  console.log('[최종수정일 : 2019.02.20]');
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      console.log('dewself::', dewself);
+      derp.HR.setHrDetail(dewself.fp_bizareaCd_cp, dewself.fp_deptCd_cp); // 컨트롤 M/D 연결
+      var today = new Date().toISOString().slice(0,10).replace(/-/g,"");
+      var CONFIG;
+      var totalData = {};             // 데이터 저장 객체
+      var objConfigMst = {};          // HR_CONFIG_MST 객체
+      var objConfigDtl = {};          // HR_CONFIG_DTL 객체
+      var objCodeDtl = {};            // HR_CODEBASE_DTL 객체
+      var objDdlDataSource = {};      // 드롭다운 데이터소스 객체
+      var emptyModel;
+      // 카드리스트
+      var cardPageSize = 100;
+      var EmpCardList;
+      var EmpCardListDataSource;
+      var currentRowUid;
+    }
+
+    // ▦▦▦▦▦▦ 태그 Attribute 추가 ▦▦▦▦▦▦
+    {
+      setBindingAttributes();
+    }
+
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+      emptyModel = getEmptyDataSet();
+      var isDigitValid;
+      var controlDigitData;
+      CONFIG = makeConfigSettings();
+      setControlConfig(CONFIG.CONTROL);   // 통제항목설정값 적용
+      setTabAuthConfig(CONFIG.TABAUTH);
+      isDigitValid = CONFIG.DIGIT.config;
+      console.log('CONFIG SET', CONFIG);
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      getCodeData('MA', 'P00170|P00200', null, null, null, today, null);
+      getCodeData('HR', 'P00040|P00220|P00310|P00630|P00640|P00650|P00660|P00670|P00710|P00720|P00730|P00750|P00760|P00770|P00790|P00800|P00810|P00830|P00850|P00860|P00870|P00880|P00900|P00910|P00920|P00930|P00980|P00990|P01020|P01140|P01150|P01480|P01510|P01550', null, null, null, today, null);
+      getEtcData();
+      // YN
+      objCodeDtl['ETC']['YN'] = [
+        { SYSDEF_CD: 'Y', SYSDEF_NM: 'Yes' },
+        { SYSDEF_CD: 'N', SYSDEF_NM: 'No' },
+      ];
+      // 국민연금해당
+      objCodeDtl['ETC']['PENSION'] = [
+        { SYSDEF_CD: 'Y', SYSDEF_NM: 'Yes' },
+        { SYSDEF_CD: 'N', SYSDEF_NM: 'No' },
+        { SYSDEF_CD: 'S', SYSDEF_NM: '사학연금' },
+      ];
+      // 거주구분
+      objCodeDtl['ETC']['LIVEFG'] = [
+        { SYSDEF_CD: '1', SYSDEF_NM: '월세' },
+        { SYSDEF_CD: '2', SYSDEF_NM: '전세' },
+        { SYSDEF_CD: '3', SYSDEF_NM: '자택' },
+      ];
+      // 비자
+      objCodeDtl['ETC']['VISA'] = [
+        { SYSDEF_CD: '', SYSDEF_NM: '' },
+        { SYSDEF_CD: '1', SYSDEF_NM: '여권' },
+        { SYSDEF_CD: '2', SYSDEF_NM: '비자' },
+      ];
+      console.log('objCodeDtl', objCodeDtl);
+      objDdlDataSource = derp.HR.makeDataSourceObject(objCodeDtl);    // objCodeDtl의 모듈별 각 항목을 dataSource 객체로 변환시켜 합침.
+      derp.HR.setDataSourceInComponent(dewself, objDdlDataSource);    // objDdlDataSource 를 각각 매핑되는 컴포넌트에 setDataSource 함.
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+      dewself.cdt_hlofFgCd_ddl.value('1');
+    }
+
+    // ▦▦▦▦▦▦ 폼패널 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      EmpCardListDataSource = dews.ui.dataSource('EmpCardListDataSource', {
+        async: false,
+        transport: {
+          read: {
+            url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_empCardList_list'),
+            data: function () {
+              dews.ui.loading.show();
+              return {
+                empy_tp_cd: '1',
+                hlof_fg_cd: dewself.cdt_hlofFgCd_ddl.value(),
+                keyword: dewself.cdt_keyword_tb.text()
+              }
+            }
+          }
+        },
+        pageSize: 0,
+        schema: {
+          model: {
+            id: 'EMP_NO',
+            fields: [
+              { field: 'EMP_NO' },
+              { field: 'KOR_NM' },
+              { field: 'POSI_CD'},
+              { field: 'DEPT_CD'},
+              { field: 'DEPT_NM'},
+              { field: '_uid' },
+            ]
+          }
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+      EmpCardList  = dews.ui.cardlist(dewself.$EmpCardList, {
+        autoBind: false,
+        selectable: true,
+        dataSource: EmpCardListDataSource,
+        // height: 400,
+        template:
+          '<div class="dews-cardlist-template">' +
+          '<div class="dews-cardlist-main-text">' +
+          '<p class="bold">#: !data.KOR_NM ? "" : data.KOR_NM #</p>' +
+          '</div>' +
+          '<div class="dews-cardlist-sub-text">' +
+          '<p class="color">#: !data.DEPT_NM ? "" : data.DEPT_NM #</p>' +
+          '</div>' +
+          '<div class="dews-cardlist-right-text">' +
+          '<p>#: !data.EMP_NO ? "" : data.EMP_NO #</p>' +
+          '</div></div>',
+        css:
+          '.fontsize { font-size: 13px} .k-dropdown.k-header { width : 100px!important}',
+        sort: [
+          { field: 'EMP_NO', title: '사번 정렬' },
+          { field: 'KOR_NM', title: '성명 정렬' },
+          { field: 'POSI_CD', title: '직위 정렬' },
+          { field: 'DEPT_CD', title: '부서 정렬' }
+        ],
+        editable: {
+          createAt: 'top',
+          update: false
+        },
+        rowAdd: function (e) {
+          currentRowUid = e.row.data.uid;
+          totalData[e.row.data.uid] = {};
+          totalData[e.row.data.uid] = getCopiedObject(emptyModel);
+          totalData[e.row.data.uid]['saveFlag'] = 'added';
+          totalData[e.row.data.uid]['validation'] = false;
+          totalData[e.row.data.uid]['CI_PHOTO_MST']['ROWSTATE'] = 'none';
+          setDefaultData(e.row.data.uid);
+
+          // 신규 대상 추가 시 편집모드 on
+          if (dewself.$content.find('#btn_edit').hasClass('on') === false) {
+            dewself.$content.find('#btn_edit').click();
+          } else {
+            makeComponentReadonly(false);
+          }
+
+          if (CONFIG.NUMBERING.config.type !== 'MANUAL') {
+            totalData[e.row.data.uid]['HR_EMP_MST']['EMP_NO'] = 'AUTO-NUMBERING';
+            EmpCardList.setValue(e.row.index, 'EMP_NO', 'AUTO-NUMBERING');
+          }
+        },
+        dataBound: function (e) {
+          dews.ui.loading.hide();
+        },
+        change: function (e) {
+          console.log('CHANGE!!!!!');
+          console.log('totalData:::::::::::::::::::::', totalData);
+          console.log('EmpCardList.select()', EmpCardList.select());
+          if (isFocusValid(EmpCardList.select())) {
+            currentRowUid = e.row.data.uid;
+            console.log('currentRowUid', currentRowUid);
+
+            if (totalData.hasOwnProperty(e.row.data.uid) === false) {
+              totalData[e.row.data.uid] = {};
+              totalData[e.row.data.uid] = getEmpData(e.row.data.EMP_NO);
+              totalData[e.row.data.uid]['saveFlag'] = 'none';
+              totalData[e.row.data.uid]['empNo'] = e.row.data.EMP_NO;
+              totalData[e.row.data.uid]['validation'] = false;
+            }
+
+            bindDataToPhotoObject(totalData[e.row.data.uid]);
+            bindDataToProfilePanel(totalData[e.row.data.uid]);
+            bindDataToFormPanel(totalData[e.row.data.uid]);
+            // 수정중일 경우에만 적용
+            // if (dewself.$content.find('#btn_edit').hasClass('on')) {
+            //   setComponentActivation(true);
+            // }
+            setComponentActivation(true);
+            isEmpDataValid();
+          } else {
+            bindDataToPhotoObject(getCopiedObject(emptyModel));
+            bindDataToFormPanel(getCopiedObject(emptyModel));
+            bindDataToProfilePanel(getCopiedObject(emptyModel));
+
+          }
+          closeUneditableItem(totalData[e.row.data.uid]['saveFlag']);
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 파일업로더 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 메인버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // test
+      dews.ui.mainbuttons.approval.on('click', function(e) {
+        console.log('totalDataAPP', totalData);
+      });
+      // 조회
+      dews.ui.mainbuttons.search.on('click', function(e) {
+        console.log('scrollTOp');
+        totalData = {};
+        dewself.$content.find('.k-grid-content.k-auto-scrollable').scrollTop(0);
+        EmpCardListDataSource.pageSize(100);        // pageSize 값을 변경하는 부분에 data read가 들어있음.
+        EmpCardListDataSource.read();
+      });
+
+      // 추가
+      dews.ui.mainbuttons.add.on('click', function(e) {
+        console.log('EMPTYDATA', emptyModel);
+        // isDigitValid = false;
+        if (isTotalDataValid()) {
+          if (isDigitValid === true) {
+            EmpCardList.addRow();
+          } else {
+            switch(CONFIG.NUMBERING.config.type) {
+              case 'AUTO':
+                dews.alert('자동채번등록메뉴에서 채번 자리수설정을 ' + controlDigitData.CTRL_CNT + '자리로 변경해주세요.', 'error');
+                break;
+              case 'RULE':
+                dews.alert('인사환경설정메뉴에서 사번부여규칙을 ' + controlDigitData.CTRL_CNT + '자리로 변경해주세요.', 'error');
+                break;
+            }
+          }
+        } else {
+          dews.ui.snackbar.warning('입력되지 않은 필수값이 있습니다.');
+        }
+      });
+
+      // 삭제
+      dews.ui.mainbuttons.delete.on('click', function(e) {
+        if (totalData[EmpCardList.getValue(EmpCardList.select(), 'uid')]['saveFlag'] === 'added') {
+          delete totalData[EmpCardList.getValue(EmpCardList.select(), 'uid')];
+          EmpCardList.removeRow(EmpCardList.select());
+        } else {
+          let dialog;
+          let initData;
+          initData = {
+            emp_no: EmpCardList.getValue(EmpCardList.select(), 'EMP_NO'),
+          };
+
+          dialog = dews.ui.dialog('PAMPHM00400_deleteCheck_POP', {
+            url: '/view/HR/PAMPHM00400_deleteCheck_POP',
+            title: '사원데이터체크',
+            width: 380,
+            height: 600,
+            initData: initData,
+            ok: function (data) {
+              console.log('ok data', data);
+              if (data === 0) {
+                let target = EmpCardList.select();
+                let targetUid = EmpCardList.getValue(target, 'uid');
+                EmpCardList.removeRow(target);
+                totalData[targetUid]['saveFlag'] = 'deleted';
+                dews.ui.snackbar.ok('삭제되었습니다.');
+              } else {
+                dews.ui.snackbar.warning('선택된 사원의 잔여데이터가 존재합니다.');
+              }
+            },
+          });
+          dialog.open();
+        }
+        console.log('totalData', totalData);
+      });
+
+      // 저장
+      dews.ui.mainbuttons.save.on('click', function(e) {
+        console.log('isdatarsult', isDataValid());
+        if (isDataValid()) {
+          dews.api.post(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_empData_save'), {
+            data: {
+              totalData: JSON.stringify(totalData)
+            }
+          }).done(function (data) {
+            dews.ui.snackbar.ok('저장되었습니다.');
+            dews.ui.mainbuttons.search.click();
+          }).fail(function (xhr, status, error) {
+            dews.ui.snackbar.error(error);
+          });
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 카드리스트 조회 버튼
+      dewself.$btn_search.on('click', function(e) {
+        dews.ui.mainbuttons.search.click();
+      });
+
+      // 사진 수정 버튼
+      dewself.$content.find('.dews-custom-profile-photo-edit-icon').on('click', function(e) {
+        dewself.$content.find('#photoUploader').click();
+      });
+
+      // 수정버튼
+      dewself.$content.find('#btn_edit').on('click', function(e) {
+        if (dewself.$content.find('#btn_edit').hasClass('on')) {
+          dewself.$content.find('#btn_edit').removeClass('on');
+          makeComponentReadonly(true);
+          dewself.$content.find('#editBtnText').text('수정');
+        } else {
+          dewself.$content.find('#btn_edit').addClass('on');
+          makeComponentReadonly(false);
+          setComponentActivation(true);
+          dewself.$content.find('#editBtnText').text('수정중');
+        }
+      });
+
+      dewself.$content.find('.dews-tab-titles').children().eq(4).on('click', function(e) {
+        dewself.mainTab.items.getById('BasicInfo1Tab').select();
+        console.log('original cardlist data', EmpCardListDataSource);
+        dews.ui.page.openSubPage('sub',
+          {
+            title: '',
+            url: 'HR/PAMPHM00400_SUB',
+            data: {
+              CONFIG: CONFIG,
+              selectId: 'AdditionalInfoTab',
+              cardListData: EmpCardListDataSource.data(),
+              cardListIndex: EmpCardList.select(),
+              cardListScroll: dewself.$content.find('.k-grid-content.k-auto-scrollable').scrollTop(),
+              objDdlDataSource: objDdlDataSource
+            },
+            callback: function(id) {
+              dewself.mainTab.items.getById(id).select();
+            }
+          }
+        );
+      });
+
+      dewself.$content.find('.dews-tab-titles').children().eq(5).on('click', function(e) {
+        dews.ui.page.openSubPage('sub',
+          {
+            title: '',
+            url: 'HR/PAMPHM00400_SUB',
+            data: {
+              CONFIG: CONFIG,
+              selectId: 'LookupTab',
+              cardListData: EmpCardListDataSource.data(),
+              cardListIndex: EmpCardList.select(),
+              cardListScroll: dewself.$content.find('.k-grid-content.k-auto-scrollable').scrollTop(),
+              objDdlDataSource: objDdlDataSource
+            },
+            callback: function(id) {
+              dewself.mainTab.items.getById(id).select();
+            }
+          }
+        );
+      });
+    }
+
+    // ▦▦▦▦▦▦ 팝업버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 첨부파일
+      dewself.$content.find('#btn_fileUpload').on('click', function(e) {
+        let dialog;
+        let initData;
+        initData = {
+          emp_no: EmpCardList.getValue(EmpCardList.select(), 'EMP_NO'),
+          fileDataSource: totalData[EmpCardList.getValue(EmpCardList.select(), 'uid')]['HR_EMPFILE_INFO'],
+          fileObjFormat: getCopiedObject(emptyModel['HR_EMPFILE_INFO'])
+        };
+
+        dialog = dews.ui.dialog('PAMPHM00400_fileUpload_POP', {
+          url: '/view/HR/PAMPHM00400_fileUpload_POP',
+          title: '첨부파일등록',
+          width: 510,
+          height: 300,
+          initData: initData,
+          ok: function (data) {
+            console.log('ok data', data);
+            totalData[EmpCardList.getValue(EmpCardList.select(), 'uid')]['HR_EMPFILE_INFO'] = data;
+            console.log('totalData', totalData);
+          },
+        });
+        dialog.open();
+      });
+
+      // 부양가족계산
+
+      dewself.$btn_calcFamily.on("click", function(e) {
+        var dialog;
+        var initData;
+
+        dialog= dews.ui.dialog('PAMPHM00100_countDependents_POP', {
+          url: '/view/HR/PAMPHM00100_countDependents_POP',
+          title: '부양가족계산',
+          width : 800,
+          height : 550,
+          buttons: 'none',
+          ok: function(data) {
+            // dews.ui.snackbar.ok('새로고침 되었습니다', 'ok');
+            // EmpMasterGridDataSource.read();
+          }
+        });
+
+        dialog.open();
+      });
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+      //포토 체인지
+      dewself.photoUploader.on('change', function(e) {
+        let uid = EmpCardList.getValue(EmpCardList.select(), 'uid');
+        let ftsObj = dewself.photoUploader.getFile();
+        dewself.photoUploader.getDownloadUrl().done(function(url) {
+          let target = dewself.$content.find('.dews-custom-profile-photo');
+          let imageUrl = 'url(' + url + ')';
+          target.css('background-image', imageUrl);
+          target.css('background-repeat', 'no-repeat');
+          target.css('background-position', 'center');
+          target.css('background-size', '63px 63px');
+        });
+
+        totalData[uid]['CI_PHOTO_MST']['NEW_FILE_DC'] = ftsObj.fileKey;
+        totalData[uid]['CI_PHOTO_MST']['ORGL_FILE_DC'] = ftsObj.filename;
+        totalData[uid]['CI_PHOTO_MST']['ORGL_FEXTSN_DC'] = ftsObj.extension;
+        totalData[uid]['CI_PHOTO_MST']['FILE_VR'] = ftsObj.size;
+        totalData[uid]['CI_PHOTO_MST']['ROWSTATE'] = 'added';
+        if (totalData[uid]['saveFlag'] === 'none') {
+          totalData[uid]['saveFlag'] = 'updated';
+          totalData[uid]['changed'] = true;
+        }
+      });
+
+      // 폼패널 체인지 이벤트
+      $.each(dewself.$content.find('.dews-ui-form-panel'), function(index, context) {
+        dewself[context.id].on('change', function(e) {
+          console.log('체인지타니~?', e);
+          if (e.$source !== undefined) {
+            console.log('폼패널 체인지 start', e);
+            let uid = EmpCardList.getValue(EmpCardList.select(), 'uid');
+            // isEmpDataValid();    // 테스트 주석
+            if (e.$source.hasClass('dews-ui-radio-group')) {
+              refreshRadioAttribute(e.$source.context.id);
+            }
+            // if (e.$source.context)
+            setComponentActivation(true);
+            setDataToTotalData(e);
+            bindDataToProfilePanel(totalData[uid]);
+            bindDataToCardlistRow(totalData[uid], uid);
+            setAutoInputData(e);
+            // if (e.$source.hasClass('dews-ui-radio-group')) {
+            //   refreshRadioAttribute(e.$source.context.id);
+            // }
+            // setComponentActivation(true);
+            isEmpDataValid();
+          }
+        });
+      });
+
+      // 주민등록주소 (clear기능이 체인지를 안타서 임시로 작성)
+      // dewself.$content.find('.dews-zipcodepicker-button.icon-clear').on('click', function(e) {
+      //   let cardListData = EmpCardList.dataItem(EmpCardList.select());
+      //   totalData[cardListData.uid]['HR_EMPINFO_DTL']['RES_POST_NO'] = dewself['fp_resPostNo_zcp']['value']();
+      //   totalData[cardListData.uid]['HR_EMPINFO_DTL']['BASE_RES_ADDR'] = dewself['fp_baseResAddr_tb']['text']();
+      //   totalData[cardListData.uid]['HR_EMPINFO_DTL']['ROWSTATE'] = 'updated';
+      // });
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+      // 국외근로비과세 툴팁 event on
+      dewself.$content.find('span[aria-owns="fp_noabrodCd_ddl_listbox"]').on('focus', function(e) {
+        console.log('gg');
+        $('#fp_noabrodCd_ddl_listbox li').on('mouseover', function(e) {
+          console.log('GGGG', e);
+          dews.ui.tooltip.show($(e.currentTarget), {
+            type: 'normal',
+            fadeOutTime: 0,   //툴팁이 사라지지 않습니다.
+            position: 'left',
+            text: $(e.currentTarget).html()
+          });
+        });
+      });
+
+      // 국외근로비과세 툴팁 event off
+      dewself.$content.find('span[aria-owns="fp_noabrodCd_ddl_listbox"]').on('blur', function(e) {
+        $('#fp_noabrodCd_ddl_listbox li').off('mouseover');
+      });
+
+      // 부서 코드피커 클릭시 사업장 입력여부 체크
+      dewself.$fp_deptCd_cp.siblings('.dews-codepicker-button').find('.dews-icon.icon-search').on('click', function (e) {
+        if (dewself.fp_bizareaCd_cp.code() == null || dewself.fp_bizareaCd_cp.code() == '') {
+          dews.alert('사업장은 필수입력 항목입니다.', 'warning');
+          e.stopImmediatePropagation(); // 이벤트 전파 막음 return false
+        }
+      });
+
+      // Enter Key 누를때 카드리스트 검색어로 조회
+      dewself.$cdt_keyword_tb.keydown(function(key) {
+        if (key.keyCode === 13){
+          dews.ui.mainbuttons.search.click();
+        }
+      });
+
+      dewself.$EmpCardList.find('.k-grid-content').on('scroll', function (e) {
+        let currentScrollHeight = e.target.scrollTop;
+        let totalScrollHeight = e.target.scrollHeight - e.target.offsetHeight;
+        if (currentScrollHeight === totalScrollHeight) {
+          console.log('EmpCardListDataSource.pageSize()::', EmpCardListDataSource.pageSize());
+          if (EmpCardListDataSource.pageSize() <= EmpCardListDataSource.data().length) {
+            EmpCardListDataSource.pageSize(EmpCardListDataSource.pageSize() + 100);
+          }
+        }
+      });
+
+      dewself.$fp_deptCd_cp.on('setData', function(e1, e2) {
+        totalData[EmpCardList.getValue(EmpCardList.select(), 'uid')]['HR_EMP_MST']['UP_DEPT_NM'] = e2.NM_UPDEPT;
+      });
+      dewself.$fp_odtyCd_ddl.on('change', function(e1) {
+        totalData[EmpCardList.getValue(EmpCardList.select(), 'uid')]['HR_EMP_MST']['ODTY_NM'] = dewself.fp_odtyCd_ddl.text();
+      });
+    }
+
+    // ▦▦▦▦▦▦ 실행 영역 ▦▦▦▦▦▦
+    {
+      // dews.ui.mainbuttons.search.click();
+      EmpCardListDataSource.pageSize(100);        // pageSize 값을 변경하는 부분에 data read가 들어있음.
+
+      setTimeout(function() {
+        makeComponentReadonly(true);
+      }, 0);
+    }
+
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+
+    // 추가 시 기본데이터 설정
+    function setDefaultData(uid) {
+      totalData[uid]['HR_EMP_MST']['EMPY_TP_CD'] = '1';
+      totalData[uid]['HR_EMPINFO_DTL']['FRGNR_CD'] = '1';
+      totalData[uid]['HR_EMPPAY_DTL']['RESIDNT_CD'] = '1';
+
+    }
+    function isFocusValid(selectedRow) {
+      return (selectedRow !== undefined);
+    }
+
+    function getCopiedObject(emptyModel) {
+      return $.extend(true, {}, emptyModel);
+    }
+
+    function getCopiedArray(array) {
+      return $.extend(true, [], array);
+    }
+
+    function getEmptyDataSet() {
+      let emptyModel;
+      dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_getEmptyDataSet'), {
+        async: false,
+      }).done(function (data) {
+        if (data.length > 0) {
+          emptyModel = data[0];
+        }
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+
+      return emptyModel;
+    }
+
+    function getEtcData() {
+      dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_etcData_list'), {
+        async: false,
+      }).done(function (data) {
+        objCodeDtl['ETC'] = {};
+        $.each(data, function(index, item) {
+          if (objCodeDtl['ETC'].hasOwnProperty(item.FIELD_CD) === false) {
+            objCodeDtl['ETC'][item.FIELD_CD] = [];
+          }
+          objCodeDtl['ETC'][item.FIELD_CD].push(item);
+        });
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+    }
+
+    function getEmpData(emp_no) {
+      var result;
+      dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_empData_list'), {
+        async: false,
+        data: {
+          emp_no: emp_no,
+        }
+      }).done(function (data) {
+        if (data.length > 0) {
+          result = data[0];
+        }
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+      return result;
+    }
+
+    // 코드자리수통제값 확인
+    function getDigitSet(numberingConfig) {
+      let result = false;
+      dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_getControlDigit'), {
+        async: false
+      }).done(function (data) {
+        console.log('control digit data', data);
+        if (0 < data.length) {
+          controlDigitData = data[0];
+          console.log('numberingConfig', numberingConfig);
+          switch(numberingConfig) {
+            case '1':
+              result = controlDigitData.AUTONUM_VALID === 'true' ? true : false;
+              break;
+            case '2':
+              result = true;
+              break;
+            case '3':
+              result = controlDigitData.EXT_VALID === 'true' ? true : false;
+              break;
+          }
+        }
+        console.log('done result', result);
+      }).fail(function (xhr, status, error) {
+        dews.error('코드자리수통제 오류입니다.');
+      });
+
+      return result;
+    }
+
+    function makeComponentReadonly(value) {
+      let saveFlag;
+      console.log('currentRowUid', currentRowUid);
+      if (currentRowUid !== undefined) {
+        saveFlag = totalData[currentRowUid]['saveFlag'];
+      }
+      console.log('saveFlag!', saveFlag);
+      let componentArray = [];
+      let exceptionArray = [];
+
+      componentArray.push(dewself.$content.find('li[id*="BasicInfo"] .dews-ui-textbox'));
+      componentArray.push(dewself.$content.find('li[id*="BasicInfo"] .dews-ui-numerictextbox'));
+      componentArray.push(dewself.$content.find('li[id*="BasicInfo"] .dews-ui-maskedtextbox'));
+      componentArray.push(dewself.$content.find('li[id*="BasicInfo"] .dews-ui-dropdownlist'));
+      componentArray.push(dewself.$content.find('li[id*="BasicInfo"] .dews-ui-codepicker'));
+      componentArray.push(dewself.$content.find('li[id*="BasicInfo"] .dews-ui-datepicker'));
+      componentArray.push(dewself.$content.find('li[id*="BasicInfo"] .dews-ui-zipcodepicker'));
+      exceptionArray.push(dewself.$content.find('li[id*="BasicInfo"] [data-custom-readonly="true"]'));
+      console.log('exceptionArray', exceptionArray);
+
+      $.each(componentArray, function(index, componentType) {
+        $.each(componentType, function(i, o) {
+          if(o.id !== '') {
+            dewself[o.id].readonly(value);
+          }
+        });
+      });
+
+      $.each(exceptionArray, function(index, componentType) {
+        $.each(componentType, function(i, o) {
+          if(o.id !== '') {
+            dewself[o.id].readonly(true);
+          }
+        });
+      });
+
+      console.log('CONFIG.NUMBERING.config.type', CONFIG.NUMBERING.config.type);
+      if (CONFIG.NUMBERING.config.type === 'MANUAL' && saveFlag !== 'added') {
+          dewself.fp_empNo_tb.readonly(true);
+      }
+      if (CONFIG.NUMBERING.config.type === 'MANUAL' && saveFlag === 'added') {
+          dewself.fp_empNo_tb.readonly(false);
+      }
+      if (CONFIG.NUMBERING.config.type !== 'MANUAL') {
+        // dewself.$content.find('#fp_empNo_tb').attr('data-custom-readonly', 'true');
+        dewself.fp_empNo_tb.readonly(true);
+      }
+
+      if (value === false) {
+        // 부서 코드피커 클릭시 사업장 입력여부 체크 (readonly 시 이벤트가 제거되서 이부분에 삽입)
+        dewself.$fp_deptCd_cp.siblings('.dews-codepicker-button').find('.dews-icon.icon-search').on('click', function (e) {
+          if (dewself.fp_bizareaCd_cp.code() == null || dewself.fp_bizareaCd_cp.code() == '') {
+            dews.alert('사업장은 필수입력 항목입니다.', 'warning');
+            e.stopImmediatePropagation(); // 이벤트 전파 막음 return false
+          }
+        });
+      }
+
+      // makeComponentDisable(value);
+      // makeRadioGroupReadonly(value);
+    }
+
+    function makeRadioGroupReadonly(value) {
+      let pointer = (value === true) ? 'none' : 'auto';
+      dewself.$content.find('.dews-radio-group-item').attr('custom-readonly', value);
+      dewself.$content.find('.dews-radio-group-wrapper').css('pointer-events', pointer);
+
+      // dewself.$content.find('.dews-ui-radio-group').attr('readonly', value);
+      // $.each(dewself.$content.find('.dews-ui-radio-group'), function(index, component) {
+      //   if(component.id !== '') {
+      //     dewself[component.id].disable(value);
+      //   }
+      // });
+    }
+
+    function bindDataToCardlistRow(dataObject, uid) {
+      let cardRow = dewself.$content.find('tr[data-uid = "'+ uid +'"] .dews-cardlist-template');
+      let selectRow = EmpCardList.select();
+      let tableDataObject = dataObject.HR_EMP_MST;
+      if (tableDataObject !== null) {
+        let profileEmpNo = (tableDataObject.EMP_NO !== null) ? tableDataObject.EMP_NO : '';
+        let profileName = (tableDataObject.KOR_NM !== null) ? tableDataObject.KOR_NM : '';
+        let profileDept = (tableDataObject.DEPT_NM !== null) ? tableDataObject.DEPT_NM : '';
+
+        EmpCardList.setValue(selectRow, 'EMP_NO', profileEmpNo);
+        EmpCardList.setValue(selectRow, 'KOR_NM', profileName);
+        EmpCardList.setValue(selectRow, 'DEPT_NM', profileDept);
+      }
+    }
+
+    function bindDataToProfilePanel(dataObject) {
+      console.log('profile data object', dataObject);
+      let tableDataObject = dataObject.HR_EMP_MST;
+      let profileName = (tableDataObject.KOR_NM !== null) ? tableDataObject.KOR_NM : '';
+      let profilePosition = (tableDataObject.POSI_NM !== null) ? tableDataObject.POSI_NM : '';
+      let profileBizarea = (tableDataObject.BIZAREA_NM !== null) ? tableDataObject.BIZAREA_NM : '';
+      let profileUpdept = (tableDataObject.UP_DEPT_NM !== null) ? '-' + tableDataObject.UP_DEPT_NM : '';
+      let profileDept = (tableDataObject.DEPT_NM !== null) ? '-' + tableDataObject.DEPT_NM : '';
+      let profileDuty = (tableDataObject.ODTY_NM !== null) ? '(' + tableDataObject.ODTY_NM + ')': '';
+
+      dewself.$content.find('.dews-custom-profile-name').text(profileName);
+      dewself.$content.find('.dews-custom-profile-position').text(profilePosition);
+      dewself.$content.find('.dews-custom-profile-bizarea').text(profileBizarea);
+      dewself.$content.find('.dews-custom-profile-updept').text(profileUpdept);
+      dewself.$content.find('.dews-custom-profile-dept').text(profileDept);
+      dewself.$content.find('.dews-custom-profile-duty').text(profileDuty);
+    }
+
+    function bindDataToPhotoObject(dataObject) {
+      let photoDataObject = dataObject.CI_PHOTO_MST;
+      let target = dewself.$content.find('.dews-custom-profile-photo');
+      let path = (photoDataObject.ISNEW === 'true') ? '/download/image/' + photoDataObject.NEW_FILE_DC + ':' + photoDataObject.ORGL_FILE_DC : '/download/image/' + photoDataObject.NEW_FILE_DC ;
+      console.log('path', path);
+      target.css('background-image', 'url(' + path + '), url(/view/images/HR/PAMPHM_NEW/hr_profile.png)');
+      target.css('background-repeat', 'no-repeat');
+      target.css('background-position', 'center');
+      target.css('background-size', '63px 63px');
+    }
+
+
+    function bindDataToFormPanel(tableDataObject) {
+      setDataToComponent('HR_EMP_MST', tableDataObject['HR_EMP_MST']);
+      setDataToComponent('HR_EMPPAY_DTL', tableDataObject['HR_EMPPAY_DTL']);
+      setDataToComponent('HR_EMPINFO_DTL', tableDataObject['HR_EMPINFO_DTL']);
+      setDataToComponent('HR_EMP_SDTL', tableDataObject['HR_EMP_SDTL']);
+    }
+
+    // 인사환경설정 탭권한설정값 적용
+    function setTabAuthConfig(configData) {
+      if (configData.use === true) {
+        $.each(configData.config, function(tab, values) {
+          if (values.available !== 'Y') {
+            dewself.mainTab.items.getById(values.tabId).hide(true);
+          }
+        });
+
+        // 가장 처음에 노출되는 탭 선택
+        if (dewself.$content.find('#mainTab .dews-tab-item-title[style!="display: none;"]').length > 0) {
+          dewself.$content.find('#mainTab .dews-tab-item-title[style!="display: none;"]')[0].click();
+        }
+        console.log('TAB VISIBLE', dewself.$content.find('#mainTab .dews-tab-item-title[style!="display: none;"]'));
+      }
+    }
+
+    // 인사환경설정 통제항목설정값 적용
+    function setControlConfig(configData) {
+      if (configData.use === true) {
+        $.each(configData.config, function(column, config) {
+          var componentId = $('[data-custom-bind-column = ' + column + ']').attr('id');
+          if (componentId !== undefined) {
+            if (config.required === 'Y') {
+              dewself[componentId].required(true);
+              dewself.$content.find('#' + componentId).addClass('required');    // .required(true) 사용시 datePicker는 required 클래스가 적용이안돼서 validate()에 걸리지 않음.
+              dewself.$content.find('#' + componentId).siblings().addClass('required');    // .required(true) 사용시 numeric-text-box는 required 클래스가 적용이안돼서 validate()에 걸리지 않음.
+            }
+            if (config.readonly === 'Y') {
+              dewself[componentId].readonly(true);
+            }
+          }
+        });
+      }
+      if (CONFIG.NUMBERING.config.type === 'MANUAL') {
+        dewself['fp_empNo_tb'].required(true);
+      }
+    }
+
+    function setDataToTotalData(e) {
+      console.log('eee', e);
+      let target = e.$source.context.id;
+      let cardListData = EmpCardList.dataItem(EmpCardList.select());
+      let column = dewself.$content.find('#' + target).attr('data-custom-bind-column');
+      let text = dewself.$content.find('#' + target).attr('data-custom-bind-text');
+      let table = dewself.$content.find('#' + target).attr('data-custom-bind-table');
+      let getter = dewself.$content.find('#' + target).attr('data-custom-getter-type');
+      let componentType = dewself.$content.find('#' + target).attr('data-custom-component-type');
+      switch (componentType) {
+        case 'code':
+          totalData[cardListData.uid][table][column] = dewself[target][getter]();
+          totalData[cardListData.uid][table][text] = dewself[target]['text']();
+          break;
+        case 'zipcode':
+          totalData[cardListData.uid][table][column] = dewself[target][getter]();
+          totalData[cardListData.uid][table][text] = dewself[e.$source.context.dataset.dewsAddressBind]['text']();
+          break;
+        default:
+          totalData[cardListData.uid][table][column] = dewself[target][getter]();
+      }
+      if (totalData[cardListData.uid]['saveFlag'] !== 'added') {
+        totalData[cardListData.uid][table]['ROWSTATE'] = 'updated';
+        totalData[cardListData.uid]['saveFlag'] = 'updated';
+        totalData[cardListData.uid]['changed'] = true;
+      }
+    }
+
+    function setDataToComponent(sourceTable, tableDataObject) {
+      if (tableDataObject !== null) {
+        let componentsByTable = dewself.$content.find('[data-custom-bind-table=' + sourceTable + ']');
+        $.each(componentsByTable, function(index, component) {
+          let attribute = component.dataset;
+          let bindCode = attribute.customBindColumn;
+          let bindText = attribute.customBindText;
+          let setterType = attribute.customSetterType;
+          let componentType = attribute.customComponentType;
+          switch (componentType) {
+            case 'code':
+              let paramObject = {};
+              let pickerCode = bindCode;
+              let pickerText = bindText;
+              if (attribute.dewsHelpCode === 'H_MA_CODEDTL_S') {
+                pickerCode = 'SYSDEF_CD';
+                pickerText = 'SYSDEF_NM';
+              }
+              if (attribute.dewsHelpCode === 'H_PS_PROJ_MST_S') {
+                pickerCode = 'PJT_NO';
+                pickerText = 'PJT_NM';
+              }
+              if (attribute.dewsHelpCode === 'H_CI_BANK_MST_S') {
+                pickerCode = 'BANK_CD';
+                pickerText = 'FNLT_NM';
+              }
+              paramObject[pickerCode] = tableDataObject[bindCode];
+              paramObject[pickerText] = tableDataObject[bindText];
+              dewself[component.id][setterType](paramObject, false);
+              // console.log('Compo', component.id);
+              // console.log('paramObject', paramObject);
+              break;
+            case 'zipcode':
+              let zipCodeValue = (tableDataObject[bindCode] === null)
+                                  ? '' : tableDataObject[bindCode];
+              dewself[component.id][setterType](zipCodeValue);
+              break;
+            case 'radio':
+              let radioValue = tableDataObject[bindCode];
+              console.log('radioId', component.id);
+              console.log('radioValue', radioValue);
+              if (dewself.$content.find('input[name="' + component.id + '"][value="' + radioValue + '"]')[0] !== undefined) {
+                // console.log('현재 선택된놈', dewself.$content.find('#' + component.id + ' option[selected="selected"]').attr('value'));
+                // dewself.$content.find('#' + component.id + ' option[selected="selected"]').removeAttr('selected');
+                dewself.$content.find('#' + component.id + ' option[value="' + radioValue + '"]').attr('selected', 'selected');
+                dewself.$content.find('input[name="' + component.id + '"][value="' + radioValue + '"]')[0].checked = true;
+
+                // dewself.$content.find('#' + component.id + ' option[value="' + radioValue + '"]').attr('focused', 'on');
+                // dewself.$content.find('#' + component.id + ' option[focused!="on"]').attr('focused', 'off');
+              } else {
+                // dews.alert(bindCode + ' 컬럼 데이터에 오류가 있습니다.', 'error');    // 임시 작성 에러코드
+              }
+              break;
+            default:
+              dewself[component.id][setterType](tableDataObject[bindCode]);
+          }
+        });
+      }
+    }
+
+    // 환경설정 객체 생성
+    function makeConfigSettings() {
+      let configDataSet = {};
+      let objConfigMst = derp.HR.getConfigMstData('COM001|COM002|COM005|COM006', null, null);
+      let objConfigDtl = derp.HR.getConfigDtlData('COM006', null, null);
+      console.log('objConfigMst', objConfigMst);
+      console.log('dewself', dewself);
+      configDataSet['NUMBERING'] = {};
+      configDataSet['CONTROL'] = {};
+      configDataSet['TABAUTH'] = {};
+      configDataSet['DIGIT'] = {};
+      configDataSet['NUMBERING']['config'] = getNumberingConfig(objConfigMst.COM001[0]);
+      configDataSet['CONTROL']['config'] = getControlConfig(objConfigDtl.COM006);
+      configDataSet['CONTROL']['use'] = getConfigUseYn(objConfigMst.COM006);
+      configDataSet['TABAUTH']['config'] = getTabauthConfig(dewself.user.empCode);
+      configDataSet['TABAUTH']['use'] = getConfigUseYn(objConfigMst.COM005);
+      configDataSet['DIGIT']['config'] = getDigitSet(objConfigMst.COM001[0].CHAR_CD_VAL_DC);
+      // configDataSet['USING']['config'] =
+
+      return configDataSet;
+    }
+
+    // 환경설정항목 사용여부 리턴
+    function getConfigUseYn(configCd) {
+      let result = false;
+      if (configCd.length > 0) {
+        switch(configCd[0].CHAR_CD_VAL_DC) {
+          case '1':
+            result = true;
+            break;
+          case '2':
+            result = false;
+            break;
+        }
+      }
+
+      return result;
+    }
+
+    function getNumberingConfig(data) {
+      let configData = {};
+      configData['code'] = data.CONFIG_CD;
+      switch(data.CHAR_CD_VAL_DC) {
+        case '1':
+          configData['type'] = 'AUTO';
+          dewself.fp_empNo_tb.text('AUTO-NUMBERING');
+          break;
+        case '2':
+          configData['type'] = 'MANUAL';
+          break;
+        case '3':
+          configData['type'] = 'RULE';
+          dewself.fp_empNo_tb.text('AUTO-NUMBERING');
+          break;
+      }
+
+      return configData;
+    }
+
+    function getControlConfig(data) {
+      let configData = {};
+      $.each(data, function(i, items) {
+        configData[items.SETUP_DATA1_DC] = {};
+        configData[items.SETUP_DATA1_DC]['required'] = items.SETUP_DATA2_DC;
+        configData[items.SETUP_DATA1_DC]['readonly'] = items.SETUP_DATA3_DC;
+      });
+
+      return configData;
+    }
+
+    function getTabauthConfig(empNo) {
+      console.log('TabauthConfig EMPNO', empNo);
+      let configData = {};
+      dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementHBCService', 'pamhbc00300_tabAuthByEmp_auth_list'), {
+        async: false,
+        data: {
+          emp_no: empNo,
+        }
+      }).done(function (data) {
+        console.log('tabdata', data);
+        $.each(data, function(i, items) {
+          if (configData[items.STDRTAB_ID] === undefined) {
+            configData[items.STDRTAB_ID] = {};
+            configData[items.STDRTAB_ID]['tabId'] = items.STDRTAB_ID;
+            configData[items.STDRTAB_ID]['tabName'] = items.STDRTAB_NM;
+            configData[items.STDRTAB_ID]['available'] = items.USE_YN;
+            configData[items.STDRTAB_ID]['subtab'] = [];
+          }
+          if (items.SUB_TAB_ID !== '*') {
+            let arcodienId;
+            switch (items.STDRTAB_ID) {
+              case 'LookupTab':
+                arcodienId = 'arcodien_lookup';
+                break;
+              case 'AdditionalInfoTab':
+                arcodienId = 'arcodien_addinfo';
+                break;
+            }
+            configData[items.STDRTAB_ID]['subtab'].push({arcodienId: arcodienId, subtabId: items.SUB_TAB_ID, subtabName: items.STDRTEAM_NM, available: items.USE_YN});
+            if (items.USE_YN === 'Y') {
+              configData[items.STDRTAB_ID]['available'] = items.USE_YN;
+            }
+          }
+        });
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+
+      return configData;
+    }
+
+    function setBindingAttributes() {
+      // data-custom-~~ 처럼 attribute를 주게되면 dataset 안에 data-를 제외하고 lowerCamelCase로 property가 저장된다.
+      // data-custom-component-type -> customComponentType
+      dewself.$content.find('.dews-ui-textbox').attr('data-custom-getter-type', 'text');
+      dewself.$content.find('.dews-ui-textbox').attr('data-custom-setter-type', 'text');
+      dewself.$content.find('.dews-ui-textbox').attr('data-custom-component-type', 'text');
+      dewself.$content.find('.dews-ui-numerictextbox').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-numerictextbox').attr('data-custom-setter-type', 'value');
+      // dewself.$content.find('.dews-ui-maskedtextbox').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-maskedtextbox').attr('data-custom-getter-type', 'raw');
+      dewself.$content.find('.dews-ui-maskedtextbox').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-dropdownlist').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-dropdownlist').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-codepicker').attr('data-custom-getter-type', 'code');
+      dewself.$content.find('.dews-ui-codepicker').attr('data-custom-setter-type', 'setData');
+      dewself.$content.find('.dews-ui-codepicker').attr('data-custom-component-type', 'code');
+      dewself.$content.find('.dews-ui-datepicker').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-datepicker').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-zipcodepicker').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-zipcodepicker').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-zipcodepicker').attr('data-custom-component-type', 'zipcode');
+      dewself.$content.find('.dews-ui-radio-group').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-radio-group').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-radio-group').attr('data-custom-component-type', 'radio');
+    }
+
+    // 데이터 검사 로직 수행
+    function isDataValid() {
+      if (!isEmpDataChanged()) {
+        dews.ui.snackbar.info('변경된 데이터가 없습니다.');
+        return false;
+      }
+      if (!isTotalDataValid()) {
+        dews.ui.snackbar.warning('입력되지 않은 필수값이 있습니다.');
+        return false;
+      }
+
+      return true;
+    }
+
+    // 필수값 입력 확인
+    function isEmpDataValid() {
+      console.log('DEWS_UI', dews.ui);
+      let result = true;
+      let target = dewself.$content.find('.dews-ui-form-panel');
+      let uid = EmpCardList.getValue(EmpCardList.select(), 'uid');
+      $.each(target, function(i, formPanel) {
+        // console.log('FORM ID', formPanel.id);
+        if (dewself[formPanel.id].validate({tooltip: false}) === false) {
+          result = false;
+          return false;
+        }
+      });
+
+      console.log('isEmpDataValid RESULT', result);
+      totalData[uid]['validation'] = result;
+      return result;
+    }
+
+    // 데이터 변경여부 확인
+    function isEmpDataChanged() {
+      let result = false;
+      $.each(totalData, function(i, o) {
+        if (o.saveFlag !== 'none') {
+          result = true;
+          return false;
+        }
+      });
+
+      return result;
+    }
+
+    // totalData 유효성 확인
+    function isTotalDataValid() {
+      let result = true;
+      $.each(totalData, function(uid, value) {
+        if (value.validation === false) {
+          result = false;
+          console.log('totalData', totalData);
+          return false;
+        }
+      });
+      return result;
+    }
+
+    // 입력값 유효성 확인
+    function isInputValid(context) {
+      let validation = false;
+      let inputValue = dewself[context.id][context.dataset.customGetterType]();
+
+      switch(context.id) {
+        case 'fp_resNo_mtb':
+          validation = inputValue.length === 13;
+          break;
+      }
+
+      return validation;
+    }
+
+    // 데이터 자동추출 로직 함수 시작
+    function setAutoInputData(e) {
+      let uid = EmpCardList.getValue(EmpCardList.select(), 'uid');
+      console.log('setAutoInputData::', e);
+      console.log('isInputValid??', isInputValid(e.$source.context));
+      switch(e.$source.context.id) {
+        case 'fp_resNo_mtb':  // 주민등록번호
+          let resData = getBirthAndSexFromResNo(dewself[e.$source.context.id][e.$source.context.dataset.customGetterType]());
+          if (resData !== null) {
+            dewself.fp_biryymmDt_dp.value(resData.birth);
+            dewself.fp_sexCd_ddl.value(resData.sex);
+            fp_biryymmDt_dp
+            totalData[uid]['HR_EMPINFO_DTL']['BIRYYMM_DT'] = resData.birth;
+            totalData[uid]['HR_EMP_MST']['RES_UPPT_BIRYYMM_DT'] = resData.birth;
+            totalData[uid]['HR_EMP_MST']['SEX_CD'] = resData.sex;
+          } else {
+            dews.ui.snackbar.warning('주민등록번호 형식이 맞지 않습니다.');
+            dewself.fp_resNo_mtb.value(null);
+            totalData[uid]['HR_EMP_MST']['RES_NO'] = null;
+          }
+          break;
+        case 'fp_groupecnyDt_dp': // 그룹입사일
+          let dateValue = dewself.fp_groupecnyDt_dp.value();
+          dewself.fp_hlofFgCd_ddl.value('1');       // 재직구분(재직)
+          dewself.fp_jncoDt_dp.value(dateValue);         // 입사일
+          dewself.fp_retireStdr_dp.value(dateValue);     // 퇴직기산일
+          totalData[uid]['HR_EMP_MST']['HLOF_FG_CD'] = '1';
+          totalData[uid]['HR_EMP_MST']['JNCO_DT'] = dateValue;
+          totalData[uid]['HR_EMP_MST']['RETIRESTDR_DT'] = dateValue;
+          break;
+        case 'fp_pstnCd_ddl': // 직급
+          let paramValue = dewself.fp_pstnCd_ddl.value();
+          dewself.fp_slstCd_cp.setHelpParams(function () {
+            return {
+              pstn_cd: paramValue
+            };
+          });
+          break;
+      }
+      // isEmpDataValid();    // 테스트 주석
+      console.log('After totalData ::', totalData);
+    }
+    // 생년월일 from 주민등록번호
+    function getBirthAndSexFromResNo(resNo) {
+      let result = null;
+      if (isResNoValid(resNo)) {
+        result = extractDataFromResNo(resNo);
+      }
+      return result;
+    }
+
+    // 주민등록번호 유효성 검사
+    function isResNoValid(res_no) {
+      var regExp = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))[0-9][0-9]{6}$/;
+      var tempArr = [];
+      var tempSum = 0;
+      var validKey = 2;
+      var result = false;
+      if (res_no.length === 13 && res_no.match(regExp) !== null) {
+        for(var index = 0; index < res_no.length; index++) {
+          tempArr.push(res_no.charAt(index));
+        }
+        for(var i = 0; i < res_no.length -1; i++) {
+          if(validKey === 10) {
+            validKey = 2;
+          }
+          tempSum += tempArr[i] * validKey;
+          validKey++;
+        }
+        result = 11 - tempSum%11 === Number(tempArr[12]);
+
+        if (result) {
+          console.log("유효한 주민번호입니다.");
+        } else {
+          console.log("유효하지 않은 주민번호입니다.");
+        }
+        return true;
+        // return result;
+      } else {
+        console.log("주민번호 형식이 맞지 않습니다.");
+        return false;
+      }
+    }
+
+    // 주민등록번호로 부터 생년월일, 생일 추출
+    function extractDataFromResNo(resNo) {
+      let century19 = ['1', '2', '5', '6'];
+      let century20 = ['3', '4', '7', '8'];
+      let maleArr = ['1', '3', '5', '7'];
+      let femaleArr = ['2', '4', '6', '8'];
+      let century;
+      let sex;
+      let result = {};
+      console.log('fact', resNo.substring(6, 7));
+      if (century19.indexOf(resNo.substring(6, 7)) !== -1) {
+        century = '19';
+      } else if (century20.indexOf(resNo.substring(6, 7)) !== -1) {
+        century = '20';
+      } else {
+        century = '19';
+      }
+
+      if (maleArr.indexOf(resNo.substring(6, 7)) !== -1) {
+        sex = '1';
+      } else if (femaleArr.indexOf(resNo.substring(6, 7)) !== -1) {
+        sex = '2';
+      } else {
+        sex = '1';
+      }
+
+      result.birth = century.concat(resNo.substring(0, 6));
+      result.sex = sex;
+
+      console.log('extract', result);
+      return result;
+    }
+
+
+    // 주민등록번호 중복된 사원 체크 (일용직, 상용직)
+    function isResNoDuplicated(res_no) {
+      var result = false;
+      dews.api.get(dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00100_checkResNo"), {
+        async: false,
+        data: {
+          res_no: res_no
+        }
+      }).done(function (data) {
+        if(data.length > 0) {
+          result = true;
+        }
+      }).fail(function (xhr, status, error) {
+      });
+
+      return result;
+    }
+
+    // 라디오버튼 바인딩을 커스텀하게되면서 필요한 함수 (선택상태를 정상적으로 초기화시켜줌)
+    function refreshRadioAttribute(radioId) {
+
+      let uid = EmpCardList.getValue(EmpCardList.select(), 'uid');
+      let table = dewself.$content.find('#' + radioId).attr('data-custom-bind-table');
+      let column = dewself.$content.find('#' + radioId).attr('data-custom-bind-column');
+      let currentData = totalData[uid][table][column];
+      let currentRadioValue = dewself.$content.find('#' + radioId + ' option[selected="selected"]').attr('value');
+      console.log('currentData', currentData);
+      console.log('currentRadioValue()', dewself[radioId].value());
+      console.log('currentRadioValue', currentRadioValue);
+      dewself.$content.find('#' + radioId + ' option[value!="' + currentRadioValue + '"]').removeAttr('selected');
+    }
+
+    // 입력값에 따른 컴포넌트 활성화처리
+    function setComponentActivation(onoff) {
+      // 기본정보1, 2 항목들은 수정 중일경우만 동작하도록.
+      if (dewself.$content.find('#btn_edit').hasClass('on')) {
+        // let
+        // // 수정불가항목
+        // closeUneditableItem();
+        // 내외국인
+        closeRelatedComponent('fp_frgnrCd_ddl', 'fp_ntnlCd_cp', '1', onoff, true);
+        closeRelatedComponent('fp_frgnrCd_ddl', 'fp_frnrInsertNo_mtb', '1', onoff, true);
+        // closeRelatedComponent('fp_frgnrCd_ddl', 'fp_frnrInsertNo_mtb', '1', onoff, true);
+        // 직급
+        closeRelatedComponent('fp_pstnCd_ddl', 'fp_slstCd_cp', '', onoff);
+      }
+
+      closeRelatedComponent('fp_dsbYnCd_ddl', 'fp_dsbTp_ddl', 'N', onoff, true);        // 장애인여부
+      closeRelatedComponent('fp_dsbYnCd_ddl', 'fp_dsbFgCd_ddl', 'N', onoff, true);
+      closeRelatedComponent('fp_dsbYnCd_ddl', 'fp_dsbGrdCd_ddl', 'N', onoff, true);
+      closeRelatedComponent('fp_dsbYnCd_ddl', 'fp_dsbAckDt_dp', 'N', onoff, true);
+      closeRelatedComponent('fp_vtrnTrgtCd_ddl', 'fp_vtrnRelCd_ddl', 'N', onoff, true); // 보훈여부
+      closeRelatedComponent('fp_vtrnTrgtCd_ddl', 'fp_vtrnGrdCd_ddl', 'N', onoff, true);
+      closeRelatedComponent('fp_vtrnTrgtCd_ddl', 'fp_vtrnNo_tb', 'N', onoff, true);
+      closeRelatedComponent('fp_residntCd_rdo', 'fp_resdncCd_cp', '1', onoff);    // 거주지국
+      closeRelatedComponent('fp_ocwCd_rdo', 'fp_noabrodCd_ddl', 'N', onoff);    // 국외근로여부
+      // console.log('현재 선택된놈', dewself.$content.find('#' + component.id + ' option[selected="selected"]').attr('value'));
+      console.log('radio value', dewself.fp_residntCd_rdo.value());
+    }
+
+    function closeRelatedComponent(componentId, relatedId, value, onoff, clear) {
+      if (dewself[componentId].value() === value) {
+        if (clear === true) {
+          console.log('relatedId', relatedId);
+          // let type = dewself[relatedId]._element.dataset.customComponentType;
+          let dataset = dewself.$content.find('#' + relatedId)[0].dataset;
+          console.log('dataset', dataset);
+          switch(dataset.customComponentType) {
+            case 'code':
+              let param = {};
+              param[dataset.dewsCodeField] = null;
+              param[dataset.dewsTextField] = null;
+              dewself[relatedId].setData(param, false);
+              console.log('code', dewself[relatedId].code());
+              console.log('text', dewself[relatedId].text());
+              break;
+            case 'text':
+              dewself[relatedId].text(null);
+              break;
+            default:
+              dewself[relatedId].value(null);
+          }
+        }
+        dewself[relatedId].readonly(onoff);
+      } else {
+        dewself[relatedId].readonly(!onoff);
+      }
+    }
+
+    // 저장 이후 편집불가능한 항목 비활성 처리
+    function closeUneditableItem(saveFlag) {
+      if (saveFlag !== 'added') {
+        dewself.fp_empNo_tb.readonly(true);
+      }
+    }
+
+    // 코드데이터
+    function getCodeData(module_cd, field_cd_pipe, syscode_yn, base_yn, foreign_yn, end_dt, keyword) {
+      if (!objCodeDtl.hasOwnProperty(module_cd)) {
+        objCodeDtl[module_cd] = {};
+      }
+      $.each(field_cd_pipe.split('|'), function (i, v) {
+        if (v != null && v != '') {
+          // objCodeDtl[cd_module][v] = [{ CD_SYSDEF: '', NM_SYSDEF: '' }];
+          objCodeDtl[module_cd][v] = [];
+        }
+      });
+      dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'), {
+        async: false,
+        data: {
+          module_cd: module_cd,
+          field_cd_pipe: field_cd_pipe,
+          syscode_yn: syscode_yn,
+          base_yn: base_yn,
+          foreign_yn: foreign_yn,
+          end_dt: end_dt,
+          keyword: keyword,
+        }
+      }).done(function (data) {
+        $.each(data, function (i, obj) {
+          objCodeDtl[module_cd][obj.FIELD_CD].push(obj);
+        });
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+    }
+
+  });
+</script>
+<style>
+  #content_PAMPHM00400 #CardListCondition {
+    padding: 10px 10px 10px 10px;
+    background-color: #f5f5f5;
+    border-top: 2px solid #666;
+    border-left: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+  }
+  /* 카드리스트 */
+  #content_PAMPHM00400 #EmpCardList {
+    height: calc(100% - 50px)!important;
+    border: 1px solid #ccc;
+  }
+  #content_PAMPHM00400 #EmpCardList>.k-grid-content {
+    height: calc(100% - 28px)!important;
+  }
+  /* 프로필패널 - 사진 프레임 */
+  #content_PAMPHM00400 .dews-custom-profile-panel {
+    height: inherit;
+    width: inherit;
+    background-color: #e6ecf5;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-photo-frame {
+    height: inherit;
+    width: 107px;
+    position: relative;
+    float: left;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-button-frame {
+    width: 300px;
+    height: inherit;
+    padding-top: 33px;
+    float: right;
+    text-align: right;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-photo {
+    display: block;
+    height: 63px;
+    width: 63px;
+    background: url('/view/images/HR/PAMPHM_NEW/hr_profile.png');
+    background-size: 63px 63px;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 63px/2);
+    left: calc(50% - 63px/2);
+  }
+  #content_PAMPHM00400 .dews-custom-profile-photo-edit-icon {
+    display: block;
+    height: 26px;
+    width: 26px;
+    background: rgba(255,255, 255,0.9) url('/view/images/HR/PAMPHM_NEW/ico_editpic.png') no-repeat center;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    left: 43px;
+  }
+
+  /* 프로필패널 - 성명/직위/소속 프레임 */
+
+  #content_PAMPHM00400 .dews-custom-profile-info-frame {
+    float: left;
+    min-height: inherit;
+    padding: 25px 0px 25px 0px
+  }
+  #content_PAMPHM00400 .dews-custom-profile-info-frame .no-space {
+    float: left;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-employee {
+    display: block;
+    height: 26px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+    text-align: left;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-division {
+    display: block;
+    height: 21px;
+    font-size: 13px;
+    color: #666;
+    text-align: left;
+  }
+
+  /* 프로필패널 - 버튼 프레임(수정/파일) */
+  #content_PAMPHM00400 .dews-custom-profile-button {
+    display: inline-block;
+    width: 67px;
+    height: 30px;
+    border: 1px solid #bcc8ce;
+    background-color: transparent;
+    border-radius: 28px;
+    margin-right: 4px;
+    cursor: pointer;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-button:hover {
+    border: 1px solid #777;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-info-edit-icon {
+    display: block;
+    float: left;
+    top: calc(50% - 8px);
+    left: 12px;
+    position: relative;
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+    background: url('/view/images/HR/PAMPHM_NEW/ico_modify.png') no-repeat center;
+  }
+  #content_PAMPHM00400 #btn_fileUpload {
+    margin-right: 18px;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-file-upload-icon {
+    display: block;
+    float: left;
+    top: calc(50% - 8px);
+    left: 12px;
+    position: relative;
+    margin-right: 3px;
+    width: 16px;
+    height: 16px;
+    background: url('/view/images/HR/PAMPHM_NEW/ico_attach.png') no-repeat center;
+  }
+  #content_PAMPHM00400 .dews-custom-profile-button-frame-text {
+    display: block;
+    float: left;
+    top: calc(50% - 10px);
+    left: 12px;
+    position: relative;
+  }
+  /* tab-title 영역 설정 */
+  #content_PAMPHM00400 .dews-tab-titles {
+    height: 30px;
+  }
+  #content_PAMPHM00400 .dews-tab-item-title {
+    padding: 4px 15px 0;
+  }
+  /* tab-items 영역 설정 */
+  #content_PAMPHM00400 .dews-tab-items {
+    overflow: auto;
+    padding-top: 0px;
+    border: 1px solid #ccc;
+    height: calc(100% - 134px);
+  }
+  /* tab-item 영역설정 */
+  #content_PAMPHM00400 .dews-tab-item {
+    padding: 20px 10px 0px 10px;
+  }
+  /* 프로필패널 아래의 탭컨텐트 사이즈 조절 (기본정보1, 기본정보2) */
+  #content_PAMPHM00400 #BasicInfo1Tab .dews-tab-content,
+  #content_PAMPHM00400 #BasicInfo2Tab .dews-tab-content {
+    height: calc(100% - 98px)!important;
+  }
+  /* 폼패널 */
+  #content_PAMPHM00400 .dews-form-panel-form ul {
+    padding: 0px 0px 10px 0px;
+  }
+  #content_PAMPHM00400 .dews-form-panel-form ul>li {
+    margin: 0px;
+    width: 336px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  #content_PAMPHM00400 #BasicInfo1FormPanel,
+  #content_PAMPHM00400 #BasicInfo2FormPanel,
+  #content_PAMPHM00400 #PayBaseFormPanel,
+  #content_PAMPHM00400 #PersonalInfoFormPanel {
+    /* height: 560px!important; */
+    border-bottom: none;
+    /* overflow: visible; */
+  }
+  #content_PAMPHM00400 .dews-form-panel-form ul>li>label {
+    width: 146px;
+    height: 39px;
+    line-height: 36px;
+    padding: 0px 8px 0px 0px;
+    font-size: 12px #000;
+    background-color: #f5f5f5;
+  }
+  #content_PAMPHM00400 .dews-form-panel-form ul>li>label.rowspan-2 {
+    height: 70px;
+    line-height: 72px;
+  }
+  #content_PAMPHM00400 .dews-form-panel-form ul>li>span {
+    width: 190px;
+    height: 39px;
+    padding: 6px 6px 6px 6px;
+  }
+  #content_PAMPHM00400 .dews-form-panel-form ul>li.col-2.row-2 {
+    height: 71px;
+  }
+  #content_PAMPHM00400 .dews-form-panel-form ul>li.li-invisible {
+    height: 40px;
+  }
+  #content_PAMPHM00400 .dews-form-panel-form ul>li.li-invisible-cols-2 {
+    height: 71px;
+  }
+  #content_PAMPHM00400 .cols-2 {
+    z-index: 1;
+    width: 506px;
+  }
+  #content_PAMPHM00400 .li-rowspan-2 {
+    height: 71px;
+  }
+  #content_PAMPHM00400 .half-size {
+    width: 84px;
+  }
+  /* 부양가족계산버튼 */
+  #content_PAMPHM00400 #btn_calcFamily {
+    margin-bottom: 5px;
+    float: right;
+  }
+
+  /* 라디오버튼 일반 */
+  /* #content_PAMPHM00400 label[custom-readonly="false"].dews-radio-group-item span:before {
+    background: #fff;
+    border: 1px solid #ccc;
+  }
+  #content_PAMPHM00400 label[custom-readonly="false"].dews-radio-group-item input:checked + span:after {
+    background: #c3c3c3;
+  } */
+  /* 라디오그룹 읽기전용속성 */
+  /* #content_PAMPHM00400 label[custom-readonly="true"].dews-radio-group-item span:before {
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+  }
+  #content_PAMPHM00400 label[custom-readonly="true"].dews-radio-group-item input:checked + span:after {
+    background: #c3c3c3;
+  } */
+</style>

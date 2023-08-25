@@ -1,0 +1,278 @@
+﻿<!-- <div class="dews-dialog-contents-area"> -->
+  <!-- <div class="dews-ui-form-panel" style="min-width: 100%;"> -->
+  <div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+    <div class="dews-container-item" data-dews-position="left" style="width: 100%;">
+      <div class="dews-ui-grid" id="PopupGrid"></div>
+      <div class="dews-ui-grid" id="dsBasicInfoListHideGrid" style="display: none;"></div>
+    </div>
+  </div>
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- 버튼 html 영역 -->
+<div class="dews-dialog-button-group bottom">
+  <button id="ok_btn" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000255">적용</button>
+</div>
+<script src="/view/js/HR/hr.common.js"></script>
+<style>
+</style>
+
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      var objCodeDtl = {};
+      var dialog = dews.ui.dialog('PAMPHM00200_autoNumberCheck02_POP');
+      var PopupGrid, PopupGridDataSource;
+      var dsBasicInfoListHideGrid, dsBasicInfoListHideDataSource;
+      var initData = dialog.initData;
+      console.log('initData', initData);
+    }
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      PopupGridDataSource = dews.ui.dataSource('items', {
+        grid: true,
+        error: function (data, message) {
+          if (!message) {
+            dews.error(data.error);
+          } else {
+            dews.error(message);
+          }
+        },
+        schema: {
+          model: {
+            //id: '',
+            fields: [
+              { field: 'UID' },
+              { field: 'BIZAREA_NM' },
+              { field: 'DEPT_NM' },
+              { field: 'EMP_NO' },
+              { field: 'KOR_NM' },
+            ]
+          }
+        },
+      });
+
+      dsBasicInfoListHideDataSource = dews.ui.dataSource('dsBasicInfoListHideDataSource', {
+        grid: true,
+        error: function (data, message) {
+          if (!message) {
+            dews.error(data.error);
+          } else {
+            dews.error(message);
+          }
+        },
+        schema: {
+          model: {
+            //id: '',
+            fields: dynamicsCol()
+          }
+        },
+      });
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+      PopupGrid = dews.ui.grid(dewself.$PopupGrid, {
+        dataSource: PopupGridDataSource,
+        rowNo: false,
+        checkable: false,
+        editable: true,
+        selectable: true,
+        sortable: false,
+        height: 300,
+        columns: [
+          { field: 'UID', title: '_uid', visible: false },
+          { field: 'BIZAREA_NM', title: dews.localize.get('사업장', 'D0000069') },
+          { field: 'DEPT_NM', title: dews.localize.get('부서', 'D0000071') },
+          { field: 'KOR_NM', title: dews.localize.get('성명', 'D0001231') },
+          {
+            field: 'EMP_NO', title: dews.localize.get('사원번호', 'D0000074'),
+            attributes: {
+              class: "required"
+            },
+            align: 'center',
+            editor: { type: 'string', maxLength: 0 }
+          },
+        ],
+        validationCheck: function(e) {
+        },
+        save: function(e) {
+          var dupemp, idx;
+          if(e.cell.field == 'EMP_NO'){
+            $.each(dsBasicInfoListHideGrid.dataItems(), function(index, row){
+              if(row.PID == e.row.data.UID){
+                dsBasicInfoListHideGrid.setCellValue(index, "EMP_NO", e.row.data.EMP_NO);
+                dupemp = e.row.data.EMP_NO;
+                idx = index;
+                // row.EMP_NO = e.row.data.EMP_NO;
+              }
+            });
+            var checkResult = getDuplicatedEmp(dupemp);
+            if (checkResult !== null) {
+              switch(checkResult) {
+                case "1":
+                  dews.ui.snackbar.warning(dews.localize.get("사원등록에 중복된 사원번호가 있습니다.", 'M0005967'));
+                  break;
+                case "2":
+                  dews.ui.snackbar.warning(dews.localize.get("일용직사원등록에 중복된 사원번호가 있습니다.", 'M0005968'));
+                  break;
+              }
+              e.grid.setCellValue(e.row.index, "EMP_NO", null, false);
+              dsBasicInfoListHideGrid.setCellValue(idx, "EMP_NO", null);
+            }
+          }
+        },
+        change: function(e) {
+        },
+        dataBound: function(e) {
+        },
+        pasted: function (e) {
+          var dupemp, idx, idx2;
+          if(e.columns == "EMP_NO"){
+            $.each(e.grid.dataItems(), function(i, data){
+              $.each(dsBasicInfoListHideGrid.dataItems(), function(i2, data2){
+                if(data2.PID == data.UID){
+                  dsBasicInfoListHideGrid.setCellValue(i2, "EMP_NO", data.EMP_NO, true);
+                  // dupemp = data.EMP_NO;
+                  // idx2 = i2;
+                }
+              });
+            });
+            dupemp = e.grid.getCellValue(e.rows[0], "EMP_NO");
+            var checkResult = getDuplicatedEmp(dupemp);
+            if (checkResult !== null) {
+              switch(checkResult) {
+                case "1":
+                  dews.ui.snackbar.warning(dews.localize.get("사원등록에 중복된 사원번호가 있습니다.", 'M0005967'));
+                  break;
+                case "2":
+                  dews.ui.snackbar.warning(dews.localize.get("일용직사원등록에 중복된 사원번호가 있습니다.", 'M0005968'));
+                  break;
+              }
+              e.grid.setCellValue(e.rows[0], "EMP_NO", null, false);
+              // dsBasicInfoListHideGrid.setCellValue(idx2, "EMP_NO", null);
+            }
+          }
+        }
+      });
+
+      // 그리드 생성하기 싫지만.. initData.dsBasicInfoList 이게 DirtyData.Updated에만 데이터가 잡혀서 들어오기 때문에
+      // DEWS 문제인지 객체 직접 수정이 불가. -> Added로 들어온다면 방법이 있지만 백엔드에 getUpdated()된거 바꿔야 함(그 외에도 문제가 있을수도..)
+      // 그렇기 때문에 그리드 하나 더 선언 후, SetCellValue 선택..
+      dsBasicInfoListHideGrid = dews.ui.grid(dewself.$dsBasicInfoListHideGrid, {
+        dataSource: dsBasicInfoListHideDataSource,
+        rowNo: false,
+        checkable: false,
+        editable: false,
+        selectable: true,
+        sortable: false,
+        columns: dynamicsCol(),
+        validationCheck: function(e) {
+        },
+        save: function(e) {
+        },
+        change: function(e) {
+        },
+        dataBound: function(e) {
+        },
+      });
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 저장 버튼
+      dewself.$ok_btn.on('click', function (e) {
+        /// 일용직 사원등록
+        if(dewself.PopupGrid.validate({}).result){
+          dews.api.batchSave(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00200_save'),{
+            data : {
+              dsCardList : JSON.stringify(initData.dsCardList.getDirtyData()),
+              dsBasicInfoList : JSON.stringify(dsBasicInfoListHideDataSource.getDirtyData()),
+              dsPayrollList : JSON.stringify(initData.dsPayrollList.getDirtyData()),
+              dsSdtlList : JSON.stringify(initData.dsSdtlList.getDirtyData())
+            }
+          }
+          ).done(function (data) {
+            dialog.ok();
+          }).fail(function (message, status, error) {
+            dews.error(message);
+          });
+        }else{
+          dews.ui.snackbar.warning(dews.localize.get("필수값을 입력해 주세요.", 'M0022209'));
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 실행 영역 ▦▦▦▦▦▦
+    {
+      PopupGridDataSource.data(initData.autoRuleListArray);
+      PopupGridDataSource.read();
+
+      dsBasicInfoListHideDataSource.data(initData.dsBasicInfoList.getDirtyData().Updated);
+      dsBasicInfoListHideDataSource.read();
+    }
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+    // function searchUser(value) {
+    //   let options = {
+    //     fields:['EMP_NO', 'KOR_NM'],
+    //     value: value
+    //   };
+    //   dewself.PopupGrid.searchCell(options);
+    // }
+
+
+    function dynamicsCol(){
+      var cols = [];
+      cols.push({ field: '_huid', title: '_huid' });
+      $.each(initData.dsBasicInfoList.options.field, function(i, data){
+        cols.push(data);
+      });
+      return cols;
+    }
+
+    // 사원번호 중복된 사원 체크 (일용직, 상용직)
+    function getDuplicatedEmp(emp_no) {
+        var result = null;
+        dews.api.get(dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00100_checkEmpNo"), {
+          async: false,
+          data: {
+            emp_no: emp_no
+          }
+        }).done(function (data) {
+          if(data.length > 0) {
+            result = data[0].EMPY_TP_CD;
+          }
+        }).fail(function (xhr, status, error) {
+        });
+      return result;
+    }
+  });
+//# sourceURL=PAMPHM00200_autoNumberCheck02_POP.js
+</script>

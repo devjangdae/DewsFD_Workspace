@@ -1,0 +1,95 @@
+﻿<div class="dews-dialog-contents-area">
+  <div class="dews-ui-form-panel">
+    <ul>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0014558">퇴직사유</label>
+        <span>
+          <input id="fp_retrReasonCd_cp" type="text" class="dews-ui-codepicker" 
+            data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" 
+            data-dews-help-size="medium" data-dews-help-params="module_cd=HR&field_cd=P01100">
+        </span>
+      </li>
+      <li>
+        <span>
+          <input id="fp_retrDtlReasonDc_tb" type="text" class="dews-ui-textbox" style="margin-left: 4px; width: 170px;">
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 버튼 html 영역 -->
+<div class="dews-dialog-button-group bottom">
+  <button id="apply" class="dews-ui-button confirm" data-dews-localize-key="D0000267">적용</button>
+  <button id="close" class="dews-ui-button confirm" data-dews-localize-key="D0000255">닫기</button>
+</div>
+
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      var objCodeDtl = {};
+      var dialog = dews.ui.dialog('PAMPHM00100_retireReason_POP');
+      var initData = dialog.initData;
+      console.log('initData', initData);
+    }
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+      dewself.fp_retrReasonCd_cp.setData({ SYSDEF_CD: initData.RETR_REASON_CD, SYSDEF_NM: initData.RETR_REASON_NM });
+      dewself.fp_retrDtlReasonDc_tb.text(initData.RETR_DTL_REASON_DC);
+    }
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 적용 버튼
+      dewself.$apply.on('click', function (e) {
+        let closeObj = {};
+        closeObj['RETR_REASON_CD'] = dewself.fp_retrReasonCd_cp.code();
+        closeObj['RETR_REASON_NM'] = dewself.fp_retrReasonCd_cp.text();
+        closeObj['RETR_REASON_DTL'] = dewself.fp_retrDtlReasonDc_tb.text();
+        dews.ui.dialog('PAMPHM00100_retireReason_POP').ok(closeObj);
+      });
+      // 닫기 버튼
+      dewself.$close.on('click', function (e) {
+        dews.ui.dialog('PAMPHM00100_retireReason_POP').cancel();
+      });
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 실행 영역 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+    
+  });
+//# sourceURL=PAMPHM00100_retireReason_POP.js
+</script>

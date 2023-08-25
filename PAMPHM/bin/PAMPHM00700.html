@@ -1,0 +1,4230 @@
+<!--##82dae3b8-8d9f-4685-9fc8-121a225f5bff##-->
+<!--##PAMPHM00700##-->
+<!--##721Nzy667GsgZLq1faGSxcJD+tsnlDvUcfmutiypmLk=##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: PAMPHM00700
+  # PageTitle: 퇴직사원조회
+  # Server: http://localhost:8090/
+-->
+<!--
+
+-->
+
+<div class="dews-button-group" style="text-align: right;">
+  <button id="btn_restore" class="dews-ui-button"> 복원</button>
+  <button id="btn_disposal" class="dews-ui-button">폐기</button>
+</div>
+<div id="condPanel" class="dews-ui-condition-panel">
+  <ul class="required-area">
+    <li class="col-2">
+      <label class="dews-ui-multilingual">보존중기간</label>
+      <span>
+        <select id="cond_ppCond_ddl" name="cond_ppCond_ddl" class="dews-ui-dropdownlist basic" data-dews-value-field="value" data-dews-text-field="test" data-dews-show-tooltip="true" style="width: 64px;" data-dews-option-label-value="" data-dews-option-label-text="전체" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+        <input id="cond_year_tb" name="cond_year_tb" type="text" class="dews-ui-numerictextbox" data-dews-increase-type="multiple" data-dews-increase-value="1000" data-dews-step="0" data-dews-round="round" style="width: 54px;" />
+        <label id="TEXT1">년</label>
+        <select id="cond_month_ddl" name="cond_month_ddl" class="dews-ui-dropdownlist basic" data-dews-value-field="value" data-dews-text-field="test" data-dews-show-tooltip="true" style="width: 60px;" data-dews-option-label-value="" data-dews-option-label-text="전체" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+        <label id="TEXT2">개월</label>
+      </span>
+    </li>
+    <li>
+      <label class="dews-ui-multilingual">퇴직일</label>
+      <span>
+        <span id="cond_retrDt_pp" class="dews-ui-periodpicker basic"></span>
+      </span>
+    </li>
+  </ul>
+  <ul class="optional-area">
+    <li>
+      <label class="dews-ui-multilingual">고용형태</label>
+      <span>
+        <select id="cond_empyTp_mcp" name="cond_empyTp_mcp" class="dews-ui-multicodepicker basic" data-dews-help-custom="false" data-dews-help-size="medium" />
+      </span>
+    </li>
+    <li>
+      <label class="dews-ui-multilingual">사원구분</label>
+      <span>
+        <select id="cond_empTp_mcp" name="cond_empTp_mcp" class="dews-ui-multicodepicker basic" data-dews-help-custom="false" data-dews-help-size="medium" />
+      </span>
+    </li>
+    <li>
+      <label class="dews-ui-multilingual">검색어</label>
+      <span>
+        <input id="cond_keyword_tb" name="cond_keyword_tb" type="text" class="dews-ui-textbox basic" />
+      </span>
+    </li>
+  </ul>
+</div>
+<div class="dews-ui-container-panel">
+  <div class="dews-container-item" data-dews-position="normal">
+    <div id="gd_empList" class="dews-ui-grid"></div>
+  </div>
+</div>
+<div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="normal">
+    <div class="dews-ui-tab-panel">
+      <ul class="dews-tab-items">
+        <li id="tab_basicInfo" class="dews-tab-item" data-dews-title="기본정보2">
+          <div id="gd_basicInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_payInfo" class="dews-tab-item" data-dews-title="급여기초">
+          <div id="gd_payInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_empInfo" class="dews-tab-item" data-dews-title="인적사항">
+          <div id="gd_empInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_otherInfo" class="dews-tab-item" data-dews-title="기타정보">
+          <div id="gd_otherInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_familyInfo" class="dews-tab-item" data-dews-title="가족사항">
+          <div id="gd_familyInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_schocareInfo" class="dews-tab-item" data-dews-title="학력사항">
+          <div id="gd_schocareInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_careerInfo" class="dews-tab-item" data-dews-title="경력사항">
+          <div id="gd_careerInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_licenseInfo" class="dews-tab-item" data-dews-title="자격면허">
+          <div id="gd_licenseInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_clubInfo" class="dews-tab-item" data-dews-title="동호회">
+          <div id="gd_clubInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_recommendInfo" class="dews-tab-item" data-dews-title="추천인">
+          <div id="gd_recommendInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_guaranteeInfo" class="dews-tab-item" data-dews-title="인보증">
+          <div id="gd_guaranteeInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_guarinsuInfo" class="dews-tab-item" data-dews-title="보험">
+          <div id="gd_guarinsuInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_visaInfo" class="dews-tab-item" data-dews-title="여권비자">
+          <div id="gd_visaInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_forelangInfo" class="dews-tab-item" data-dews-title="외국어">
+          <div id="gd_forelangInfo" class="dews-ui-grid"></div>
+        </li>
+        <li id="tab_projectInfo" class="dews-tab-item" data-dews-title="프로젝트">
+          <div id="gd_projectInfo" class="dews-ui-grid"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+    
+</style>
+
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.0.23061401';
+    self.version.service='Pamphm00700Service';
+
+
+    
+    
+    self.ds_empList = dews.ui.dataSource('ds_empList', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_empList'),
+          data: function () {
+            return {
+              month: self.cond_month_ddl.value(),
+              year: self.cond_year_tb.value(),
+              ppCond: self.cond_ppCond_ddl.value(),
+              keyword: self.cond_keyword_tb.text(),
+              emp_tps: self.cond_empTp_mcp.codes().join('|'),
+              retr_end_dt: self.cond_retrDt_pp.getEndDate(),
+              retr_start_dt: self.cond_retrDt_pp.getStartDate(),
+              empy_td_cds: self.cond_empyTp_mcp.codes().join('|')
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'KOR_NM', editable: false, dataType: 'string' }, 
+            { field: 'KEEP_DC', editable: false, dataType: 'string' }, 
+            { field: 'RES_NO', editable: false, dataType: 'string' }, 
+            { field: 'SEX_CD', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_CD', editable: false, dataType: 'string' }, 
+            { field: 'DEPT_CD', editable: false, dataType: 'string' }, 
+            { field: 'GROUPECNY_DT', editable: false, dataType: 'string' }, 
+            { field: 'JNCO_DT', editable: false, dataType: 'string' }, 
+            { field: 'RETIRESTDR_DT', editable: false, dataType: 'string' }, 
+            { field: 'RETR_DT', editable: false, dataType: 'string' }, 
+            { field: 'RETR_REASON_CD', editable: false, dataType: 'string' }, 
+            { field: 'EMP_TP', editable: false, dataType: 'string' }, 
+            { field: 'FRGNR_CD', editable: false, dataType: 'string' }, 
+            { field: 'NTNL_CD', editable: false, dataType: 'string' }, 
+            { field: 'FRNR_INSERT_NO', editable: false, dataType: 'string' }, 
+            { field: 'POSI_CD', editable: false, dataType: 'string' }, 
+            { field: 'PSTN_CD', editable: false, dataType: 'string' }, 
+            { field: 'SLST_CD', editable: false, dataType: 'string' }, 
+            { field: 'ODTY_CD', editable: false, dataType: 'string' }, 
+            { field: 'DUTY_CD', editable: false, dataType: 'string' }, 
+            { field: 'EMGNC_CNTC_NO', editable: false, dataType: 'string' }, 
+            { field: 'MAIL_DC', editable: false, dataType: 'string' }, 
+            { field: '_uid', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_NM', editable: false, dataType: 'string' }, 
+            { field: 'DEPT_NM', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'),{
+      async: false,
+      data: {
+          end_dt: '',
+          foreign_yn: '',
+          field_cd_pipe: 'P00640|P00650|P00920|P01100|P00010|P00200|P00660|P01740|P00990|P06960|ZR21_10005|P00670|P01020|P00630|P00980|ZR32_10005|ZR34_10005|P00040|P00730|P00720|P00390|P01140|P00880|P00860|P00870|P00710|P00850|P00760|P00810|P00770|P00800|P00790|P06990|P00780|P03240|P01380|ZA03_10005|P01930|P00700|P00690|P00900|P01510|ZR41_10005|P00220|P05200|P01480|P01470|P00830|P00890|P01110|ZS02_10005|P07310|ZR48_10005|P00060|P01500|P00910|P00930|ZR40_10005|P00310|P06980|P03550|P05900|P01550|P07330|P03200',
+          module_cd: 'HR',
+          syscode_yn: '',
+          keyword: '',
+          base_yn: ''
+      }
+    }).done(function (data) {
+      var ar_P00640 = new Array();
+      var ar_P00650 = new Array();
+      var ar_P00920 = new Array();
+      var ar_P01100 = new Array();
+      var ar_P00010 = new Array();
+      var ar_P00200 = new Array();
+      var ar_P00660 = new Array();
+      var ar_P01740 = new Array();
+      var ar_P00990 = new Array();
+      var ar_P06960 = new Array();
+      var ar_ZR21_10005 = new Array();
+      var ar_P00670 = new Array();
+      var ar_P01020 = new Array();
+      var ar_P00630 = new Array();
+      var ar_P00980 = new Array();
+      var ar_ZR32_10005 = new Array();
+      var ar_ZR34_10005 = new Array();
+      var ar_P00040 = new Array();
+      var ar_P00730 = new Array();
+      var ar_P00720 = new Array();
+      var ar_P00390 = new Array();
+      var ar_P01140 = new Array();
+      var ar_P00880 = new Array();
+      var ar_P00860 = new Array();
+      var ar_P00870 = new Array();
+      var ar_P00710 = new Array();
+      var ar_P00850 = new Array();
+      var ar_P00760 = new Array();
+      var ar_P00810 = new Array();
+      var ar_P00770 = new Array();
+      var ar_P00800 = new Array();
+      var ar_P00790 = new Array();
+      var ar_P06990 = new Array();
+      var ar_P00780 = new Array();
+      var ar_P03240 = new Array();
+      var ar_P01380 = new Array();
+      var ar_ZA03_10005 = new Array();
+      var ar_P01930 = new Array();
+      var ar_P00700 = new Array();
+      var ar_P00690 = new Array();
+      var ar_P00900 = new Array();
+      var ar_P01510 = new Array();
+      var ar_ZR41_10005 = new Array();
+      var ar_P00220 = new Array();
+      var ar_P05200 = new Array();
+      var ar_P01480 = new Array();
+      var ar_P01470 = new Array();
+      var ar_P00830 = new Array();
+      var ar_P00890 = new Array();
+      var ar_P01110 = new Array();
+      var ar_ZS02_10005 = new Array();
+      var ar_P07310 = new Array();
+      var ar_ZR48_10005 = new Array();
+      var ar_P00060 = new Array();
+      var ar_P01500 = new Array();
+      var ar_P00910 = new Array();
+      var ar_P00930 = new Array();
+      var ar_ZR40_10005 = new Array();
+      var ar_P00310 = new Array();
+      var ar_P06980 = new Array();
+      var ar_P03550 = new Array();
+      var ar_P05900 = new Array();
+      var ar_P01550 = new Array();
+      var ar_P07330 = new Array();
+      var ar_P03200 = new Array();
+    
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].FIELD_CD == "P00640") { 
+          ar_P00640.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00650") { 
+          ar_P00650.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00920") { 
+          ar_P00920.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01100") { 
+          ar_P01100.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00010") { 
+          ar_P00010.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00200") { 
+          ar_P00200.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00660") { 
+          ar_P00660.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01740") { 
+          ar_P01740.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00990") { 
+          ar_P00990.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P06960") { 
+          ar_P06960.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "ZR21_10005") { 
+          ar_ZR21_10005.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00670") { 
+          ar_P00670.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01020") { 
+          ar_P01020.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00630") { 
+          ar_P00630.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00980") { 
+          ar_P00980.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "ZR32_10005") { 
+          ar_ZR32_10005.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "ZR34_10005") { 
+          ar_ZR34_10005.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00040") { 
+          ar_P00040.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00730") { 
+          ar_P00730.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00720") { 
+          ar_P00720.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00390") { 
+          ar_P00390.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01140") { 
+          ar_P01140.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00880") { 
+          ar_P00880.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00860") { 
+          ar_P00860.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00870") { 
+          ar_P00870.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00710") { 
+          ar_P00710.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00850") { 
+          ar_P00850.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00760") { 
+          ar_P00760.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00810") { 
+          ar_P00810.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00770") { 
+          ar_P00770.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00800") { 
+          ar_P00800.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00790") { 
+          ar_P00790.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P06990") { 
+          ar_P06990.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00780") { 
+          ar_P00780.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P03240") { 
+          ar_P03240.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01380") { 
+          ar_P01380.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "ZA03_10005") { 
+          ar_ZA03_10005.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01930") { 
+          ar_P01930.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00700") { 
+          ar_P00700.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00690") { 
+          ar_P00690.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00900") { 
+          ar_P00900.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01510") { 
+          ar_P01510.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "ZR41_10005") { 
+          ar_ZR41_10005.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00220") { 
+          ar_P00220.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P05200") { 
+          ar_P05200.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01480") { 
+          ar_P01480.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01470") { 
+          ar_P01470.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00830") { 
+          ar_P00830.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00890") { 
+          ar_P00890.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01110") { 
+          ar_P01110.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "ZS02_10005") { 
+          ar_ZS02_10005.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P07310") { 
+          ar_P07310.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "ZR48_10005") { 
+          ar_ZR48_10005.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00060") { 
+          ar_P00060.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01500") { 
+          ar_P01500.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00910") { 
+          ar_P00910.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00930") { 
+          ar_P00930.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "ZR40_10005") { 
+          ar_ZR40_10005.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00310") { 
+          ar_P00310.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P06980") { 
+          ar_P06980.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P03550") { 
+          ar_P03550.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P05900") { 
+          ar_P05900.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01550") { 
+          ar_P01550.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P07330") { 
+          ar_P07330.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P03200") { 
+          ar_P03200.push(data[i]); 
+    
+        }
+      }
+      self.pipeDataSource1_P00640 = dews.ui.dataSource('pipeDataSource1_P00640',  { data: ar_P00640 });
+      self.pipeDataSource1_P00650 = dews.ui.dataSource('pipeDataSource1_P00650',  { data: ar_P00650 });
+      self.pipeDataSource1_P00920 = dews.ui.dataSource('pipeDataSource1_P00920',  { data: ar_P00920 });
+      self.pipeDataSource1_P01100 = dews.ui.dataSource('pipeDataSource1_P01100',  { data: ar_P01100 });
+      self.pipeDataSource1_P00010 = dews.ui.dataSource('pipeDataSource1_P00010',  { data: ar_P00010 });
+      self.pipeDataSource1_P00200 = dews.ui.dataSource('pipeDataSource1_P00200',  { data: ar_P00200 });
+      self.pipeDataSource1_P00660 = dews.ui.dataSource('pipeDataSource1_P00660',  { data: ar_P00660 });
+      self.pipeDataSource1_P01740 = dews.ui.dataSource('pipeDataSource1_P01740',  { data: ar_P01740 });
+      self.pipeDataSource1_P00990 = dews.ui.dataSource('pipeDataSource1_P00990',  { data: ar_P00990 });
+      self.pipeDataSource1_P06960 = dews.ui.dataSource('pipeDataSource1_P06960',  { data: ar_P06960 });
+      self.pipeDataSource1_ZR21_10005 = dews.ui.dataSource('pipeDataSource1_ZR21_10005',  { data: ar_ZR21_10005 });
+      self.pipeDataSource1_P00670 = dews.ui.dataSource('pipeDataSource1_P00670',  { data: ar_P00670 });
+      self.pipeDataSource1_P01020 = dews.ui.dataSource('pipeDataSource1_P01020',  { data: ar_P01020 });
+      self.pipeDataSource1_P00630 = dews.ui.dataSource('pipeDataSource1_P00630',  { data: ar_P00630 });
+      self.pipeDataSource1_P00980 = dews.ui.dataSource('pipeDataSource1_P00980',  { data: ar_P00980 });
+      self.pipeDataSource1_ZR32_10005 = dews.ui.dataSource('pipeDataSource1_ZR32_10005',  { data: ar_ZR32_10005 });
+      self.pipeDataSource1_ZR34_10005 = dews.ui.dataSource('pipeDataSource1_ZR34_10005',  { data: ar_ZR34_10005 });
+      self.pipeDataSource1_P00040 = dews.ui.dataSource('pipeDataSource1_P00040',  { data: ar_P00040 });
+      self.pipeDataSource1_P00730 = dews.ui.dataSource('pipeDataSource1_P00730',  { data: ar_P00730 });
+      self.pipeDataSource1_P00720 = dews.ui.dataSource('pipeDataSource1_P00720',  { data: ar_P00720 });
+      self.pipeDataSource1_P00390 = dews.ui.dataSource('pipeDataSource1_P00390',  { data: ar_P00390 });
+      self.pipeDataSource1_P01140 = dews.ui.dataSource('pipeDataSource1_P01140',  { data: ar_P01140 });
+      self.pipeDataSource1_P00880 = dews.ui.dataSource('pipeDataSource1_P00880',  { data: ar_P00880 });
+      self.pipeDataSource1_P00860 = dews.ui.dataSource('pipeDataSource1_P00860',  { data: ar_P00860 });
+      self.pipeDataSource1_P00870 = dews.ui.dataSource('pipeDataSource1_P00870',  { data: ar_P00870 });
+      self.pipeDataSource1_P00710 = dews.ui.dataSource('pipeDataSource1_P00710',  { data: ar_P00710 });
+      self.pipeDataSource1_P00850 = dews.ui.dataSource('pipeDataSource1_P00850',  { data: ar_P00850 });
+      self.pipeDataSource1_P00760 = dews.ui.dataSource('pipeDataSource1_P00760',  { data: ar_P00760 });
+      self.pipeDataSource1_P00810 = dews.ui.dataSource('pipeDataSource1_P00810',  { data: ar_P00810 });
+      self.pipeDataSource1_P00770 = dews.ui.dataSource('pipeDataSource1_P00770',  { data: ar_P00770 });
+      self.pipeDataSource1_P00800 = dews.ui.dataSource('pipeDataSource1_P00800',  { data: ar_P00800 });
+      self.pipeDataSource1_P00790 = dews.ui.dataSource('pipeDataSource1_P00790',  { data: ar_P00790 });
+      self.pipeDataSource1_P06990 = dews.ui.dataSource('pipeDataSource1_P06990',  { data: ar_P06990 });
+      self.pipeDataSource1_P00780 = dews.ui.dataSource('pipeDataSource1_P00780',  { data: ar_P00780 });
+      self.pipeDataSource1_P03240 = dews.ui.dataSource('pipeDataSource1_P03240',  { data: ar_P03240 });
+      self.pipeDataSource1_P01380 = dews.ui.dataSource('pipeDataSource1_P01380',  { data: ar_P01380 });
+      self.pipeDataSource1_ZA03_10005 = dews.ui.dataSource('pipeDataSource1_ZA03_10005',  { data: ar_ZA03_10005 });
+      self.pipeDataSource1_P01930 = dews.ui.dataSource('pipeDataSource1_P01930',  { data: ar_P01930 });
+      self.pipeDataSource1_P00700 = dews.ui.dataSource('pipeDataSource1_P00700',  { data: ar_P00700 });
+      self.pipeDataSource1_P00690 = dews.ui.dataSource('pipeDataSource1_P00690',  { data: ar_P00690 });
+      self.pipeDataSource1_P00900 = dews.ui.dataSource('pipeDataSource1_P00900',  { data: ar_P00900 });
+      self.pipeDataSource1_P01510 = dews.ui.dataSource('pipeDataSource1_P01510',  { data: ar_P01510 });
+      self.pipeDataSource1_ZR41_10005 = dews.ui.dataSource('pipeDataSource1_ZR41_10005',  { data: ar_ZR41_10005 });
+      self.pipeDataSource1_P00220 = dews.ui.dataSource('pipeDataSource1_P00220',  { data: ar_P00220 });
+      self.pipeDataSource1_P05200 = dews.ui.dataSource('pipeDataSource1_P05200',  { data: ar_P05200 });
+      self.pipeDataSource1_P01480 = dews.ui.dataSource('pipeDataSource1_P01480',  { data: ar_P01480 });
+      self.pipeDataSource1_P01470 = dews.ui.dataSource('pipeDataSource1_P01470',  { data: ar_P01470 });
+      self.pipeDataSource1_P00830 = dews.ui.dataSource('pipeDataSource1_P00830',  { data: ar_P00830 });
+      self.pipeDataSource1_P00890 = dews.ui.dataSource('pipeDataSource1_P00890',  { data: ar_P00890 });
+      self.pipeDataSource1_P01110 = dews.ui.dataSource('pipeDataSource1_P01110',  { data: ar_P01110 });
+      self.pipeDataSource1_ZS02_10005 = dews.ui.dataSource('pipeDataSource1_ZS02_10005',  { data: ar_ZS02_10005 });
+      self.pipeDataSource1_P07310 = dews.ui.dataSource('pipeDataSource1_P07310',  { data: ar_P07310 });
+      self.pipeDataSource1_ZR48_10005 = dews.ui.dataSource('pipeDataSource1_ZR48_10005',  { data: ar_ZR48_10005 });
+      self.pipeDataSource1_P00060 = dews.ui.dataSource('pipeDataSource1_P00060',  { data: ar_P00060 });
+      self.pipeDataSource1_P01500 = dews.ui.dataSource('pipeDataSource1_P01500',  { data: ar_P01500 });
+      self.pipeDataSource1_P00910 = dews.ui.dataSource('pipeDataSource1_P00910',  { data: ar_P00910 });
+      self.pipeDataSource1_P00930 = dews.ui.dataSource('pipeDataSource1_P00930',  { data: ar_P00930 });
+      self.pipeDataSource1_ZR40_10005 = dews.ui.dataSource('pipeDataSource1_ZR40_10005',  { data: ar_ZR40_10005 });
+      self.pipeDataSource1_P00310 = dews.ui.dataSource('pipeDataSource1_P00310',  { data: ar_P00310 });
+      self.pipeDataSource1_P06980 = dews.ui.dataSource('pipeDataSource1_P06980',  { data: ar_P06980 });
+      self.pipeDataSource1_P03550 = dews.ui.dataSource('pipeDataSource1_P03550',  { data: ar_P03550 });
+      self.pipeDataSource1_P05900 = dews.ui.dataSource('pipeDataSource1_P05900',  { data: ar_P05900 });
+      self.pipeDataSource1_P01550 = dews.ui.dataSource('pipeDataSource1_P01550',  { data: ar_P01550 });
+      self.pipeDataSource1_P07330 = dews.ui.dataSource('pipeDataSource1_P07330',  { data: ar_P07330 });
+      self.pipeDataSource1_P03200 = dews.ui.dataSource('pipeDataSource1_P03200',  { data: ar_P03200 });
+      self.pipeDataSource1 = dews.ui.dataSource('pipeDataSource1', { data: data });
+      
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'),{
+      async: false,
+      data: {
+          end_dt: '',
+          foreign_yn: '',
+          field_cd_pipe: 'P00610',
+          module_cd: 'PS',
+          syscode_yn: '',
+          keyword: '',
+          base_yn: ''
+      }
+    }).done(function (data) {
+      var ar_P00610 = new Array();
+    
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].FIELD_CD == "P00610") { 
+          ar_P00610.push(data[i]); 
+    
+        }
+      }
+      self.pipeDataSource2_P00610 = dews.ui.dataSource('pipeDataSource2_P00610',  { data: ar_P00610 });
+      self.pipeDataSource2 = dews.ui.dataSource('pipeDataSource2', { data: data });
+      
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'),{
+      async: false,
+      data: {
+          end_dt: '',
+          foreign_yn: '',
+          field_cd_pipe: 'P00170|S00320|P00200|P01050|P01180',
+          module_cd: 'MA',
+          syscode_yn: '',
+          keyword: '',
+          base_yn: ''
+      }
+    }).done(function (data) {
+      var ar_P00170 = new Array();
+      var ar_S00320 = new Array();
+      var ar_P00200 = new Array();
+      var ar_P01050 = new Array();
+      var ar_P01180 = new Array();
+    
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].FIELD_CD == "P00170") { 
+          ar_P00170.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "S00320") { 
+          ar_S00320.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P00200") { 
+          ar_P00200.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01050") { 
+          ar_P01050.push(data[i]); 
+    
+        }
+        else if (data[i].FIELD_CD == "P01180") { 
+          ar_P01180.push(data[i]); 
+    
+        }
+      }
+      self.pipeDataSource3_P00170 = dews.ui.dataSource('pipeDataSource3_P00170',  { data: ar_P00170 });
+      self.pipeDataSource3_S00320 = dews.ui.dataSource('pipeDataSource3_S00320',  { data: ar_S00320 });
+      self.pipeDataSource3_P00200 = dews.ui.dataSource('pipeDataSource3_P00200',  { data: ar_P00200 });
+      self.pipeDataSource3_P01050 = dews.ui.dataSource('pipeDataSource3_P01050',  { data: ar_P01050 });
+      self.pipeDataSource3_P01180 = dews.ui.dataSource('pipeDataSource3_P01180',  { data: ar_P01180 });
+      self.pipeDataSource3 = dews.ui.dataSource('pipeDataSource3', { data: data });
+      
+    });
+    self.ynLocalDataSource1 = dews.ui.dataSource('ynLocalDataSource1', {
+      schema: {
+        model: {
+          fields: [
+            { field: 'SYSDEF_CD', editable: false, type: 'string' }, 
+            { field: 'SYSDEF_NM', editable: false, type: 'string' }
+          ]
+    
+        }
+      },
+      data: [{"SYSDEF_CD": "1","SYSDEF_NM": "Yes"},{"SYSDEF_CD": "2","SYSDEF_NM": "No"}]
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_ci_codeDtl_list'),{
+      async: false,
+      data: {
+          end_dt: '',
+          foreign_yn: '',
+          field_cd_pipe: 'S10070',
+          module_cd: 'FI',
+          syscode_yn: '',
+          keyword: '',
+          base_yn: ''
+      }
+    }).done(function (data) {
+      var ar_S10070 = new Array();
+    
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].FIELD_CD == "S10070") { 
+          ar_S10070.push(data[i]); 
+    
+        }
+      }
+      self.pipeDataSource4_S10070 = dews.ui.dataSource('pipeDataSource4_S10070',  { data: ar_S10070 });
+      self.pipeDataSource4 = dews.ui.dataSource('pipeDataSource4', { data: data });
+      
+    });
+    self.ds_basicInfo = dews.ui.dataSource('ds_basicInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_basicInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'CHCRT_NM2', editable: false, dataType: 'string' }, 
+            { field: 'ENG_LNM_NM2', editable: false, dataType: 'string' }, 
+            { field: 'ENG_ADDR2', editable: false, dataType: 'string' }, 
+            { field: 'OGRP_CD', editable: false, dataType: 'string' }, 
+            { field: 'SERI_CD', editable: false, dataType: 'string' }, 
+            { field: 'JKND_CD', editable: false, dataType: 'string' }, 
+            { field: 'TKG_CD', editable: false, dataType: 'string' }, 
+            { field: 'EVAL_CSF_CD', editable: false, dataType: 'string' }, 
+            { field: 'LAST_LEDU_CD', editable: false, dataType: 'string' }, 
+            { field: 'ATSCOLC_CD', editable: false, dataType: 'string' }, 
+            { field: 'BIRYYMM_DT', editable: false, dataType: 'string' }, 
+            { field: 'CNWKSTDR_DT', editable: false, dataType: 'string' }, 
+            { field: 'RES_UPPT_BIRYYMM_DT', editable: false, dataType: 'string' }, 
+            { field: 'ANCT_RECKN_DT', editable: false, dataType: 'string' }, 
+            { field: 'MLTPLC_STD_DT', editable: false, dataType: 'string' }, 
+            { field: 'LAST_MLTPLC_DT', editable: false, dataType: 'string' }, 
+            { field: 'UGRD_STD_DT', editable: false, dataType: 'string' }, 
+            { field: 'LAST_UGRD_DT', editable: false, dataType: 'string' }, 
+            { field: 'TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'DUTY_CD', editable: false, dataType: 'string' }, 
+            { field: 'PJT_CD', editable: false, dataType: 'string' }, 
+            { field: 'RMK_DC', editable: false, dataType: 'string' }, 
+            { field: 'RMK1_DC', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_payInfo = dews.ui.dataSource('ds_payInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_payInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'RES_UPPT_BIRYYMM_DT', editable: false, dataType: 'string' }, 
+            { field: 'SPO_CD', editable: false, dataType: 'string' }, 
+            { field: 'FAMILYTEY_CNT', editable: false, dataType: 'string' }, 
+            { field: 'LADY_HSHR_CD', editable: false, dataType: 'string' }, 
+            { field: 'FAMILYSIY_CNT', editable: false, dataType: 'string' }, 
+            { field: 'HSHR_YN_CD', editable: false, dataType: 'string' }, 
+            { field: 'DSB_YN_CD', editable: false, dataType: 'string' }, 
+            { field: 'DSPSN_CNT', editable: false, dataType: 'string' }, 
+            { field: 'DSPSN_FAML_CNT', editable: false, dataType: 'string' }, 
+            { field: 'FRNR_SINGL_TRTE_CD', editable: false, dataType: 'string' }, 
+            { field: 'CHILD_SUPP_DDCT_CNT', editable: false, dataType: 'string' }, 
+            { field: 'SPDM_TRST_CHIL_CNT', editable: false, dataType: 'string' }, 
+            { field: 'CHILD_BRP_TRGT_CNT', editable: false, dataType: 'string' }, 
+            { field: 'RESIDNT_CD', editable: false, dataType: 'string' }, 
+            { field: 'RESDNC_CD', editable: false, dataType: 'string' }, 
+            { field: 'RESDNC_NM', editable: false, dataType: 'string' }, 
+            { field: 'SMLMDM_EMPYMN_TAXXMPT_CD', editable: false, dataType: 'string' }, 
+            { field: 'DSPTC_LABOR_YN', editable: false, dataType: 'string' }, 
+            { field: 'SCEPREPAY_TRGT_CD', editable: false, dataType: 'string' }, 
+            { field: 'SCEPREPAY_AMT', editable: false, dataType: 'string' }, 
+            { field: 'REDUCT_APLY_FG', editable: false, dataType: 'string' }, 
+            { field: 'REDUCT_TRGT_FG', editable: false, dataType: 'string' }, 
+            { field: 'REDUCT_TP_CD', editable: false, dataType: 'string' }, 
+            { field: 'REDUCT_END_DT', editable: false, dataType: 'string' }, 
+            { field: 'PR_DRCT_WKR_CD', editable: false, dataType: 'string' }, 
+            { field: 'PR_FRMLA_M2500_YN', editable: false, dataType: 'string' }, 
+            { field: 'OCW_CD', editable: false, dataType: 'string' }, 
+            { field: 'NOABROD_CD', editable: false, dataType: 'string' }, 
+            { field: 'BANK1_CD', editable: false, dataType: 'string' }, 
+            { field: 'BANK1_NM', editable: false, dataType: 'string' }, 
+            { field: 'ACCNT1_NO', editable: false, dataType: 'string' }, 
+            { field: 'ACCNT1_NO_ORGN', editable: false, dataType: 'string' }, 
+            { field: 'ACCNT1_NO_ENC_CD', editable: false, dataType: 'string' }, 
+            { field: 'DPSR1_NM', editable: false, dataType: 'string' }, 
+            { field: 'BANK2_CD', editable: false, dataType: 'string' }, 
+            { field: 'BANK2_NM', editable: false, dataType: 'string' }, 
+            { field: 'ACCNT2_NO', editable: false, dataType: 'string' }, 
+            { field: 'ACCNT2_NO_ORGN', editable: false, dataType: 'string' }, 
+            { field: 'ACCNT2_NO_ENC_CD', editable: false, dataType: 'string' }, 
+            { field: 'DPSR2_NM', editable: false, dataType: 'string' }, 
+            { field: 'NPNCRRENNC_CD', editable: false, dataType: 'string' }, 
+            { field: 'NPN_AMT', editable: false, dataType: 'string' }, 
+            { field: 'HLTHINS_INS_CD', editable: false, dataType: 'string' }, 
+            { field: 'HLTHINS_AMT', editable: false, dataType: 'string' }, 
+            { field: 'EMPYINSFO_TARGNO_CD', editable: false, dataType: 'string' }, 
+            { field: 'ODSN_LNGTRRCPER_INSU_AMT', editable: false, dataType: 'string' }, 
+            { field: 'INDUSAC_INSU_TRGT_CD', editable: false, dataType: 'string' }, 
+            { field: 'PVTSKLPN_AMT', editable: false, dataType: 'string' }, 
+            { field: 'ODSN_RCPER_RDUCTTRGET_CD', editable: false, dataType: 'string' }, 
+            { field: 'HLTHINS_NO', editable: false, dataType: 'string' }, 
+            { field: 'ACCTTYPE_CD', editable: false, dataType: 'string' }, 
+            { field: 'BG_TP_CD', editable: false, dataType: 'string' }, 
+            { field: 'BG_TP_NM', editable: false, dataType: 'string' }, 
+            { field: 'LOCTAX_APLCNTAR_CD', editable: false, dataType: 'string' }, 
+            { field: 'ANIC_AMT', editable: false, dataType: 'string' }, 
+            { field: 'MNTSLR_AMT', editable: false, dataType: 'string' }, 
+            { field: 'FSTCLSS_AMT', editable: false, dataType: 'string' }, 
+            { field: 'TMPAY_AMT', editable: false, dataType: 'string' }, 
+            { field: 'APNTC_EXPY_DT', editable: false, dataType: 'string' }, 
+            { field: 'TAXAMT_DDCT_RT', editable: false, dataType: 'string' }, 
+            { field: 'EMPYINSFO_AMT', editable: false, dataType: 'string' }, 
+            { field: 'EMPYINSFO_NO', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_empInfo = dews.ui.dataSource('ds_empInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_empInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'COMPANY_CD', editable: false, dataType: 'string' }, 
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'CC_CD', editable: false, dataType: 'string' }, 
+            { field: 'CC_NM', editable: false, dataType: 'string' }, 
+            { field: 'LAST_LEDU_CD', editable: false, dataType: 'string' }, 
+            { field: 'INHBTNT_POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'RES_POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'BASE_RES_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'DTL_RES_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'CUR_POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'BASE_CUR_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'DTL_CUR_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'PRMDMCL_POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'PRMDMCL_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'DTL_PRMDMCL_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'EMGNC_CNTC_NO', editable: false, dataType: 'string' }, 
+            { field: 'BIRYYMM_DT', editable: false, dataType: 'string' }, 
+            { field: 'ATSCOLC_CD', editable: false, dataType: 'string' }, 
+            { field: 'EMAIL_NM', editable: false, dataType: 'string' }, 
+            { field: 'PJT_CD', editable: false, dataType: 'string' }, 
+            { field: 'PJT_NM', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_GRD_CD', editable: false, dataType: 'string' }, 
+            { field: 'BLDTP_CD', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_TRGT_CD', editable: false, dataType: 'string' }, 
+            { field: 'MPP_DC', editable: false, dataType: 'string' }, 
+            { field: 'MDHT_DC', editable: false, dataType: 'string' }, 
+            { field: 'MTRSC_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'EXMT_REASON_CD', editable: false, dataType: 'string' }, 
+            { field: 'HSHR_NM', editable: false, dataType: 'string' }, 
+            { field: 'HSHR_REL_CD', editable: false, dataType: 'string' }, 
+            { field: 'LAYOFF_DT', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_REL_CD', editable: false, dataType: 'string' }, 
+            { field: 'DSB_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'LIVE_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'ENST_DT', editable: false, dataType: 'string' }, 
+            { field: 'WGHT_QT', editable: false, dataType: 'string' }, 
+            { field: 'STTR_QT', editable: false, dataType: 'string' }, 
+            { field: 'SGHT_LEFT_QT', editable: false, dataType: 'string' }, 
+            { field: 'SGHT_RGHT_QT', editable: false, dataType: 'string' }, 
+            { field: 'HOB_CD', editable: false, dataType: 'string' }, 
+            { field: 'HOB_CD_NM', editable: false, dataType: 'string' }, 
+            { field: 'DSB_GRD_CD', editable: false, dataType: 'string' }, 
+            { field: 'ORGIN_CITY_CD', editable: false, dataType: 'string' }, 
+            { field: 'MRRG_DT', editable: false, dataType: 'string' }, 
+            { field: 'AMFT_CD', editable: false, dataType: 'string' }, 
+            { field: 'DMBLZ_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'JNCO_EXTG_CNT', editable: false, dataType: 'string' }, 
+            { field: 'BMS_CD', editable: false, dataType: 'string' }, 
+            { field: 'RLGN_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'JNCO_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'HIRE_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'SSN_NO', editable: false, dataType: 'string' }, 
+            { field: 'MLH_CD', editable: false, dataType: 'string' }, 
+            { field: 'FRGNR_CD', editable: false, dataType: 'string' }, 
+            { field: 'FRNR_INSERT_NO', editable: false, dataType: 'string' }, 
+            { field: 'NTNL_CD', editable: false, dataType: 'string' }, 
+            { field: 'NTNL_NM', editable: false, dataType: 'string' }, 
+            { field: 'MLTPLC_STD_DT', editable: false, dataType: 'string' }, 
+            { field: 'UGRD_STD_DT', editable: false, dataType: 'string' }, 
+            { field: 'ENG_ADDR2', editable: false, dataType: 'string' }, 
+            { field: 'ENG_DTL_ADDR2', editable: false, dataType: 'string' }, 
+            { field: 'RETR_REASON_CD', editable: false, dataType: 'string' }, 
+            { field: 'RETR_REASON_NM', editable: false, dataType: 'string' }, 
+            { field: 'RETR_DTL_REASON_DC', editable: false, dataType: 'string' }, 
+            { field: 'SCHL_NM', editable: false, dataType: 'string' }, 
+            { field: 'HCERT_EXPY_DT', editable: false, dataType: 'string' }, 
+            { field: 'DSB_YN_CD', editable: false, dataType: 'string' }, 
+            { field: 'DSPSN_INSERT_DT', editable: false, dataType: 'string' }, 
+            { field: 'DSB_TMNN_DT', editable: false, dataType: 'string' }, 
+            { field: 'DSB_TERM_START_DT', editable: false, dataType: 'string' }, 
+            { field: 'DSB_TERM_END_DT', editable: false, dataType: 'string' }, 
+            { field: 'NATMERAT_CD', editable: false, dataType: 'string' }, 
+            { field: 'NATMERGRAD_CD', editable: false, dataType: 'string' }, 
+            { field: 'NATMERREGI_DT', editable: false, dataType: 'string' }, 
+            { field: 'NATMERASSM_CD', editable: false, dataType: 'string' }, 
+            { field: 'NATIMERTRM_DT', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_INSERT_DT', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_TMNN_DT', editable: false, dataType: 'string' }, 
+            { field: 'FRNR_INSERT_DT', editable: false, dataType: 'string' }, 
+            { field: 'STAY_QUA_CD', editable: false, dataType: 'string' }, 
+            { field: 'STAY_TERM_START_DT', editable: false, dataType: 'string' }, 
+            { field: 'STAY_TERM_END_DT', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_TRGT_FG_DC', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_DC', editable: false, dataType: 'string' }, 
+            { field: 'MERITER_REL_CD', editable: false, dataType: 'string' }, 
+            { field: 'CNWKSTDR_DT', editable: false, dataType: 'string' }, 
+            { field: 'LCNS_EXPY_DT', editable: false, dataType: 'string' }, 
+            { field: 'LCNS_NO', editable: false, dataType: 'string' }, 
+            { field: 'VTRN_NO', editable: false, dataType: 'string' }, 
+            { field: 'DSB_ACK_DT', editable: false, dataType: 'string' }, 
+            { field: 'RESDNC_CD', editable: false, dataType: 'string' }, 
+            { field: 'RESDNC_NM', editable: false, dataType: 'string' }, 
+            { field: 'DSPSN_YN', editable: false, dataType: 'string' }, 
+            { field: 'HOB_NM', editable: false, dataType: 'string' }, 
+            { field: 'TLNT_CD', editable: false, dataType: 'string' }, 
+            { field: 'TLNT_CD_NM', editable: false, dataType: 'string' }, 
+            { field: 'TLNT_NM', editable: false, dataType: 'string' }, 
+            { field: 'MRRG_YN', editable: false, dataType: 'string' }, 
+            { field: 'ANCT_RECKN_DT', editable: false, dataType: 'string' }, 
+            { field: 'ANCT_ADDNUM_DY', editable: false, dataType: 'string' }, 
+            { field: 'DSB_TP', editable: false, dataType: 'string' }, 
+            { field: 'RMK_DC', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_ID', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_IP', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_MCADDR_NM', editable: false, dataType: 'string' }, 
+            { field: 'INSERT_DTS', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_ID', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_IP', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_MCADDR_NM', editable: false, dataType: 'string' }, 
+            { field: 'UPDATE_DTS', editable: false, dataType: 'string' }, 
+            { field: 'ENG_POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'TEL2_NO', editable: false, dataType: 'string' }, 
+            { field: 'COSS_CD', editable: false, dataType: 'string' }, 
+            { field: 'ORIGIN_POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'ORIGIN_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'DTL_ORIGIN_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'HOPE_DUTY1_CD', editable: false, dataType: 'string' }, 
+            { field: 'HOPE_DUTY2_CD', editable: false, dataType: 'string' }, 
+            { field: 'HOPE_DUTY1_NM', editable: false, dataType: 'string' }, 
+            { field: 'HOPE_DUTY2_NM', editable: false, dataType: 'string' }, 
+            { field: 'EVAL_CSF_CD', editable: false, dataType: 'string' }, 
+            { field: 'EVAL_CSF_NM', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_familyInfo = dews.ui.dataSource('ds_familyInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_familyInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'COMPANY_CD', editable: false, dataType: 'string' }, 
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'RES_NO', editable: false, dataType: 'string' }, 
+            { field: 'FAML_NM', editable: false, dataType: 'string' }, 
+            { field: 'REL_CD', editable: false, dataType: 'string' }, 
+            { field: 'CHILD_SQ', editable: false, dataType: 'string' }, 
+            { field: 'LAST_LEDU_CD', editable: false, dataType: 'string' }, 
+            { field: 'FRGNR_CD', editable: false, dataType: 'string' }, 
+            { field: 'ATSCOLC_CD', editable: false, dataType: 'string' }, 
+            { field: 'DSB_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'FAMILYALL_YN', editable: false, dataType: 'string' }, 
+            { field: 'YREND_TRGT_YN', editable: false, dataType: 'string' }, 
+            { field: 'BASE_DDCT_TRGT_YN', editable: false, dataType: 'string' }, 
+            { field: 'DSPSN_YN', editable: false, dataType: 'string' }, 
+            { field: 'BRTHDY_TRGT_YN', editable: false, dataType: 'string' }, 
+            { field: 'TWINS_YN', editable: false, dataType: 'string' }, 
+            { field: 'JOB_NM', editable: false, dataType: 'string' }, 
+            { field: 'OFC_NM', editable: false, dataType: 'string' }, 
+            { field: 'POSI_NM', editable: false, dataType: 'string' }, 
+            { field: 'BIRYYMM_DT', editable: false, dataType: 'string' }, 
+            { field: 'RES_UPPT_BIRYYMM_DT', editable: false, dataType: 'string' }, 
+            { field: 'DEATH_YN', editable: false, dataType: 'string' }, 
+            { field: 'RMK_DC', editable: false, dataType: 'string' }, 
+            { field: 'INVLV_REL_YN', editable: false, dataType: 'string' }, 
+            { field: 'INVLV_REL_CD', editable: false, dataType: 'string' }, 
+            { field: 'INVLV_REL_NM', editable: false, dataType: 'string' }, 
+            { field: 'INVLV_EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'INVLV_KOR_NM', editable: false, dataType: 'string' }, 
+            { field: 'FRNR_INSERT_NO', editable: false, dataType: 'string' }, 
+            { field: 'SEX_CD', editable: false, dataType: 'string' }, 
+            { field: 'ECLST_NM', editable: false, dataType: 'string' }, 
+            { field: 'LTGT_YN', editable: false, dataType: 'string' }, 
+            { field: 'TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'ADDR_DC', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_schocareInfo = dews.ui.dataSource('ds_schocareInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_schocareInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'SCHL_CD', editable: false, dataType: 'string' }, 
+            { field: 'SCHL_NM', editable: false, dataType: 'string' }, 
+            { field: 'SCHL_NM_TEXT', editable: false, dataType: 'string' }, 
+            { field: 'SCHL_CD_X10005', editable: false, dataType: 'string' }, 
+            { field: 'SCHL_NM_X10005', editable: false, dataType: 'string' }, 
+            { field: 'MTRC_DT', editable: false, dataType: 'string' }, 
+            { field: 'GRDT_DT', editable: false, dataType: 'string' }, 
+            { field: 'LEDU_CD', editable: false, dataType: 'string' }, 
+            { field: 'MJR_CD_X10005', editable: false, dataType: 'string' }, 
+            { field: 'MJR_NM_X10005', editable: false, dataType: 'string' }, 
+            { field: 'PL_MJR_CD_X10005', editable: false, dataType: 'string' }, 
+            { field: 'PL_MJR_NM_X10005', editable: false, dataType: 'string' }, 
+            { field: 'MJR_CD', editable: false, dataType: 'string' }, 
+            { field: 'MJR_NM', editable: false, dataType: 'string' }, 
+            { field: 'MJR_NM_TEXT', editable: false, dataType: 'string' }, 
+            { field: 'GRDT_YN_CD', editable: false, dataType: 'string' }, 
+            { field: 'LAST_LEDU_YN', editable: false, dataType: 'string' }, 
+            { field: 'JNCO_LEDU_YN', editable: false, dataType: 'string' }, 
+            { field: 'LEDU_PT', editable: false, dataType: 'string' }, 
+            { field: 'GRADSCH_FG', editable: false, dataType: 'string' }, 
+            { field: 'FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'NATION_CD', editable: false, dataType: 'string' }, 
+            { field: 'NATION_NM', editable: false, dataType: 'string' }, 
+            { field: 'LOCPLC_CD', editable: false, dataType: 'string' }, 
+            { field: 'LOCPLC_NM', editable: false, dataType: 'string' }, 
+            { field: 'SCHL_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'SCHL_FG_NM', editable: false, dataType: 'string' }, 
+            { field: 'SUBSPECL_CD', editable: false, dataType: 'string' }, 
+            { field: 'SUBSPECL_NM', editable: false, dataType: 'string' }, 
+            { field: 'SUBSPECL_NM_TEXT', editable: false, dataType: 'string' }, 
+            { field: 'DGRE_NO', editable: false, dataType: 'string' }, 
+            { field: 'DGRE_CD', editable: false, dataType: 'string' }, 
+            { field: 'DGRE_NM', editable: false, dataType: 'string' }, 
+            { field: 'EDU_TM_DY', editable: false, dataType: 'string' }, 
+            { field: 'TM_UNIT_CD', editable: false, dataType: 'string' }, 
+            { field: 'DISSERT_TITL_NM', editable: false, dataType: 'string' }, 
+            { field: 'PL_MJR_CD', editable: false, dataType: 'string' }, 
+            { field: 'PL_MJR_NM', editable: false, dataType: 'string' }, 
+            { field: 'PL_MJR_NM_TEXT', editable: false, dataType: 'string' }, 
+            { field: 'DMJ_CD', editable: false, dataType: 'string' }, 
+            { field: 'DMJ_NM', editable: false, dataType: 'string' }, 
+            { field: 'DMJ_NM_TEXT', editable: false, dataType: 'string' }, 
+            { field: 'INTLTSH_CD', editable: false, dataType: 'string' }, 
+            { field: 'INTLTSH_NM', editable: false, dataType: 'string' }, 
+            { field: 'INTLTSH_NM_TEXT', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_licenseInfo = dews.ui.dataSource('ds_licenseInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_licenseInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'ACQS_DT', editable: false, dataType: 'string' }, 
+            { field: 'QUA_CARD_CD', editable: false, dataType: 'string' }, 
+            { field: 'QUA_CARD_NM', editable: false, dataType: 'string' }, 
+            { field: 'QUA_CARD_NM_TEXT', editable: false, dataType: 'string' }, 
+            { field: 'QUA_GRD_CD', editable: false, dataType: 'string' }, 
+            { field: 'QUA_NO', editable: false, dataType: 'string' }, 
+            { field: 'QUA_EPAY_YN', editable: false, dataType: 'string' }, 
+            { field: 'VLID_DT', editable: false, dataType: 'string' }, 
+            { field: 'ISSUE_ISTN_CD', editable: false, dataType: 'string' }, 
+            { field: 'ISSUE_ISTN_NM', editable: false, dataType: 'string' }, 
+            { field: 'RMK_DC', editable: false, dataType: 'string' }, 
+            { field: 'QUA_PRGS_CD', editable: false, dataType: 'string' }, 
+            { field: 'ACQS_NBTM', editable: false, dataType: 'string' }, 
+            { field: 'APPNT_CD', editable: false, dataType: 'string' }, 
+            { field: 'UNT_CD', editable: false, dataType: 'string' }, 
+            { field: 'GRD_CNT', editable: false, dataType: 'string' }, 
+            { field: 'BWRK_SHAPE_CD', editable: false, dataType: 'string' }, 
+            { field: 'BWRK_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'START_DT', editable: false, dataType: 'string' }, 
+            { field: 'END_DT', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_clubInfo = dews.ui.dataSource('ds_clubInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_clubInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'CLUB_CD', editable: false, dataType: 'string' }, 
+            { field: 'CLUB_NM', editable: false, dataType: 'string' }, 
+            { field: 'JOIN_DT', editable: false, dataType: 'string' }, 
+            { field: 'DROT_DT', editable: false, dataType: 'string' }, 
+            { field: 'CLUB_TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'POSI_NM', editable: false, dataType: 'string' }, 
+            { field: 'CLUB_CHRTR_DC', editable: false, dataType: 'string' }, 
+            { field: 'DUES_AMT', editable: false, dataType: 'string' }, 
+            { field: 'ODTY_CD', editable: false, dataType: 'string' }, 
+            { field: 'ODTY_NM', editable: false, dataType: 'string' }, 
+            { field: 'PAYAPPLC_START_YM', editable: false, dataType: 'string' }, 
+            { field: 'PAYAPPLC_END_YM', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_recommendInfo = dews.ui.dataSource('ds_recommendInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_recommendInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'RECOMEN_NM', editable: false, dataType: 'string' }, 
+            { field: 'REL_CD', editable: false, dataType: 'string' }, 
+            { field: 'REL_NM', editable: false, dataType: 'string' }, 
+            { field: 'RECOMEN_OFC_NM', editable: false, dataType: 'string' }, 
+            { field: 'POSI_NM', editable: false, dataType: 'string' }, 
+            { field: 'TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'HOUS_TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'RMK_DC', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_guaranteeInfo = dews.ui.dataSource('ds_guaranteeInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_guaranteeInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'GRNTE_START_DT', editable: false, dataType: 'string' }, 
+            { field: 'GRNTE_END_DT', editable: false, dataType: 'string' }, 
+            { field: 'REL_CD', editable: false, dataType: 'string' }, 
+            { field: 'GRNTR_NM', editable: false, dataType: 'string' }, 
+            { field: 'RES_NO', editable: false, dataType: 'string' }, 
+            { field: 'TEL_NO', editable: false, dataType: 'string' }, 
+            { field: 'CUR_ADDR', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_guarinsuInfo = dews.ui.dataSource('ds_guarinsuInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_guarinsuInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'GRNTE_START_DT', editable: false, dataType: 'string' }, 
+            { field: 'GRNTE_END_DT', editable: false, dataType: 'string' }, 
+            { field: 'INSU_COMPANY_CD', editable: false, dataType: 'string' }, 
+            { field: 'GRNTE_AMT', editable: false, dataType: 'string' }, 
+            { field: 'GRNTE_INSU_AMT', editable: false, dataType: 'string' }, 
+            { field: 'INSU_NO', editable: false, dataType: 'string' }, 
+            { field: 'BOND_NO', editable: false, dataType: 'string' }, 
+            { field: 'JOIN_YN', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_visaInfo = dews.ui.dataSource('ds_visaInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_visaInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'VISA_NO', editable: false, dataType: 'string' }, 
+            { field: 'VISA_CD', editable: false, dataType: 'string' }, 
+            { field: 'IEMP_DT', editable: false, dataType: 'string' }, 
+            { field: 'EXPRTN_DT', editable: false, dataType: 'string' }, 
+            { field: 'NATION_CD', editable: false, dataType: 'string' }, 
+            { field: 'NATION_NM', editable: false, dataType: 'string' }, 
+            { field: 'IEMP_ISTN_NM', editable: false, dataType: 'string' }, 
+            { field: 'PSPT_CD', editable: false, dataType: 'string' }, 
+            { field: 'USE_PURPSE_DC', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_forelangInfo = dews.ui.dataSource('ds_forelangInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_forelangInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'LANG_FG_CD', editable: false, dataType: 'string' }, 
+            { field: 'LANG_FG_NM', editable: false, dataType: 'string' }, 
+            { field: 'LANG_CD', editable: false, dataType: 'string' }, 
+            { field: 'LANG_NM', editable: false, dataType: 'string' }, 
+            { field: 'APYEXM_DT', editable: false, dataType: 'string' }, 
+            { field: 'LANG_PT', editable: false, dataType: 'number' }, 
+            { field: 'TRIAL_ISTN_NM', editable: false, dataType: 'string' }, 
+            { field: 'LANG_GRD_CD', editable: false, dataType: 'string' }, 
+            { field: 'LANG_GRD_NM', editable: false, dataType: 'string' }, 
+            { field: 'LANG_ABLT_DC', editable: false, dataType: 'string' }, 
+            { field: 'RMK_DC', editable: false, dataType: 'string' }, 
+            { field: 'REQ_DT', editable: false, dataType: 'string' }, 
+            { field: 'LANG_TEST_FG', editable: false, dataType: 'string' }, 
+            { field: 'VLID_DT', editable: false, dataType: 'string' }, 
+            { field: 'LANG2_PT', editable: false, dataType: 'number' }, 
+            { field: 'LANG3_PT', editable: false, dataType: 'number' }, 
+            { field: 'LANG4_PT', editable: false, dataType: 'number' }, 
+            { field: 'LANG5_PT', editable: false, dataType: 'number' }, 
+            { field: 'LANG_INCNPAY_PAY_AMT', editable: false, dataType: 'number' }, 
+            { field: 'LANG_INCNPAY_PAY_DT', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_projectInfo = dews.ui.dataSource('ds_projectInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_projectInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'PJT_NO', editable: false, dataType: 'string' }, 
+            { field: 'PJT_NM', editable: false, dataType: 'string' }, 
+            { field: 'START_DT', editable: false, dataType: 'string' }, 
+            { field: 'END_DT', editable: false, dataType: 'string' }, 
+            { field: 'COMPANY_NM', editable: false, dataType: 'string' }, 
+            { field: 'ROLE_DC', editable: false, dataType: 'string' }, 
+            { field: 'OTCM_DC', editable: false, dataType: 'string' }, 
+            { field: 'RMK_DC', editable: false, dataType: 'string' }, 
+            { field: 'WBS_NO', editable: false, dataType: 'string' }, 
+            { field: 'WBS_NM', editable: false, dataType: 'string' }, 
+            { field: 'WBS_NO_X10005', editable: false, dataType: 'string' }, 
+            { field: 'WBS_NM_X10005', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_careerInfo = dews.ui.dataSource('ds_careerInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_careerInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'NO_SQ', editable: false, dataType: 'string' }, 
+            { field: 'COMPANY_NM', editable: false, dataType: 'string' }, 
+            { field: 'JNCO_DT', editable: false, dataType: 'string' }, 
+            { field: 'RETR_DT', editable: false, dataType: 'string' }, 
+            { field: 'CNWKPD_DT', editable: false, dataType: 'string' }, 
+            { field: 'CNWKPD_DT_MASKED', editable: false, dataType: 'string' }, 
+            { field: 'POSI_NM', editable: false, dataType: 'string' }, 
+            { field: 'PSTN_NM', editable: false, dataType: 'string' }, 
+            { field: 'ODTY_NM', editable: false, dataType: 'string' }, 
+            { field: 'RSPT_TSK_NM', editable: false, dataType: 'string' }, 
+            { field: 'RETR_REASON_DC', editable: false, dataType: 'string' }, 
+            { field: 'CARREC_YN', editable: false, dataType: 'string' }, 
+            { field: 'CWRK_ACK_RT', editable: false, dataType: 'number' }, 
+            { field: 'ACK_TERM_DT', editable: false, dataType: 'string' }, 
+            { field: 'ACK_TERM_DT_MASKED', editable: false, dataType: 'string' }, 
+            { field: 'RMK_DC', editable: false, dataType: 'string' }, 
+            { field: 'DEPT_NM', editable: false, dataType: 'string' }, 
+            { field: 'YEARSLARY_AMT', editable: false, dataType: 'number' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_otherInfo = dews.ui.dataSource('ds_otherInfo', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'Pamphm00700Service', 'pamphm00700_otherInfo'),
+          data: function () {
+            return {
+              emp_no: (self.gd_empList.select() > -1 ) ? self.gd_empList.dataItem(self.gd_empList.select()).EMP_NO : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'TEL2_NO', editable: false, dataType: 'string' }, 
+            { field: 'BANK3_CD', editable: false, dataType: 'string' }, 
+            { field: 'BANK3_NM', editable: false, dataType: 'string' }, 
+            { field: 'ACCNT3_NO', editable: false, dataType: 'string' }, 
+            { field: 'DPSR3_NM', editable: false, dataType: 'string' }, 
+            { field: 'PRMDMCL_ADDR', editable: false, dataType: 'string' }, 
+            { field: 'PRMDMCL_POST_NO', editable: false, dataType: 'string' }, 
+            { field: 'DTL_PRMDMCL_ADDR', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.ds_ppcond = dews.ui.dataSource('ds_ppcond', {
+      schema: {
+        model: {
+          fields: [
+            { field: 'value', editable: false, type: 'string' }, 
+            { field: 'test', editable: false, type: 'string' }
+          ]
+    
+        }
+      },
+      data: [
+      {
+       value: "1",
+       test : "미만"
+      },
+      {
+       value: "2",
+       test : "초과"
+      }
+    ]
+    });
+    self.ds_month = dews.ui.dataSource('ds_month', {
+      schema: {
+        model: {
+          fields: [
+            { field: 'value', editable: false, type: 'string' }, 
+            { field: 'test', editable: false, type: 'string' }
+          ]
+    
+        }
+      },
+      data: [
+      {
+       value: "01",
+       test : "01"
+      },
+      {
+       value: "02",
+       test : "02"
+      },
+      {
+       value: "03",
+       test : "03"
+      },
+      {
+       value: "04",
+       test : "04"
+      },
+      {
+       value: "05",
+       test : "05"
+      },
+      {
+       value: "06",
+       test : "06"
+      },
+      {
+       value: "07",
+       test : "07"
+      },
+      {
+       value: "08",
+       test : "08"
+      },
+      {
+       value: "09",
+       test : "09"
+      },
+      {
+       value: "10",
+       test : "10"
+      },
+      {
+       value: "11",
+       test : "11"
+      },
+      {
+       value: "12",
+       test : "12"
+      }
+    ]
+    });
+    self.ds_visaCd = dews.ui.dataSource('ds_visaCd', {
+      schema: {
+        model: {
+          fields: [
+            { field: 'SYSDEF_CD', editable: false, type: 'string' }, 
+            { field: 'SYSDEF_NM', editable: false, type: 'string' }
+          ]
+    
+        }
+      },
+      data: [
+      {
+       SYSDEF_CD : '1',
+       SYSDEF_NM : '여권'
+      },
+      {
+       SYSDEF_CD : '2',
+       SYSDEF_NM : '비자'
+      }
+    ]
+    });
+    
+    
+    dews.ui.mainbuttons.localize.disable(true);
+    dews.ui.mainbuttons.etnapproval.hide();
+    dews.ui.mainbuttons.search.click(/*e983281a-a3d8-4a28-ac08-8f6c614a5e82*/ function() {
+        dews.ui.loading.show();
+        self.ds_empList.read();
+    });
+    self.$btn_restore.on('click', /*5cc26255-295e-4522-bb79-5e3ecf55da89*/ function() {
+      // openDialog("restore");
+    
+      // 2021-01-13 복원시 전체 복원으로 변경
+      dews.ui.loading.show();
+      dews.api.post(dews.url.getApiUrl("HR", "Pamphm00700Service", "pamphm00700_move"), {
+        async: false,
+        data: {
+          state : "restore",
+          ori_disposal : "",
+          moveData : JSON.stringify(self.gd_empList.getCheckedRows())
+        }
+      }).done(function (data) {
+        dews.ui.mainbuttons.search.click();
+      }).fail(function(xhr, status, error) {
+        dews.error(error);
+        dews.ui.loading.hide();
+      });
+    });
+    self.$btn_disposal.on('click', /*d7110bf1-1847-46d3-a644-75d3d8d2f675*/ function() {
+      openDialog("disposal");
+    });
+    self.cond_ppCond_ddl.setDataSource(self.ds_ppcond);
+    self.cond_month_ddl.setDataSource(self.ds_month);
+    dews.ui.grid(self.$gd_empList, {
+      dataSource: self.ds_empList,
+      height: 345,
+      selectable: true,
+      sortable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다.',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'EMP_NO',
+          title: '사번',
+          width: 100,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_SD_PRTNR_EMP_S',
+            codeField: 'EMP_NO',
+            textField: 'KOR_NM',
+            helpTitle: '영업담당자 도움창',
+            helpSize: 'big'
+          }
+        },
+        {
+          field: 'KOR_NM',
+          title: '성명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'KEEP_DC',
+          title: '보존중기간',
+          width: 120,
+          align: 'left'
+        },
+        {
+          field: 'RES_NO',
+          title: '주민등록번호',
+          width: 120,
+          formats: {
+            type: 'mask',
+            format: '######-#######'
+          }
+        },
+        {
+          field: 'SEX_CD',
+          title: '성별',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00630,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'BIZAREA_CD',
+          title: '사업장코드',
+          width: 90,
+          visible: false,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_MA_BIZAREA_MST_S',
+            codeField: 'BIZAREA_CD',
+            textField: 'BIZAREA_NM',
+            helpTitle: '사업장 도움창',
+            helpSize: 'medium'
+          }
+        },
+        {
+          field: 'BIZAREA_NM',
+          title: '사업장',
+          width: 100,
+          align: 'left'
+        },
+        {
+          field: 'DEPT_CD',
+          title: '부서코드',
+          width: 90,
+          visible: false,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_MA_DEPT_MST_S',
+            codeField: 'DEPT_CD',
+            textField: 'DEPT_NM',
+            helpTitle: '부서 도움창',
+            helpSize: 'big'
+          }
+        },
+        {
+          field: 'DEPT_NM',
+          title: '부서',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'GROUPECNY_DT',
+          title: '그룹입사일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'JNCO_DT',
+          title: '입사일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'RETIRESTDR_DT',
+          title: '퇴직기산일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'RETR_DT',
+          title: '퇴직일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'RETR_REASON_CD',
+          title: '퇴직사유',
+          width: 100,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01100,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'EMP_TP',
+          title: '사원구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00220,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'FRGNR_CD',
+          title: '내외국인',
+          width: 100,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource3_P00200,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'NTNL_CD',
+          title: '국적',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource3_P00170,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'FRNR_INSERT_NO',
+          title: '외국인식별번호',
+          width: 120
+        },
+        {
+          field: 'POSI_CD',
+          title: '직위',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00640,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'PSTN_CD',
+          title: '직급',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00650,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'SLST_CD',
+          title: '호봉',
+          width: 80,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_HR_PAYSTEP_INFO_S',
+            codeField: 'SLST_CD',
+            textField: 'SLST_CD',
+            helpTitle: '호봉도움창',
+            helpSize: 'medium'
+          }
+        },
+        {
+          field: 'ODTY_CD',
+          title: '직책',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00980,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DUTY_CD',
+          title: '직무',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00920,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'EMGNC_CNTC_NO',
+          title: '비상연락',
+          width: 100
+        },
+        {
+          field: 'MAIL_DC',
+          title: '메일주소',
+          width: 120,
+          align: 'left'
+        },
+        {
+          field: '_uid',
+          title: '_uid',
+          width: 60,
+          visible: false
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_basicInfo, {
+      dataSource: self.ds_basicInfo,
+      rowNo: false,
+      selectable: true,
+      sortable: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'CHCRT_NM2',
+          title: '한자성명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'ENG_LNM_NM2',
+          title: '영문성명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'ENG_ADDR2',
+          title: '영문주소',
+          width: 100
+        },
+        {
+          field: 'OGRP_CD',
+          title: '직군',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00660,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'SERI_CD',
+          title: '직렬',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01740,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'JKND_CD',
+          title: '직종',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00990,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'TKG_CD',
+          title: '근무조',
+          width: 80
+        },
+        {
+          field: 'EVAL_CSF_CD',
+          title: '평가구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P07330,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'LAST_LEDU_CD',
+          title: '최종학력',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00670,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'ATSCOLC_CD',
+          title: '양음구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01020,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'BIRYYMM_DT',
+          title: '생년월일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'CNWKSTDR_DT',
+          title: '근속기준일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'RES_UPPT_BIRYYMM_DT',
+          title: '주민등록상\n생년월일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'ANCT_RECKN_DT',
+          title: '연차기산일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'MLTPLC_STD_DT',
+          title: '승호예정일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'LAST_MLTPLC_DT',
+          title: '최종승호일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'UGRD_STD_DT',
+          title: '승급예정일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'LAST_UGRD_DT',
+          title: '최종승급일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'TEL_NO',
+          title: '전화번호',
+          width: 100,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_ZR34_10005,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DUTY_CD',
+          title: '직무이력',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00920,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'PJT_CD',
+          title: '프로젝트',
+          width: 80
+        },
+        {
+          field: 'RMK_DC',
+          title: '비고',
+          width: 120,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P03240,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'RMK1_DC',
+          title: '비고1내역',
+          width: 120,
+          align: 'left'
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_payInfo, {
+      dataSource: self.ds_payInfo,
+      rowNo: false,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'SPO_CD',
+          title: '배우자공제',
+          width: 90
+        },
+        {
+          field: 'FAMILYTEY_CNT',
+          title: '부양가족\n20세',
+          width: 90
+        },
+        {
+          field: 'LADY_HSHR_CD',
+          title: '부녀자공제',
+          width: 90
+        },
+        {
+          field: 'FAMILYSIY_CNT',
+          title: '부양가족\n60세',
+          width: 90
+        },
+        {
+          field: 'HSHR_YN_CD',
+          title: '세대주여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DSPSN_FAML_CNT',
+          title: '장애인가족수',
+          width: 90
+        },
+        {
+          field: 'SPDM_TRST_CHIL_CNT',
+          title: '수급자/\n위탁아동',
+          width: 90
+        },
+        {
+          field: 'CHILD_SUPP_DDCT_CNT',
+          title: '다자녀\n추가공제',
+          width: 90
+        },
+        {
+          field: 'CHILD_BRP_TRGT_CNT',
+          title: '다자녀\n추가공제',
+          width: 90,
+          visible: false
+        },
+        {
+          field: 'DSPTC_LABOR_YN',
+          title: '파견근로여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'FRNR_SINGL_TRTE_CD',
+          title: '외국인\n단일세율',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00040,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'OCW_CD',
+          title: '국외근로여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'NOABROD_CD',
+          title: '국외근로비과세',
+          width: 150,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01550,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'FLAG_CD'
+          }
+        },
+        {
+          field: 'SCEPREPAY_TRGT_CD',
+          title: '학자금상환대상',
+          width: 80
+        },
+        {
+          field: 'SCEPREPAY_AMT',
+          title: '학자금상환액',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'RESIDNT_CD',
+          title: '거주자여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'RESDNC_NM',
+          title: '거주지국',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'NPNCRRENNC_CD',
+          title: '국민연금해당',
+          width: 90
+        },
+        {
+          field: 'NPN_AMT',
+          title: '국민(사학)\n연금료',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'HLTHINS_INS_CD',
+          title: '건강보험해당',
+          width: 90
+        },
+        {
+          field: 'HLTHINS_AMT',
+          title: '건강보험료',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'EMPYINSFO_TARGNO_CD',
+          title: '고용보험해당',
+          width: 90
+        },
+        {
+          field: 'EMPYINSFO_AMT',
+          title: '고용보험료',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'ODSN_RCPER_RDUCTTRGET_CD',
+          title: '노인장기요양경감',
+          width: 90
+        },
+        {
+          field: 'ODSN_LNGTRRCPER_INSU_AMT',
+          title: '노인장기요양보험료',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'INDUSAC_INSU_TRGT_CD',
+          title: '산재보험해당',
+          width: 90
+        },
+        {
+          field: 'APNTC_EXPY_DT',
+          title: '수습종료일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'REDUCT_TRGT_FG',
+          title: '감면대상자',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P05200,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'REDUCT_END_DT',
+          title: '감면종료일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'REDUCT_APLY_FG',
+          title: '감면적용구분',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P05900,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'BANK1_CD',
+          title: '은행코드(급여)',
+          width: 90,
+          visible: false
+        },
+        {
+          field: 'BANK1_NM',
+          title: '은행(급여)',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'ACCNT1_NO',
+          title: '급여 계좌번호',
+          width: 120
+        },
+        {
+          field: 'DPSR1_NM',
+          title: '급여 예금주',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'BANK2_CD',
+          title: '은행코드(경비)',
+          width: 90,
+          visible: false
+        },
+        {
+          field: 'BANK2_NM',
+          title: '은행(경비)',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'ACCNT2_NO',
+          title: '경비 계좌번호',
+          width: 120
+        },
+        {
+          field: 'DPSR2_NM',
+          title: '경비 예금주',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'ACCTTYPE_CD',
+          title: '계정유형',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00310,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'BG_TP_CD',
+          title: '예산유형코드',
+          width: 80,
+          visible: false
+        },
+        {
+          field: 'BG_TP_NM',
+          title: '예산유형',
+          width: 90,
+          align: 'left'
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_empInfo, {
+      dataSource: self.ds_empInfo,
+      rowNo: false,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'HIRE_FG_CD',
+          title: '채용구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00730,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'JNCO_FG_CD',
+          title: '입사구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00720,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'LIVE_FG_CD',
+          title: '거주구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00390,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'MRRG_YN',
+          title: '결혼여부',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01140,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'RLGN_FG_CD',
+          title: '종교',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00880,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'MRRG_DT',
+          title: '결혼일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'CUR_POST_NO',
+          title: '현재주소\n우편번호',
+          width: 90
+        },
+        {
+          field: 'BASE_CUR_ADDR',
+          title: '현재주소기본',
+          width: 120,
+          align: 'left'
+        },
+        {
+          field: 'DTL_CUR_ADDR',
+          title: '현재주소상세',
+          width: 120,
+          align: 'left'
+        },
+        {
+          field: 'DSB_YN_CD',
+          title: '장애인여부',
+          width: 90
+        },
+        {
+          field: 'DSB_FG_CD',
+          title: '장애구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00860,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DSB_GRD_CD',
+          title: '장애등급',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00870,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DSB_ACK_DT',
+          title: '장애인정일',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'VTRN_FG_CD',
+          title: '보훈구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P03550,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'VTRN_REL_CD',
+          title: '보훈관계',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00710,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'VTRN_GRD_CD',
+          title: '보훈등급',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00850,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'VTRN_NO',
+          title: '보훈번호',
+          width: 100
+        },
+        {
+          field: 'MTRSC_FG_CD',
+          title: '병역구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00760,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DMBLZ_FG_CD',
+          title: '제대구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00810,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'AMFT_CD',
+          title: '군별',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00770,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'MLH_CD',
+          title: '계급',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00800,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'EXMT_REASON_CD',
+          title: '미필사유',
+          width: 100,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00790,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'ENST_DT',
+          title: '입대일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'LAYOFF_DT',
+          title: '제대일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'SSN_NO',
+          title: '군번',
+          width: 60
+        },
+        {
+          field: 'BMS_CD',
+          title: '병과',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00780,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_otherInfo, {
+      dataSource: self.ds_otherInfo,
+      rowNo: false,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'TEL2_NO',
+          title: '전화번호(기타)',
+          width: 60
+        },
+        {
+          field: 'BANK3_CD',
+          title: '은행(기타)',
+          width: 80,
+          visible: false
+        },
+        {
+          field: 'BANK3_NM',
+          title: '은행(기타)',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'ACCNT3_NO',
+          title: '계좌번호(기타)',
+          width: 60
+        },
+        {
+          field: 'DPSR3_NM',
+          title: '예금주(기타)',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'PRMDMCL_POST_NO',
+          title: '본적우편번호',
+          width: 60
+        },
+        {
+          field: 'PRMDMCL_ADDR',
+          title: '본적주소',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'DTL_PRMDMCL_ADDR',
+          title: '상세본적주소',
+          width: 90,
+          align: 'left'
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_familyInfo, {
+      dataSource: self.ds_familyInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'COMPANY_CD',
+          title: '회사코드',
+          width: 80,
+          visible: false,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_MA_COMPANY_S01',
+            codeField: 'COMPANY_CD',
+            textField: 'COMPANY_NM',
+            helpTitle: '회사 도움창',
+            helpSize: 'medium'
+          }
+        },
+        {
+          field: 'EMP_NO',
+          title: '사원번호',
+          width: 60,
+          visible: false,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_SD_PRTNR_EMP_S',
+            codeField: 'EMP_NO',
+            textField: 'KOR_NM',
+            helpTitle: '영업담당자 도움창',
+            helpSize: 'big'
+          }
+        },
+        {
+          field: 'FAML_NM',
+          title: '성명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'REL_CD',
+          title: '관계코드',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00710,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'RES_NO',
+          title: '주민등록번호',
+          width: 120,
+          formats: {
+            type: 'mask',
+            format: '######-#######'
+          }
+        },
+        {
+          field: 'BIRYYMM_DT',
+          title: '생년월일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'ATSCOLC_CD',
+          title: '양음여부',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01020,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'FRGNR_CD',
+          title: '내외국인여부',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource3_P00200,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'FRNR_INSERT_NO',
+          title: '외국인식별번호',
+          width: 120
+        },
+        {
+          field: 'LAST_LEDU_CD',
+          title: '최종학력',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00670,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'BRTHDY_TRGT_YN',
+          title: '생일대상',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'FAMILYALL_YN',
+          title: '수당여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'YREND_TRGT_YN',
+          title: '연말정산대상',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'BASE_DDCT_TRGT_YN',
+          title: '기본공제대상',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DEATH_YN',
+          title: '사망여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DSPSN_YN',
+          title: '장애인여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DSB_FG_CD',
+          title: '장애구분코드',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00860,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'JOB_NM',
+          title: '직업',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'OFC_NM',
+          title: '직장명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'POSI_NM',
+          title: '직위',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'TWINS_YN',
+          title: '쌍둥이여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'RMK_DC',
+          title: '비고',
+          width: 120,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P03240,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_schocareInfo, {
+      dataSource: self.ds_schocareInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'LEDU_CD',
+          title: '학력구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00670,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'NATION_CD',
+          title: '국가',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource3_P00170,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'SCHL_NM_TEXT',
+          title: '학교',
+          width: 60
+        },
+        {
+          field: 'LOCPLC_CD',
+          title: '소재지',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01380,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'GRADSCH_FG',
+          title: '대학원구분',
+          width: 60,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P06980,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'MTRC_DT',
+          title: '입학일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'GRDT_DT',
+          title: '졸업일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'MJR_NM_TEXT',
+          title: '전공',
+          width: 60
+        },
+        {
+          field: 'SUBSPECL_NM_TEXT',
+          title: '부전공',
+          width: 60
+        },
+        {
+          field: 'DMJ_NM_TEXT',
+          title: '학과',
+          width: 60
+        },
+        {
+          field: 'GRDT_YN_CD',
+          title: '졸업구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00700,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'DGRE_CD',
+          title: '학위',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00690,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'LAST_LEDU_YN',
+          title: '최종학력여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'JNCO_LEDU_YN',
+          title: '입사학력여부',
+          width: 90,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_careerInfo, {
+      dataSource: self.ds_careerInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'EMP_NO',
+          title: '사원번호',
+          width: 60,
+          visible: false,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_SD_PRTNR_EMP_S',
+            codeField: 'EMP_NO',
+            textField: 'KOR_NM',
+            helpTitle: '영업담당자 도움창',
+            helpSize: 'big'
+          }
+        },
+        {
+          field: 'COMPANY_NM',
+          title: '회사명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'JNCO_DT',
+          title: '입사일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'RETR_DT',
+          title: '퇴사일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'DEPT_NM',
+          title: '부서',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'CNWKPD_DT',
+          title: '근속기간',
+          width: 80,
+          visible: false
+        },
+        {
+          field: 'CNWKPD_DT_MASKED',
+          title: '근속기간(년월일)',
+          width: 120
+        },
+        {
+          field: 'CWRK_ACK_RT',
+          title: '경력인정율',
+          width: 100,
+          align: 'right',
+          suffix: '%',
+          formats: {
+            type: 'number',
+            format: 'MA00009',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'ACK_TERM_DT',
+          title: '인정기간',
+          width: 80,
+          visible: false
+        },
+        {
+          field: 'ACK_TERM_DT_MASKED',
+          title: '인정기간(년월일)',
+          width: 120
+        },
+        {
+          field: 'POSI_NM',
+          title: '직위',
+          width: 90,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00640,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'ODTY_NM',
+          title: '직책',
+          width: 90,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00980,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'RSPT_TSK_NM',
+          title: '담당업무',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'YEARSLARY_AMT',
+          title: '연봉',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'RETR_REASON_DC',
+          title: '퇴사이유',
+          width: 120,
+          align: 'left'
+        },
+        {
+          field: 'CARREC_YN',
+          title: '경력인정유무',
+          width: 100
+        },
+        {
+          field: 'RMK_DC',
+          title: '경력인정제외',
+          width: 120,
+          align: 'left'
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_licenseInfo, {
+      dataSource: self.ds_licenseInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'QUA_CARD_NM_TEXT',
+          title: '자격증명',
+          width: 60
+        },
+        {
+          field: 'ACQS_DT',
+          title: '취득일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'QUA_NO',
+          title: '자격번호',
+          width: 60
+        },
+        {
+          field: 'QUA_EPAY_YN',
+          title: '자격수당',
+          width: 60,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'VLID_DT',
+          title: '유효일수',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'ISSUE_ISTN_CD',
+          title: '발행기관코드',
+          width: 80,
+          visible: false,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource3_P01180,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'ISSUE_ISTN_NM',
+          title: '발행기관',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'RMK_DC',
+          title: '비고',
+          width: 120,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P03240,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_clubInfo, {
+      dataSource: self.ds_clubInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'CLUB_CD',
+          title: '동호회코드',
+          width: 80,
+          visible: false
+        },
+        {
+          field: 'CLUB_NM',
+          title: '동호회명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'JOIN_DT',
+          title: '가입일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'DROT_DT',
+          title: '탈퇴일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'CLUB_TEL_NO',
+          title: '전화번호',
+          width: 60
+        },
+        {
+          field: 'ODTY_CD',
+          title: '동호회직책코드',
+          width: 80,
+          visible: false,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00980,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'ODTY_NM',
+          title: '동호회직책',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'CLUB_CHRTR_DC',
+          title: '동호회성격',
+          width: 120,
+          align: 'left'
+        },
+        {
+          field: 'DUES_AMT',
+          title: '동호회비',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'PAYAPPLC_START_YM',
+          title: '급여적용시작년월',
+          width: 60,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00008'
+          }
+        },
+        {
+          field: 'PAYAPPLC_END_YM',
+          title: '급여적용종료년월',
+          width: 60,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00008'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_recommendInfo, {
+      dataSource: self.ds_recommendInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'RECOMEN_NM',
+          title: '성명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'REL_CD',
+          title: '관계',
+          width: 80,
+          visible: false,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00710,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'REL_NM',
+          title: '관계',
+          width: 90,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00710,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'RECOMEN_OFC_NM',
+          title: '직장명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'POSI_NM',
+          title: '직위',
+          width: 90,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00640,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'TEL_NO',
+          title: '전화번호',
+          width: 60,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_ZR34_10005,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'HOUS_TEL_NO',
+          title: '집전화번호',
+          width: 60
+        },
+        {
+          field: 'RMK_DC',
+          title: '비고',
+          width: 120,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P03240,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_guaranteeInfo, {
+      dataSource: self.ds_guaranteeInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'GRNTE_START_DT',
+          title: '시작일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'GRNTE_END_DT',
+          title: '종료일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'REL_CD',
+          title: '관계',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00710,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'GRNTR_NM',
+          title: '보증인',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'RES_NO',
+          title: '주민번호',
+          width: 60,
+          formats: {
+            type: 'mask',
+            format: '######-#######'
+          }
+        },
+        {
+          field: 'CUR_ADDR',
+          title: '주소',
+          width: 90,
+          align: 'left'
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_guarinsuInfo, {
+      dataSource: self.ds_guarinsuInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'GRNTE_START_DT',
+          title: '시작일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'GRNTE_END_DT',
+          title: '종료일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'INSU_COMPANY_CD',
+          title: '보험회사',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01500,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'GRNTE_AMT',
+          title: '보증금액',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'GRNTE_INSU_AMT',
+          title: '보증보험료',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'number'
+          }
+        },
+        {
+          field: 'INSU_NO',
+          title: '보험번호',
+          width: 60
+        },
+        {
+          field: 'BOND_NO',
+          title: '증권번호',
+          width: 60
+        },
+        {
+          field: 'JOIN_YN',
+          title: '가입여부',
+          width: 60,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ynLocalDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_visaInfo, {
+      dataSource: self.ds_visaInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'VISA_NO',
+          title: '비자번호',
+          width: 60
+        },
+        {
+          field: 'VISA_CD',
+          title: '비자구분',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.ds_visaCd,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'IEMP_DT',
+          title: '발급일자',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'EXPRTN_DT',
+          title: '만기일자',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'NATION_CD',
+          title: '국가코드',
+          width: 80,
+          visible: false,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource3_P00170,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'NATION_NM',
+          title: '국가코드',
+          width: 90,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource3_P00170,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'IEMP_ISTN_NM',
+          title: '발급기관',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'PSPT_CD',
+          title: '여권종류',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00910,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'USE_PURPSE_DC',
+          title: '사용목적',
+          width: 120,
+          align: 'left'
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_forelangInfo, {
+      dataSource: self.ds_forelangInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'LANG_FG_CD',
+          title: '외국어구분코드',
+          width: 80,
+          visible: false
+        },
+        {
+          field: 'LANG_FG_NM',
+          title: '외국어구분',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'LANG_NM',
+          title: '외국어시험',
+          width: 90
+        },
+        {
+          field: 'VLID_DT',
+          title: '유효일자',
+          width: 90,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'LANG2_PT',
+          title: '듣기점수',
+          width: 90
+        },
+        {
+          field: 'LANG5_PT',
+          title: '말하기점수',
+          width: 90
+        },
+        {
+          field: 'LANG3_PT',
+          title: '읽기점수',
+          width: 90
+        },
+        {
+          field: 'LANG4_PT',
+          title: '쓰기점수',
+          width: 90
+        },
+        {
+          field: 'LANG_PT',
+          title: '총점',
+          width: 90
+        },
+        {
+          field: 'LANG_GRD_CD',
+          title: '외국어등급',
+          width: 80,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P01510,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'LANG_GRD_NM',
+          title: '외국어등급명',
+          width: 90,
+          align: 'left',
+          visible: false
+        },
+        {
+          field: 'LANG_ABLT_DC',
+          title: '외국어능력',
+          width: 120,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P03200,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'APYEXM_DT',
+          title: '응시일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'TRIAL_ISTN_NM',
+          title: '시행기관',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'LANG_INCNPAY_PAY_AMT',
+          title: '어학장려금',
+          width: 100,
+          align: 'right',
+          formats: {
+            type: 'number',
+            format: 'MA00003',
+            predefined: true
+          },
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_ZR41_10005,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        },
+        {
+          field: 'LANG_INCNPAY_PAY_DT',
+          title: '장려금지급일',
+          width: 100,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'RMK_DC',
+          title: '비고',
+          width: 120,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P03240,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    dews.ui.grid(self.$gd_projectInfo, {
+      dataSource: self.ds_projectInfo,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      noDataMessage: '데이터가 없습니다',
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'PJT_NO',
+          title: '프로젝트코드',
+          width: 60,
+          visible: false,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_PS_PROJTMP_MST_S',
+            codeField: 'PJT_NO',
+            textField: 'PJT_NO',
+            helpTitle: '표준프로젝트번호 도움창'
+          }
+        },
+        {
+          field: 'PJT_NM',
+          title: '프로젝트',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'START_DT',
+          title: '시작일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'END_DT',
+          title: '종료일',
+          width: 80,
+          formats: {
+            type: 'date',
+            predefined: true,
+            format: 'MA00007'
+          },
+          editor: {
+            type: 'date'
+          }
+        },
+        {
+          field: 'COMPANY_NM',
+          title: '관련회사',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'ROLE_DC',
+          title: '역할',
+          width: 120,
+          align: 'left'
+        },
+        {
+          field: 'OTCM_DC',
+          title: '성과',
+          width: 120,
+          align: 'left'
+        },
+        {
+          field: 'RMK_DC',
+          title: '비고',
+          width: 120,
+          align: 'left',
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P03240,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      dataBound: /*ee73af6d-c776-444c-b40c-5d7fc5723909*/ function() {
+      dews.ui.loading.hide();
+    }
+    });
+    
+    
+    self.gd_empList.setDetail(self.gd_basicInfo);
+    self.gd_empList.setDetail(self.gd_payInfo);
+    self.gd_empList.setDetail(self.gd_empInfo);
+    self.gd_empList.setDetail(self.gd_otherInfo);
+    self.gd_empList.setDetail(self.gd_familyInfo);
+    self.gd_empList.setDetail(self.gd_schocareInfo);
+    self.gd_empList.setDetail(self.gd_careerInfo);
+    self.gd_empList.setDetail(self.gd_licenseInfo);
+    self.gd_empList.setDetail(self.gd_clubInfo);
+    self.gd_empList.setDetail(self.gd_recommendInfo);
+    self.gd_empList.setDetail(self.gd_guaranteeInfo);
+    self.gd_empList.setDetail(self.gd_guarinsuInfo);
+    self.gd_empList.setDetail(self.gd_visaInfo);
+    self.gd_empList.setDetail(self.gd_forelangInfo);
+    self.gd_empList.setDetail(self.gd_projectInfo);
+    
+    
+    /*e41d2cb5-ed76-4ad3-a4c9-ced63ce4d5b7*/ function openDialog(state) {
+      var dialog, initData;
+    
+      var height = 600;
+      if(state == 'disposal') {
+        height = 655;
+      }
+    
+      initData = {
+        mst_empList: self.gd_empList.getCheckedValues('EMP_NO'),
+        state : state
+      };
+    
+      var dialog = dews.ui.dialog("PAMPHM00700_POP", {
+        url: "/view/HR/PAMPHM00700_POP",
+        title: '퇴직사원처리도움창',
+        width: 800,
+        height: height,
+        // buttons: 'applyAndClose',
+        initData: initData,
+        ok: function (data) {
+          if (data.length > 0) {
+            console.log(data);
+          }
+        }
+      });
+      dialog.open();
+    }
+    
+    //# sourceURL=PAMPHM00700.js
+    
+
+  
+  });
+
+</script>

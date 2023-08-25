@@ -1,0 +1,195 @@
+﻿<div class="dews-dialog-contents-area">
+  <div class="dews-ui-condition-panel combo col-3 dews-container-control dews-control-activate">
+    <form class="dews-condition-panel-form">
+      <ul class="required-area">
+        <li>
+          <label data-dews-localize-key="D0000070">재직구분</label>
+          <span>
+            <select class="dews-ui-dropdownlist" style="width:95px" id="ddlCdIncom" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+            </select>
+            <input type="text" class="dews-ui-textbox" style="width:100%" id="resOrFrn_no">
+          </span>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div>
+    <div class='dews-ui-grid' id='dialogGrid'>
+    </div>
+  </div>
+  <div class="dews-container-panel" data-dews-fit-bottom="true">
+    <div class="dews-container-item">
+      <div id="referBox" class="dews-ui-referbox" data-dews-localize-key="D0013560" data-dews-title="작성요령" style="height: 115px">
+        <span id="infoDesc">※ 조회되는 통합사원번호를 선택 후 적용해주세요.<br>
+                            ※ (자동채번 옵션이 선택된 경우) 신규버튼을 누르면 자동채번으로 전환됩니다.<br>
+                            ※ (수기입력 옵션이 선택된 경우) 신규버튼을 누르면 메인화면에서 수기입력이 가능합니다.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dews-dialog-button-group bottom">
+  <button class="dews-ui-button" id="btnNew" data-dews-localize-key="D0000372">신규</button>
+  <button class="dews-ui-button" id="btnAccept" data-dews-localize-key="D0000267">적용</button>
+  <button class="dews-ui-button" id="btnClose" data-dews-localize-key="D0000255">닫기</button>
+</div>
+
+
+
+
+
+<script>
+  dews.ready(function(){
+
+    // MARK : variables --------------------------------
+    var dewself = this;
+    var dialogGrid, dialogDtSource;
+    var dialog = dews.ui.dialog("PAMPHM00100_searchGempNo_POP");
+    var initData = dialog.getInitData();
+
+    // MARK : initLoad --------------------------------
+    dewself.resOrFrn_no.enable(false);
+    dewself.resOrFrn_no.text(initData.resOrFrnNoText);
+
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'), {
+      async: false,
+      data: {
+        module_cd: "HR",
+        field_cd_pipe: "P00750|",
+        syscode_yn: "",
+        base_yn: "",
+        foreign_yn: "",
+        end_dt: "",
+        keyword: ""
+      }
+    })
+    .done(function(data){
+      dewself.ddlCdIncom.setDataSource(data);
+    });
+
+    // MARK : initDataSource --------------------------------
+    dialogDtSource = dews.ui.dataSource('dialogDtSource', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00400_searchGempNo'),
+          data: function(){
+            return {
+              hlof_fg_cd: dewself.ddlCdIncom.value(),         // 재직('A') 로 넘기면 재직구분 조회조건 반영안함 / 팝업창내 조회조건 때문에 추가
+              frgnr_Cd: initData.gubun_fg,      // 내외국인 구분
+              resOrFrn_no: dewself.resOrFrn_no.text()
+            }
+          }
+        }
+      },
+      schema: {
+        model: {
+          id: 'Pamphm00400_gempNo',
+          fields: [
+            { field: 'COMPANY_CD' },
+            { field: 'COMPANY_NM' },
+            { field: 'GEMP_NO' },
+            { field: 'KOR_NM' },
+            { field: 'POSI_CD' }
+          ]
+        }
+      }
+    });
+
+    // MARK : initGrid --------------------------------
+    dialogGrid = dews.ui.grid(dewself.$dialogGrid, {
+      dataSource: dialogDtSource,
+      selectable: true,
+      checkable: false,
+      rowNo: true,
+      editable: false,
+      autobind: true,
+      height: 280,
+      columns: [
+        {
+          field: "COMPANY_CD",
+          title: dews.localize.get("회사코드", 'D0000004'),
+          width: 100,
+          ailgn: "center"
+        },
+        {
+          field: "COMPANY_NM",
+          title: dews.localize.get("회사명", 'D0000062'),
+          width: 100,
+          ailgn: "center"
+        },
+        {
+          field: "GEMP_NO",
+          title: dews.localize.get("통합사원번호", 'D0000679'),
+          width: 100,
+          ailgn: "center"
+        },
+        {
+          field: "KOR_NM",
+          title: dews.localize.get("사원명", 'D0000075'),
+          width: 100,
+          ailgn: "center"
+        },
+        {
+          field: "POSI_CD",
+          title: dews.localize.get("직책", 'D0000685'),
+          width: 100,
+          ailgn: "center",
+          visible: false
+        }
+      ],
+      dblClicked: function (e) {
+        var okData = {
+          gemp_no: e.row.data.GEMP_NO
+        };
+        dialog.ok(okData);
+      }
+    });
+
+    // MARK : initMainButton --------------------------------
+
+    // MARK : eventHandler --------------------------------
+    dewself.$btnNew.on('click', function(e){
+      var okData = {
+        gemp_no: "AUTO-NUMBERING"
+      };
+      dialog.ok(okData);
+    });
+
+    dewself.ddlCdIncom.on('change', function (e) {
+      dialogDtSource.read();
+    });
+
+    dewself.$btnAccept.on('click', function(e){
+      var row;
+      var okData;
+
+      // row 가 존자하면
+      if(dewself.dialogGrid.dataItem(dewself.dialogGrid.select())){
+        row = dewself.dialogGrid.dataItem(dewself.dialogGrid.select());
+
+        okData= {
+          gemp_no: dewself.dialogGrid.dataItem(dewself.dialogGrid.select()).GEMP_NO
+        };
+
+        dialog.ok(okData);
+      }
+      // row 가 없으면
+      else{
+        dews.alert("매핑할 수 있는 통합사원번호가 없습니다.");
+        return false;
+      }
+    });
+
+    dewself.$btnClose.on('click', function(e){
+      dialog.close();
+    });
+
+    // MARK : funStd --------------------------------
+
+    // MARK : func --------------------------------
+
+  });
+//# sourceURL=view/HR/PAMPHM00100_searchGempNo_POP.js
+</script>

@@ -1,0 +1,68 @@
+<!--##bdb487e9-d67c-4c36-9b10-55454dce0a46##-->
+<!--##BSEHRM##-->
+<!--##d5l0HGOfQXOC//soOBOHMg==##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: BSEHRM
+  # PageTitle: BSEHRM
+  # Server: http://localhost:8090/
+-->
+<!--
+
+-->
+
+<div class="dews-ui-condition-panel">
+  <ul class="required-area">
+    <li>
+      <label class="dews-ui-multilingual">Label</label>
+      <span>
+        <input id="txt1" name="txt1" type="text" class="dews-ui-textbox basic" />
+      </span>
+    </li>
+  </ul>
+</div>
+<div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="normal">
+    <div id="gridMaster1" class="dews-ui-grid"></div>
+  </div>
+</div>
+
+<style>
+    
+</style>
+
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.0';
+
+
+    
+    
+    
+    
+    dews.ui.mainbuttons.localize.disable(true);
+    dews.ui.grid(self.$gridMaster1, {
+      height: 175,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      copyMode: 'cell',
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    
+    
+    
+    
+    
+
+  
+  });
+
+</script>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page title="BSEHRM" name="BSEHRM" type="page">
+  <canvas uid="canvas-1485142915100" type="page" title="BSEHRM" component="" function="">
+    <pageInformation>
+      <version>1.0</version>
+      <create>tjqkd0912</create>
+      <modify>tjqkd0912</modify>
+      <builddate>2023-08-14T14:43:50.5088001+09:00</builddate>
+      <createdate>2023-08-14T14:39:52.6850261+09:00</createdate>
+      <modifieddate>2023-08-14T14:43:50.5088001+09:00</modifieddate>
+    </pageInformation>
+    <mainButtons uid="mainButtons-1385142915113">
+      <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="normal" type="information" />
+      <mainButton uid="mainButton-1485142971050" id="localize" buttonAttr="disabled" type="localize" />
+      <mainButton uid="mainButton-1485142971051" id="approval" buttonAttr="normal" type="approval" />
+      <mainButton uid="mainButton-1485142971058" id="etn-approval" buttonAttr="normal" type="etn-approval" />
+      <mainButton uid="mainButton-1485142971052" id="add" buttonAttr="normal" type="add" />
+      <mainButton uid="mainButton-1485142971053" id="search" buttonAttr="normal" type="search" />
+      <mainButton uid="mainButton-1485142971054" id="delete" buttonAttr="normal" type="delete" />
+      <mainButton uid="mainButton-1485142971055" id="print" buttonAttr="normal" type="print" />
+      <mainButton uid="mainButton-1485142971056" id="save" buttonAttr="normal" type="save" />
+      <mainButton uid="mainButton-1485142971057" id="configure" buttonAttr="normal" type="configure" />
+    </mainButtons>
+    <conditionPanel uid="conditionPanel-1505787714956" margin="false" optional="false" optionalcollapsed="true" columnLength="3" labelAlign="right">
+      <conditionGroup uid="conditionGroup-1505787714960" type="required">
+        <conditionItem uid="conditionItem-1505787722852" columnSize="1" text="Label">
+          <textbox uid="textbox-1505787722855" id="txt1" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" />
+        </conditionItem>
+      </conditionGroup>
+    </conditionPanel>
+    <containerPanel uid="containerPanel-1505787729725" height_type="px" fitBottom="true" containerResize="false">
+      <containerItem uid="containerItem-1505787729727" width_type="px" location="normal">
+        <grid uid="grid-1505787733564" id="gridMaster1" dataSource="" height_type="px" height="175" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" noData="false" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+          <columns />
+          <filter filterType="Boolean" filter="true" iconVisible="false" />
+          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+            <gridContextItems />
+          </contextObject>
+          <detailGrid addedRowDataSourceRead="true" />
+          <gridGroupColumns />
+          <fixed colCount="0" rightColCount="0" />
+          <styles heightTyp="string">
+            <rowNo />
+            <cellBorder />
+            <font bold="false" />
+            <padding />
+            <heightObject />
+          </styles>
+          <note>
+            <keys />
+          </note>
+        </grid>
+      </containerItem>
+    </containerPanel>
+  </canvas>
+  <dataSources />
+  <pageMarkDown><![CDATA[]]></pageMarkDown>
+  <pageCssStyle><![CDATA[]]></pageCssStyle>
+  <stylesheets />
+  <javascripts />
+  <settings />
+  <datas />
+</page>

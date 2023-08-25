@@ -1,0 +1,2558 @@
+﻿<!-- 소스변환[1.0.0.13] : 성승익(seunglk.seong) 변환시간 : 2018-08-31 16:14:00  -->
+<!--
+  모듈 : HR
+  메뉴명: 급여기본사항등록
+  수정내역:
+    - 2017.05.10 김준수 : 최초작성
+-->
+
+<div class="dews-container-panel" data-dews-fit-bottom="true" data-dews-container-height="653">
+  <div class="dews-container-item" data-dews-position="left" data-dews-width="300">
+    <!-- 왼쪽 카드리스트 조회 영역-->
+    <div class="custom-ui-condition-panel" style="width: 300px; height: 47px;">
+      <form class="custom-condition-panel-form" onsubmit="return false">
+        <ul class="required-area">
+          <!-- <li> -->
+            <select id="cbGubn" class="dews-ui-dropdownlist" style="float: left; width: 83px; margin-right: 2px;" data-dews-text-field="SYSDEF_NM" data-dews-value-field="SYSDEF_CD"></select><!-- #.# CD_SYSDEF 변환됨 => SYSDEF_CD--><!-- #.# NM_SYSDEF 변환됨 => SYSDEF_NM-->
+          <!-- </li> -->
+          <!-- <li> -->
+            <input id="txtSearch" class="dews-ui-textbox" type="text" maxlength="20" style="float: left; width: 162px; margin-right: 2px;" placeholder="성명 및 사번 검색" data-dews-placeholder-localize-key="D0015417">
+          <!-- </li> -->
+          <button id="btn_search" class="dews-ui-button ico-search"></button>
+        </ul>
+      </form>
+    </div>
+    <!-- 왼쪽 카드리스트 -->
+    <div class="dews-ui-cardlist" id="gridCardList"></div>
+  </div>
+
+  <!-- 화면영역 오른쪽 컨테이너 -->
+  <div class="dews-container-item" id="container">
+    <div class="dews-ui-tab-panel" id="mainTab">
+      <ul class="dews-tab-items">
+        <li class="dews-tab-item" id="basicinfo_tab" data-dews-title="기본사항" data-dews-localize-key="D0012345">
+          <div class="dews-button-group">
+            <button id="classMngBtn" class="dews-ui-button" type="button">사원구분기준</button>
+            <button id="classChkBtn" class="dews-ui-button" type="button">사원구분체크</button>
+            <button id="btnNew" class="dews-ui-button" type="button" data-dews-localize-key="D0015422">부양가족계산</button>
+            <button id="addTabOpenBtn" class="dews-ui-button open-all"></button>
+            <button class="dews-ui-button close-all"></button>
+          </div>
+          <div class="dews-form-panel">
+            <form class="dews-form-panel-form">
+              <ul>
+                <li><label data-dews-localize-key="D0000069">사업장</label> <span> <input id="BIZAREA_NM" type="text" data-dews-bind-type="twoway" data-dews-bind-column="BIZAREA_NM" class="dews-ui-textbox" readonly="true">
+                </span></li>
+                <li><label data-dews-localize-key="D0000680">사원구분</label>
+                  <span>
+                    <select id="EMP_TP" class="dews-ui-dropdownlist" data-dews-selectable="SELECTABLE" data-dews-selectable-false-value="N" readonly="true" data-dews-bind-type="twoway" custom-dropdown-data-module="HR" custom-dropdown-data-code="P00220" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-bind-code="EMP_TP" >
+                    </select>
+                  </span>
+                </li>
+                <li><label data-dews-localize-key="D0000073">입사일</label> <span> <input id="JNCO_DT" class="dews-ui-datepicker" data-dews-bind-type="twoway" data-dews-bind-column="JNCO_DT" readonly="true">
+                </span></li>
+                <li><label data-dews-localize-key="D0014236">퇴사일자</label> <span> <input id="RETR_DT" class="dews-ui-datepicker" data-dews-bind-type="twoway" data-dews-bind-column="RETR_DT" readonly="true">
+                </span></li>
+                <!-- 아직 사용X -->
+                <!-- <li><label data-dews-localize-key="">임금파크시작일</label> <span> <input id="DPSR2_NM" type="text" class="dews-ui-textbox" data-dews-bind-type="twoway" data-dews-bind-column="DPSR2_NM" maxlength="50">
+                </span></li> -->
+              </ul>
+            </form>
+          </div>
+          <!-- 아코디언 시작. 21.09.27 추가 -->
+          <div class="dews-ui-arcodien" id="arcodien_addinfo" data-dews-arcodien-type="multiple">
+            <ul>
+              <li class="dews-arcodien-item" id="arcodienTaxAmount" data-dews-item-title="간이세액" data-dews-localize-key="D0023159">
+                <div class="dews-ui-form-panel" id="BasicInfo1FormPanel">
+                  <!-- <div class="dews-form-panel"> -->
+                  <!-- <form class="dews-form-panel-form"> -->
+                    <ul>
+                      <li><label data-dews-localize-key="D0015423">배우자공제</label> <span> <select id="SPO_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="SPO_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN"></select>
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015424">부양가족20세</label> <span> <input id="FAMILYTEY_CNT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="FAMILYTEY_CNT" data-dews-format="#,###" maxlength="5">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015425">부녀자공제</label> <span> <select id="LADY_HSHR_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="LADY_HSHR_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                        </select>
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015426">부양가족60세</label> <span> <input id="FAMILYSIY_CNT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="FAMILYSIY_CNT" data-dews-format="#,###" maxlength="5">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015427">세대주여부</label> <span> <select id="HSHR_YN_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="HSHR_YN_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                        </select>
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015428">장애인</label> <span> <input id="DSPSN_FAML_CNT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="DSPSN_FAML_CNT" data-dews-format="#,###" maxlength="5">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015434">외국인단일세율</label> <span> <select id="FRNR_SINGL_TRTE_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="FRNR_SINGL_TRTE_CD" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                        </select>
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015430">수급자/위탁아동</label> <span> <input id="SPDM_TRST_CHIL_CNT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="SPDM_TRST_CHIL_CNT" data-dews-format="#,###" maxlength="5">
+                      </span></li>
+                      <li>
+                        <label data-dews-localize-key="D0015433">파견근로여부</label>
+                        <span>
+                          <select id="DSPTC_LABOR_YN" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="DSPTC_LABOR_YN"
+                            data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                          </select>
+                        </span>
+                      </li>
+                      <li><label data-dews-localize-key="D0015432">다자녀추가공제</label> <span> <input id="CHILD_SUPP_DDCT_CNT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="CHILD_SUPP_DDCT_CNT" data-dews-format="#,###" maxlength="5">
+                      </span></li>
+                    </ul>
+                  <!-- </form> -->
+                </div>
+              </li>
+              <li class="dews-arcodien-item" id="arcodienSalary" data-dews-item-title="급여기초" data-dews-localize-key="D0015458">
+                <div class="dews-ui-form-panel" id="BasicInfo2FormPanel">
+                <!-- <div class="dews-form-panel"> -->
+                  <!-- <form class="dews-form-panel-form"> -->
+                    <ul>
+                      <li>
+                        <label data-dews-localize-key="D0015429">생산직해당</label>
+                        <span>
+                          <select id="PR_DRCT_WKR_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="PR_DRCT_WKR_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label class="dews-ui-multilingual" data-dews-localize-key="D0073858">생산직총급여한도</label>
+                        <span>
+                          <select id="PR_FRMLA_M2500_YN" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="PR_FRMLA_M2500_YN"
+                          data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                          </select>
+                        </span>
+                      </li>
+                      <li class="col-2">
+                        <label data-dews-localize-key="D0015435">국외근로여부</label>
+                        <span>
+                          <select id="OCW_CD" class="dews-ui-dropdownlist" style="width: 169px;" data-dews-bind-type="twoway" data-dews-bind-code="OCW_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN"></select>
+                          <select id="NOABROD_CD" class="dews-ui-dropdownlist" style="width: 336px;" data-dews-bind-type="twoway" data-dews-bind-code="NOABROD_CD" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"></select>
+                      </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015439">거주자여부</label>
+                        <span>
+                          <select id="RESIDNT_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-selectable="SELECTABLE" data-dews-selectable-false-value="N" data-dews-bind-code="RESIDNT_CD" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015440">거주지국</label>
+                        <span>
+                          <input id="RESDNC_CD" type="text" class="dews-ui-codepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" data-dews-help-size="medium" data-dews-help-title="거주지국" data-dews-help-params="module_cd=MA&field_cd=P00170" data-dews-bind-type="twoway" data-dews-bind-code="RESDNC_CD" data-dews-bind-text="RESDNC_NM">
+                        </span>
+                      </li>
+                      <li>
+                        <label class="dews-ui-multilingual" data-dews-localize-key="D0073861">감면대상자</label>
+                        <span>
+                          <select id="REDUCT_TRGT_FG" class="dews-ui-dropdownlist" data-dews-selectable="SELECTABLE" data-dews-selectable-false-value="N"
+                          custom-dropdown-data-module="HR" custom-dropdown-data-code="P05200" data-dews-bind-code="REDUCT_TRGT_FG"
+                          data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0073864">감면율</label>
+                        <span>
+                          <select id="REDUCT_TP_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway"
+                            data-dews-selectable="SELECTABLE" data-dews-selectable-false-value="N" data-dews-bind-code="REDUCT_TP_CD"
+                            data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0073821">감면적용구분</label>
+                        <span>
+                          <select id="REDUCT_APLY_FG" class="dews-ui-dropdownlist" data-dews-selectable="SELECTABLE"
+                          data-dews-selectable-false-value="N" data-dews-bind-code="REDUCT_APLY_FG"
+                          data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015449">감면종료일</label>
+                        <span>
+                          <input id="REDUCT_END_DT" type="text" class="dews-ui-datepicker" data-dews-bind-type="twoway" data-dews-bind-column="REDUCT_END_DT">
+                        </span>
+                      </li>
+                      <li>
+                        <label>경영성과급감면(중소)</label>
+                        <span>
+                          <select id="MGT_MRTP_REDUCT_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway"
+                            data-dews-selectable="SELECTABLE" data-dews-selectable-false-value="N" data-dews-bind-code="MGT_MRTP_REDUCT_CD"
+                            data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                          </select>
+                        </span>
+                      </li>
+                      <li><label data-dews-localize-key="D0015568">학자금상환대상</label> <span> <select id="SCEPREPAY_TRGT_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="SCEPREPAY_TRGT_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                        </select>
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015438">학자금상환액</label> <span> <input id="SCEPREPAY_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="SCEPREPAY_AMT" maxlength="19" data-dews-format="#,###">
+                      </span></li>
+                      <li>
+                        <label data-dews-localize-key="D0092094">학자금상환종료일</label>
+                        <span>
+                          <input id="SCEPREPAY_END_DT" type="text" class="dews-ui-datepicker" data-dews-bind-type="twoway" data-dews-bind-column="SCEPREPAY_END_DT">
+                        </span>
+                      </li>
+                      <li><label data-dews-localize-key="D0014399">수습종료일</label><span>
+                        <input id="APNTC_EXPY_DT" type="text" class="dews-ui-datepicker" data-dews-bind-type="twoway" data-dews-bind-column="APNTC_EXPY_DT"><!-- #.# DT_PROBAT 변환됨 => APNTC_EXPY_DT--><!-- #.# DT_PROBAT 변환됨 => APNTC_EXPY_DT-->
+                        </span></li>
+                      <li>
+                        <label data-dews-localize-key="D0092093">종교인소득반영</label>
+                        <span>
+                          <select id="SRC_TAX_BNEI_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="SRC_TAX_BNEI_CD" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label class="dews-ui-multilingual" data-dews-localize-key="D0014913">체류자격</label>
+                        <span>
+                          <input id="STAY_QUA_CD" type="text" class="dews-ui-codepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                          data-dews-bind-code="STAY_QUA_CD" data-dews-bind-text="STAY_QUA_NM" data-dews-help-size="medium" data-dews-help-params="module_cd=HR&field_cd=P05310"
+                          data-dews-help-code="H_MA_CODEDTL_S">
+                          </select>
+                        </span>
+                      </li>
+                      <!-- <li><label class="dews-ui-multilingual">학자금상환종료일</label> <span> <input id="SCEPREPAY_END_DT" type="text" class="dews-ui-datepicker" data-dews-bind-type="twoway" data-custom-bind-column="SCEPREPAY_END_DT">
+                        </span></li> -->
+                      <!-- <li>
+                        <label></label>
+                        <span> -->
+                        <!-- 세액조정 삭제됨 -->
+                        <!-- <input id="TEMPPP" type="text" class="dews-ui-numerictextbox readonly" data-dews-bind-type="twoway" data-dews-bind-column="TEMPPP" maxlength="19" data-dews-format="#,###"> -->
+                          <!-- <select id = "TAXAMT_DDCT_RT" class="dews-ui-dropdownlist"
+                                custom-dropdown-data-module="HR" custom-dropdown-data-code="P01470" custom-dropdown-add-all="true"
+                                data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM"
+                                data-custom-bind-column="TAXAMT_DDCT_RT" data-custom-bind-table="HR_EMPPAY_DTL"> -->
+                          <!-- <select id = "TAXAMT_DDCT_RT" class='dews-ui-dropdownlist' data-dews-bind-type="twoway" data-dews-bind-code= "TAXAMT_DDCT_RT" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                          </select> -->
+                        <!-- </span>
+                      </li> -->
+                    </ul>
+                  <!-- </form> -->
+                </div>
+              </li>
+              <li class="dews-arcodien-item" id="arcodienAccountInfo" data-dews-item-title="계좌정보" data-dews-localize-key="D0006674">
+                <div class="dews-ui-form-panel" id="PayBaseFormPanel">
+                <!-- <div class="dews-form-panel">
+                  <form class="dews-form-panel-form"> -->
+                    <ul>
+                      <!-- <li><label data-dews-localize-key="D0015557">은행코드(급여)</label> <span> <input id="BANK1_CD" type="text" class="dews-ui-codepicker" data-dews-bind-type="twoway" data-dews-bind-code="BANK1_CD" data-dews-bind-text="BANK1_NM" data-dews-code-field="BANK_CD" data-dews-text-field="FNLT_NM" data-dews-help-code="H_CI_BANK_MST_S" data-dews-help-width="800" data-dews-help-height="610" data-dews-help-params="combo0=KR">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015558">은행코드(경비)</label> <span> <input id="BANK2_CD" type="text" class="dews-ui-codepicker" data-dews-bind-type="twoway" data-dews-bind-code="BANK2_CD" data-dews-bind-text="BANK2_NM" data-dews-code-field="BANK_CD" data-dews-text-field="FNLT_NM" data-dews-help-code="H_CI_BANK_MST_S" data-dews-help-width="800" data-dews-help-height="610" data-dews-help-params="combo0=KR">
+                      </span></li> -->
+                      <li><label data-dews-localize-key="D0015557">은행코드(급여)</label> <span> <input id="BANK1_CD" type="text" class="dews-ui-codepicker" data-dews-bind-type="twoway" data-dews-bind-code="BANK1_CD" data-dews-bind-text="BANK1_NM" data-dews-code-field="BANK_CD" data-dews-text-field="FNLT_NM" data-dews-help-code="H_HR_BANK_MST_S" data-dews-help-size="big" data-dews-help-params="combo0=KR">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0015558">은행코드(경비)</label> <span> <input id="BANK2_CD" type="text" class="dews-ui-codepicker" data-dews-bind-type="twoway" data-dews-bind-code="BANK2_CD" data-dews-bind-text="BANK2_NM" data-dews-code-field="BANK_CD" data-dews-text-field="FNLT_NM" data-dews-help-code="H_HR_BANK_MST_S" data-dews-help-size="big" data-dews-help-params="combo0=KR">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0001201">계좌번호</label> <span> <input id="ACCNT1_NO" type="text" class="dews-ui-textbox" data-dews-bind-type="twoway" data-dews-bind-column="ACCNT1_NO" maxlength="30">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0001201">계좌번호</label> <span> <input id="ACCNT2_NO" type="text" class="dews-ui-textbox" data-dews-bind-type="twoway" data-dews-bind-column="ACCNT2_NO" maxlength="30">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0001200">예금주</label> <span> <input id="DPSR1_NM" type="text" class="dews-ui-textbox" data-dews-bind-type="twoway" data-dews-bind-column="DPSR1_NM" maxlength="50">
+                      </span></li>
+                      <li><label data-dews-localize-key="D0001200">예금주</label> <span> <input id="DPSR2_NM" type="text" class="dews-ui-textbox" data-dews-bind-type="twoway" data-dews-bind-column="DPSR2_NM" maxlength="50">
+                      </span></li>
+                    </ul>
+                  <!-- </form> -->
+                </div>
+              </li>
+              <li class="dews-arcodien-item" id="arcodienInsurance" data-dews-item-title="국민/건강보험" data-dews-localize-key="D0095088">
+                <div class="dews-ui-form-panel" id="PersonalInfoFormPanel">
+                <!-- <div class="dews-form-panel">
+                  <form class="dews-form-panel-form"> -->
+                    <ul>
+                      <li>
+                        <label data-dews-localize-key="D0015441">국민연금해당</label>
+                        <span>
+                          <select id="NPNCRRENNC_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="NPNCRRENNC_CD" data-dews-value-field="CD_YNS" data-dews-text-field="NM_YNS">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015442">국민(사학)연금료</label>
+                        <span>
+                          <input id="NPN_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="NPN_AMT" data-dews-format="#,###" maxlength="19">
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015443">건강보험해당</label>
+                        <span>
+                          <select id="HLTHINS_INS_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="HLTHINS_INS_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015444">건강보험료</label>
+                        <span>
+                          <input id="HLTHINS_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="HLTHINS_AMT" data-dews-format="#,###" maxlength="19">
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015561">노인장기요양경감</label>
+                        <span>
+                          <select id="ODSN_RCPER_RDUCTTRGET_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="ODSN_RCPER_RDUCTTRGET_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015447">노인장기요양보험료</label>
+                        <span>
+                          <input id="ODSN_LNGTRRCPER_INSU_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="ODSN_LNGTRRCPER_INSU_AMT" data-dews-format="#,###" maxlength="19">
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015445">고용보험해당</label>
+                        <span>
+                          <select id="EMPYINSFO_TARGNO_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="EMPYINSFO_TARGNO_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                          </select>
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0005960">고용보험료</label>
+                        <span>
+                          <input id="EMPYINSFO_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="EMPYINSFO_AMT" data-dews-format="#,###" maxlength="19">
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015446">산재보험해당</label>
+                        <span>
+                          <select id="INDUSAC_INSU_TRGT_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="INDUSAC_INSU_TRGT_CD" data-dews-value-field="CD_YN" data-dews-text-field="NM_YN">
+                          </select>
+                        </span>
+                      </li>
+                      <!-- <li><label><span></span></label></li> -->
+                      <li>
+                        <label data-dews-localize-key="D0099700">국민연금관리번호</label>
+                        <span>
+                          <input id="NPNMANAGE_NO" type="text" class="dews-ui-textbox" data-dews-bind-type="twoway" data-dews-bind-column="NPNMANAGE_NO" maxlength="40">
+                        </span>
+                      </li>
+                      <li>
+                        <label data-dews-localize-key="D0015562">건강보험증번호</label>
+                        <span>
+                          <input id="HLTHINS_NO" type="text" class="dews-ui-textbox" data-dews-bind-type="twoway" data-dews-bind-column="HLTHINS_NO" maxlength="40">
+                        </span>
+                      </li>
+                      <li>
+                        <label class="dews-ui-multilingual" data-dews-localize-key="D0073428">근로자원부번호</label>
+                        <span>
+                          <input id="EMPYINSFO_NO" type="text" class="dews-ui-textbox" data-dews-bind-type="twoway" data-dews-bind-column="EMPYINSFO_NO" maxlength="40">
+                        </span>
+                      </li>
+                    </ul>
+                  <!-- </form> -->
+                </div>
+              </li>
+              <li class="dews-arcodien-item" id="arcodienChit" data-dews-item-title="전표정보" data-dews-localize-key="D0005281">
+                <div class="dews-ui-form-panel" id="EtcInfoFormPanel">
+                <!-- <div class="dews-form-panel">
+                  <form class="dews-form-panel-form"> -->
+                    <ul>
+                      <li><label data-dews-localize-key="D0000230">계정유형</label> <span> <select id="ACCTTYPE_CD" class="dews-ui-dropdownlist" data-dews-bind-type="twoway" data-dews-bind-code="ACCTTYPE_CD" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+                      </select><!-- #.# NM_SYSDEF 변환됨 => SYSDEF_NM--><!-- #.# CD_SYSDEF 변환됨 => SYSDEF_CD--><!-- #.# CD_ACCOUNT 변환됨 => ACCTTYPE_CD--><!-- #.# CD_ACCOUNT 변환됨 => ACCTTYPE_CD-->
+                      </span></li>
+                      <li>
+                        <label class="dews-ui-multilingual" data-dews-localize-key="D0017031">예산유형</label>
+                        <span>
+                          <input id="BG_TP_CD" type="text" class="dews-ui-codepicker readonly"
+                          data-dews-bind-code="BG_TP_CD" data-dews-bind-text="BG_TP_NM"
+                          data-dews-code-field="BG_TP_CD" data-dews-text-field="BG_TP_NM" data-dews-help-code="H_HR_SLACCT_MST_S"
+                          data-dews-help-size="largebig" data-dews-help-params="">
+                          </select>
+                        </span>
+                      </li>
+                      </span>
+                      <li id="setDrsColumn1"><label data-dews-localize-key="D0015454">연봉</label> <span> <input id="ANIC_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="ANIC_AMT" data-dews-format="#,###" maxlength="19">
+                      </span></li>
+                      <li id="setDrsColumn2"><label data-dews-localize-key="D0015455">월급</label> <span> <input id="MNTSLR_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="MNTSLR_AMT" data-dews-format="#,###" maxlength="19">
+                      </span></li>
+                      <li id="setDrsColumn3"><label data-dews-localize-key="D0015456">일급</label> <span> <input id="FSTCLSS_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="FSTCLSS_AMT" data-dews-format="#,###" maxlength="19">
+                      </span></li>
+                      <li id="setDrsColumn4"><label data-dews-localize-key="D0015457">시급</label> <span> <input id="TMPAY_AMT" type="text" class="dews-ui-numerictextbox" data-dews-bind-type="twoway" data-dews-bind-column="TMPAY_AMT" data-dews-format="#,###" maxlength="19">
+                      </span></li>
+                    </ul>
+                  <!-- </form> -->
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- 21.09.27추가 drs코드, 10062(가스기술공사) -->
+        <li class="dews-tab-item" id="LookupTab_10062" data-dews-title="조회사항" data-dews-localize-key="D0015486">
+          <div class="dews-ui-arcodien" id="arcodien_lookup" data-dews-arcodien-type="multiple">
+            <ul>
+              <li class="dews-arcodien-item" id="arcodienAnnuity" data-dews-item-title="퇴직연금" data-dews-localize-key="D0016720">
+                <div id="resignGrid_10062" class="dews-ui-grid"></div>
+              </li>
+            </ul>
+            <ul>
+              <li class="dews-arcodien-item" id="mutualAidInfo" data-dews-item-title="상조가입정보조회" data-dews-localize-key="">
+                <div id="mutualAidGrid" class="dews-ui-grid"></div>
+              </li>
+            </ul>
+            <ul>
+              <li class="dews-arcodien-item" id="withHoldingRate" data-dews-item-title="원천징수율" data-dews-localize-key="">
+                <div id="withHoldingRateGrid" class="dews-ui-grid"></div>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!--더보기-->
+    <!-- 더보기 아래 있는 컨트롤들 모두 예금주 아래로 뺴버림 2021.01.19 -->
+    <button class="custom-detail-button dews-ui-multilingual" data-dews-localize-key="D0014441" style="display:none">더보기</button>
+    <div class="dews-popup-panel" style="display:none">
+      <div class="dews-popup-item">
+        <div class="dews-form-panel" data-dews-columns="2">
+          <form class="dews-form-panel-form">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="gridDetailList" class="dews-ui-grid" style="display: none;"></div>
+    <div id="gridSdtlList" class="dews-ui-grid" style="display: none;"></div>
+    <!-- <div id="gridDetailList" class="dews-ui-grid"></div> -->
+  </div>
+
+<!-- 스타일 지정 -->
+<style>
+  /*카드리스트 조회조건*/
+
+  #content_PAMPHM00300 .custom-ui-condition-panel {
+    zoom: 1;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    background: #f5f5f5;
+  }
+
+  #content_PAMPHM00300 .custom-ui-condition-panel>.custom-condition-panel-form>ul {
+    list-style: none;
+    margin: 0;
+    zoom: 1;
+    padding: 6px 8px 6px 10px;
+  }
+
+  #content_PAMPHM00300 .custom-ui-condition-panel>.custom-condition-panel-form>ul>li {
+    display: inline-block;
+    margin: 2px 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+  }
+  /*카드리스트*/
+
+  #content_PAMPHM00300 #gridCardList {
+    border: 1px solid #ccc;
+    height: calc(100% - 50px)!important;
+  }
+
+  #content_PAMPHM00300 .custom-detail-button {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    height: 31px;
+    background: #f0f0f0;
+    color: #000000;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    font-family: Graphic, NanumSquare, Dotum, Helvetica, Arial,
+    'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  }
+
+  #content_PAMPHM00300 .custom-detail-button::after {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAGCAYAAAD37n+BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABSSURBVChTfY9RDsAgCEPLTgkn5JiIVRacyd6HNdiSKhGBiZlRN2sIyFa4O/XheVLmSb+Tb6Bvru1HqAeuGskV4h+yPwfZs5tf+ruo6q+5WCFgAKAZHgmPNeo3AAAAAElFTkSuQmCC');
+    left: 10px;
+    position: relative;
+  }
+
+  #content_PAMPHM00300 .custom-ui-condition-panel>.custom-condition-panel-form>ul>li>.k-dropdown.dews-dropdownlist-wrapper,
+  #content_PAMPHM00300 .custom-ui-condition-panel>.custom-condition-panel-form>ul>li>input.k-textbox {
+    width: 100% !important;
+  }
+
+  #content_PAMPHM00300 .dews-container-panel>.dews-container-item>.dews-ui-cardlist {
+    border-top: none;
+    height: calc(100% - 76px) !important;
+  }
+
+  #content_PAMPHM00300 .dews-container-panel>.dews-container-item>.dews-ui-cardlist>.k-grid-content {
+    height: calc(100% - 28px) !important;
+  }
+
+  #content_PAMPHM00300 .dews-popup-panel {
+    padding: 0;
+    display: none;
+    overflow: hidden;
+    border: 1px solid #ccc;
+  }
+
+  #content_PAMPHM00300 .dews-popup-close-button {
+    width: 100%;
+    position: relative;
+    font-size: 14px;
+    font-family: Graphic, NanumSquare, Dotum, Helvetica, Arial,
+    'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    color: #000000;
+    padding: 5px 30px;
+    left: 0;
+    top: 0;
+    height: 33px;
+    border-bottom: 1px solid #ccc;
+    background: #f0f0f0;
+    background-image: none !important;
+  }
+
+  #content_PAMPHM00300 .dews-popup-close-button::after {
+    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAGCAYAAAD37n+BAAAAR0lEQVQYlX2QwQ3AMAgD7UwJE3pM55WKulV4IbgDBKvKACCJuER3GwDWAU/hBksibSOE3PS6YI0GJxD5M2QKKf1uTCGBzyM2dGgaEbvnlFcAAAAASUVORK5CYII=');
+    left: 10px;
+    position: relative;
+  }
+
+  #content_PAMPHM00300 .dews-popup-arrow-button {
+    display: none;
+  }
+
+  #content_PAMPHM00300 .dews-popup-panel .dews-form-panel ul>li:nth-child(3n+1) {
+    clear: none;
+  }
+
+  #content_PAMPHM00300 .dews-popup-panel .dews-form-panel ul>li:nth-child(2n+1) {
+    clear: left;
+  }
+
+  #content_PAMPHM00300 .dews-form-panel {
+    border-bottom: none;
+  }
+
+  #content_PAMPHM00300 .dews-popup-panel .dews-form-panel>.dews-form-panel-form>ul>li {
+    width: 322px!important;
+  }
+
+  #content_PAMPHM00300 .dews-popup-panel .dews-form-panel>.dews-form-panel-form>ul>li>label {
+    width: 147px;
+  }
+
+  #content_PAMPHM00300 .dews-popup-panel .dews-popup-item {
+    padding: 0px;
+  }
+
+  #content_PAMPHM00300 button.dews-ui-button.open-all {
+    width: 28px;
+    height: 27px;
+    background: url('/view/images/HR/ico_allshow.png') no-repeat center;
+  }
+
+  #content_PAMPHM00300 button.dews-ui-button.close-all {
+    width: 28px;
+    height: 27px;
+    background: url('/view/images/HR/ico_allhide.png') no-repeat center;
+  }
+</style>
+
+<!-- 스크립트 지정 -->
+<script src="/view/js/HR/hr.common.js"></script>
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+
+    //MARK: mainbutton setting --------------------------------
+    dews.ui.mainbuttons.approval.disable(true);
+    dews.ui.mainbuttons.print.disable(true);
+    dews.ui.mainbuttons.configure.disable(true);
+    dews.ui.mainbuttons.add.disable(true);
+    dews.ui.mainbuttons.delete.disable(true);
+
+    //flag
+    var flag = 1;
+    var index;
+
+    //MARK: variables --------------------------------
+    var dewself = this;
+    dewself.version.view = '1.0.22061301';
+    dewself.version.service = 'PersonalAdministrationManagementPHMService';
+    var objCodeDtl = {};
+    var gridCardList, dsCardList;
+    var gridDetailList, dsDetailList;
+    var resignDataSource_10062, resignGrid_10062, mutualAidDataSource_10062, mutualAidGrid, withHoldingRateGrid, withHoldingRateDataSource_10062;
+    var dtFrnrSinglTrteCd;
+    var gridSdtlList, dsSdtlList;
+    var deptOrderConfig;
+
+    var objConfigMst = derp.HR.getConfigMstData('COM006|SLA002|SLA003|COM042', null, null); // HR_CONFIG_MST 객체
+    var objConfigDtl = derp.HR.getConfigDtlData('COM006', null, null); // HR_CONFIG_DTL 객체
+
+    let configDataSet = getControlConfig(objConfigDtl.COM006);
+    var configMstCom042 = objConfigMst.COM042[0].CHAR_CD_VAL_DC; // [인사환경설정]메뉴의 '사원등록계정유형변경사용여부'
+
+    var com006Config = (0 < objConfigMst.COM006.length) ? objConfigMst.COM006[0].CHAR_CD_VAL_DC : '2';  // [인사환경설정]의 '사원등록항목통제'
+    var slamep002Config = (0 < objConfigMst.SLA002.length) ? objConfigMst.SLA002[0].CHAR_CD_VAL_DC : '2';  // [급여전표기준등록]의 '전표적용방식'
+    var slamep003Config = (0 < objConfigMst.SLA003.length) ? objConfigMst.SLA003[0].CHAR_CD_VAL_DC : '2';  // [급여전표기준등록]의 '예산연결사용여부'
+
+    var CompUtil = {};
+    var StandardConfigSet;
+    CompUtil = derp.HR.ComponentUtil.getInstance(dewself);
+    StandardConfigSet = CompUtil.getStandardConfig('PAMPHM00300');
+    CompUtil.makeComponent(StandardConfigSet);
+
+    var RowStateEnum = Object.freeze({
+      ADDED: "added",
+      UPDATED: "updated",
+      NONE: "none"
+    });
+    var detailConds = {
+        bizarea_cd: null,
+        dept_cd: null,
+        emp_tp: null,
+        ogrp_cd: null,
+        jknd_cd: null,
+        duty_cd: null,
+        pstn_cd: null,
+        // slst_cd_from: null,
+        // slst_cd_to: null,
+        slst_cd: null,
+        odty_cd: null,
+        posi_cd: null,
+        cc_cd: null,
+        pjt_cd: null,
+      };
+
+    // ▦▦▦▦▦▦ 태그 Attribute 추가 ▦▦▦▦▦▦
+    {
+      setBindingAttributes();
+    }
+
+    //YN코드
+    var dtYn = [
+      { CD_YN: 'N', NM_YN: 'No' },
+      { CD_YN: 'Y', NM_YN: 'Yes' }
+    ];
+
+    var dtYnAll = [{ CD_YN: '', NM_YN: '' },
+    { CD_YN: 'Y', NM_YN: 'Yes' },
+    { CD_YN: 'N', NM_YN: 'No' }];
+
+    var dtYns = [{ CD_YNS: 'N', NM_YNS: 'No' },
+    { CD_YNS: 'Y', NM_YNS: 'Yes' },
+    { CD_YNS: 'S', NM_YNS: dews.localize.get('사학연금', 'D0015405') }];
+
+    //코드관리 데이터 로드 (HR) : 재직구분[P00750], 계정유형[P00310], 감면유형[P00330], 거주자구분[P00310], 세액조정[P01470]
+    var dtCdIncom, dtCdAccount, dtCdGam, dtCdMrtp, dtCdLive, dtCdNation, dtCdTax;
+    var dtCdOcd = [];
+    var deadlineData = getPayDeadlineData();
+
+    getCodeData("HR", "P00040|P00310|P00330|P00390|P00750|P01330|P01480|P01470|P05200|P05900|P06300|P00220", null, null, null, null, null);
+    getCodeData("MA", "P00170|", null, null, null, null, null);
+    objCodeDtl.HR.P00310.unshift({FIELD_CD: "P00310", SYSDEF_CD: "", SYSDEF_NM: "", FLAG_CD: null});
+    objCodeDtl.HR.P00750.unshift({FIELD_CD: "P00750", SYSDEF_CD: "", SYSDEF_NM: "", FLAG_CD: null});    // 재직구분
+    objCodeDtl.HR.P01480.unshift({FIELD_CD: "P01480", SYSDEF_CD: "", SYSDEF_NM: "", FLAG_CD: null});
+    objCodeDtl.HR.P01470.unshift({FIELD_CD: "P01470", SYSDEF_CD: null, SYSDEF_NM: "", FLAG_CD: null});
+    objCodeDtl.HR.P05200.unshift({FIELD_CD: "P05200", SYSDEF_CD: "", SYSDEF_NM: "", FLAG_CD: null});
+    objCodeDtl.HR.P06300.unshift({FIELD_CD: "P06300", SYSDEF_CD: "", SYSDEF_NM: "", FLAG_CD: null});
+
+    makeReductDS(); // 감면율, 경영성과급감면(중소) 드롭다운리스트 데이터소스 세팅
+
+    dtCdAccount = dews.ui.dataSource("dtCdAccount", {
+      data: objCodeDtl.HR.P00310
+    });
+    dtCdLive = dews.ui.dataSource("dtCdLive", {
+      data: objCodeDtl.HR.P00390
+    });
+    dtCdIncom = dews.ui.dataSource("dtCdIncom", {
+      data: objCodeDtl.HR.P00750
+    });
+    dtCdGam = dews.ui.dataSource("dtCdGam", {
+      data: objCodeDtl.HR.reductTpCdDS
+    });
+    dtCdMrtp = dews.ui.dataSource("dtCdMrtp", {
+      data: objCodeDtl.HR.reductMgtMrtpDS
+    });
+    dtCdNation = dews.ui.dataSource("dtCdNation", {
+      data: objCodeDtl.MA.P00170
+    });
+    dtFrnrSinglTrteCd = dews.ui.dataSource("dtFrnrSinglTrteCd", {
+      data: objCodeDtl.HR.P00040
+    });
+    dtCdTax = dews.ui.dataSource("dtCdTax", {
+      data: objCodeDtl.HR.P01470
+    });
+    dtReductAplyFg = dews.ui.dataSource("dtReductAplyFg", {
+      data: objCodeDtl.HR.P05900
+    });
+    dtReductTrgtFg = dews.ui.dataSource("dtReductTrgtFg", {
+      data: objCodeDtl.HR.P05200
+    });
+    dtSrcTaxBneiCd = dews.ui.dataSource("dtSrcTaxBneiCd", {
+      data: objCodeDtl.HR.P06300
+    });
+    dtSrcEmpTp = dews.ui.dataSource("dtSrcEmpTp", {
+      data: objCodeDtl.HR.P00220
+    });
+
+    dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_codedtl'), {
+      async: false,
+      data: {
+        cd_gubun: "TAX",
+        cd_field_pipe: ""
+      }
+    }).done(function (data) {
+      var source = { FIELD_CD: "", SYSDEF_CD: "", SYSDEF_NM: "" };
+      dtCdOcd.push(source);
+
+      if (data.length > 0) {
+        for (var idx = 0; idx < data.length; idx++) {
+           source = {
+            SYSDEF_CD: data[idx]["SYSDEF_CD"], /* #.# CD_SYSDEF 변환됨 => SYSDEF_CD */ /* #.# CD_SYSDEF 변환됨 => SYSDEF_CD */
+            SYSDEF_NM: data[idx]["SYSDEF_NM"] /* #.# NM_SYSDEF 변환됨 => SYSDEF_NM */ /* #.# NM_SYSDEF 변환됨 => SYSDEF_NM */
+          }
+          dtCdOcd.push(source);
+        }
+      }
+    }).fail(function (xhr, status, error) {
+      dews.error(dews.localize.get('코드관리 조회 오류입니다.', 'M0002603'));
+    });
+
+    // drs처리(가스기술공사) 가입연금종류 컬럼
+    var rpenOriginData = [
+        { value: '', text: '' },
+        { value: '1', text: dews.localize.get('DB형', 'D0016982') },
+        { value: '2', text: dews.localize.get('DC형', 'D0016983') },
+        { value: '3', text: dews.localize.get('혼합형', 'D0016984') }
+    ];
+    var rpenDataSource2 = dews.ui.dataSource('rpenDataSource2', {
+        data: rpenOriginData
+    });
+    // 가스기술공사 (조회사항탭) drscode처리(10062)
+    if(dewself.mainEnv.drsCode === '10062'){
+      dewself.$LookupTab_10062.css('display', 'block');
+      dewself.mainTab.items.getById('LookupTab_10062').hide(false);
+
+      dewself.$content.find('#setDrsColumn1').css('display', 'none');
+      dewself.$content.find('#setDrsColumn2').css('display', 'none');
+      dewself.$content.find('#setDrsColumn3').css('display', 'none');
+      dewself.$content.find('#setDrsColumn4').css('display', 'none');
+    }else{
+      dewself.$LookupTab_10062.css('display', 'none');
+      dewself.mainTab.items.getById('LookupTab_10062').hide(true);
+
+      dewself.$content.find('#setDrsColumn1').css('display', 'block');
+      dewself.$content.find('#setDrsColumn2').css('display', 'block');
+      dewself.$content.find('#setDrsColumn3').css('display', 'block');
+      dewself.$content.find('#setDrsColumn4').css('display', 'block');
+    }
+
+
+    //MARK: initLoad --------------------------------
+    //드랍다운 데이터소스 바인딩
+    {
+      // 사원구분
+      dewself.EMP_TP.setDataSource(dtSrcEmpTp);
+      //재직구분 : 디폴트 1.재직구분 (1.재직, 2.휴직, 3.퇴직)
+      dewself.cbGubn.setDataSource(dtCdIncom);
+      dewself.cbGubn.value('1');
+      // 급여기초
+      dewself.RESIDNT_CD.setDataSource(dtCdLive);
+      dewself.REDUCT_TP_CD.setDataSource(dtCdGam);
+      dewself.MGT_MRTP_REDUCT_CD.setDataSource(dtCdMrtp);
+      dewself.REDUCT_APLY_FG.setDataSource(dtReductAplyFg);
+      dewself.REDUCT_TRGT_FG.setDataSource(dtReductTrgtFg);
+      dewself.ACCTTYPE_CD.setDataSource(dtCdAccount); /* #.# CD_ACCOUNT 변환됨 => ACCTTYPE_CD */
+      dewself.NOABROD_CD.setDataSource(dtCdOcd);
+      // 급여기초 yn
+      dewself.SPO_CD.setDataSource(dtYn);
+      dewself.LADY_HSHR_CD.setDataSource(dtYn);
+      dewself.HSHR_YN_CD.setDataSource(dtYn);
+      dewself.FRNR_SINGL_TRTE_CD.setDataSource(dtFrnrSinglTrteCd);
+      // dewself.SMLMDM_EMPYMN_TAXXMPT_CD.setDataSource(dtYn);
+      dewself.DSPTC_LABOR_YN.setDataSource(dtYn);
+      dewself.SCEPREPAY_TRGT_CD.setDataSource(dtYn);
+      dewself.PR_DRCT_WKR_CD.setDataSource(dtYn);
+      dewself.PR_FRMLA_M2500_YN.setDataSource(dtYn);
+      dewself.OCW_CD.setDataSource(dtYn);
+      dewself.NPNCRRENNC_CD.setDataSource(dtYns);
+      dewself.NPNCRRENNC_CD.setDataSource(dtYns);
+      dewself.HLTHINS_INS_CD.setDataSource(dtYn);
+      dewself.EMPYINSFO_TARGNO_CD.setDataSource(dtYn);
+      dewself.SRC_TAX_BNEI_CD.setDataSource(dtSrcTaxBneiCd);
+      dewself.INDUSAC_INSU_TRGT_CD.setDataSource(dtYn);
+      dewself.ODSN_RCPER_RDUCTTRGET_CD.setDataSource(dtYn);
+      //세액감면
+      // dewself.TAXAMT_DDCT_RT.setDataSource(dtCdTax);
+    }
+
+    //MARK: initDataSource --------------------------------
+    {
+      dsCardList = dews.ui.dataSource("dsCardList", {
+        async: false,
+        transport: {
+          read: {
+            type: 'post',
+            url: dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00100_list"),
+            data: function () {
+              dews.ui.loading.show();
+              return {
+                hlof_fg_cd: dewself.cbGubn.value(), /* #.# cd_incom 변환됨 => hlof_fg_cd */
+                search_param: dewself.txtSearch.text(),
+                // 상세조건
+                bizarea_cd_pipe: detailConds.bizarea_cd,
+                dept_cd_pipe: detailConds.dept_cd,
+                emp_tp_pipe: detailConds.emp_tp,
+                ogrp_cd_pipe: detailConds.ogrp_cd,
+                jknd_cd_pipe: detailConds.jknd_cd,
+                duty_cd_pipe: detailConds.duty_cd,
+                pstn_cd_pipe: detailConds.pstn_cd,
+                // slst_cd_from: detailConds.slst_cd_from,
+                // slst_cd_to: detailConds.slst_cd_to,
+                slst_cd: detailConds.slst_cd,
+                odty_cd_pipe: detailConds.odty_cd,
+                posi_cd_pipe: detailConds.posi_cd,
+                cc_cd_pipe: detailConds.cc_cd,
+                pjt_cd_pipe: detailConds.pjt_cd,
+              }
+            }
+          }
+        },
+        pageSize : 3000,
+        schema: {
+          model: {
+            id: 'EMP_NO', /* #.# NO_EMP 변환됨 => EMP_NO */
+            fields: [
+              { field: 'EMP_NO' }, /* #.# NO_EMP 변환됨 => EMP_NO */
+              { field: 'KOR_NM' }, /* #.# NM_KOR 변환됨 => KOR_NM */
+              { field: 'POSI_NM' },
+              { field: 'DEPT_NM' }, /* #.# NM_DEPT 변환됨 => DEPT_NM */
+              { field: 'UP_DEPT_NM' },
+              { field: 'BIZAREA_CD'},
+              { field: 'EMP_TP'},
+              { field: 'GROUPECNY_DT' },
+              { field: 'JNCO_DT' },
+              { field: 'RETIRESTDR_DT'},
+              { field: 'APNTC_EXPY_DT'},
+              { field: 'REDUCT_END_DT'},
+              { field: 'SORT_SQ', type:'number'},
+              { field: 'DEPT_START_DT'}
+            ]
+          }
+        }
+      });
+
+      dsDetailList = dews.ui.dataSource('dsDetailList', {
+        grid: true,
+        transport: {
+          read: {
+            url: dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00300_detail_list"),
+            data: function () {
+              var currentRow = gridCardList.select(),
+                currentNo = (typeof currentRow === 'undefined') ? '' : gridCardList.getValue(currentRow, 'EMP_NO'); /* #.# NO_EMP 변환됨 => EMP_NO */
+              return {
+                emp_no: currentNo /* #.# no_emp 변환됨 => emp_no */
+              }
+            }
+          }
+        },
+        schema: {
+          model: {
+            id: 'EMP_NO', /* #.# NO_EMP 변환됨 => EMP_NO */
+            fields: [
+              { field: 'EMP_NO' }, /* #.# NO_EMP 변환됨 => EMP_NO */
+              { field: 'BIZAREA_NM' },
+              { field: 'EMP_TP' },
+              { field: 'JNCO_DT' },
+              { field: 'RETR_DT' },
+              { field: 'SPO_CD' },
+              { field: 'FAMILYTEY_CNT' },
+              { field: 'LADY_HSHR_CD' },
+              { field: 'FAMILYSIY_CNT' },
+              { field: 'HSHR_YN_CD' },
+              { field: 'DSPSN_CNT' },
+              { field: 'DSPSN_FAML_CNT' },
+              { field: 'FRNR_SINGL_TRTE_CD' },
+              { field: 'CHILD_SUPP_DDCT_CNT' },
+              { field: 'SPDM_TRST_CHIL_CNT' },
+              { field: 'CHILD_BRP_TRGT_CNT' },
+              { field: 'RESIDNT_CD' },
+              { field: 'RESDNC_CD' },
+              { field: 'RESDNC_NM' },
+              { field: 'SMLMDM_EMPYMN_TAXXMPT_CD' },
+              { field: 'DSPTC_LABOR_YN' },
+              { field: 'SCEPREPAY_TRGT_CD' },
+              { field: 'SCEPREPAY_AMT' },
+              { field: 'SCEPREPAY_END_DT' },
+              { field: 'SRC_TAX_BNEI_CD' },
+              { field: 'REDUCT_APLY_FG' },
+              { field: 'REDUCT_TRGT_FG' },
+              { field: 'REDUCT_TP_CD' },
+              { field: 'MGT_MRTP_REDUCT_CD' },
+              { field: 'REDUCT_END_DT' },
+              { field: 'PR_DRCT_WKR_CD' },
+              { field: 'PR_FRMLA_M2500_YN' },
+              { field: 'OCW_CD' },
+              { field: 'NOABROD_CD' },
+              { field: 'BANK1_CD' },
+              { field: 'BANK1_NM' },
+              { field: 'ACCNT1_NO' },
+              { field: 'ACCNT1_NO_ORGN' },      //암호화비교를 위한 필드추가
+              { field: 'ACCNT1_NO_ENC_CD' },    //암호화비교를 위한 필드추가
+              { field: 'DPSR1_NM' },
+              { field: 'BANK2_CD' },
+              { field: 'BANK2_NM' },
+              { field: 'ACCNT2_NO' },
+              { field: 'ACCNT2_NO_ORGN' },      //암호화비교를 위한 필드추가
+              { field: 'ACCNT2_NO_ENC_CD' },    //암호화비교를 위한 필드추가
+              { field: 'DPSR2_NM' },
+              { field: 'NPNCRRENNC_CD' },
+              { field: 'NPN_AMT' },
+              { field: 'HLTHINS_INS_CD' },
+              { field: 'HLTHINS_AMT' },
+              { field: 'EMPYINSFO_TARGNO_CD' },
+              { field: 'ODSN_LNGTRRCPER_INSU_AMT' },
+              { field: 'INDUSAC_INSU_TRGT_CD' },
+              { field: 'PVTSKLPN_AMT' },
+              { field: 'ODSN_RCPER_RDUCTTRGET_CD' },
+              { field: 'HLTHINS_NO' },
+              { field: 'NPNMANAGE_NO' },
+              { field: 'ACCTTYPE_CD' },
+              { field: 'BG_TP_CD' },
+              { field: 'BG_TP_NM' },
+              { field: 'LOCTAX_APLCNTAR_CD' },
+              { field: 'ANIC_AMT' },
+              { field: 'MNTSLR_AMT' },
+              { field: 'FSTCLSS_AMT' },
+              { field: 'TMPAY_AMT' },
+              { field: 'APNTC_EXPY_DT' }, /* #.# DT_PROBAT 변환됨 => APNTC_EXPY_DT */
+              { field: 'TAXAMT_DDCT_RT'},
+              { field: 'EMPYINSFO_AMT'},
+              { field: 'EMPYINSFO_NO'},
+              { field: 'DSB_YN_CD'},
+              { field: 'FRGNR_CD'},
+              { field: 'STAY_QUA_CD'},
+              { field: 'STAY_QUA_NM'},
+              { field: 'RES_UPPT_BIRYYMM_DT'},
+
+            ]
+          }
+        }
+      });
+
+      // 가스기술공사 전용, 조회사항 탭 / 퇴직연금 그리드
+      {
+        resignDataSource_10062 = dews.ui.dataSource("resignDataSource_10062", {
+            grid: true,
+            transport: {
+                read: {
+                    url: dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00300_resign_list_10062"),
+                    data: function () {
+                      var currentRow = gridCardList.select(),
+                        currentNo = (typeof currentRow === 'undefined') ? '' : gridCardList.getValue(currentRow, 'EMP_NO'); /* #.# NO_EMP 변환됨 => EMP_NO */
+                      return {
+                        emp_no: currentNo /* #.# no_emp 변환됨 => emp_no */
+                      }
+                    }
+                }
+            }
+            ,
+            schema: {
+                model: {
+                    fields: [
+                        { field: 'EMP_NO' },
+                        { field: 'SBSANNTY_CD' },
+                        { field: 'FNLT_NM' },
+                        { field: 'NO_SQ' },
+                        { field: 'JOIN_DT' },
+                        { field: 'ANNTY_STD_DT' },
+                        { field: 'BANK_CD' },
+                        { field: 'ACNT_NO' },
+                        { field: 'ACM_RT' },
+                        { field: 'MIDDLECSUM_PAYTX_YN' }
+                        // { field: 'RETPEN_TRNS_DT' },
+                        // { field: 'RETPEN_TMNN_DT' },
+                        // { field: 'RMK_DC' },
+                        // { field: 'RTRPAY_CONN_INFO_DC' }
+                    ]
+                }
+            }
+        });
+      }
+      {
+        mutualAidDataSource_10062 = dews.ui.dataSource("mutualAidDataSource_10062", {
+            grid: true,
+            transport: {
+                read: {
+                    url: dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00300_mutualAid_list_10062"),
+                    data: function () {
+                      var currentRow = gridCardList.select(),
+                        currentNo = (typeof currentRow === 'undefined') ? '' : gridCardList.getValue(currentRow, 'EMP_NO'); /* #.# NO_EMP 변환됨 => EMP_NO */
+                      return {
+                        emp_no: currentNo /* #.# no_emp 변환됨 => emp_no */
+                      }
+                    }
+                }
+            }
+            ,
+            schema: {
+                model: {
+                    fields: [
+                        { field: 'EMP_NO' },
+                        { field: 'NO_SQ' },
+                        { field: 'JOIN_ISTN_CD' },
+                        { field: 'JOIN_ISTN_NM' },
+                        { field: 'JOIN_DT' },
+                        { field: 'DROT_DT' },
+                        { field: 'DUES_AMT' },
+                        { field: 'RMK_DC' }
+                    ]
+                }
+            }
+        });
+      }
+
+      {
+        withHoldingRateDataSource_10062 = dews.ui.dataSource("withHoldingRateDataSource_10062", {
+            grid: true,
+            transport: {
+                read: {
+                    url: dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00300_withHoldingRate_list_10062"),
+                    data: function () {
+                      var currentRow = gridCardList.select(),
+                        currentNo = (typeof currentRow === 'undefined') ? '' : gridCardList.getValue(currentRow, 'EMP_NO'); /* #.# NO_EMP 변환됨 => EMP_NO */
+                      return {
+                        emp_no: currentNo /* #.# no_emp 변환됨 => emp_no */
+                      }
+                    }
+                }
+            }
+            ,
+            schema: {
+                model: {
+                    fields: [
+                        { field: 'START_YM' },
+                        { field: 'END_YM' },
+                        { field: 'INCOMTAX_FG' },
+                        { field: 'INCOMTAX_NM' },
+                        { field: 'INCOMTAX_RT' },
+                        { field: 'RMK_DC' }
+                    ]
+                }
+            }
+        });
+      }
+
+      // 기준정보설정 동적 컬럼
+      {
+        dsSdtlList = dews.ui.dataSource('dsSdtlList', {
+          grid: true,
+          transport: {
+            read: {
+              url: dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00200_empSdtl_list"),
+              data: function () {
+                var currentRow = gridCardList.select();
+                return {
+                  emp_no: (typeof currentRow === 'undefined') ? '' : gridCardList.getValue(currentRow, 'EMP_NO'), /* #.# no_emp 변환됨 => emp_no */ /* #.# NO_EMP 변환됨 => EMP_NO */
+                  menuID: 'PAMPHM00300'
+                }
+              }
+            }
+          },
+          schema: {
+            model: {
+              id: 'EMP_NO', /* #.# NO_EMP 변환됨 => EMP_NO */
+              fields: [
+                { field: 'EMP_NO' }, /* #.# NO_EMP 변환됨 => EMP_NO */
+                { field: 'COMPANY_CD' }, /* #.# DT_ENTER 변환됨 => JNCO_DT */
+                { field: 'LINE_SQ' }, /* #.# DT_RETIRE 변환됨 => RETR_DT */
+                { field: 'MCLS_CD' },
+                { field: 'DATA_FG' },
+                { field: 'MNGD_CD' },
+                { field: 'MNGD_NM' },
+                { field: 'MNG_AMT' },
+                { field: 'MNG_DC' },
+                { field: 'ROWSTATE' }
+              ]
+            }
+          }
+        });
+      }
+    }
+
+    // MARK: initGrid --------------------------------
+    {
+      gridCardList = dews.ui.cardlist(dewself.$gridCardList, {
+        selectable: true,
+        dataSource: dsCardList,
+        cardStyle: 'spacing',
+        totalCount: {
+          template: '{0}명',
+          format: ''
+        },
+        title: '사원',
+        height: 300,
+        template:
+        '<div class="dews-cardlist-template">' +
+        '<div class="dews-cardlist-main-text">' +
+        '<p class="bold">#: !data.KOR_NM ? "" : data.KOR_NM #</p>' + /* #.# NM_KOR 변환됨 => KOR_NM */ /* #.# NM_KOR 변환됨 => KOR_NM */
+        '<p style="font-size: 14px;">&nbsp;#: !data.POSI_NM ? "" : data.POSI_NM #</p>' +
+        '</div>' +
+        '<div class="dews-cardlist-sub-text" style="width: 180px;">' +
+        '<p class="fontsize">#: !data.NM_UPDEPT ? "" : data.NM_UPDEPT + "/" #</p>' +
+        '<p class="color">#: !data.DEPT_NM ? "" : data.DEPT_NM #</p>' + /* #.# NM_DEPT 변환됨 => DEPT_NM */ /* #.# NM_DEPT 변환됨 => DEPT_NM */
+        '</div>' +
+        '<div class="dews-cardlist-right-text">' +
+        '<p>#: !data.EMP_NO ? "" : data.EMP_NO #</p>' + /* #.# NO_EMP 변환됨 => EMP_NO */ /* #.# NO_EMP 변환됨 => EMP_NO */
+        '</div></div>',
+        css:
+        '.fontsize { font-size: 13px} .k-dropdown.k-header { width : 100px!important}',
+        sort: [
+          { field: 'EMP_NO', title: dews.localize.get('사번 정렬', 'D0015490') },
+          { field: 'KOR_NM', title: dews.localize.get('성명 정렬', 'D0014194') },
+          { field: 'DEPT_CD', title: dews.localize.get('부서 정렬', 'D0014195') }
+        ],
+        dataBound: function(e){
+
+          dews.ui.loading.hide();
+          //setTotalEmpCount(gridCardList.dataItems().length);
+
+          if(flag == 2){
+            setTimeout(function(){
+              gridCardList.select(index);
+            }, 0);
+            flag = 1;
+          }
+        },
+        change: function(e) {
+          console.log('change!!');
+          resignDataSource_10062.read();
+          mutualAidDataSource_10062.read();
+          withHoldingRateDataSource_10062.read();
+        }
+      });
+
+      gridDetailList = dews.ui.grid(dewself.$gridDetailList, {
+        dataSource: dsDetailList,
+        columns: [
+          { field: 'EMP_NO' }, /* #.# NO_EMP 변환됨 => EMP_NO */
+          { field: 'BIZAREA_NM' },
+          { field: 'EMP_TP' },
+          { field: 'JNCO_DT' },
+          { field: 'RETR_DT' },
+          { field: 'SPO_CD' },
+          { field: 'FAMILYTEY_CNT' },
+          { field: 'LADY_HSHR_CD' },
+          { field: 'FAMILYSIY_CNT' },
+          { field: 'HSHR_YN_CD' },
+          { field: 'DSPSN_CNT' },
+          { field: 'DSPSN_FAML_CNT' },
+          { field: 'FRNR_SINGL_TRTE_CD' },
+          { field: 'CHILD_SUPP_DDCT_CNT' },
+          { field: 'SPDM_TRST_CHIL_CNT' },
+          { field: 'CHILD_BRP_TRGT_CNT' },
+          { field: 'RESIDNT_CD' },
+          { field: 'RESDNC_CD' },
+          { field: 'RESDNC_NM' },
+          { field: 'SMLMDM_EMPYMN_TAXXMPT_CD' },
+          { field: 'DSPTC_LABOR_YN' },
+          { field: 'SCEPREPAY_TRGT_CD' },
+          { field: 'SCEPREPAY_AMT' },
+          { field: 'SCEPREPAY_END_DT' },
+          { field: 'SRC_TAX_BNEI_CD' },
+          { field: 'REDUCT_TP_CD' },
+          { field: 'MGT_MRTP_REDUCT_CD' },
+          { field: 'REDUCT_END_DT' },
+          { field: 'PR_DRCT_WKR_CD' },
+          { field: 'PR_FRMLA_M2500_YN' },
+          { field: 'OCW_CD' },
+          { field: 'NOABROD_CD' },
+          { field: 'BANK1_CD' },
+          { field: 'BANK1_NM' },
+          { field: 'ACCNT1_NO' },
+          { field: 'DPSR1_NM' },
+          { field: 'BANK2_CD' },
+          { field: 'BANK2_NM' },
+          { field: 'ACCNT2_NO' },
+          { field: 'DPSR2_NM' },
+          { field: 'NPNCRRENNC_CD' },
+          { field: 'NPN_AMT' },
+          { field: 'HLTHINS_INS_CD' },
+          { field: 'HLTHINS_AMT' },
+          { field: 'EMPYINSFO_TARGNO_CD' },
+          { field: 'ODSN_LNGTRRCPER_INSU_AMT' },
+          { field: 'INDUSAC_INSU_TRGT_CD' },
+          { field: 'PVTSKLPN_AMT' },
+          { field: 'ODSN_RCPER_RDUCTTRGET_CD' },
+          { field: 'HLTHINS_NO' },
+          { field: 'NPNMANAGE_NO' },
+          { field: 'ACCTTYPE_CD' }, /* #.# CD_ACCOUNT 변환됨 => ACCTTYPE_CD */
+          { field: 'LOCTAX_APLCNTAR_CD' },
+          { field: 'ANIC_AMT' },
+          { field: 'MNTSLR_AMT' },
+          { field: 'FSTCLSS_AMT' },
+          { field: 'TMPAY_AMT' },
+          { field: 'APNTC_EXPY_DT' }, /* #.# DT_PROBAT 변환됨 => APNTC_EXPY_DT */
+          { field: 'TAXAMT_DDCT_RT'},
+          { field: 'FRGNR_CD'},   // 내외국인코드
+          { field: 'STAY_QUA_CD'},  // 체류자격
+        ],
+        change: function (e) {
+          console.log("$content::", dewself.$content, "||e.row.data::", e.row.data);
+          bindingControl(dewself.$content, e.row.data);
+          setInitControl(e.row.data);
+          // formpanel바인딩이 끝나고 실행되도록
+          setBgTpCdOptions();
+        }
+      });
+
+      resignGrid_10062 = dews.ui.grid(dewself.$resignGrid_10062, {
+          dataSource: resignDataSource_10062,
+          height: 200,
+          rowNo: true,
+          sortable: true,
+          selectable: true,
+          checkable: false,
+          shiftCheck: true,
+          editable: false,
+          noData: true,
+          noDataMessage: dews.localize.get('검색 결과가 없습니다.', 'M0000203'),
+          columns: [
+              {
+                  field: 'NO_SQ',
+                  title: dews.localize.get('순번', 'D0000006'),
+                  visible: false,
+                  editable: false
+              },
+              {
+                  field: 'EMP_NO',
+                  title: dews.localize.get('사번', 'D0000776'),
+                  editable: false,
+                  visible: false,
+                  width: 100,
+                  align: 'left'
+              },
+              {
+                  field: 'SBSANNTY_CD',
+                  title: dews.localize.get('가입연금종류', 'D0016981'),
+                  editable: false,
+                  editor: {
+                      type: 'dropDown',
+                      dataSource: rpenDataSource2,
+                      dataValueField: 'value',
+                      dataTextField: 'text'
+                  },
+                  width: 100,
+                  align: 'center'
+              },
+              {
+                  field: 'BANK_CD',
+                  title: dews.localize.get('연금사코드', 'D0016676'),
+                  visible: false
+              },
+              {
+                  field: 'FNLT_NM',
+                  title: dews.localize.get('연금사', 'D0016677'),
+                  width: 80,
+                  align: 'left'
+              },
+              {
+                  field: 'JOIN_DT',
+                  title: dews.localize.get('가입일', 'D0004380'),
+                  formats: {
+                      type: 'date',
+                      format: 'yyyy-MM-dd'
+                  },
+                  editor: {
+                      type: 'date',
+                      format: 'yyyy-MM-dd'
+                  },
+                  editable: false,
+                  width: 100
+
+              },
+              {
+                  field: 'ANNTY_STD_DT',
+                  title: dews.localize.get('연금기준일', 'D0016986'),
+                  formats: {
+                      type: 'date',
+                      format: 'yyyy-MM-dd'
+                  }, editor: {
+                      type: 'date',
+                      format: 'yyyy-MM-dd'
+                  },
+                  editable: false,
+                  width: 100
+              },
+              {
+                  field: 'ACNT_NO',
+                  title: dews.localize.get('연금계좌번호', 'D0016987'),
+                  editable: false,
+                  width: 115,
+                  align: 'left'
+              },
+              {
+                  field: 'ACM_RT',
+                  title: dews.localize.get('적립비율', 'D0016988'),
+                  formats: {
+                      type: 'number'
+                  },
+                  editable: false,
+                  width: 80,
+                  suffix: '%',
+                  align: 'right'
+              },
+              {
+                  field: 'MIDDLECSUM_PAYTX_YN',
+                  title: dews.localize.get('중간정산금납부', 'D0016989'),
+                  editor: {
+                      type: 'dropDown',
+                      dataSource: dews.ui.dataSource('ds',{data:dtYn}),
+                      dataValueField: 'CD_YN',
+                      dataTextField: 'NM_YN'
+                  },
+                  editable: false,
+                  width: 110,
+                  align: 'left'
+              }
+          ],
+          save: function (e) {
+          },
+          dataBound: function (e) {
+          }
+      });
+
+
+      withHoldingRateGrid = dews.ui.grid(dewself.$withHoldingRateGrid, { // 원천징수율
+          dataSource: withHoldingRateDataSource_10062,
+          height: 200,
+          rowNo: true,
+          sortable: true,
+          selectable: true,
+          checkable: false,
+          shiftCheck: true,
+          editable: false,
+          noData: true,
+          noDataMessage: dews.localize.get('검색 결과가 없습니다.', 'M0000203'),
+          columns: [
+              {
+                  field: 'START_YM',
+                  title: '시작년월',
+                  formats: {
+                      type: 'date',
+                      format: 'yyyy-MM'
+                  },
+                  editor: {
+                      type: 'date',
+                      format: 'yyyy-MM'
+                  },
+                  editable: false,
+                  width: 100
+              },
+              {
+                  field: 'END_YM',
+                  title: '종료년월',
+                  formats: {
+                      type: 'date',
+                      format: 'yyyy-MM'
+                  }, editor: {
+                      type: 'date',
+                      format: 'yyyy-MM'
+                  },
+                  editable: false,
+                  width: 100
+              },
+              {
+                  field: 'INCOMTAX_NM',
+                  title: '적용구분',
+                  editable: false,
+                  width: 115,
+                  align: 'left'
+              },
+              {
+                  field: 'INCOMTAX_RT',
+                  title: '과표율',
+                  formats: {
+                      type: 'number'
+                  },
+                  editable: false,
+                  width: 80,
+                  suffix: '%',
+                  align: 'right'
+              },
+              {
+                  field: 'RMK_DC',
+                  title: '비고',
+                  editable: false,
+                  width: 115,
+                  align: 'left'
+              }
+          ],
+          save: function (e) {
+          },
+          dataBound: function (e) {
+          }
+      });
+
+      mutualAidGrid = dews.ui.grid(dewself.$mutualAidGrid, {
+          dataSource: mutualAidDataSource_10062,
+          height: 200,
+          rowNo: true,
+          sortable: true,
+          selectable: true,
+          checkable: false,
+          shiftCheck: true,
+          editable: false,
+          noData: true,
+          noDataMessage: dews.localize.get('검색 결과가 없습니다.', 'M0000203'),
+          columns: [
+              {
+                  field: 'NO_SQ',
+                  title: dews.localize.get('순번', 'D0000006'),
+                  visible: false
+              },
+              {
+                  field: 'EMP_NO',
+                  title: dews.localize.get('사번', 'D0000776'),
+                  visible: false,
+                  attributes: {
+                      class: "readonly"
+                  },
+                  width: 100,
+                  align: 'left'
+              },
+              {
+                  field: 'JOIN_ISTN_CD',
+                  title: '가입기관코드',
+                  visible: false
+              },
+              {
+                  field: 'JOIN_ISTN_NM',
+                  title: '가입기관명',
+                  editable: false
+              },
+              {
+                  field: 'JOIN_DT',
+                  title: dews.localize.get('가입일', 'D0004380'),
+                  formats: {
+                      type: 'date',
+                      format: 'yyyy-MM-dd'
+                  },
+                  editor: {
+                      type: 'date',
+                      format: 'yyyy-MM-dd'
+                  },
+                  editable: false,
+                  width: 100
+
+              },
+              {
+                  field: 'DROT_DT',
+                  title: '탈퇴일',
+                  formats: {
+                      type: 'date',
+                      format: 'yyyy-MM-dd'
+                  },
+                  editor: {
+                      type: 'date',
+                      format: 'yyyy-MM-dd'
+                  },
+                  editable: false,
+                  width: 100
+
+              },
+              {
+                  field: 'DUES_AMT',
+                  title: '회비금액',
+                  formats: {
+                      type: 'number',
+                      format: '#,###'
+                  },
+                  editable: false,
+                  width: 100
+
+              },
+              {
+                  field: 'RMK_DC',
+                  title: '비고내역',
+                  editable: false,
+                  width: 100
+              }
+          ],
+          save: function (e) {
+          },
+          dataBound: function (e) {
+          }
+      });
+
+      gridSdtlList = dews.ui.grid('#gridSdtlList', {
+        autoBind: false,
+        dataSource: dsSdtlList,
+        selectable: true,
+        editable: false,
+        sortable: false,
+        checkable: false,
+        height: 245,
+        columns: [
+            { field: 'EMP_NO', title: dews.localize.get('사원번호', 'D0000074') },
+            { field: 'COMPANY_CD' },
+            { field: 'LINE_SQ' },
+            { field: 'MCLS_CD' },
+            { field: 'DATA_FG' },
+            { field: 'MNGD_CD' },
+            { field: 'MNGD_NM' },
+            { field: 'MNG_AMT' },
+            { field: 'MNG_DC' },
+            { field: 'ROWSTATE' }
+        ],
+        dataBound : function(e){
+          sdtlSettingData(e);
+        },
+        change : function(e){
+          sdtlSettingData(e);
+        }
+      });
+
+      gridCardList.setDetail(gridDetailList);
+      gridCardList.setDetail(gridSdtlList);
+    }
+
+    //MARK: initMainButton --------------------------------
+    {
+      dewself.$btn_search.on('click', function(e) {
+        dews.ui.mainbuttons.search.click();
+
+        dialog = dews.ui.dialog('PAMPHM00100_detailSearch_POP', {
+          url: '/view/HR/PAMPHM00100_detailSearch_POP',
+          title: dews.localize.get('상세검색', 'D0004328'),
+          width: 500,
+          height: 500,
+          ok: function (selectedConds) {
+            detailConds = selectedConds;
+          },
+        });
+        dialog.open();
+
+      });
+
+      //메인버튼 : 승인
+      dews.ui.mainbuttons.approval.on("click", function (e) {
+        console.log(" 메인버튼 : 승인");
+      });
+
+      //메인버튼 : 추가
+      dews.ui.mainbuttons.add.on("click", function (e) {
+        console.log(dews.localize.get(" 메인버튼 : 추가", 'D0072477'));
+      });
+
+      //메인버튼 : 조회
+      dews.ui.mainbuttons.search.on("click", function (e) {
+        console.log(dews.localize.get(" 메인버튼 : 조회", 'D0072478'));
+
+        dataSearch();
+        console.log('detail data', dsDetailList.data());
+
+        // 상세검색조건 초기화
+        $.each(detailConds, function(key, value) {
+          detailConds[key] = null;
+        });
+      });
+
+      // 전체 열기 / 닫기
+      dewself.$content.find('.dews-ui-button.open-all').on('click', function(e) {
+        let targetId = $(this).parent().siblings('div.dews-ui-arcodien')[0].id;
+        dewself[targetId].openAll();
+      });
+      dewself.$content.find('.dews-ui-button.close-all').on('click', function(e) {
+        let targetId = $(this).parent().siblings('div.dews-ui-arcodien')[0].id;
+        dewself[targetId].closeAll();
+      });
+
+      function getDeptOrderConfig(){
+        dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_getDeptOrderConfig'), {
+          async: false
+        }).done(function (data) {
+          deptOrderConfig = data;
+        }).fail(function (xhr, status, error) {
+        });
+      }
+      getDeptOrderConfig();
+
+      var card= dewself.gridCardList;
+      card._card.thead.find('.dews-dropdownlist-wrapper').on('change', function (e) {
+        var column,
+        select = $(e.target);
+        column = select.find('option[selected="selected"]')[0].value;
+
+        if(column == 'DEPT_CD'){
+          if(deptOrderConfig == '1'){
+            dsCardList.sort([{field: 'BIZAREA_CD', dir: 'asc'}, {field: 'DEPT_CD', dir: 'asc'}, {field: 'SORT_SQ', dir: 'asc'}, {field: 'DEPT_START_DT', dir: 'asc'}, {field: 'EMP_NO', dir: 'asc'}]);
+          }else{
+            dsCardList.sort([{field: 'BIZAREA_CD', dir: 'asc'}, {field: 'SORT_SQ', dir: 'asc'}, {field: 'DEPT_CD', dir: 'asc'}, {field: 'DEPT_START_DT', dir: 'asc'}, {field: 'EMP_NO', dir: 'asc'}]);
+          }
+        }
+      });
+
+      //저장
+      dews.ui.mainbuttons.save.on("click", function (e) {
+        console.log("dirty:: ", dsDetailList.getDirtyData());
+        console.log("dtc", dsDetailList.getDirtyDataCount());
+        console.log("grid", gridDetailList.dataItems());
+        if (IsChanged()) {
+          if(com006Config == '1') { // [인사환경설정]-사원등록항목통제 '사용'이면
+            if(configDataSet.BG_TP_CD.required == 'Y') { // [인사환경설정]- 통제항목 도움창에서 '예산유형코드'(BG_TP_CD) '필수'이면
+              if (isBgTpCdValid()) {
+                saveData();
+              } else {
+                dews.ui.snackbar.warning(dews.localize.get("입력되지 않은 필수값이 있습니다.", 'M0000036'));
+              }
+            }else if(configDataSet.BG_TP_CD.required == 'N') {
+              saveData();
+            }
+          }else if(com006Config == '2') { // [인사환경설정]-사원등록항목통제 '미사용'이면
+            if (slamep002Config === '1' && slamep003Config === '1') { // [급여전표기준등록]의 '전표적용방식'이 '1'(사원)이고 '예산연결사용여부'가 '1'사용이면
+              if (isDetailValid()) {
+                saveData();
+              } else {
+                dews.ui.snackbar.warning(dews.localize.get("입력되지 않은 필수값이 있습니다.", 'M0000036'));
+              }
+            } else {
+              saveData();
+            }
+          }
+
+        } else {
+          dews.ui.snackbar.info(dews.localize.get('변경된 사항이 없습니다', 'D0000408'));
+        }
+      });
+
+      //메인버튼 : 삭제
+      dews.ui.mainbuttons.delete.on("click", function (e) {
+        console.log(dews.localize.get(" 메인버튼 : 삭제", 'D0025754'));
+      });
+
+      //메인버튼 : 인쇄
+      dews.ui.mainbuttons.print.on("click", function (e) {
+        console.log(dews.localize.get(" 메인버튼 : 인쇄", 'D0072479'));
+      });
+
+      //Closing
+      dewself.closing.on(function (e) {
+        console.log(dews.localize.get(" 메뉴닫기", 'D0025836'));
+        if (IsChanged()) {
+          // 버튼 입력까지 닫기를 대기 하기 위해서는 promise() 함수를 호출하여 반환하여야 합니다.
+          return dews.confirm(dews.localize.get('저장하지 않은 변경사항이 존재합니다.\n그래도 닫기를 계속하시겠습니까?', 'M0005264')).no(function () {
+              e.preventDefault();
+            });
+        }
+      });
+
+      // 가스기술공사 전용 버튼 drscode처리(10062)
+    if(dewself.mainEnv.drsCode == '10062'){
+      dewself.$classMngBtn.on("click", function(e) { // '사원구분기준' 버튼(한국가스기술공사 전용)
+        var dialog;
+        var initData;
+
+        dialog= dews.ui.dialog('PAMPHM00300_classManage_POP', {
+          url: '/view/HR/PAMPHM00300_classManage_POP',
+          title: '직급별사원구분관리',
+          width : 900,
+          height : 550,
+          buttons: 'none',
+          ok: function(data) {
+
+          },
+          close: function(data) {
+            getClassChkLength();
+          }
+        });
+
+        // dialog.setInitData(initData);
+        dialog.open();
+      });
+
+      dewself.$classChkBtn.on("click", function(e) { // '사원구분체크' 버튼(한국가스기술공사 전용)
+        var dialog;
+        var initData;
+
+        dialog= dews.ui.dialog('PAMPHM00300_classCheck_POP', {
+          url: '/view/HR/PAMPHM00300_classCheck_POP',
+          title: '직급별사원구분체크',
+          width : 1100,
+          height : 550,
+          buttons: 'none',
+          ok: function(data) {
+
+          },
+          close: function(data) {
+            getClassChkLength();
+          }
+        });
+
+        // dialog.setInitData(initData);
+        dialog.open();
+      });
+
+      getClassChkLength();
+
+    }else {
+      dewself.$classMngBtn.hide();
+      dewself.$classChkBtn.hide();
+    }
+
+
+    function getClassChkLength() {
+      dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'Pamphm00300_pop_selectClassChk'), {
+        async: false,
+        data: {
+          keyword: '',
+          diff_check: 'Y'
+        }
+      }).done(function (data) {
+        // console.log("Pamphm00300_pop_selectClassChk:", data.length);
+        dewself.$classChkBtn.text("사원구분체크(" + data.length + ")");
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+    }
+
+      dewself.$btnNew.on("click", function(e) {
+        var dialog;
+        var initData;
+        index = gridCardList.select();
+        flag = 2;
+
+        // initData = {
+        //   yy_impute: dewself.cdt_yyImpute_ntb.value(),
+        //   tp_adjust: dewself.cdt_tpAdjust_ddl.value(),
+        //   cd_bizarea_pipe: dewself.cdt_cdBizarea_mcp.codes().join('|'),
+        //   cd_dept_pipe: dewself.cdt_cdDept_mcp.codes().join('|'),
+        //   no_emp_pipe: EmpMasterGrid.getCheckedValues("NO_EMP").join("|")
+        // };
+
+        dialog= dews.ui.dialog('PAMPHM00100_countDependents_POP', {
+          url: '/view/HR/PAMPHM00100_countDependents_POP',
+          title: dews.localize.get('부양가족계산', 'D0015422'),
+          width : 900,
+          height : 550,
+          buttons: 'none',
+          ok: function(data) {
+            // dews.ui.snackbar.ok('새로고침 되었습니다', 'ok');
+            // EmpMasterGridDataSource.read();
+            // dsDetailList.read();
+
+            dataSearch();
+          }
+        });
+
+        // dialog.setInitData(initData);
+        gridCardList.select(index);
+        dialog.open();
+      });
+    }
+
+    //MARK: eventHandler --------------------------------
+    {
+      // 더보기 버튼 클릭시
+      dewself.$content.find('.custom-detail-button').on('click', function () {
+        dews.ui.popuppanel($(this).parent().find('.dews-popup-panel'), {
+          visible: false
+        }).show();
+        $(this).parent().find('.dews-popup-panel').find('.dews-popup-close-button').text(dews.localize.get("더보기 닫기", 'D0015570'));
+      });
+
+      // 엔터키
+      dewself.$txtSearch.keydown(function (e) {
+
+        if (event.keyCode == 13) {
+          dataSearch();
+        }
+
+        // var search = dewself.txtSearch.text();
+        // if (event.keyCode == 13 && search) {
+        //   var index = 0;
+        //   var find = false;
+        //   var currentRow = dewself.gridCardList.select();
+        //   var ds = dewself.gridCardList.options.dataSource;
+        //   $.each(ds.data(), function (i, ii) {
+        //     if (i >= currentRow) {
+        //       $.each(Object.keys(ii), function (j, jj) {
+        //         if (typeof ii[jj] == 'string' && ii[jj].indexOf(search) > -1) {
+        //           if(i != currentRow) {
+        //             if(ds.pageSize() < i) {
+        //               ds.pageSize(i*1.2);
+        //             }
+        //             find = true;
+        //           }
+        //           index = i;
+        //           return false;
+        //         }
+        //       });
+        //       if(find) {
+        //         return false;
+        //       }
+        //     }
+        //   });
+        //   if(!find) {
+        //     $.each(ds.data(), function (i, ii) {
+        //       if (i < currentRow) {
+        //         $.each(Object.keys(ii), function (j, jj) {
+        //           if (typeof ii[jj] == 'string' && ii[jj].indexOf(search) > -1) {
+        //             find = true;
+        //             index = i;
+        //             return false;
+        //           }
+        //         });
+        //         if(find) {
+        //           return false;
+        //         }
+        //       }
+        //     });
+        //   }
+        //   if (typeof currentRow != 'undefined') {
+        //     dewself.gridCardList.select(index);
+        //   }
+        // }
+      });
+
+      dewself.$REDUCT_TRGT_FG.on('change', function(e) {
+        if (dewself.REDUCT_TRGT_FG.value() !== '') {
+          let dsbYnCd = dewself.gridDetailList.getCellValue(0, 'DSB_YN_CD');
+          let fullAge = derp.HR.getFullAgeFromBirth(dewself.gridDetailList.getCellValue(0, 'RES_UPPT_BIRYYMM_DT'));
+          if (dsbYnCd === 'Y' || (60 <= fullAge) || dewself.REDUCT_TRGT_FG.value() === '2') {
+            dewself.REDUCT_TP_CD.value('T12');
+            dewself.gridDetailList.setCellValue(0, 'REDUCT_TP_CD', 'T12', false);
+          } else {
+            dewself.REDUCT_TP_CD.value('T13');
+            dewself.gridDetailList.setCellValue(0, 'REDUCT_TP_CD', 'T13', false);
+          }
+          dewself.REDUCT_APLY_FG.value('1');
+          dewself.gridDetailList.setCellValue(0, 'REDUCT_APLY_FG', '1', false);
+          if (dewself.REDUCT_END_DT.value() === null) {
+            dews.alert('감면종료일이 입력되지 않았습니다.', 'warning');
+          }
+        } else {
+          dewself.REDUCT_TP_CD.value('');
+          dewself.gridDetailList.setCellValue(0, 'REDUCT_TP_CD', null, false);
+          dewself.REDUCT_END_DT.value('');
+          dewself.gridDetailList.setCellValue(0, 'REDUCT_END_DT', null, false);
+          dewself.REDUCT_APLY_FG.value('');
+          dewself.gridDetailList.setCellValue(0, 'REDUCT_APLY_FG', null, false);
+        }
+      });
+
+      // 거주자여부
+      dewself.$RESIDNT_CD.on("change", function (e) {
+        console.log(" RESIDNT_CD / change");
+
+        if (dewself.RESIDNT_CD.value() == "2") {
+          dewself.RESDNC_CD.enable(true);
+        } else {
+          dewself.RESDNC_CD.setData({SYSDEF_CD: null, SYSDEF_NM: null}, false);
+          dewself.RESDNC_CD.enable(false);
+        }
+      });
+
+      //국외근로여부
+      dewself.$OCW_CD.on("change", function (e) {
+        if (dewself.OCW_CD.value() == "Y") {
+          dewself.NOABROD_CD.enable(true);
+        } else {
+          dewself.NOABROD_CD.value(null);
+          dewself.NOABROD_CD.enable(false);
+        }
+      });
+
+      //학자금상환대상 SUB
+      dewself.$SCEPREPAY_TRGT_CD.on("change", function (e) {
+
+        if (dewself.SCEPREPAY_TRGT_CD.value() == "Y") {
+          dewself.SCEPREPAY_AMT.enable(true);
+        } else {
+          dewself.SCEPREPAY_AMT.value(null);
+          dewself.SCEPREPAY_AMT.enable(false);
+        }
+      });
+
+      //생산직해당 SUB
+      dewself.$PR_DRCT_WKR_CD.on("change", function (e) {
+
+        if (dewself.PR_DRCT_WKR_CD.value() == "Y") {
+          dewself.PR_FRMLA_M2500_YN.enable(true);
+          dewself.PR_FRMLA_M2500_YN.value("N");
+        } else {
+          dewself.PR_FRMLA_M2500_YN.value(null);
+          dewself.PR_FRMLA_M2500_YN.enable(false);
+        }
+      });
+
+      dewself.$content.find(".dews-form-panel .dews-ui-codepicker").on("setData", function (e) {
+
+        var oldCode = dewself.gridDetailList.getCellValue(0, e.target.id);
+        var newCode = e.code;
+        var subchar = e.target.id.substring(0,4);
+        var checkchar = e.target.id.substring(4);
+        if(subchar == 'std_'){
+          $.each(dewself.gridSdtlList.dataItems(), function(i,v){
+            if(v.MCLS_CD == checkchar){
+              dewself.gridSdtlList.setCellValue(i, 'MNG_DC', newCode);
+            }
+          });
+        }
+        else if (oldCode != newCode) {
+          dewself.gridDetailList.setCellValue(0, e.target.id, newCode, false);
+        }
+      });
+
+      dewself.$content.find(".dews-form-panel .dews-ui-zipcodepicker").on("setData", function (e) {
+
+        var oldCode = dewself.gridDetailList.getCellValue(0, e.target.id);
+        var newCode = e.zipcode;
+        var subchar = e.target.id.substring(0,4);
+        var checkchar = e.target.id.substring(4);
+        if(subchar == 'std_'){
+          $.each(dewself.gridSdtlList.dataItems(), function(i,v){
+            if(v.MCLS_CD == checkchar){
+              dewself.gridSdtlList.setCellValue(i, 'MNG_DC', newCode);
+            }
+          });
+        }
+        else if (oldCode != newCode) {
+          dewself.gridDetailList.setCellValue(0, e.target.id, newCode, false);
+          dewself.gridDetailList.setCellValue(0, e.target.getAttribute('data-dews-address-bind'), e.street, false);
+        }
+      });
+
+      dewself.$content.find(".dews-form-panel .dews-ui-textbox").on("change", function (e) {
+        var subchar = e.target.id.substring(0,4);
+        var checkchar = e.target.id.substring(4);
+        if(subchar == 'std_'){
+          $.each(dewself.gridSdtlList.dataItems(), function(i,v){
+            if(v.MCLS_CD == checkchar){
+              dewself.gridSdtlList.setCellValue(i, 'MNG_DC', e.target.value);
+            }
+          });
+        }else{
+          dewself.gridDetailList.setCellValue(0, e.target.id, e.target.value, false);
+        }
+      });
+
+      dewself.$content.find(".dews-form-panel .dews-ui-maskedtextbox").on("change", function (e) {
+        var subchar = e.target.id.substring(0,4);
+        var checkchar = e.target.id.substring(4);
+        if(subchar == 'std_'){
+          $.each(dewself.gridSdtlList.dataItems(), function(i,v){
+            if(v.MCLS_CD == checkchar){
+              dewself.gridSdtlList.setCellValue(i, 'MNG_DC', dews.ui.maskedtextbox($(e.target)).raw());
+            }
+          });
+        }else{
+          dewself.gridDetailList.setCellValue(0, e.target.id, dews.ui.maskedtextbox($(e.target)).raw(), false);
+        }
+      });
+
+      dewself.$content.find(".dews-form-panel .dews-ui-dropdownlist").on("change", function (e) {
+        var subchar = e.target.id.substring(0,4);
+        var checkchar = e.target.id.substring(4);
+        if(subchar == 'std_'){
+          $.each(dewself.gridSdtlList.dataItems(), function(i,v){
+            if(v.MCLS_CD == checkchar){
+              dewself.gridSdtlList.setCellValue(i, 'MNG_DC', e.target.value);
+            }
+          });
+        }else{
+          dewself.gridDetailList.setCellValue(0, e.target.id, e.target.value, false);
+          if(com006Config == '1') { // [인사환경설정]-사원등록항목통제 '사용'이면
+            if (e.target.id === 'ACCTTYPE_CD') { // '계정유형'이면
+              if(configMstCom042 == '1') {
+                if(configDataSet.BG_TP_CD.required == 'Y') { // [인사환경설정]- 통제항목 도움창에서 '예산유형코드' 필수 이면
+                  dewself.BG_TP_CD.required(true);
+                }else if(configDataSet.BG_TP_CD.required == 'N') {
+                  dewself.BG_TP_CD.required(false);
+                }
+
+                if(configDataSet.BG_TP_CD.readonly == 'Y') { // [인사환경설정]- 통제항목 도움창에서 '예산유형코드' 수정불가능 이면
+                  dewself.BG_TP_CD.readonly(true);
+                }else if(configDataSet.BG_TP_CD.readonly == 'N') {
+                  dewself.BG_TP_CD.readonly(false);
+                }
+
+                dewself.BG_TP_CD.setHelpParams(function () {
+                  return {
+                    accttype_cd: dewself.ACCTTYPE_CD.value(),
+                    docu_cd: '11'
+                  };
+                });
+
+                // 계정유형이 변경되면 예산유형 값을 null로 초기화한다.
+                dewself.BG_TP_CD.setData({'BG_TP_CD': null, 'BG_TP_NM': null}, false);
+                dewself.gridDetailList.setCellValue(0, 'BG_TP_CD', null, false);
+              }else if(configMstCom042 == '2') {
+                dewself.BG_TP_CD.required(false);
+                dewself.ACCTTYPE_CD.readonly(true); // '계정유형' 읽기전용으로 설정
+                dewself.BG_TP_CD.readonly(true); // '예산유형' 읽기전용으로 설정
+              }
+            }
+          }else if(com006Config == '2') { // [인사환경설정]-사원등록항목통제 '미사용'이면
+            if (slamep002Config === '1' && slamep003Config === '1') { // [급여전표기준등록]의 '전표적용방식'이 '1'(사원)이고 '예산연결사용여부'가 '1'사용이면
+              if (e.target.id === 'ACCTTYPE_CD') { // '계정유형'이면
+                if(configMstCom042 == '1') {
+                  if (dewself[e.target.id].value() === '') { // '계정유형' 값이 없으면
+                    dewself.BG_TP_CD.setData({'BG_TP_CD': null, 'BG_TP_NM': null}, false);
+                    dewself.BG_TP_CD.required(false);
+                    dewself.BG_TP_CD.readonly(true);
+                    dewself.gridDetailList.setCellValue(0, 'BG_TP_CD', null, false);
+                  } else {
+                    // 예산유형코드피커 계정유형파라미터 설정
+                    dewself.BG_TP_CD.required(true);  // '예산유형'은 필수값으로 통제
+                    dewself.BG_TP_CD.readonly(false);
+                    dewself.BG_TP_CD.setHelpParams(function () {
+                      return {
+                        accttype_cd: dewself.ACCTTYPE_CD.value(),
+                        docu_cd: '11'
+                      };
+                    });
+                  }
+                }else if(configMstCom042 == '2') {
+                  dewself.BG_TP_CD.required(false);
+                  dewself.ACCTTYPE_CD.readonly(true); // '계정유형' 읽기전용으로 설정
+                  dewself.BG_TP_CD.readonly(true); // '예산유형' 읽기전용으로 설정
+                }
+              }
+            }
+          }
+
+        }
+      });
+
+      dewself.$content.find(".dews-form-panel .dews-ui-datepicker").on("change", function (e) {
+        var subchar = e.target.id.substring(0,4);
+        var checkchar = e.target.id.substring(4);
+        if(subchar == 'std_'){
+          $.each(dewself.gridSdtlList.dataItems(), function(i,v){
+            if(v.MCLS_CD == checkchar){
+              dewself.gridSdtlList.setCellValue(i, 'MNG_DC', dews.ui.datepicker($(e.target)).value());
+            }
+          });
+        }else{
+          if (isEmpDeadline()) {
+            let deadlineColumns = ['APNTC_EXPY_DT','REDUCT_END_DT'];
+            // 현재 수정중인 컬럼명
+            let currentEditColumn = e.target.id;
+            // 현재 수정한 컴포넌트가 마감여부체크하는 입력항목인지 검사
+            if (deadlineColumns.includes(currentEditColumn)) {
+              let empDeadlineData = getEmpDeadlineData();
+              // 초기값
+              let initValue = gridCardList.getValue(gridCardList.select(), currentEditColumn);
+              // 현재 입력한 값
+              let inputValue = dews.ui.datepicker($(e.target)).value();
+              // 조회 초기 값이 마감여부데이터의 시작일, 종료일에 걸리는지 확인
+              // 입력한 값이 마감여부데이터의 시작일, 종료일에 걸리는지 확인
+              // 걸리면 마감사원 주의메시지창 출력
+              if ((empDeadlineData.START_DT <= initValue && initValue <= empDeadlineData.END_DT)
+                  || (empDeadlineData.START_DT <= inputValue && inputValue <= empDeadlineData.END_DT)) {
+                confirmDeadlineInput(e);
+              }
+            }
+          } else {
+            dewself.gridDetailList.setCellValue(0, e.target.id, dews.ui.datepicker($(e.target)).value(), false);
+          }
+        }
+      });
+
+      // 감면종료일, 학자금상환종료일 수기입력시 change 안타는 오류 때문에 focusout 태우기로 수정. 2021.05.31
+      dewself.$content.find(".dews-form-panel .dews-ui-datepicker").on("focusout", function (e) {
+        var subchar = e.target.id.substring(0,4);
+        var checkchar = e.target.id.substring(4);
+        if(subchar == 'std_'){
+          $.each(dewself.gridSdtlList.dataItems(), function(i,v){
+            if(v.MCLS_CD == checkchar){
+              dewself.gridSdtlList.setCellValue(i, 'MNG_DC', dews.ui.datepicker($(e.target)).value());
+            }
+          });
+        }else{
+          if (isEmpDeadline()) {
+            let deadlineColumns = ['APNTC_EXPY_DT','REDUCT_END_DT'];
+            // 현재 수정중인 컬럼명
+            let currentEditColumn = e.target.id;
+            // 현재 수정한 컴포넌트가 마감여부체크하는 입력항목인지 검사
+            if (deadlineColumns.includes(currentEditColumn)) {
+              let empDeadlineData = getEmpDeadlineData();
+              // 초기값
+              let initValue = gridCardList.getValue(gridCardList.select(), currentEditColumn);
+              // 현재 입력한 값
+              let inputValue = dews.ui.datepicker($(e.target)).value();
+              // 조회 초기 값이 마감여부데이터의 시작일, 종료일에 걸리는지 확인
+              // 입력한 값이 마감여부데이터의 시작일, 종료일에 걸리는지 확인
+              // 걸리면 마감사원 주의메시지창 출력
+              if ((empDeadlineData.START_DT <= initValue && initValue <= empDeadlineData.END_DT)
+                  || (empDeadlineData.START_DT <= inputValue && inputValue <= empDeadlineData.END_DT)) {
+                confirmDeadlineInput(e);
+              }
+            }
+          } else {
+            dewself.gridDetailList.setCellValue(0, e.target.id, dews.ui.datepicker($(e.target)).value(), false);
+          }
+        }
+      });
+
+      dewself.$content.find(".dews-form-panel .dews-ui-numerictextbox").on("change", function (e) {
+        var subchar = e.target.id.substring(0,4);
+        var checkchar = e.target.id.substring(4);
+        if(subchar == 'std_'){
+          $.each(dewself.gridSdtlList.dataItems(), function(i,v){
+            if(v.MCLS_CD == checkchar){
+              dewself.gridSdtlList.setCellValue(i, 'MNG_DC', e.target.value);
+            }
+          });
+        }else{
+          dewself.gridDetailList.setCellValue(0, e.target.id, e.target.value, false);
+        }
+      });
+
+      dewself.$gridCardList.find('.k-grid-content').on("scroll", function (e) {
+        var scroll = e.target;
+        if(Math.ceil(scroll.scrollTop) == scroll.scrollHeight - scroll.offsetHeight) {
+          var ds = dewself.gridCardList.options.dataSource;
+          if(ds.pageSize() <= ds.data().length) {
+            ds.pageSize(ds.pageSize()*1.2);
+          }
+        }
+      });
+    }
+
+    //MARK: func --------------------------------
+    {
+      function bindingControl(panel, dataItem) {
+        if (dataItem !== null) {
+
+          var _code, _text;
+
+          //마스트
+          var maskList = panel.find(".dews-form-panel .dews-ui-maskedtextbox");
+          for (var i = 0; i < maskList.length; i++) {
+            _text = dataItem[$(maskList[i]).attr('data-dews-bind-column')];
+            dews.ui.maskedtextbox($(maskList[i])).value(_text);
+          }
+
+          //텍스트
+          var txtList = panel.find(".dews-form-panel .dews-ui-textbox");
+          for (var i = 0; i < txtList.length; i++) {
+            _text = dataItem[$(txtList[i]).attr('data-dews-bind-column')];
+            dews.ui.textbox($(txtList[i])).text(_text);
+          }
+
+          //드롭다운
+          var dropList = panel.find(".dews-form-panel .dews-ui-dropdownlist");
+          for (var i = 0; i < dropList.length; i++) {
+            _code = dataItem[$(dropList[i]).attr('data-dews-bind-code')];
+            dews.ui.dropdownlist($(dropList[i])).value(_code);
+          }
+
+          //코드피커
+          var codeList = panel.find(".dews-form-panel .dews-ui-codepicker"), _obj;
+          for (var i = 0; i < codeList.length; i++) {
+            _obj = {};
+            _code = dataItem[$(codeList[i]).attr('data-dews-bind-code')];
+            _text = dataItem[$(codeList[i]).attr('data-dews-bind-text')];
+            _obj[dews.ui.codepicker($(codeList[i])).getOptions()["codeField"]] = _code;
+            _obj[dews.ui.codepicker($(codeList[i])).getOptions()["textField"]] = _text;
+            dews.ui.codepicker($(codeList[i])).setData(_obj, false);
+          }
+
+          //우편도움창
+          var zipList = panel.find(".dews-form-panel .dews-ui-zipcodepicker");
+          for (var i = 0; i < zipList.length; i++) {
+            _code = dataItem[$(zipList[i]).attr('data-dews-bind-code')];
+            if ($.isEmptyObject(_code)) {
+              dews.ui.zipcodepicker($(zipList[i])).clearData();
+            } else {
+              dews.ui.zipcodepicker($(zipList[i])).value(_code);
+            }
+          }
+
+          //데이트피커
+          var dateList = panel.find(".dews-form-panel .dews-ui-datepicker");
+          for (var i = 0; i < dateList.length; i++) {
+            _text = dataItem[$(dateList[i]).attr('data-dews-bind-column')];
+            dews.ui.datepicker($(dateList[i])).value(_text);
+          }
+
+          //금액
+          var numericList = panel.find(".dews-form-panel .dews-ui-numerictextbox");
+          for (var i = 0; i < numericList.length; i++) {
+            _text = dataItem[$(numericList[i]).attr('data-dews-bind-column')];
+            dews.ui.numerictextbox($(numericList[i])).value(_text);
+          }
+        }
+      }
+
+      function setInitControl(dataItem) {
+        if (dataItem !== null) {
+
+          // 거주자여부
+          if (dataItem.RESIDNT_CD == "2") {
+            dewself.RESDNC_CD.enable(true);
+          } else {
+            dewself.RESDNC_CD.setData({SYSDEF_CD: null, SYSDEF_NM: null}, false);
+            dewself.RESDNC_CD.enable(false);
+          }
+          // 국외근로여부
+          if (dataItem.OCW_CD == "Y") {
+            dewself.NOABROD_CD.enable(true);
+          } else {
+            dewself.NOABROD_CD.value(null);
+            dewself.NOABROD_CD.enable(false);
+          }
+          // 학자금상환대상
+          if (dataItem.SCEPREPAY_TRGT_CD == "Y") {
+            dewself.SCEPREPAY_AMT.enable(true);
+          } else {
+            dewself.SCEPREPAY_AMT.value(null);
+            dewself.SCEPREPAY_AMT.enable(false);
+          }
+          // 생산직해당
+          if (dataItem.PR_DRCT_WKR_CD == "Y") {
+            dewself.PR_FRMLA_M2500_YN.enable(true);
+            // dewself.PR_FRMLA_M2500_YN.value("N");
+          } else {
+            dewself.PR_FRMLA_M2500_YN.value(null);
+            dewself.PR_FRMLA_M2500_YN.enable(false);
+          }
+          // 체류자격
+          if (dataItem.FRGNR_CD == "2") {
+            dewself.STAY_QUA_CD.enable(true);
+            // dewself.PR_FRMLA_M2500_YN.value("N");
+          } else {
+            dewself.STAY_QUA_CD.setData({SYSDEF_CD: null, SYSDEF_NM: null}, false);
+            dewself.STAY_QUA_CD.enable(false);
+          }
+        }
+      }
+
+      function dataSearch() {
+        if (IsChanged()) {
+          dews.confirm(dews.localize.get('저장하지 않은 데이터가 있습니다.\n그래도 조회를 계속하시겠습니까?', 'M0000639')).yes(function () {
+            dsCardList.read();
+          }).done(function () {
+          });
+        }
+        else {
+          dsCardList.read();
+        }
+      }
+
+      function saveData() {
+        dews.api.batchSave(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00300_save'),
+          dsDetailList,
+          dsSdtlList
+        ).done(function (data) {
+            dews.ui.snackbar.ok(dews.localize.get('저장이 완료되었습니다.', 'M0000021')).done(function () {
+              dsCardList.read();
+              gridCardList.keepRow();
+            });
+        }).fail(function (message, status, error) {
+          dews.error({ message: message });
+        });
+      }
+
+      // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+      function setTotalEmpCount(count) {
+        let counterContext = dewself.$content.find('.dews-ui-cardlist .k-grid-header th.k-header #empCounter');
+        if (counterContext.length > 0) {
+          counterContext.remove();
+        }
+        dewself.$content.find('.dews-ui-cardlist .k-grid-header th.k-header').prepend(dews.localize.get('<span id="empCounter" style="font-weight: bold;">총인원 &nbsp;&nbsp;', 'D0015333') + count + dews.localize.get(' 명<span>', 'D0015334'));
+      }
+
+    }
+
+
+    //MARK: funcStd --------------------------------
+    {
+
+
+      //필수조회조건 체크
+      function Chk() {
+        return true;
+      }
+
+      //저장가능여부 : 권한
+      function CanSave() {
+        return true;
+      }
+
+      //그리드 데이터 변경여부
+      function IsChanged() {
+        if(CanSave()){
+          if (dsDetailList.getDirtyDataCount() > 0) {
+            return true;
+          }
+          if (dewself.gridSdtlList.dataSource.getDirtyDataCount() > 0) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      //데이터 검증
+      function Verify() {
+        return true;
+      }
+    }
+
+
+
+    function confirmDeadlineInput(panelInfo) {
+      dews.confirm(dews.localize.get('마감 대상 사원입니다.\n변경하시겠습니까?', 'M0015435'), 'question').yes(function (e) {
+        dewself.gridDetailList.setCellValue(0, panelInfo.target.id, dews.ui.datepicker($(panelInfo.target)).value(), false);
+      }).no(function (e) {
+
+        let orgData = gridCardList.getValue(gridCardList.select(), panelInfo.target.id);
+        dewself[panelInfo.target.id].value(orgData);
+
+      });
+    }
+
+    function getEmpDeadlineData() {
+      let currentEmpBizareaCd = gridCardList.getValue(gridCardList.select(), 'BIZAREA_CD');
+      let currentEmpEmpTp = gridCardList.getValue(gridCardList.select(), 'EMP_TP');
+      let result = {};
+      $.each(deadlineData, function(i, row) {
+        if (row.BIZAREA_CD === currentEmpBizareaCd && row.EMP_TP === currentEmpEmpTp) {
+          result = row;
+          return false;
+        }
+      });
+
+      return result;
+    }
+
+    function isEmpDeadline() {
+      let currentEmpBizareaCd = gridCardList.getValue(gridCardList.select(), 'BIZAREA_CD');
+      let currentEmpEmpTp = gridCardList.getValue(gridCardList.select(), 'EMP_TP');
+      let result = false;
+      $.each(deadlineData, function(i, row) {
+        if (row.BIZAREA_CD === currentEmpBizareaCd && row.EMP_TP === currentEmpEmpTp) {
+          result = true;
+          return false;
+        }
+      });
+
+      return result;
+    }
+
+    function getPayDeadlineData() {
+      let deadlineDataArr = [];
+      dews.api.post(dews.url.getApiUrl('HR', 'HrCommonService', 'getListRmenu'), {
+        async: false,
+        data: {
+          rvers_ym: dews.date.format(new Date(), 'yyyyMM'),
+          menu_cd: 'PAMPHM00300',
+          termfg_cd: null,
+          bizarea_cd: null,
+          // bizarea_cd: '1000|2000',
+          // bizarea_cd: JSON.stringify(['1000', '2000']),
+          empy_tp_cd: null,
+          emp_tp: null,
+          ctrl_fg: null,
+          basic_dt: null,
+          from_dt: null,
+          to_dt: null,
+          close_yn: 'Y',
+        }
+      }).done(function (data) {
+        console.log('getListRmenu:', data);
+        deadlineDataArr = data;
+      }).fail(function (xhr, status, error) {
+        dews.ui.snackbar.warning(xhr.responseJSON.message);
+        console.log(xhr, status, error);
+      });
+
+      return deadlineDataArr;
+    }
+
+    function setBgTpCdOptions() { // [인사환경설정]-사원등록항목통제
+      if(configMstCom042 == '1') {
+        if(com006Config == '2') { // [인사환경설정]-사원등록항목통제 '미사용'이면
+          if (slamep002Config === '1' && slamep003Config === '1') { // [급여전표기준등록]의 '전표적용방식'이 '1'(사원)이고 '예산연결사용여부'가 '1'사용이면
+            // 계정유형 값에 따른 예산유형 처리
+            if ((dewself.ACCTTYPE_CD.value()||'') === '') {
+              dewself.BG_TP_CD.readonly(true);
+              dewself.BG_TP_CD.required(false);
+            } else {
+              dewself.BG_TP_CD.readonly(false);
+              dewself.BG_TP_CD.required(true);
+            }
+          }
+        }else if(com006Config == '1') { // [인사환경설정]-사원등록항목통제 '사용'이면
+          if(configDataSet.BG_TP_CD.required == 'Y') { // [인사환경설정]- 통제항목 도움창에서 '예산유형코드' 필수 이면
+            dewself.BG_TP_CD.required(true);
+          }else if(configDataSet.BG_TP_CD.required == 'N') {
+            dewself.BG_TP_CD.required(false);
+          }
+
+          if(configDataSet.BG_TP_CD.readonly == 'Y') { // [인사환경설정]- 통제항목 도움창에서 '예산유형코드' 수정불가능 이면
+            dewself.BG_TP_CD.readonly(true);
+          }else if(configDataSet.BG_TP_CD.readonly == 'N') {
+            dewself.BG_TP_CD.readonly(false);
+          }
+        }
+
+        dewself.BG_TP_CD.setHelpParams(function () {
+          return {
+            accttype_cd: dewself.ACCTTYPE_CD.value(),
+            docu_cd: '11'
+          };
+        });
+      }else if(configMstCom042 == '2') {
+        dewself.BG_TP_CD.required(false);
+        dewself.ACCTTYPE_CD.readonly(true); // '계정유형' 읽기전용으로 설정
+        dewself.BG_TP_CD.readonly(true); // '예산유형' 읽기전용으로 설정
+      }
+    }
+
+    function isDetailValid() {
+      let result = true;
+      let dirtyData = dsDetailList.getDirtyData().Updated;
+      $.each(dirtyData, function(i, row) {
+        if(configMstCom042 == '1') {
+          if ((row.ACCTTYPE_CD !== null && row.ACCTTYPE_CD !== '')&& row.BG_TP_CD == null) {
+            result = false;
+            return false;
+          }
+        }else if(configMstCom042 == '2') {
+          result = true;
+          return true;
+        }
+      });
+
+      return result;
+    }
+
+    function isBgTpCdValid() {
+      let result = true;
+      let dirtyData = dsDetailList.getDirtyData().Updated;
+      $.each(dirtyData, function(i, row) {
+        if(configMstCom042 == '1') {
+          if (row.BG_TP_CD == null) {
+            result = false;
+            return false;
+          }
+        }else if(configMstCom042 == '2') {
+          result = true;
+          return true;
+        }
+      });
+
+      return result;
+    }
+
+    function getControlConfig(data) {
+      let configData = {};
+      $.each(data, function(i, items) {
+        configData[items.SETUP_DATA1_DC] = {};
+        configData[items.SETUP_DATA1_DC]['required'] = items.SETUP_DATA2_DC;
+        configData[items.SETUP_DATA1_DC]['readonly'] = items.SETUP_DATA3_DC;
+      });
+
+      return configData;
+    }
+
+    // 코드데이터
+    function getCodeData(module_cd, field_cd_pipe, syscode_yn, base_yn, foreign_yn, end_dt, keyword) { /* #.# cd_module 변환됨 => module_cd */ /* @.@ yn_default 변환 선택 => base_yn (base_val_yn,base_yn,dflt_yn) */ /* @.@ dt_end 변환 선택 => end_dt (jnco_term_end_dt,end_dt,cont_end_dt,ls_end_dt,dept_end_dt,bg_end_dt,vlid_end_dt) */
+
+      if (!objCodeDtl.hasOwnProperty(module_cd)) { /* #.# cd_module 변환됨 => module_cd */
+        objCodeDtl[module_cd] = {}; /* #.# cd_module 변환됨 => module_cd */
+      }
+      $.each(field_cd_pipe.split("|"), function (i, v) {
+        if (v != null && v != "") {
+          // objCodeDtl[cd_module][v] = [{ CD_SYSDEF: "", NM_SYSDEF: "" }];
+          objCodeDtl[module_cd][v] = []; /* #.# cd_module 변환됨 => module_cd */
+        }
+      });
+      dews.api.get(dews.url.getApiUrl("CM", "CommonCodeDtlService", "common_codeDtl_list"), {
+        async: false,
+        data: {
+          module_cd: module_cd, /* #.# cd_module 변환됨 => module_cd */ /* #.# cd_module 변환됨 => module_cd */
+          field_cd_pipe: field_cd_pipe,
+          syscode_yn: syscode_yn,
+          base_yn: base_yn, /* @.@ yn_default 변환 선택 => base_yn (base_val_yn,base_yn,dflt_yn) */ /* @.@ yn_default 변환 선택 => base_yn (base_val_yn,base_yn,dflt_yn) */
+          foreign_yn: foreign_yn,
+          end_dt: end_dt, /* @.@ dt_end 변환 선택 => end_dt (jnco_term_end_dt,end_dt,cont_end_dt,ls_end_dt,dept_end_dt,bg_end_dt,vlid_end_dt) */ /* @.@ dt_end 변환 선택 => end_dt (jnco_term_end_dt,end_dt,cont_end_dt,ls_end_dt,dept_end_dt,bg_end_dt,vlid_end_dt) */
+          keyword: keyword,
+        }
+      }).done(function (data) {
+        $.each(data, function (i, obj) {
+          objCodeDtl[module_cd][obj.FIELD_CD].push(obj); /* #.# cd_module 변환됨 => module_cd */ /* @.@ CD_FIELD 변환 선택 => FIELD_CD (COMM_CD,MNG_CD,FIELD_CD,CMUSEFLD_CD,FIELD_FG_CD,COMM_FIELD_CD) */
+        });
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+    }
+
+     // 사원등록 참고, 기준정보설정메뉴 동적 컬럼 세팅
+    function setBindingAttributes() {
+      // data-custom-~~ 처럼 attribute를 주게되면 dataset 안에 data-를 제외하고 lowerCamelCase로 property가 저장된다.
+      // data-custom-component-type -> customComponentType
+      dewself.$content.find('.dews-ui-textbox').attr('data-custom-getter-type', 'text');
+      dewself.$content.find('.dews-ui-textbox').attr('data-custom-setter-type', 'text');
+      dewself.$content.find('.dews-ui-textbox').attr('data-custom-component-type', 'text');
+      dewself.$content.find('.dews-ui-numerictextbox').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-numerictextbox').attr('data-custom-setter-type', 'value');
+      // dewself.$content.find('.dews-ui-maskedtextbox').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-maskedtextbox').attr('data-custom-getter-type', 'raw');
+      dewself.$content.find('.dews-ui-maskedtextbox').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-dropdownlist').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-dropdownlist').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-codepicker').attr('data-custom-getter-type', 'code');
+      dewself.$content.find('.dews-ui-codepicker').attr('data-custom-setter-type', 'setData');
+      dewself.$content.find('.dews-ui-codepicker').attr('data-custom-component-type', 'code');
+      dewself.$content.find('.dews-ui-datepicker').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-datepicker').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-zipcodepicker').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-zipcodepicker').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-zipcodepicker').attr('data-custom-component-type', 'zipcode');
+      dewself.$content.find('.dews-ui-radio-group').attr('data-custom-getter-type', 'value');
+      dewself.$content.find('.dews-ui-radio-group').attr('data-custom-setter-type', 'value');
+      dewself.$content.find('.dews-ui-radio-group').attr('data-custom-component-type', 'radio');
+    }
+    // 관련 핌스 : P20211001038 / 기준정보설정메뉴 조회데이터 동적 컬럼 추가 후 세팅.
+    function sdtlSettingData(e){
+      let componentsByTable = dewself.$content.find('[data-custom-bind-table=' + 'HR_EMP_SDTL' + ']');
+      if(e.row.data != "" && e.row.data != null){
+        $.each(componentsByTable, function(index, component) {
+          let attribute = component.dataset;
+          let bindKey = attribute.customBindKey;
+          let setterType = attribute.customSetterType;
+          $.each(e.grid.dataItems(), function(i, data) {
+            if (data !== null && bindKey === data.MCLS_CD) {
+              dewself[component.id][setterType](data.MNG_DC);
+              return false;
+            }
+          });
+        });
+      }
+    }
+
+    function makeReductDS() {
+      var tempP01480 = objCodeDtl.HR.P01480.slice();
+      var reductTpCdDS = new Array();
+      var reductMgtMrtpDS = new Array();
+
+      reductTpCdDS.push(tempP01480[0]);
+      reductMgtMrtpDS.push(tempP01480[0]);
+
+      for(idx = 0; idx < tempP01480.length; idx++) {
+        if(tempP01480[idx].SYSDEF_CD.substring(0,2) == "T1") {      // 감면율 드롭다운리스트
+          reductTpCdDS.push(tempP01480[idx]);
+        }else if(tempP01480[idx].SYSDEF_CD.substring(0,2) == "T3") {   // 경영성과급감면(중소) 드롭다운리스트
+          reductMgtMrtpDS.push(tempP01480[idx]);
+        }
+      }
+
+      objCodeDtl.HR.reductTpCdDS = reductTpCdDS;
+      objCodeDtl.HR.reductMgtMrtpDS = reductMgtMrtpDS;
+    }
+
+    //사용
+    //# sourceURL=/view/HR/PAMPHM/PAMPHM00300.js
+  });
+
+</script>

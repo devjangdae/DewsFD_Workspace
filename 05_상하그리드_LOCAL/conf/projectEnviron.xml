@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Environment>
+  <server>
+    <url>http://localhost:8080</url>
+  </server>
+  <serverdbsearch>
+    <url>http://localhost:8080</url>
+  </serverdbsearch>
+  <module>
+    <name>AU</name>
+    <desc>Inspection</desc>
+  </module>
+  <BaseInfo>
+    <UID>e8a0b906-24a3-4cc0-b674-c45dc47a3d6e</UID>
+  </BaseInfo>
+  <SourceBank>
+    <code>SourceBank__210809_162743</code>
+  </SourceBank>
+  <variables />
+  <outputs />
+</Environment>

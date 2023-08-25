@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page title="호봉" name="PAMPHM00100_slstCd_POP" type="codehelpdlg">
+  <canvas uid="canvas-1485142915113" type="codehelpdlg" dialogsize="big" title="호봉" preReady="4433528f-4ad9-47ed-aeef-004faea6a915" ready="f3aaf471-0287-4886-a9ea-a53dd4e47fa8" component="" function="">
+    <pageInformation>
+      <version>1.0</version>
+      <create>hjs0830</create>
+      <modify>hjs0830</modify>
+      <builddate>2023-06-07T13:54:47.7780056+09:00</builddate>
+      <createdate>2023-06-05T15:05:43.0309141+09:00</createdate>
+      <modifieddate>2023-06-07T13:54:47.7780056+09:00</modifieddate>
+    </pageInformation>
+    <conditionPanel uid="conditionPanel-1685945172759" id="conditionpanel1" margin="false" optional="false" optionalcollapsed="true" columnLength="3" labelAlign="right">
+      <conditionGroup uid="conditionGroup-1685945172856" type="required">
+        <conditionItem uid="conditionItem-1685945194063" id="keyword" columnSize="2" text="검색어" state="basic">
+          <textbox uid="textbox-1685945194166" id="keyword" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" keyDown="e75d1ffb-8fde-41bc-a6af-16dd47d68434" />
+        </conditionItem>
+      </conditionGroup>
+    </conditionPanel>
+    <containerPanel uid="containerPanel-1685945178621" id="containerpanel1" height_type="px" fitBottom="true" containerResize="false">
+      <containerItem uid="containerItem-1685945179042" id="containerpanelitem1" width_type="px" location="normal">
+        <grid uid="grid-1685945181554" mockupData="" id="grid1" dataSource="ds1" height_type="px" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="multiple" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false" dataBound="ac275dba-0389-4f40-a0e0-6506f2c47757" dblClicked="5004a328-ade7-48bd-a974-bb70dce6c311">
+          <columns>
+            <column uid="fb88ce80-f1ce-4f59-bea0-b676eb365cb6" field="SLST_CD" title="호봉" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
+                <referenceFieldArray />
+              </mergeObject>
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <headerSummary predefined="false" currency_type="value" currency="" align="center" />
+              <headerSummaryCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+          </columns>
+          <filter filterType="Boolean" filter="true" iconVisible="false" />
+          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+            <gridContextItems />
+          </contextObject>
+          <detailGrid addedRowDataSourceRead="true" />
+          <gridGroupColumns />
+          <fixed colCount="0" rightColCount="0" />
+          <styles heightTyp="string">
+            <rowNo />
+            <cellBorder />
+            <font bold="false" />
+            <padding />
+            <heightObject />
+          </styles>
+          <note>
+            <keys />
+          </note>
+        </grid>
+      </containerItem>
+    </containerPanel>
+  </canvas>
+  <dataSources>
+    <datasource uid="datasource-9f6d941357344f4b845814c49de2adaf" id="ds1" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PersonalAdministrationManagementPHMService" urlpattern="pamphm00100_selectSlstCd" params_type="javascript" params="87fd3599-3912-4700-8c9e-d200d5c813f8" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="2810995b-37a4-498a-ab8e-3a3b09381e98" DSType="Grid" isPost="false">
+      <mapping />
+      <columns>
+        <column field="SLST_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="호봉" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+  </dataSources>
+  <pageMarkDown><![CDATA[]]></pageMarkDown>
+  <pageCssStyle><![CDATA[]]></pageCssStyle>
+  <stylesheets />
+  <javascripts>
+    <javascript id="4433528f-4ad9-47ed-aeef-004faea6a915"><![CDATA[
+var addField = [], addColumn = [];
+
+
+addField = [
+              { field: 'SLST_CD', editable: false, dataType: 'string' }
+            ];
+]]></javascript>
+    <javascript id="f3aaf471-0287-4886-a9ea-a53dd4e47fa8"><![CDATA[function initSetting() {
+  addField = [
+            { field: 'SLST_CD', editable: false, dataType: 'string' }
+          ];
+  
+  addColumn = [
+        {
+          field: 'SLST_CD',
+          title: '호봉',
+          width: 80
+        },
+      ];
+}
+
+
+function getDynamicGridName(){
+  dews.api.get(dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00100_selectSlstCdHeaderName"), {
+    async: false,
+  }).done(function (data) {
+    console.log("data:", data);
+
+    var flag = false;
+
+    $.each(data, function(idx, val){
+      addField.push({field: 'COL' +val.SYSDEF_CD}); // 데이터소스에 필드 추가
+      addColumn.push({field: 'COL' + val.SYSDEF_CD,  // 그리드에 컬럼 추가
+                      title: val.SYSDEF_NM,
+                      align: "right",
+                      width: 100,
+                      formats: {
+                        type: 'number',
+                        format: 'MA00003',
+                        predefined: true
+                      }
+                    });
+
+    });
+  }).fail(function (xhr, status, error) {
+    dews.error(xhr.responseJSON.message);
+  });
+}
+
+dews.ui.loading.show();
+initSetting();
+getDynamicGridName();
+
+self.ds1.setFields(addField);
+self.grid1.setColumns(addColumn);
+
+self.keyword.text(self.initData.params.keyword);
+self.ds1.read();
+
+self.buttons.ok.on('click', function (e) {
+    if(self.grid1.select() > 0) {
+        self.ok(self.grid1.dataItem(self.grid1.select()));
+    }else{
+      dews.alert('선택된 데이터가 없습니다.', 'warning');
+    }
+});
+
+
+//# sourceURL=PAMPHM00100_slstCd_POP.js
+]]></javascript>
+    <javascript id="87fd3599-3912-4700-8c9e-d200d5c813f8"><![CDATA[function() {
+    return {
+        'keyword' : self.keyword.text(),
+        'pstn_cd' : self.initData.params.pstn_cd   // 직급코드
+    }
+}]]></javascript>
+    <javascript id="2810995b-37a4-498a-ab8e-3a3b09381e98"><![CDATA[function (e) {
+    console.log(e);
+    // e.error 에러
+    // e.message 에러 메시지
+    // e.state 에러 상태 (ex) 400
+    dews.ui.loading.hide();
+    dews.error(e.message);
+}]]></javascript>
+    <javascript id="e75d1ffb-8fde-41bc-a6af-16dd47d68434"><![CDATA[function(e) {
+  try {
+        if (e.keyCode == 13) {
+          dews.ui.loading.show();
+          self.ds1.read();
+        }
+      } catch (error) {
+        dews.error(error);
+      }
+}]]></javascript>
+    <javascript id="5004a328-ade7-48bd-a974-bb70dce6c311"><![CDATA[function(e) {
+  self.ok(self.grid1.dataItem(self.grid1.select()));
+}]]></javascript>
+    <javascript id="ac275dba-0389-4f40-a0e0-6506f2c47757"><![CDATA[function(e) {
+  dews.ui.loading.hide();
+  if(e.row.data.length == 0) {
+    dews.ui.snackbar.warning("조회된 데이터가 없습니다.");
+  }
+}]]></javascript>
+  </javascripts>
+  <settings />
+  <datas />
+</page>

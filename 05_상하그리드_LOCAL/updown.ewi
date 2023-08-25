@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PageInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <layout>
+    <selectedServer>https://staging.comet.duzon.net</selectedServer>
+    <projectName>04_상하그리드</projectName>
+    <menuTitle>상하그리드</menuTitle>
+    <menuID>updown</menuID>
+  </layout>
+  <dataSources>
+    <datasource uid="datasource-d672750486b64fb1839c87cfce106ded" id="mstGrid_ds" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="PS" service="ProjectSystemWbsService" urlpattern="dept_search_list" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping>
+        <param parameter="dept_cd" applyType="control" dataType="_DEPT_CD" value="code" />
+      </mapping>
+      <columns>
+        <column field="DEPT_CD" unionfield="" dataType="string" editable="false" isID="false" isChildren="false" description="부서코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="DEPT_NM" unionfield="" dataType="string" editable="false" isID="false" isChildren="false" description="부서명" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="DEPT_START_DT" unionfield="" dataType="string" editable="false" isID="false" isChildren="false" description="부서시작일" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="_UUID" unionfield="" dataType="string" editable="false" isID="false" isChildren="false" description="_uid" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-7e63da939c804d349c36c4af3b183950" id="dtlGrid_ds" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="PS" service="ProjectSystemWbsService" urlpattern="emp_search_list" params_type="mapping" params="b83edbbb-a805-44ad-9745-303de1be7454" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping>
+        <param parameter="dept_cd" applyType="control" dataType="grid1" value="selectedRow.DEPT_CD" />
+      </mapping>
+      <columns>
+        <column field="DEPT_CD" unionfield="" dataType="string" editable="false" isID="false" isChildren="false" description="부서코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="EMP_NO" unionfield="" dataType="string" editable="false" isID="false" isChildren="false" description="사번" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="KOR_NM" unionfield="" dataType="string" editable="false" isID="false" isChildren="false" description="사원명" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+  </dataSources>
+</PageInfo>

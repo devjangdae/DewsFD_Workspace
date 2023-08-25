@@ -1,0 +1,1373 @@
+﻿<!--##f4b16cfc-bd5e-4ec8-8633-c8d9e5cc9bdb##-->
+<!--##content_PAMPHM00800##-->
+<!--##S++kMjty3QSdFLEdG2bJqCrqtwxgCYZoERac3yu3o2g=##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: PAMPHM00800
+  # PageTitle: 외부사원등록
+  # Server: https://dev.comet.duzon.net/
+-->
+<!--
+
+-->
+
+<div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="left" data-dews-width="347px">
+    <div class="dews-ui-container-panel" data-dews-container-height="50">
+      <div class="dews-container-item" data-dews-position="normal">
+        <div class="custom-ui-condition-panel" id="CardListCondition" style="width: 347px; height: 47px;">
+          <input type="text" id="DATE_DT" name="datepicker1" class="dews-ui-datepicker basic" style="float: left; width: 100px; margin-right: 2px;"/>
+          <input id="KEYWORD" type="text" class="dews-ui-textbox" style="float: left; width: 210px; margin-right: 2px;" placeholder="부서/성명/사원번호">
+        </div>
+      </div>
+    </div>
+    <div class="dews-ui-container-panel" style="display: none;">
+      <div class="dews-container-item" data-dews-position="normal">
+        <div id="outEmpDtlGrid" class="dews-ui-grid"></div>
+      </div>
+    </div>
+    <div class="dews-ui-container-panel" style="overflow: hidden;" data-dews-fit-bottom="true">
+      <div class="dews-container-item" data-dews-position="normal">
+        <div id="outEmpGrid" class="dews-ui-grid"></div>
+      </div>
+    </div>
+  </div>
+  <div class="dews-container-item" data-dews-position="normal">
+    <div class="dews-ui-container-panel">
+      <div class="dews-container-item" data-dews-position="normal">
+        <div class="dews-custom-profile-panel">
+  <!-- 프로필사진 프레임 -->
+  <div class="dews-custom-profile-photo-frame">
+    <span class="dews-custom-profile-photo">
+      <!-- 사진등록 포토업로더 -->
+      <div style="display:none;">
+        <input id="photoUploader" type="file" class="dews-ui-file" data-dews-download-use="false" data-dews-file-key="customFileKey">
+      </div>
+      <img id="photoArea">
+      <span class="dews-custom-profile-photo-edit-icon"></span>
+    </span>
+  </div>
+  <div class="dews-custom-profile-info-frame">
+    <div class="dews-custom-profile-employee">
+      <div class="dews-custom-profile-name"></div>
+      <div class="dews-custom-profile-position"></div>
+    </div>
+    <span class="dews-custom-profile-division">
+      <span class="dews-custom-profile-bizarea no-space"></span>
+      <span class="dews-custom-profile-updept no-space"></span>
+      <span class="dews-custom-profile-dept no-space"></span>
+      <span class="dews-custom-profile-duty no-space"></span>
+    </span>
+  </div>
+  <div class="dews-custom-profile-button-frame">
+    <span id="btn_edit" class="dews-custom-profile-button">
+      <span class="dews-custom-profile-info-edit-icon"></span>
+      <span id="editBtnText" class="dews-custom-profile-button-frame-text dews-ui-multilingual" data-dews-localize-key="D0000266">수정</span>
+    </span>
+    <span id="btn_fileUpload" class="dews-custom-profile-button" style="width: 90px; top: -15px; position: relative;">
+      <span class="dews-custom-profile-file-upload-icon"></span>
+      <span class="dews-custom-profile-button-frame-text dews-ui-multilingual" data-dews-localize-key="D0026697">파일</span>
+      <span id="fileCount" style="display: inline-block; position: relative; top: 4px; left: -14px;">(0)</span>
+      <!-- <span class="dews-custom-profile-countbox">0</span> -->
+    </span>
+  </div>
+</div>
+      </div>
+    </div>
+    <div class="dews-ui-container-panel" data-dews-fit-bottom="true" style="min-width: 699px; overflow: auto;">
+      <div class="dews-container-item" data-dews-position="normal">
+        <div id="FORMPANEL" class="dews-ui-form-panel">
+          <form class="dews-form-panel-form">
+            <ul>
+              <li>
+                <label>사원번호</label>
+                <span>
+                  <input id="EMP_NO" name="EMP_NO" type="text" data-dews-bind-column="EMP_NO" class="dews-ui-textbox required" />
+                </span>
+              </li>
+              <li>
+                <label>통합사원번호</label>
+                <span>
+                  <input id="GEMP_NO" type="text" class="dews-ui-textbox required"  data-dews-bind-column="GEMP_NO" data-custom-readonly="true" maxlength="40" style="width: 140px;">
+                  <button id="GEMP_NO_BTN" class="dews-ui-button ico-search" disabled="true"></button>
+                </span>
+              </li>
+              <li>
+                <label>성명</label>
+                <span>
+                  <input id="KOR_NM" name="KOR_NM" type="text" data-dews-bind-column="KOR_NM" class="dews-ui-textbox" />
+                </span>
+              </li>
+              <li>
+                <label>사업장</label>
+                <span>
+                  <input type="text" id="BIZAREA_CD" name="BIZAREA_CD" class="dews-ui-codepicker basic" data-dews-help-code="H_MA_BIZAREA_MST_S" data-dews-code-field="BIZAREA_CD" data-dews-text-field="BIZAREA_NM" data-dews-help-custom="false" data-dews-bind-code="BIZAREA_CD" data-dews-bind-text="BIZAREA_NM" data-dews-help-size="medium" data-dews-ajax="true" />
+                </span>
+              </li>
+              <li>
+                <label>부서</label>
+                <span>
+                  <input type="text" id="DEPT_CD" name="DEPT_CD" class="dews-ui-codepicker basic" data-dews-help-code="H_MA_DEPT_MST_S" data-dews-code-field="DEPT_CD" data-dews-text-field="DEPT_NM" data-dews-help-custom="false" data-dews-bind-code="DEPT_CD" data-dews-bind-text="DEPT_NM" data-dews-help-size="medium" data-dews-ajax="true" />
+                </span>
+              </li>
+              <li>
+                <label>시작일</label>
+                <span>
+                  <input type="text" id="START_DT" name="START_DT" class="dews-ui-datepicker basic" data-dews-bind-column="START_DT" />
+                </span>
+              </li>
+              <li>
+                <label>종료일</label>
+                <span>
+                  <input type="text" id="END_DT" name="END_DT" class="dews-ui-datepicker basic" data-dews-bind-column="END_DT" />
+                </span>
+              </li>
+              <li>
+                <label>사원구분</label>
+                <span>
+                  <select id="EMP_TP" name="EMP_TP" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-bind-value="EMP_TP" data-dews-show-tooltip="true" data-dews-option-label-value="" data-dews-option-label-text="" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+                </span>
+              </li>
+              <li>
+                <label>비용센터</label>
+                <span>
+                  <input type="text" id="CC_CD" name="CC_CD" class="dews-ui-codepicker basic" data-dews-help-code="H_MA_CC_MST_S" data-dews-code-field="CC_CD" data-dews-text-field="CC_NM" data-dews-help-custom="false" data-dews-bind-code="CC_CD" data-dews-bind-text="CC_NM"  data-dews-help-width="800" data-dews-help-height="600" data-dews-ajax="true" />
+                </span>
+              </li>
+              <li>
+                <label>메일주소</label>
+                <span>
+                  <input id="EMAIL_NM" name="EMAIL_NM" type="text" data-dews-bind-column="EMAIL_NM" class="dews-ui-textbox basic" />
+                </span>
+              </li>
+              <li>
+                <label>프로젝트</label>
+                <span>
+                  <input type="text" id="PJT_CD" name="PJT_CD" class="dews-ui-codepicker basic" data-dews-help-code="H_MA_PROJECT_MST_S" data-dews-code-field="NO_PROJECT" data-dews-text-field="NM_PROJECT" data-dews-help-custom="false" data-dews-bind-code="PJT_CD" data-dews-help-width="800" data-dews-help-height="600" data-dews-ajax="true" />
+                </span>
+              </li>
+              <li>
+                <label>비상연락처</label>
+                <span>
+                  <input id="EMGNC_CNTC_NO" name="EMGNC_CNTC_NO" type="text" data-dews-bind-column="EMGNC_CNTC_NO" class="dews-ui-textbox basic" />
+                </span>
+              </li>
+              <li>
+                <label>전화번호</label>
+                <span>
+                  <input id="TEL_NO" name="TEL_NO" type="text" data-dews-bind-column="TEL_NO" class="dews-ui-textbox basic" />
+                </span>
+              </li>
+              <li>
+                <label>공장</label>
+                <span>
+                  <input type="text" id="PLANT_CD" name="PLANT_CD" class="dews-ui-codepicker basic" data-dews-help-code="H_MA_PLANT_MST_S" data-dews-code-field="PLANT_CD" data-dews-text-field="PLANT_NM" data-dews-help-custom="false" data-dews-bind-code="PLANT_CD" data-dews-help-width="800" data-dews-help-height="600" data-dews-ajax="true" />
+                </span>
+              </li>
+              <li id="GW_LCNS_CD_LI">
+                <label>GW라이선스</label>
+                <span>
+                  <select id="GW_LCNS_CD" name="GW_LCNS_CD" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-bind-value="GW_LCNS_CD" data-dews-show-tooltip="true" data-dews-option-label-value="" data-dews-option-label-text="" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+                </span>
+              </li>
+              <li class="col-2">
+                <label>비고</label>
+                <span>
+                  <input id="RMK_DC" name="RMK_DC" type="text" data-dews-bind-column="RMK_DC" class="dews-ui-textbox basic" />
+                </span>
+              </li>
+            </ul>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dews-ui-popup-panel">
+  <div class="dews-popup-item"></div>
+</div>
+
+<style>
+    #content_PAMPHM00800 #CardListCondition {
+      padding: 10px 10px 10px 10px;
+      background-color: #f5f5f5;
+      border-top: 2px solid #666;
+      border-left: 1px solid #d9d9d9;
+      border-right: 1px solid #d9d9d9;
+    }
+
+    /* 프로필패널 - 사진 프레임 */
+    #content_PAMPHM00800 .dews-custom-profile-panel {
+      height: 97px;
+      /* width: inherit; */
+      min-width: 699px;
+      overflow: auto;
+      background-color: #e6ecf5;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-photo-frame {
+      height: inherit;
+      width: 107px;
+      position: relative;
+      float: left;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-button-frame {
+      width: 300px;
+      height: inherit;
+      padding-top: 33px;
+      float: right;
+      text-align: right;
+      position: absolute;
+      right: 10px;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-photo {
+      display: block;
+      height: 80px;
+      width: 80px;
+      background: url('/view/images/HR/hr_profile.png');
+      background-size: 80px 80px;
+      border-radius: 50%;
+      position: absolute;
+      top: 8px;
+      left: 13px;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-photo-edit-icon {
+      display: none;
+      height: 30px;
+      width: 30px;
+      background: rgba(255,255, 255,0.9) url('/view/images/HR/ico_editpic.png') no-repeat center;
+      border-radius: 50%;
+      cursor: pointer;
+      position: absolute;
+      top: 50px;
+      left: 53px;
+    }
+
+    /* 프로필패널 - 성명/직위/소속 프레임 */
+
+    #content_PAMPHM00800 .dews-custom-profile-info-frame {
+      float: left;
+      min-height: inherit;
+      padding: 25px 0px 25px 0px
+    }
+    #content_PAMPHM00800 .dews-custom-profile-name{
+      width:auto;
+      box-sizing: border-box;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-position{
+      width:auto;
+      box-sizing: border-box;
+      font-size: 13px
+    }
+
+    #content_PAMPHM00800 .dews-custom-profile-info-frame .no-space {
+      float: left;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-employee {
+      display: block;
+      height: 26px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #000;
+      text-align: left;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-division {
+      display: block;
+      height: 21px;
+      font-size: 13px;
+      color: #666;
+      text-align: left;
+    }
+
+    /* 프로필패널 - 버튼 프레임(수정/파일) */
+    #content_PAMPHM00800 .dews-custom-profile-button {
+      display: inline-block;
+      width: 67px;
+      height: 30px;
+      border: 1px solid #bcc8ce;
+      background-color: transparent;
+      border-radius: 28px;
+      margin-right: 4px;
+      cursor: pointer;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-button:hover {
+      border: 1px solid #777;
+    }
+    #content_PAMPHM00800 .dews-custom-profile-info-edit-icon {
+      display: block;
+      float: left;
+      top: calc(50% - 8px);
+      left: 12px;
+      position: relative;
+      margin-right: 3px;
+      width: 16px;
+      height: 16px;
+      background: url('/view/images/HR/ico_modify.png') no-repeat center;
+    }
+
+    #content_PAMPHM00800 .dews-custom-profile-button-frame-text {
+      display: block;
+      float: left;
+      top: calc(50% - 10px);
+      left: 12px;
+      position: relative;
+    }
+
+    #content_PAMPHM00800 .dews-custom-profile-button-frame-text {
+      display: block;
+      float: left;
+      top: calc(50% - 10px);
+      left: 12px;
+      position: relative;
+    }
+
+    #content_PAMPHM00800 #btn_fileUpload {
+      margin-right: 18px;
+    }
+
+    #content_PAMPHM00800 .dews-custom-profile-file-upload-icon {
+      display: block;
+      float: left;
+      top: calc(50% - 8px);
+      left: 12px;
+      position: relative;
+      margin-right: 3px;
+      width: 16px;
+      height: 16px;
+      background: url('/view/images/HR/ico_attach.png') no-repeat center;
+    }
+</style>
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.0.23081101';
+    self.version.service='PAMPHM00800_SERVICE';
+    self.$content.append('<script src=\'/view/js/HR/hr.common.js\'><\/script>');
+
+    self.DATE_DT.value(new Date());
+
+    var selectedDateDt = self.DATE_DT.value();
+    makeComponentReadonly(true);
+
+    var ruleIsExtValId;
+    var controlDigitData;
+    var isDigitValid;
+
+    var objConfigMst = derp.HR.getConfigMstData('COM002|COM047', null, null); // HR_CONFIG_MST 객체
+    var objConfigDtl = derp.HR.getConfigDtlData('COM002', null, null); // HR_CONFIG_DTL 객체
+    var CONFIG = makeConfigSettings(objConfigMst, objConfigDtl);
+
+    isDigitValid = CONFIG.DIGIT.config; // 코드자리수통제값 검증 결과(맞으면 true)
+
+    var ciCtrlConfig_CI00012 = "";  // 통합사원번호 채번규칙 통합(ci)환경설정 ['1' : 자동(통합자동채번등록), '2' : 자동(사원번호), '3' : 수기]
+    getCiCtrlConfig('CI','CI00012', 'Y');  // 통합사원번호 채번규칙 통합(ci)환경설정 ['1' : 자동(통합자동채번등록), '2' : 자동(사원번호), '3' : 수기]
+
+    derp.HR.setHrDetail(self.BIZAREA_CD, self.DEPT_CD, null, self); // 컨트롤 M/D 연결
+
+    self.outEmpDataSource = dews.ui.dataSource('outEmpDataSource', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'getOutEmpGrid'),
+          data: function() {
+            return {
+                date_dt : self.DATE_DT.value()|| dews.date.format(new Date(), 'yyyyMMdd'),
+                keyword : self.KEYWORD.text() || ''
+            }
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'DEPT_CD', editable: false, dataType: 'string' },
+            { field: 'DEPT_NM', editable: false, dataType: 'string' },
+            { field: 'EMP_NO', editable: false, dataType: 'string' },
+            { field: 'GEMP_NO', editable: false, dataType: 'string' },
+            { field: 'KOR_NM', editable: false, dataType: 'string' },
+            { field: 'START_DT', editable: false, dataType: 'string' },
+            { field: 'EMP_TP', editable: false, dataType: 'string' },
+            { field: '_uid', editable: false, dataType: 'string' }
+          ]
+        }
+      },
+      error: function (e) {
+        console.log("getOutEmpGrid 조회 오류 발생:", e);
+        dews.ui.loading.hide();
+        dews.ui.snackbar.warning(e.message);
+      }
+    });
+
+    self.outEmpDtlDataSource = dews.ui.dataSource('outEmpDtlDataSource', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'getOutEmpDtlGrid'),
+          data: function() {
+        var dataItem = self.outEmpGrid.dataItems(self.outEmpGrid.select());
+
+        if(dataItem.EMP_NO == 'AUTO-NUMBERING') {
+          dataItem.EMP_NO = null;
+        }
+
+        var currentRow = self.outEmpGrid.select();
+
+        return{
+            // pid: (typeof currentRow === 'undefined') ? '' : self.outEmpGrid.getCellValue(currentRow, '_uid'),
+            date_dt : selectedDateDt || dews.date.format(new Date(), 'yyyyMMdd'),
+            emp_no : dataItem.EMP_NO || '',
+            dept_cd : dataItem.DEPT_CD || ''
+        }
+    }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'EMP_NO', editable: false, dataType: 'string' },
+            { field: 'GEMP_NO', editable: false, dataType: 'string' },
+            { field: 'KOR_NM', editable: false, dataType: 'string' },
+            { field: 'BIZAREA_NM', editable: false, dataType: 'string' },
+            { field: 'BIZAREA_CD', editable: false, dataType: 'string' },
+            { field: 'DEPT_CD', editable: false, dataType: 'string' },
+            { field: 'DEPT_NM', editable: false, dataType: 'string' },
+            { field: 'START_DT', editable: false, dataType: 'string' },
+            { field: 'END_DT', editable: false, dataType: 'string' },
+            { field: 'EMP_TP', editable: false, dataType: 'string' },
+            { field: 'CC_CD', editable: false, dataType: 'string' },
+            { field: 'CC_NM', editable: false, dataType: 'string' },
+            { field: 'EMAIL_NM', editable: false, dataType: 'string' },
+            { field: 'PJT_CD', editable: false, dataType: 'string' },
+            { field: 'PJT_NM', editable: false, dataType: 'string' },
+            { field: 'EMGNC_CNTC_NO', editable: false, dataType: 'string' },
+            { field: 'TEL_NO', editable: false, dataType: 'string' },
+            { field: 'PLANT_CD', editable: false, dataType: 'string' },
+            { field: 'PLANT_NM', editable: false, dataType: 'string' },
+            { field: 'GW_LCNS_CD', editable: false, dataType: 'string' },
+            { field: 'RMK_DC', editable: false, dataType: 'string' },
+            { field: 'FILE_DC', editable: false, dataType: 'string' },
+            { field: 'NEW_FILE_DC', editable: false, dataType: 'string' },
+            { field: 'ORGL_FILE_DC', editable: false, dataType: 'string' },
+            { field: 'ORGL_FEXTSN_DC', editable: false, dataType: 'string' },
+            { field: 'FILE_VR', editable: false, dataType: 'string' },
+            { field: 'FILE_STATE', editable: false, dataType: 'string' },
+            { field: 'CNT', editable: false, dataType: 'string' },
+            { field: 'PID' }
+          ]
+        }
+      },
+      error: function (e) {
+        console.log("getOutEmpDtlGrid 조회 오류 발생:", e);
+        dews.ui.loading.hide();
+        dews.ui.snackbar.warning(e.message);
+      }
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'),{
+      async: false,
+      data: {
+          end_dt: '',
+          foreign_yn: '',
+          field_cd_pipe: 'P00220|P01580',
+          module_cd: 'HR',
+          syscode_yn: '',
+          keyword: '',
+          base_yn: ''
+      }
+    }).done(function (data) {
+      var ar_P00220 = new Array();
+      var ar_P01580 = new Array();
+
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].FIELD_CD == "P00220") {
+          ar_P00220.push(data[i]);
+        }else if (data[i].FIELD_CD == "P01580") {
+          ar_P01580.push(data[i]);
+        }
+      }
+
+      self.HR__P00220 = dews.ui.dataSource('HR__P00220',  { data: ar_P00220 });
+      self.HR__P01580 = dews.ui.dataSource('HR__P01580',  { data: ar_P01580 });
+      self.HR_ = dews.ui.dataSource('HR_', { data: data });
+    });
+
+
+    dews.ui.mainbuttons.localize.disable(true);
+    dews.ui.mainbuttons.add.click(function() {
+      self.outEmpGrid.addRow();
+    });
+    dews.ui.mainbuttons.search.click(function() {
+      if(Validate()){
+        dews.ui.loading.warning('누락된 필수값이 있습니다.');
+      }
+      else if(IsChange()){
+        dews.confirm('저장되지 않은 데이터가 있습니다.\n그래도 조회 하시겠습니까?', "question").yes(function () {
+          SearchData();
+        }).no(function () {
+          return;
+        });
+      }
+      else{
+        SearchData();
+      }
+    });
+    dews.ui.mainbuttons.delete.click(function() {
+      var grid = self.outEmpGrid;
+      grid.removeRow(grid.select());
+    });
+    dews.ui.mainbuttons.save.click(function() {
+      if(IsChange()){
+        SaveData();
+      }
+      else{
+        dews.ui.snackbar.warning("변경된 항목이 없습니다.");
+      }
+    });
+    dews.ui.grid(self.$outEmpDtlGrid, {
+      dataSource: self.outEmpDtlDataSource,
+      rowNo: false,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'EMP_NO',
+          title: '사원번호',
+          attributes: { class: 'required' },
+          width: 60
+        },
+        {
+          field: 'GEMP_NO',
+          title: '통합사원번호',
+          attributes: { class: 'required' },
+          width: 100
+        },
+        {
+          field: 'KOR_NM',
+          title: '성명',
+          width: 60
+        },
+        {
+          field: 'BIZAREA_NM',
+          title: '사업장',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'BIZAREA_CD',
+          title: '사업영역코드',
+          width: 80
+        },
+        {
+          field: 'DEPT_CD',
+          title: '부서코드',
+          width: 80
+        },
+        {
+          field: 'DEPT_NM',
+          title: '부서',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'START_DT',
+          title: '시작일',
+          width: 80,
+        },
+        {
+          field: 'END_DT',
+          title: '종료일',
+          width: 80,
+        },
+        {
+          field: 'EMP_TP',
+          title: '사원구분',
+          width: 60
+        },
+        {
+          field: 'CC_CD',
+          title: '비용센터 코드',
+          width: 80
+        },
+        {
+          field: 'CC_NM',
+          title: '비용센터',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'EMAIL_NM',
+          title: '이메일명',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'PJT_CD',
+          title: '프로젝트 코드',
+          width: 80
+        },
+        {
+          field: 'PJT_NM',
+          title: '프로젝트',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'EMGNC_CNTC_NO',
+          title: '비상연락번호',
+          width: 60
+        },
+        {
+          field: 'TEL_NO',
+          title: '전화번호',
+          width: 60
+        },
+        {
+          field: 'PLANT_CD',
+          title: '공장코드',
+          width: 60
+        },
+        {
+          field: 'PLANT_NM',
+          title: '공장명',
+          width: 60
+        },
+        {
+          field: 'GW_LCNS_CD',
+          title: 'GW라이선스',
+          width: 80
+        },
+        {
+          field: 'RMK_DC',
+          title: '비고',
+          width: 120,
+          align: 'left'
+        },
+        { field: 'PID' }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      dataBound: function(e) { // 'outEmpDtlGrid'의 dataBound
+        dews.ui.loading.hide();
+        let grid = self.outEmpDtlGrid;
+        if(self.outEmpGrid.dataItems().length > 0 && grid.dataItems().length === 0) {
+          grid.addRow();
+          grid.setCellValue(grid.select(), 'PID', self.outEmpGrid.getCellValue(self.outEmpGrid.select(), '_uid'));
+
+          // 사원번호 채번규칙이 수동('2')이 아닐때
+          if (CONFIG.NUMBERING.config.type !== 'MANUAL') {
+            grid.setCellValue(grid.select(), 'EMP_NO', 'AUTO-NUMBERING');
+          }
+        }
+        self.outEmpDtlGrid.bindPanel(self.FORMPANEL);
+        bindDataToPhotoObject();
+        let dataItem = grid.dataItems(0);
+        let cnt = dataItem != null ? dataItem.CNT : 0;
+        self.$content.find('#fileCount').text('('+cnt+')');
+      },
+      rowAdd : function(e){
+        self.outEmpDtlGrid.setCellValue(0,'FILE_STATE','NONE');
+        self.outEmpDtlGrid.setCellValue(0,'CNT','0');
+        makeComponentReadonly(false);
+      },
+      change: function(e) {
+        self.outEmpDtlGrid.bindPanel(self.FORMPANEL);
+        var mstDataItem = self.outEmpGrid.dataItems(self.outEmpGrid.select());
+        var dtlDataItem = self.outEmpDtlGrid.dataItems(self.outEmpDtlGrid.select());
+        var korNm = mstDataItem.KOR_NM || "";
+        var deptNm = dtlDataItem.DEPT_NM || "";
+        var bizNm = self.BIZAREA_CD.text() || "";
+        var cnt = 0;
+
+        if(dtlDataItem != null && dtlDataItem.length > 0 && dtlDataItem.CNT != undefined) {
+          cnt = dtlDataItem.CNT;
+        }
+
+        self.$content.find('.dews-custom-profile-name').text(korNm);
+        self.$content.find('.dews-custom-profile-position').text(bizNm+' '+deptNm);
+        self.$content.find('#fileCount').text('('+cnt+')');
+        bindDataToPhotoObject();
+
+        self.DEPT_CD.setHelpParams({
+            company_cd: self.user.companyCode,
+            auth_bizarea: self.BIZAREA_CD.code(),
+            auth_pc: '',
+            auth_dept: ''
+        });
+
+        // 22.01.12 추가
+        // 수정중일 경우에만 적용 (pims -> M20220103164)
+        if (self.$content.find('#btn_edit').hasClass('on')) {
+          makeComponentReadonly(false);
+        }
+
+        if(self.outEmpGrid.getRowState(self.outEmpGrid.select()) == 'added') {
+          // 통합환경등록-통합사원번호채번규칙이 수동('3')이 아닐때
+          if (ciCtrlConfig_CI00012 != '3') {
+            var gempNoText = self.GEMP_NO.text();
+            if(gempNoText == null || gempNoText == "" || gempNoText == undefined) {
+              self.GEMP_NO.text('AUTO-NUMBERING');
+            }
+
+            var outEmpGridGempNo = self.outEmpGrid.getCellValue(self.outEmpGrid.select(), 'GEMP_NO');
+            if(outEmpGridGempNo == null || outEmpGridGempNo == "" || outEmpGridGempNo == undefined) {
+              self.outEmpGrid.setCellValue(self.outEmpGrid.select(), 'GEMP_NO', 'AUTO-NUMBERING');
+            }
+
+            var outEmpDtlGridGempNo = self.outEmpDtlGrid.getCellValue(0, 'GEMP_NO');
+            if(outEmpDtlGridGempNo == null || outEmpDtlGridGempNo == "" || outEmpDtlGridGempNo == undefined) {
+              self.outEmpDtlGrid.setCellValue(0, 'GEMP_NO', 'AUTO-NUMBERING');
+            }
+
+            self.GEMP_NO.readonly(true);
+            if (self.$content.find('#btn_edit').hasClass('on')) {
+              self.GEMP_NO_BTN.enable(true);
+            }else {
+              self.GEMP_NO_BTN.enable(false);
+            }
+          }
+        }else {
+          self.GEMP_NO_BTN.enable(false);
+        }
+      }
+    });
+    dews.ui.grid(self.$outEmpGrid, {
+      dataSource: self.outEmpDataSource,
+      editable: false,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      noData: true,
+      copyMode: 'cell',
+      note: {
+        key: ['EMP_NO'],
+        markField: 'EMP_NO'
+      },
+      columns: [
+        {
+          field: 'DEPT_CD',
+          title: '부서코드',
+          width: 80,
+          visible: false
+        },
+        {
+          field: 'DEPT_NM',
+          title: '부서',
+          width: 90,
+          align: 'left'
+        },
+        {
+          field: 'EMP_NO',
+          title: '사원번호',
+          attributes: { class: 'required' },
+          width: 100,
+          style : function(e) {
+            return {background:"#FFFFFF"};
+          }
+        },
+        {
+          field: 'GEMP_NO',
+          title: '통합사원번호',
+          attributes: { class: 'required' },
+          width: 100,
+          visible: false,
+          style : function(e) {
+            return {background:"#FFFFFF"};
+          }
+        },
+        {
+          field: 'KOR_NM',
+          title: '성명',
+          width: 80,
+          align: 'left'
+        },
+        {
+          field: 'START_DT',
+          title: '시작일',
+          width: 80,
+          align: 'left',
+          visible: false
+        },
+        {
+          field: 'EMP_TP',
+          title: '사원구분',
+          width: 80,
+          align: 'left',
+          visible: false
+        },
+        {
+          field: '_uid',
+          title: '_uid',
+          width: 60,
+          visible: false
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      dataBound: function(e) {
+        if(self.outEmpGrid.dataItems().length === 0){
+          dews.ui.snackbar.warning("검색된 데이터가 없습니다.");
+          CleanFront();
+        }
+      },
+      rowAdd: function(e) {
+        // 사원번호 채번규칙이 수동('2')이 아닐때
+        if (CONFIG.NUMBERING.config.type !== 'MANUAL') {
+          self.EMP_NO.text('AUTO-NUMBERING');
+          self.outEmpGrid.setCellValue(self.outEmpGrid.select(), 'EMP_NO', 'AUTO-NUMBERING');
+        }
+
+        if (self.$content.find('#btn_edit').hasClass('on') === false) {
+          self.$content.find('#btn_edit').click();
+        } else {
+          makeComponentReadonly(false);
+        }
+        // 22.01.13 setDetail은 rowAdd시, dtl dataBound를 타야지 정상이지만, local은 가능하나
+        // 서버에 올린후, 버전차이(?)로 인해 불가능. 그럼에 read() 함수 추가
+        // self.outEmpDtlDataSource.read();
+      }
+    });
+
+    self.$KEYWORD.on('keydown', function(e) {
+        if(e.keyCode === 13) {
+            SearchData();
+        }
+    });
+
+    self.$content.find('.dews-custom-profile-photo-edit-icon').on('click', function(e) {
+      self.$content.find('#photoUploader').click();
+    });
+
+    self.photoUploader.on('change', function(e) {
+      let grid = self.outEmpDtlGrid;
+      let select = grid.select();
+      let ftsObj = self.photoUploader.getFile();
+      self.photoUploader.getDownloadUrl().done(function(url) {
+        let target = self.$content.find('.dews-custom-profile-photo');
+        let imageUrl = 'url(' + url + ')';
+        target.css('background-image', imageUrl);
+        target.css('background-repeat', 'no-repeat');
+        target.css('background-position', 'center');
+        target.css('background-size', '80px 80px');
+      });
+
+        grid.setCellValue(select,'NEW_FILE_DC',ftsObj.fileKey);
+        grid.setCellValue(select,'ORGL_FILE_DC',ftsObj.filename);
+        grid.setCellValue(select,'ORGL_FEXTSN_DC',ftsObj.extension);
+        grid.setCellValue(select,'FILE_VR',ftsObj.size);
+        var state = grid.dataItems(select).FILE_STATE;
+        if(state === 'EXIST' || state === 'UPDATE'){
+          grid.setCellValue(select,'FILE_STATE','UPDATE');
+        }
+        else{
+          grid.setCellValue(select,'FILE_STATE','ADD');
+        }
+    });
+
+    self.$content.find('#btn_fileUpload').on('click', function(e) {
+      let dialog;
+      let initData;
+      let grid = self.outEmpGrid;
+      let select = grid.select();
+      let dataItem = grid.dataItems(select);
+      initData = {
+        emp_no: dataItem.EMP_NO,
+      };
+
+
+      dialog = dews.ui.dialog('PAMPHM00800_fileUpload_POP', {
+        url: '/view/HR/PAMPHM00800_fileUpload_POP',
+        title: '첨부파일등록',
+        width: 510,
+        height: 285,
+        initData: initData,
+        ok: function (data) {
+          self.$content.find('#fileCount').text('('+data.length+')');
+          self.outEmpDtlGrid.setCellValue(0,'CNT',data.length+'');
+        },
+      });
+      dialog.open();
+    });
+
+    self.$content.find('#GEMP_NO_BTN').on('click', function(e) {
+      if(self.outEmpGrid.getRowState(self.outEmpGrid.select()) == 'added') {
+        if(!self.outEmpGrid.dataItem(self.outEmpGrid.select()).EMP_NO || !self.outEmpGrid.dataItem(self.outEmpGrid.select()).KOR_NM) {
+          dews.alert(dews.localize.get("사원번호와 사원명을 입력하여 주십시오.", 'M0002424'), "ico3");
+        }
+        else {
+          var initData = {
+            searchText: self.outEmpGrid.dataItem(self.outEmpGrid.select()).KOR_NM,
+            addList: self.outEmpDtlDataSource.getDirtyData().Added,
+            curUid: self.outEmpGrid.dataItem(self.outEmpGrid.select())._uid
+          };
+
+          var dialog = dews.ui.dialog("PAMPHM00800_POP", {
+            url: "/view/HR/PAMPHM00800_POP",
+            title: dews.localize.get("사원", 'D0000080'),
+            width: 746,
+            height: 504,
+            ok: function (data){
+              if(data){
+                self.outEmpGrid.setCellValue(self.outEmpGrid.select(), 'GEMP_NO', data);
+                self.outEmpDtlGrid.setCellValue(0, 'GEMP_NO', data);
+                self.GEMP_NO.text(data);
+              }
+            }
+          });
+          dialog.setInitData(initData);
+          dialog.open();
+        }
+      }
+    });
+
+    function bindDataToPhotoObject() {
+      let grid = self.outEmpDtlGrid;
+      let idx = grid.select();
+      let dataItem = grid.dataItem(idx);
+      let target = self.$content.find('.dews-custom-profile-photo');
+      let path = '/view/images/HR/hr_profile.png';
+      if(dataItem != null && dataItem.NEW_FILE_DC != null) {
+        path = '/download/image/' + dataItem.NEW_FILE_DC;
+      }
+      // let path = (dataItem.NEW_FILE_DC != '') ? '/download/image/' + dataItem.NEW_FILE_DC + ':' + dataItem.ORGL_FILE_DC : '/download/image/' + dataItem.NEW_FILE_DC ;
+      target.css('background-image', 'url(' + path + ')');
+      target.css('background-repeat', 'no-repeat');
+      target.css('background-position', 'center');
+      target.css('background-size', '80px 80px');
+    }
+
+    // 수정버튼
+    self.$content.find('#btn_edit').on('click', function(e) {
+      var value;
+      if (self.$content.find('#btn_edit').hasClass('on')) {
+        self.$content.find('#btn_edit').removeClass('on');
+        self.$content.find('.dews-custom-profile-photo-edit-icon').css('display', 'none');
+        self.$content.find('#editBtnText').text(dews.localize.get('수정', 'D0000266'));
+        value = true;
+      } else {
+        self.$content.find('#btn_edit').addClass('on');
+        self.$content.find('.dews-custom-profile-photo-edit-icon').css('display', 'block');
+        self.$content.find('#editBtnText').text(dews.localize.get('수정중', 'D0015495'));
+        value = false;
+      }
+      makeComponentReadonly(value);
+    });
+
+    self.DEPT_CD.setHelpParams(function () {
+      return {
+        company_cd: self.user.companyCode,
+        auth_bizarea: self.BIZAREA_CD.code(),
+        auth_pc: '',
+        auth_dept: ''
+      };
+    });
+
+    self.closing.on(function (e) {
+      if (IsChange()) {
+        return dews.confirm("저장되지 않은 변경사항이 있습니다.\n 그래도 종료하시겠습니까?").yes(function () {
+        }).no(function () {
+          e.preventDefault();
+        })
+      }
+    });
+
+    self.$EMP_NO.on('change', function(e) {
+      //같은 사번 등록 X 로직
+      var empNo = self.EMP_NO.text();
+      var selectIdx = self.outEmpGrid.select();
+      if(MatchEmp(empNo)){
+        self.outEmpGrid.setCellValue(selectIdx,'EMP_NO',self.EMP_NO.text());
+        self.outEmpDtlGrid.setCellValue(0,'EMP_NO',empNo);
+      }
+      else{
+        self.EMP_NO.text(null);
+        dews.alert("사원등록에 중복된 사원번호가 있습니다.");
+      }
+    });
+
+    self.GEMP_NO.on('change', function(e) {
+      //같은 통합사번 등록 X 로직
+      var gempNo = self.GEMP_NO.text();
+      var selectIdx = self.outEmpGrid.select();
+      if(MatchGemp(gempNo)){
+        self.outEmpGrid.setCellValue(selectIdx,'GEMP_NO',self.GEMP_NO.text());
+        self.outEmpDtlGrid.setCellValue(0,'GEMP_NO',gempNo);
+      }
+      else{
+        self.GEMP_NO.text(null);
+        dews.alert("사원등록에 중복된 통합사원번호가 있습니다.");
+      }
+    });
+
+    self.$KOR_NM.on('change', function(e) {
+      var selectIdx = self.outEmpGrid.select();
+      self.outEmpGrid.setCellValue(selectIdx,'KOR_NM',self.KOR_NM.text());
+      self.outEmpDtlGrid.setCellValue(0,'KOR_NM',self.KOR_NM.text());
+    });
+    self.BIZAREA_CD.on('setData', function(e) {
+      if(e.code === "" || e.code === null){
+        self.DEPT_CD.clearData();
+      }
+      self.outEmpDtlGrid.setCellValue(0,'BIZAREA_CD',e.code);
+      self.outEmpDtlGrid.setCellValue(0,'BIZAREA_NM',e.text);
+    });
+    self.DEPT_CD.on('setData', function(e) {
+      var selectIdx = self.outEmpGrid.select();
+      self.outEmpGrid.setCellValue(selectIdx,'DEPT_CD',e.code);
+      self.outEmpGrid.setCellValue(selectIdx,'DEPT_NM',e.text);
+      self.outEmpDtlGrid.setCellValue(0,'DEPT_CD',e.code);
+      self.outEmpDtlGrid.setCellValue(0,'DEPT_NM',e.text);
+    });
+    self.START_DT.on('change', function(e) {
+      var selectIdx = self.outEmpGrid.select();
+      self.outEmpGrid.setCellValue(selectIdx,'START_DT',dews.date.format(self.START_DT.value(),'yyyyMMdd'));
+      self.outEmpDtlGrid.setCellValue(0,'START_DT',dews.date.format(self.START_DT.value(),'yyyyMMdd'));
+    });
+    self.END_DT.on('change', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'END_DT',dews.date.format(self.END_DT.value(),'yyyyMMdd'));
+    });
+    self.EMP_TP.setDataSource(self.HR__P00220);
+    self.EMP_TP.on('change', function(e) {
+      var selectIdx = self.outEmpGrid.select();
+      self.outEmpGrid.setCellValue(selectIdx,'EMP_TP',self.EMP_TP.value());
+      self.outEmpDtlGrid.setCellValue(0,'EMP_TP',self.EMP_TP.value());
+    });
+    self.GW_LCNS_CD.setDataSource(self.HR__P01580);
+    self.GW_LCNS_CD.on('change', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'GW_LCNS_CD',self.GW_LCNS_CD.value());
+    });
+    self.CC_CD.on('setData', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'CC_CD',e.code);
+    });
+    self.$EMAIL_NM.on('change', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'EMAIL_NM',self.EMAIL_NM.text());
+    });
+    self.PJT_CD.on('setData', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'PJT_CD',e.code);
+    });
+    self.$EMGNC_CNTC_NO.on('change', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'EMGNC_CNTC_NO',self.EMGNC_CNTC_NO.text());
+    });
+    self.$TEL_NO.on('change', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'TEL_NO',self.TEL_NO.text());
+    });
+    self.PLANT_CD.on('setData', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'PLANT_CD',e.code);
+      self.outEmpDtlGrid.setCellValue(0,'PLANT_NM',e.text);
+    });
+    self.$RMK_DC.on('change', function(e) {
+      self.outEmpDtlGrid.setCellValue(0,'RMK_DC',self.RMK_DC.text());
+    });
+
+
+    self.outEmpGrid.setDetail(self.outEmpDtlGrid);
+
+
+    SearchData();
+
+    // self.DEPT_CD.on('codedialog', function (e) {
+    //   if (self.BIZAREA_CD.code().length <= 0 || self.BIZAREA_CD.code() == undefined || self.BIZAREA_CD.code() == null) {
+    //     dews.alert("사업장은 필수항목입니다.", 'warning');
+    //     return false;
+    //   }
+    // });
+
+    function SaveData(){
+      if(self.outEmpGrid.validate().result) {
+        dews.ui.loading.show();
+
+        dews.api.post(dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'saveData'), {
+          async: false,
+          data: {
+            mstData : JSON.stringify(self.outEmpDataSource.getDirtyData()),
+            dtlData : JSON.stringify(self.outEmpDtlDataSource.getDirtyData())
+          }
+        }).done(function (data) {
+          self.outEmpGrid.deleteNote({
+            type: 'deleted'
+          });
+
+          dews.ui.loading.hide();
+          dews.ui.snackbar.ok("저장되었습니다.");
+          SearchData();
+        }).fail(function (xhr, status, error) {
+          dews.ui.loading.hide();
+          dews.error(error || dews.localize.get('작업이 실패하였습니다.'));
+        });
+      }else{
+        dews.alert(dews.localize.get('필수값이 입력되지 않은 데이터가 있습니다.', 'M0005302'), 'warning');
+      }
+    }
+
+    function Validate(){
+      if(self.outEmpGrid.dataItems().length < 0){
+        return self.FORMPANEL.validate();
+      }
+    }
+
+    function makeComponentReadonly(value) {
+      let componentArray = [];
+      let exceptionArray = [];
+
+      componentArray.push(self.$content.find('#FORMPANEL .dews-ui-textbox'));
+      componentArray.push(self.$content.find('#FORMPANEL .dews-ui-numerictextbox'));
+      componentArray.push(self.$content.find('#FORMPANEL .dews-ui-maskedtextbox'));
+      componentArray.push(self.$content.find('#FORMPANEL .dews-ui-dropdownlist'));
+      componentArray.push(self.$content.find('#FORMPANEL .dews-ui-codepicker'));
+      componentArray.push(self.$content.find('#FORMPANEL .dews-ui-datepicker'));
+      componentArray.push(self.$content.find('#FORMPANEL .dews-ui-zipcodepicker'));
+      exceptionArray.push(self.$content.find('#FORMPANEL [data-custom-readonly="true"]'));
+      exceptionArray.push(self.$content.find('#FORMPANEL [data-custom-config-readonly="true"]'));
+
+      $.each(componentArray, function(index, componentType) {
+        $.each(componentType, function(i, o) {
+          if(o.id !== '') {
+            self[o.id].readonly(value);
+          }
+        });
+      });
+      if(value === false) {
+        if(self.outEmpDtlGrid.getRowState(0) != 'added') {
+          self.EMP_NO.readonly(true);
+          self.GEMP_NO.readonly(true);
+          self.GEMP_NO_BTN.enable(false);
+        }else if(self.outEmpDtlGrid.getRowState(0) === 'added') {
+
+          // 사원번호 채번규칙이 수동('2')이 아닐때
+          if (CONFIG.NUMBERING.config.type !== 'MANUAL') {
+            self.EMP_NO.readonly(true);
+          }else {
+            self.EMP_NO.readonly(false);
+          }
+
+          if (ciCtrlConfig_CI00012 == '3') { // 통합환경등록-통합사원번호채번규칙이 수동('3') 이면
+            self.GEMP_NO.readonly(false);
+            self.GEMP_NO_BTN.enable(true);
+          }else {
+            self.GEMP_NO.readonly(true);
+            self.GEMP_NO_BTN.enable(true);
+          }
+        }else {
+          self.EMP_NO.readonly(true);
+          self.GEMP_NO.readonly(true);
+          self.GEMP_NO_BTN.enable(false);
+        }
+      }else {
+        self.GEMP_NO_BTN.enable(false);
+      }
+    }
+
+    function IsChange(){
+      return self.outEmpDataSource.hasDirty() ||
+             self.outEmpDtlDataSource.hasDirty()
+    }
+
+    function SearchData(){
+      selectedDateDt = self.DATE_DT.value();
+      dews.ui.loading.show();
+      self.outEmpDataSource.read();
+    }
+
+    function MatchEmp(empNo){
+      var matchResult;
+      dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'matchEmp'), {
+        async: false,
+        data: {
+            emp_no : empNo
+        }
+      }).done(function (result) {
+        matchResult = result;
+      })
+      return matchResult;
+    }
+
+    function MatchGemp(gempNo) {
+      var matchResult;
+      var drsCode = self.mainEnv.drsCode;
+
+      if(drsCode == '20049') {
+        matchResult = true;
+      }else {
+        dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'pamphm00800_check_usegemp'), {
+          async: false,
+          data: {
+              gemp_no : gempNo
+          }
+        }).done(function (result) {
+          if(result != "") {  // 통합사원번호 중복 시
+            matchResult = false;
+          }
+          else {
+            matchResult = true;
+          }
+        })
+      }
+
+      return matchResult;
+    }
+
+    // 환경설정 객체 생성
+    function makeConfigSettings(objConfigMst, objConfigDtl) {
+      let configDataSet = {};
+
+      configDataSet['NUMBERING'] = {};
+      configDataSet['DIGIT'] = {};
+      configDataSet['NUMBERING']['config'] = getNumberingConfig(objConfigMst.COM002[0]); // objConfigMst.COM002[0]: 외부사원번호부여규칙
+      configDataSet['DIGIT']['use'] = getDigitUseYn();
+      configDataSet['DIGIT']['config'] = getDigitSet(objConfigMst.COM002[0].CHAR_CD_VAL_DC);
+      configDataSet['DIGIT']['number'] = Number(controlDigitData.CTRL_CNT);
+      configDataSet['DIGIT']['method'] = getDigitMethod(controlDigitData.CTRL_MTHD_TP);
+      configDataSet['COM047'] = (0 < objConfigMst.COM047.length) ? objConfigMst.COM047[0].CHAR_CD_VAL_DC : '2';
+
+      return configDataSet;
+    }
+
+    function getNumberingConfig(data) {
+      let configData = {};
+      configData['code'] = data.CONFIG_CD;
+      switch(data.CHAR_CD_VAL_DC) { // 외부사원번호부여규칙
+        case '1': // 1:자동부여
+          configData['type'] = 'AUTO';
+          self.EMP_NO.text('AUTO-NUMBERING');
+          break;
+        case '2': // 2:수동부여
+          configData['type'] = 'MANUAL';
+          break;
+        case '3': // 3:채번규칙으로부여
+          configData['type'] = 'RULE';
+          self.EMP_NO.text('AUTO-NUMBERING');
+          break;
+        case '4': // 4:통합사원번호 부여
+          configData['type'] = 'SET_GEMP_NO';
+          break;
+      }
+
+      return configData;
+    }
+
+    // 코드자리수통제값 확인
+    function getDigitUseYn() {
+      let result = 'N';
+      dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'pamphm00800_getControlDigit'), {
+        async: false,
+        data: {
+          empy_shape_cd: 'E'
+        }
+      }).done(function (data) {
+        if (0 < data.length) {
+          result = data[0].USE_YN;
+        }
+      }).fail(function (xhr, status, error) {
+      });
+
+      return result;
+    }
+
+    // 코드자리수통제값 확인
+    function getDigitSet(numberingConfig) {
+      let result = false;
+      dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'pamphm00800_getControlDigit'), {
+        async: false,
+        data: {
+          empy_shape_cd: 'E'
+        }
+      }).done(function (data) {
+        if (0 < data.length) {
+          controlDigitData = data[0];
+          if (controlDigitData.USE_YN === 'Y') {
+            switch(numberingConfig) { // 외부사원번호부여규칙
+            case '1': // 1:자동부여
+              result = controlDigitData.AUTONUM_VALID === 'true' ? true : false;
+              // AUTONUM_VALID: 사원번호의 자동채번 규칙의 길이가 [코드자리수통제 규칙]과 맞으면 true
+              break;
+            case '2': // 2:수동부여
+              result = true;
+              break;
+            case '3': // 3:채번규칙으로부여
+              // 인사환경설정 > 사원부여규칙이 상용직이 아닌경우에도 사원번호 입력이 가능해야 함. M20220103219
+              // result = controlDigitData.EXT_VALID === 'true' ? true : false;
+              ruleIsExtValId = controlDigitData.EXT_VALID === 'false' ? true : false;
+              // EXT_VALID: [일용직의 사원번호 채번규칙내역 길이]가 [코드자리수통제 규칙]과 맞으면 true
+              result = true;
+              break;
+            // case '4': // 4:통합사원번호 부여
+            //   result = true;
+            //   break;
+            }
+          } else {
+            result = true;
+            if(numberingConfig === '3') { // 3:채번규칙으로부여
+                ruleIsExtValId = false;  // 자동채번 O
+            }
+          }
+        }
+      }).fail(function (xhr, status, error) {
+        dews.error(dews.localize.get('코드자리수통제 오류입니다.', 'M0005947'));
+      });
+
+      return result;
+    }
+
+    function getDigitMethod(method_tp) {
+      let methodType;
+      switch(method_tp) {
+        case '1':
+          methodType = 'equal'
+          break;
+        case '2':
+          methodType = 'below'
+          break;
+      }
+      return methodType;
+    }
+
+    function CleanFront(){
+      self.EMP_NO.text(null);
+      self.KOR_NM.text(null);
+      self.BIZAREA_CD.clearData();
+      self.DEPT_CD.clearData();
+      self.START_DT.value(null);
+      self.END_DT.value(null);
+      self.EMP_TP.value(null);
+      self.CC_CD.clearData();
+      self.EMAIL_NM.text(null);
+      self.PJT_CD.clearData();
+      self.EMGNC_CNTC_NO.text(null);
+      self.TEL_NO.text(null);
+      self.PLANT_CD.clearData();
+      self.RMK_DC.text(null);
+    }
+
+    // 통합환경설정 가져오기 (회사아님 통합임)
+    function getCiCtrlConfig(module_cd, ctrl_cd, use_yn) {
+      dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'common_ciCtrlConfig_string'), {
+        async: false,
+        data: {
+          module_cd: module_cd,
+          ctrl_cd: ctrl_cd,
+          use_yn: use_yn
+        }
+      }).done(function (data) {
+        ciCtrlConfig_CI00012 = data;
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+    }
+
+    if(CONFIG.COM047 == '2') {
+      self.$content.find("#GW_LCNS_CD_LI").remove();
+    }
+
+    //# sourceURL=PAMPHM00800.js
+
+
+
+  });
+
+</script>

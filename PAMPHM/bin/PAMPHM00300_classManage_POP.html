@@ -1,0 +1,243 @@
+<!--##eec78515-9f9a-4c40-a86c-608a9ade1813##-->
+<!--##PAMPHM00300_classManage_POP##-->
+<!--##qi3bSmPUj2YkhzvHH1uWGXctWmKsfPCBOxxt8TI201vnNeBZwgRn7obRJKNhYSK8S+/OMaa7JCOTcWTWwikPLQ==##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: PAMPHM00300_classManage_POP
+  # PageTitle: 직급별사원구분관리
+  # Server: http://localhost:8090/
+-->
+<!--
+
+-->
+
+<div class="dews-ui-condition-panel">
+  <ul class="required-area">
+    <li>
+      <label class="dews-ui-multilingual">기준일</label>
+      <span>
+        <input type="text" id="basicDate" name="basicDate" class="dews-ui-datepicker basic" />
+      </span>
+    </li>
+  </ul>
+</div>
+<div class="dews-button-group" style="text-align: right;">
+  <button id="searchBtn" class="dews-ui-button">조회</button>
+  <button id="saveBtn" class="dews-ui-button">저장</button>
+</div>
+<div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="normal">
+    <div id="grid1" class="dews-ui-grid"></div>
+  </div>
+</div>
+<div class="dews-dialog-button-group bottom" style="text-align: center;">
+  <button id="closeBtn" class="dews-ui-button confirm">닫기</button>
+</div>
+
+<style>
+    
+</style>
+
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.0.21123101';
+    self.version.service='PersonalAdministrationManagementPHMService';
+
+
+    /*3dc6bcd9-d686-4055-b20c-f0b2c3745f53*/ 
+    
+    self.basicDate.value(dews.date.format(new Date(), 'yyyyMMdd')); // basicDate에 yyyyMMdd 형태로 세팅
+    
+    
+    
+    self.dataSource1 = dews.ui.dataSource('dataSource1', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'Pamphm00300_pop_selectClassMng'),
+          data: function () {
+            return {
+              basic_date: self.basicDate.value()
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'POSI_CD', editable: false, dataType: 'string' }, 
+            { field: 'POSI_NM', editable: false, dataType: 'string' }, 
+            { field: 'END_DT', editable: false, dataType: 'string' }, 
+            { field: 'EMP_CLS_CD', editable: false, dataType: 'string' }, 
+            { field: 'EMP_CLS_NM', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_ci_codeDtl_list'),{
+      async: false,
+      data: {
+          end_dt: '',
+          foreign_yn: '',
+          field_cd_pipe: 'S00320',
+          module_cd: 'MA',
+          syscode_yn: '',
+          keyword: '',
+          base_yn: ''
+      }
+    }).done(function (data) {
+      var ar_S00320 = new Array();
+    
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].FIELD_CD == "S00320") { 
+          ar_S00320.push(data[i]); 
+    
+        }
+      }
+      self.pipeDataSource1_S00320 = dews.ui.dataSource('pipeDataSource1_S00320',  { data: ar_S00320 });
+      self.pipeDataSource1 = dews.ui.dataSource('pipeDataSource1', { data: data });
+      
+    });
+    
+    
+    self.$searchBtn.on('click', /*32c4be64-0845-4e6b-aa5f-05f6736ce8ae*/ function(e) {
+      if (isChanged()) {
+        dews.confirm('저장하지 않은 데이터가 있습니다.\n그래도 조회를 계속하시겠습니까?').yes(function () {
+        dews.ui.loading.show();
+        self.dataSource1.read();
+        });
+      } else {
+        dews.ui.loading.show();
+        self.dataSource1.read();
+      }
+    });
+    self.$saveBtn.on('click', /*9fe72ee0-c4f6-44bd-88a0-afff6bf50741*/ function(e) {
+      if (self.dataSource1.getDirtyDataCount() > 0) {
+        dews.api.post(dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "Pamphm00300_pop_saveClassMng"), {
+          async: false,
+          data: {
+            dataSource: JSON.stringify(self.dataSource1.getDirtyData())
+          }
+        }).done(function (data) {
+          dews.ui.snackbar.ok("저장되었습니다.");
+          dews.ui.loading.show();
+          self.dataSource1.read();
+        }).fail(function (data) {
+          dews.ui.snackbar.warning("저장 중 오류가 발생하였습니다.");
+        });
+      }else {
+        dews.ui.snackbar.warning("변경된 데이터가 없습니다.");
+      }
+    });
+    dews.ui.grid(self.$grid1, {
+      dataSource: self.dataSource1,
+      height: 366,
+      editable: true,
+      sortable: 'multiple',
+      checkable: false,
+      copyMode: 'cell',
+      columns: [
+        {
+          field: '직급코드',
+          title: '직급코드',
+          width: 240,
+          columns: [
+            {
+              field: 'POSI_CD',
+              title: '코드',
+              width: 70,
+              align: 'left',
+              attributes: { class: 'readonly' }
+            },
+            {
+              field: 'POSI_NM',
+              title: '명칭',
+              width: 100,
+              align: 'left',
+              attributes: { class: 'readonly' }
+            },
+            {
+              field: 'END_DT',
+              title: '종료일',
+              width: 60,
+              attributes: { class: 'readonly' }
+            }
+          ]
+        },
+        {
+          field: 'EMP_CLS_NM',
+          title: '사원구분 매핑',
+          width: 60,
+          editor: {
+            type: 'codepicker',
+            helpCode: 'H_MA_CODEDTL_S',
+            codeField: 'SYSDEF_CD',
+            textField: 'SYSDEF_NM',
+            gridCodeField: 'EMP_CLS_CD',
+            gridTextField: 'EMP_CLS_NM',
+            helpTitle: '사원구분공통코드도움창',
+            helpSize: 'medium',
+            helpParams: function () {
+              return {
+                module_cd: 'HR',
+                field_cd: 'P00220'
+              };
+            }
+          }
+        },
+        {
+          field: 'field',
+          title: '대상인원',
+          width: 60,
+          visible: false
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      dataBound: /*32bc9e7d-b8c1-49d6-82c5-b5c1dc4e1646*/ function(e) {
+      if(e.row.data.length == 0) {
+        dews.ui.snackbar.warning("조회된 데이터가 없습니다.");
+      }
+      dews.ui.loading.hide();
+    }
+    });
+    self.$closeBtn.on('click', /*3b97dfb5-9f9f-4a57-b0f9-b19a2ae7518d*/ function(e) {
+      if (isChanged()) {
+        dews.confirm('저장하지 않은 데이터가 있습니다.\n그래도 닫기를 계속하시겠습니까?').yes(function () {
+          e.preventDefault();
+          dews.ui.dialog('PAMPHM00300_classManage_POP').close();
+        });
+      } else {
+        e.preventDefault();
+        dews.ui.dialog('PAMPHM00300_classManage_POP').close();
+      }
+    });
+    
+    
+    
+    
+    /*98d71fc7-a4ec-4e45-aacc-9b43a1a7350d*/ 
+    
+    function isChanged() {
+      if (self.dataSource1.getDirtyDataCount() > 0) {
+        return true;
+      }else {
+        return false;
+      }
+    }
+    
+    
+    //# sourceURL=PAMPHM00300_classManage_POP.js
+    
+
+  
+  });
+
+</script>

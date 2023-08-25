@@ -1,0 +1,274 @@
+﻿<div class="dews-dialog-contents-area">
+  <div class="dews-ui-form-panel" data-dews-columns="1">
+    <ul>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000069">사업장</label>
+        <span>
+          <select type="text" id="cdt_bizareaCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="BIZAREA_CD" data-dews-text-field="BIZAREA_NM" data-dews-help-code="H_MA_BIZAREA_MST_S" data-dews-help-size="medium" data-dews-help-params="">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000071">부서</label>
+        <span>
+          <select type="text" id="cdt_deptCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="DEPT_CD" data-dews-text-field="DEPT_NM" data-dews-help-code="H_MA_DEPT_MST_S" data-dews-help-size="big" data-dews-help-params="">
+          </select>
+        </span>
+      </li>
+      <li id="cdt_empTp_li1">
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000680">사원구분</label>
+        <span>
+          <select type="text" id="cdt_empTp_mcp1" class="dews-ui-multicodepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" data-dews-help-size="medium" data-dews-help-params="module_cd=HR&field_cd=P00220">
+          </select>
+        </span>
+      </li>
+      <li id="cdt_empTp_li2">
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000680">사원구분</label>
+        <span>
+          <select type="text" id="cdt_empTp_mcp2" class="dews-ui-multicodepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="PAMPHM00100_empTp_POP"  data-dews-help-title="코드 도움창" data-dews-help-custom="true" data-dews-help-view-url="~/view/HR/PAMPHM00100_empTp_POP" data-dews-help-size="medium" data-dews-ajax="true">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0013841">직군</label>
+        <span>
+          <select type="text" id="cdt_ogrpCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" data-dews-help-size="medium" data-dews-help-params="module_cd=HR&field_cd=P00660">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0013842">직종</label>
+        <span>
+          <select type="text" id="cdt_jkndCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" data-dews-help-size="medium" data-dews-help-params="module_cd=HR&field_cd=P00990">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0013590">직무</label>
+        <span>
+          <select type="text" id="cdt_dutyCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" data-dews-help-size="middle" data-dews-help-params="module_cd=HR&field_cd=P00920">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0008294">직급</label>
+        <span>
+          <select type="text" id="cdt_pstnCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" data-dews-help-size="middle" data-dews-help-params="module_cd=HR&field_cd=P00650">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0014381">호봉</label>
+        <span>
+          <!-- <input type="text" class="dews-ui-textbox slst" id="cdt_slstCdFrom_tb">
+          ~
+          <input type="text" class="dews-ui-textbox slst" id="cdt_slstCdTo_tb"> -->
+          <input type="text" class="dews-ui-textbox slst" id="cdt_slstCd_tb">
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000685">직책</label>
+        <span>
+          <select type="text" id="cdt_odtyCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" data-dews-help-size="middle" data-dews-help-params="module_cd=HR&field_cd=P00980">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0006838">직위</label>
+        <span>
+          <select type="text" id="cdt_posiCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-help-code="H_MA_CODEDTL_S" data-dews-help-size="middle" data-dews-help-params="module_cd=HR&field_cd=P00640">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000018">비용센터</label>
+        <span>
+          <select type="text" id="cdt_ccCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="CC_CD" data-dews-text-field="CC_NM" data-dews-help-code="H_MA_CC_MST_S" data-dews-help-size="big" data-dews-help-params="">
+          </select>
+        </span>
+      </li>
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000019">프로젝트</label>
+        <span>
+          <select type="text" id="cdt_pjtNo_mcp" class="dews-ui-multicodepicker" data-dews-code-field="PJT_NO" data-dews-text-field="PJT_NM" data-dews-help-code="H_PS_PROJ_MST_S" data-dews-help-size="extra" data-dews-help-params="">
+          </select>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- 버튼 html 영역 -->
+<div class="dews-dialog-button-group bottom">
+  <button id="apply" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000267">적용</button>
+  <button id="close" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000255">닫기</button>
+</div>
+<script src="/view/js/HR/hr.common.js"></script>
+
+
+<style>
+  .slst {
+    width: 50px!important;
+  }
+</style>
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      var dialog = dews.ui.dialog('PAMPHM00100_detailSearch_POP');
+      var detailConds = dialog.initData;
+      var selectedConds = {
+        bizarea_cd: null,
+        dept_cd: null,
+        emp_tp: null,
+        ogrp_cd: null,
+        jknd_cd: null,
+        duty_cd: null,
+        pstn_cd: null,
+        slst_cd_from: null,
+        slst_cd_to: null,
+        odty_cd: null,
+        posi_cd: null,
+        cc_cd: null,
+        pjt_cd: null,
+        pickerData: null,
+        configMstCom048 : detailConds.configMstCom048
+      };
+
+      var configMstCom048 = detailConds.configMstCom048;
+
+      var cdt_empTp_mcp_data = '';
+      if(configMstCom048 == '1') { // 1:미사용
+        dewself.$content.find("#cdt_empTp_li2").remove();
+      }else if(configMstCom048 == '2') { // 2:사용
+        dewself.$content.find("#cdt_empTp_li1").remove();
+      }
+    }
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+      setDetailCondsData(detailConds);
+    }
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 적용 버튼
+      dewself.$apply.on('click', function (e) {
+        dews.ui.snackbar.info('상세검색이 설정되었습니다.');
+
+        var cdt_empTp_mcp_codes = '';
+        if(configMstCom048 == '1') { // 1:미사용
+          cdt_empTp_mcp_codes = dewself.cdt_empTp_mcp1.codes().join('|');
+        }else if(configMstCom048 == '2') { // 2:사용
+          cdt_empTp_mcp_codes = dewself.cdt_empTp_mcp2.codes().join('|');
+        }
+        selectedConds = {
+          bizarea_cd: dewself.cdt_bizareaCd_mcp.codes().join('|'),
+          dept_cd: dewself.cdt_deptCd_mcp.codes().join('|'),
+          emp_tp: cdt_empTp_mcp_codes,
+          ogrp_cd: dewself.cdt_ogrpCd_mcp.codes().join('|'),
+          jknd_cd: dewself.cdt_jkndCd_mcp.codes().join('|'),
+          duty_cd: dewself.cdt_dutyCd_mcp.codes().join('|'),
+          pstn_cd: dewself.cdt_pstnCd_mcp.codes().join('|'),
+          // slst_cd_from: dewself.cdt_slstCdFrom_tb.text(),
+          // slst_cd_to: dewself.cdt_slstCdTo_tb.text(),
+          slst_cd: dewself.cdt_slstCd_tb.text(),
+          odty_cd: dewself.cdt_odtyCd_mcp.codes().join('|'),
+          posi_cd: dewself.cdt_posiCd_mcp.codes().join('|'),
+          cc_cd: dewself.cdt_ccCd_mcp.codes().join('|'),
+          pjt_cd: dewself.cdt_pjtNo_mcp.codes().join('|'),
+          pickerData: getPickerData(),
+          configMstCom048 : detailConds.configMstCom048
+        };
+        dialog.ok(selectedConds);
+      });
+
+      // 닫기 버튼
+      dewself.$close.on('click', function (e) {
+        dialog.cancel();
+      });
+
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+      // 부서 도움창
+      dewself.$cdt_deptCd_mcp.siblings('.dews-multicodepicker-wrap').find('.dews-icon.icon-search').on('click', function(e) {
+        dewself.cdt_deptCd_mcp.setHelpParams({
+          auth_bizarea: dewself.cdt_bizareaCd_mcp.codes().join('|'),
+        });
+      });
+    }
+
+    // ▦▦▦▦▦▦ 실행 영역 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+    function setDetailCondsData(detailConds) {
+      if (detailConds != null) {
+        $.each(detailConds.pickerData, function(key, value) {
+          if(configMstCom048 == '1' && key == 'cdt_empTp_mcp') { // 1:미사용
+            dewself.cdt_empTp_mcp1.setData(value);
+          }else if(configMstCom048 == '2' && key == 'cdt_empTp_mcp') { // 2:사용
+            dewself.cdt_empTp_mcp2.setData(value);
+          }else {
+            dewself[key].setData(value);
+          }
+        });
+        // dewself.cdt_slstCdFrom_tb.text(detailConds.slst_cd_from);
+        // dewself.cdt_slstCdTo_tb.text(detailConds.slst_cd_to);
+        dewself.cdt_slstCd_tb.text(detailConds.slst_cd);
+      }
+    }
+
+    function getPickerData() {
+      let dataSet = {};
+
+      var cdt_empTp_mcp_data = '';
+      if(configMstCom048 == '1') { // 1:미사용
+        cdt_empTp_mcp_data = dewself.cdt_empTp_mcp1.getData();
+      }else if(configMstCom048 == '2') { // 2:사용
+        cdt_empTp_mcp_data = dewself.cdt_empTp_mcp2.getData();
+      }
+
+      dataSet.cdt_bizareaCd_mcp = dewself.cdt_bizareaCd_mcp.getData();
+      dataSet.cdt_deptCd_mcp = dewself.cdt_deptCd_mcp.getData();
+      dataSet.cdt_empTp_mcp = cdt_empTp_mcp_data;
+      dataSet.cdt_ogrpCd_mcp = dewself.cdt_ogrpCd_mcp.getData();
+      dataSet.cdt_jkndCd_mcp = dewself.cdt_jkndCd_mcp.getData();
+      dataSet.cdt_dutyCd_mcp = dewself.cdt_dutyCd_mcp.getData();
+      dataSet.cdt_pstnCd_mcp = dewself.cdt_pstnCd_mcp.getData();
+      dataSet.cdt_odtyCd_mcp = dewself.cdt_odtyCd_mcp.getData();
+      dataSet.cdt_posiCd_mcp = dewself.cdt_posiCd_mcp.getData();
+      dataSet.cdt_ccCd_mcp = dewself.cdt_ccCd_mcp.getData();
+      dataSet.cdt_pjtNo_mcp = dewself.cdt_pjtNo_mcp.getData();
+      return dataSet;
+    }
+  });
+//# sourceURL=PAMPHM00100_detailSearch_POP.js
+</script>

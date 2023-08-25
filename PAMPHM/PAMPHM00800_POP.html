@@ -1,0 +1,208 @@
+﻿<div class="dews-dialog-contents-area">
+  <div class="dews-ui-condition-panel combo col-3 dews-container-control dews-control-activate">
+    <form class="dews-condition-panel-form">
+      <ul class="required-area">
+        <li>
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0000070">재직구분</label>
+          <span>
+            <select class="dews-ui-dropdownlist" style="width:95px" id="ddlCdIncom" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+            </select>
+            <input type="text" class="dews-ui-textbox" style="width:100%" id="tbSearch">
+          </span>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="dews-container-panel">
+    <div class="dews-container-item">
+      <div class='dews-ui-grid' id='dialogGrid'></div>
+    </div>
+  </div>
+</div>
+
+<div class="dews-dialog-button-group bottom">
+  <button class="dews-ui-button confirm" id="btnAccept" data-dews-localize-key="D0000267">적용</button>
+  <button class="dews-ui-button confirm" id="btnClose" data-dews-localize-key="D0000255">닫기</button>
+</div>
+
+<script>
+  dews.ready(function(){
+
+    // MARK : variables --------------------------------
+    var dewself = this;
+    var dialogGrid, dialogDtSource;
+    var dialog = dews.ui.dialog("PAMPHM00800_POP");
+    var initData = dialog.getInitData();
+    dews.ui.loading.show();
+
+    // MARK : initLoad --------------------------------
+    dewself.tbSearch.enable(false);
+    dewself.tbSearch.text(initData.searchText);
+
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'), {
+      async: false,
+      data: {
+        module_cd: "HR",
+        field_cd_pipe: "P00750|",
+        syscode_yn: "",
+        base_yn: "",
+        foreign_yn: "",
+        end_dt: "",
+        keyword: ""
+      }
+    })
+    .done(function(data){
+      dewself.ddlCdIncom.setDataSource(data);
+    });
+
+    // MARK : initDataSource --------------------------------
+    dialogDtSource = dews.ui.dataSource('dialogDtSource', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'pamphm00800_pop_list_dialog'),
+          data: function(){
+            return {
+              hlof_fg_cd: dewself.ddlCdIncom.value(),
+              searchText: dewself.tbSearch.text()
+            }
+          }
+        }
+      },
+      schema: {
+        model: {
+          id: 'Pamphm00800emp',
+          fields: [
+            { field: 'COMPANY_CD' },
+            { field: 'COMPANY_NM' },
+            { field: 'GEMP_NO' },
+            { field: 'KOR_NM' },
+            { field: 'POSI_CD' }
+          ]
+        }
+      }
+    });
+
+    // MARK : initGrid --------------------------------
+    dialogGrid = dews.ui.grid(dewself.$dialogGrid, {
+      dataSource: dialogDtSource,
+      selectable: true,
+      checkable: false,
+      rowNo: true,
+      editable: false,
+      editSkip: true,
+      autobind: true,
+      noData: true,
+      height: 368,
+      columns: [
+        {
+          field: "COMPANY_CD",
+          title: dews.localize.get("회사코드", 'D0000004'),
+          width: 100,
+          ailgn: "center"
+        },
+        {
+          field: "COMPANY_NM",
+          title: dews.localize.get("회사명", 'D0000062'),
+          width: 100,
+          ailgn: "center"
+        },
+        {
+          field: "GEMP_NO",
+          title: dews.localize.get("통합사원번호", 'D0000679'),
+          width: 100,
+          ailgn: "center"
+        },
+        {
+          field: "KOR_NM",
+          title: dews.localize.get("사원명", 'D0000075'),
+          width: 100,
+          ailgn: "center"
+        },
+        {
+          field: "POSI_CD",
+          title: dews.localize.get("직책", 'D0000685'),
+          width: 100,
+          ailgn: "center"
+        }
+      ],
+      dataBound: function(e) {
+        dews.ui.loading.hide();
+      }
+    });
+
+    // MARK : initMainButton --------------------------------
+
+    // MARK : eventHandler --------------------------------
+    dewself.dialogGrid.on("keyup", function(e){
+      if(e.keyCode == "13"){
+        if(dewself.dialogGrid.dataItems().length > 0){
+          dewself.$btnAccept.click();
+        }
+      }
+    });
+
+    dewself.$btnAccept.on('click', function(e){
+      var dialogdata = [];
+      var row;
+
+      if(dewself.dialogGrid.dataItem(dewself.dialogGrid.select())){
+        row = dewself.dialogGrid.dataItem(dewself.dialogGrid.select());
+
+        var drsCode = dews.ui.page.mainEnv.drsCode;
+        if(drsCode == '20049') {
+          dialog.ok(row.GEMP_NO);
+        }else {
+          var useGemp = $.grep(initData.addList, function(add, idx){
+            return row.GEMP_NO == add.GEMP_NO && initData.curUid != add._huid;
+          });
+
+          if(useGemp){
+            if(useGemp.length > 0){
+              dews.alert(dews.localize.get("이미 사용중인 통합사원번호입니다.", 'M0002425') + "\n" + dews.localize.get("다른 통합사원번호를 택하거나 신규추가하여 주십시오.", 'M0002426'), "ico3");
+              return false;
+            }
+            else{
+              dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00800_SERVICE', 'pamphm00800_check_usegemp'), {
+                async: false,
+                data: {
+                  gemp_no: row.GEMP_NO
+                }
+              })
+              .done(function(data){
+                if(data != ""){
+                  dews.alert(dews.localize.get("이미 사용중인 통합사원번호입니다.", 'M0002425') + "\n" + dews.localize.get("다른 통합사원번호를 택하거나 신규추가하여 주십시오.", 'M0002426'), "ico3");
+                }
+                else{
+                  dialog.ok(row.GEMP_NO);
+                }
+              })
+              .fail(function (xhr, satus, error) {
+                dews.error(error);
+              });
+            }
+          }
+        }
+      }
+      else{
+        dews.alert(dews.localize.get("통합사원번호를 신규추가하여 주십시오.", 'M0002427'), "ico3");
+        return false;
+      }
+    });
+
+    dewself.$btnClose.on('click', function(e){
+      dialog.close();
+    });
+
+    dewself.ddlCdIncom.on('change',function(e){
+      dews.ui.loading.show();
+      dialogDtSource.read();
+    });
+
+    // MARK : funStd --------------------------------
+
+    // MARK : func --------------------------------
+
+  });
+//# sourceURL=view/HR/PAMPHM00800_POP.js
+</script>

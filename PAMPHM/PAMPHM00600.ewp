@@ -1,0 +1,3472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page title="사원등록엑셀업로드" name="PAMPHM00600" type="page">
+  <canvas uid="canvas-1485142915100" type="page" title="사원등록엑셀업로드" preReady="c01a114d-fb38-4296-b96a-0d463b46dcc7" ready="598257d4-87d1-4956-8c49-a116d520cec6" component="" function="">
+    <pageInformation>
+      <version>1.0.22080301</version>
+      <create>hjs0830</create>
+      <modify>hjs0830</modify>
+      <builddate>2022-08-03T09:40:32.0883192+09:00</builddate>
+      <createdate>2022-07-12T12:02:13.3712622+09:00</createdate>
+      <modifieddate>2022-08-03T09:40:32.0883192+09:00</modifieddate>
+      <service>PAMPHM00600_SERVICE</service>
+    </pageInformation>
+    <mainButtons uid="mainButtons-1385142915113">
+      <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="normal" type="information" />
+      <mainButton uid="mainButton-1485142971050" id="localize" buttonAttr="disabled" type="localize" />
+      <mainButton uid="mainButton-1485142971051" id="approval" buttonAttr="normal" type="approval" />
+      <mainButton uid="mainButton-1485142971058" id="etn-approval" buttonAttr="normal" type="etn-approval" />
+      <mainButton uid="mainButton-1485142971052" id="add" buttonAttr="normal" type="add" />
+      <mainButton uid="mainButton-1485142971053" id="search" buttonAttr="normal" type="search" />
+      <mainButton uid="mainButton-1485142971054" id="delete" buttonAttr="normal" type="delete" />
+      <mainButton uid="mainButton-1485142971055" id="print" buttonAttr="normal" type="print" />
+      <mainButton uid="mainButton-1485142971056" id="save" buttonAttr="normal" type="save" click="" />
+      <mainButton uid="mainButton-1485142971057" id="configure" buttonAttr="normal" type="configure" />
+    </mainButtons>
+    <containerPanel uid="containerPanel-1658281689020" height_type="px" containerResize="false">
+      <containerItem uid="containerItem-1658281689537" width_type="px" location="normal">
+        <htmlControl uid="htmlControl-1658281693660" htmlCode="&lt;div class=&quot;dews-button-group&quot; style=&quot;text-align: right;&quot;&gt;&#xD;&#xA;  &lt;button id=&quot;excelCreateBtn&quot; class=&quot;dews-ui-button&quot;&gt;엑셀파일생성&lt;/button&gt;&#xD;&#xA;  &lt;button id=&quot;excelUploadBtn&quot; class=&quot;dews-ui-filebutton&quot;&gt;엑셀파일업로드&lt;/button&gt;&#xD;&#xA;  &lt;button id=&quot;errorCheckBtn&quot; class=&quot;dews-ui-button&quot;&gt;오류검증&lt;/button&gt;&#xD;&#xA;  &lt;button id=&quot;empApplyBtn&quot; class=&quot;dews-ui-button&quot;&gt;사원반영&lt;/button&gt;&#xD;&#xA;&lt;/div&gt;" height_type="px" />
+      </containerItem>
+    </containerPanel>
+    <conditionPanel uid="conditionPanel-1505787714956" margin="false" optional="false" optionalcollapsed="true" columnLength="3" labelAlign="right">
+      <conditionGroup uid="conditionGroup-1505787714960" type="required">
+        <conditionItem uid="conditionItem-1505787722852" columnSize="1" text="등록구분">
+          <dropdownlist uid="dropdownlist-581cce6e49bb4452a5df4b32f87881dd" id="regCategory" autoBind="true" dataSource="" valueField="SYSDEF_CD" textField="SYSDEF_NM" pipeparam="" useDefault="false" defaultValue="" defaultText="" width_type="px" disabled="false" readonly="false" autoOpen="false" useNumkey="false" showTooltip="true" showValueTooltip="true" state="required" dataBound="" change="6aff4011-b96e-4e6f-a265-f139798104b1" />
+        </conditionItem>
+      </conditionGroup>
+    </conditionPanel>
+    <containerPanel uid="containerPanel-1505787729725" height_type="px" fitBottom="true" containerResize="false">
+      <containerItem uid="containerItem-1505787729727" width_type="px" location="normal">
+        <grid uid="grid-1505787733564" mockupData="" id="grid1" dataSource="" height_type="px" height="175" editable="true" movable="false" rowNo="true" selectable="false" checkable="true" sortable="false" shiftCheck="true" autoBind="false" requiredCheck="false" stateColumn="false" noData="true" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" useGridUserGroup="false">
+          <columns />
+          <filter filterType="Boolean" filter="true" iconVisible="false" />
+          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+            <gridContextItems>
+              <gridContextItem id="exception_handing" text="예외처리" handler="c3f60977-a6b9-4c51-be03-a267a2d11bcd" display="f3622880-5ddf-46ec-a0bf-1770766b0e8b" />
+            </gridContextItems>
+          </contextObject>
+          <detailGrid addedRowDataSourceRead="true" />
+          <gridGroupColumns />
+          <fixed colCount="3" rightColCount="0" />
+          <styles heightTyp="string">
+            <rowNo />
+            <cellBorder />
+            <font bold="false" />
+            <padding />
+            <heightObject />
+          </styles>
+          <note>
+            <keys />
+          </note>
+        </grid>
+      </containerItem>
+    </containerPanel>
+  </canvas>
+  <dataSources />
+  <pageMarkDown><![CDATA[]]></pageMarkDown>
+  <pageCssStyle><![CDATA[]]></pageCssStyle>
+  <stylesheets />
+  <javascripts>
+    <javascript id="c01a114d-fb38-4296-b96a-0d463b46dcc7"><![CDATA[self.$content.append('<script src=\'/view/js/HR/hr.common.js\'><\/script>');
+
+var objCodeDtl = {};
+var fields = [], columns = [];
+let columnOfSelectedTable = [];
+let exceptHandle = [];
+
+// 검증결과 드롭다운리스트 설정
+var errorCorrectDataSource = [
+  {
+    'ERR_YN': '0',
+    'ERR_YN_NM': '미검사'
+  },
+  {
+    'ERR_YN': '1',
+    'ERR_YN_NM': '오류'
+  },
+  {
+    'ERR_YN': '2',
+    'ERR_YN_NM': '정상'
+  }
+];
+
+// 반영결과 드롭다운리스트 설정
+var applyResultDataSource = [
+  {
+    'APPLY_RESULT': '0',
+    'APPLY_RESULT_NM': '반영전'
+  },
+  {
+    'APPLY_RESULT': '1',
+    'APPLY_RESULT_NM': '실패'
+  },
+  {
+    'APPLY_RESULT': '2',
+    'APPLY_RESULT_NM': '성공'
+  }
+];
+
+getCodeData('HR', 'P02120|', null, null, null, null, null);
+self.regCategory.setDataSource(objCodeDtl.HR.P02120);
+getColumnOfSelectedTable();
+
+var objConfigMst = derp.HR.getConfigMstData('COM001', null, null); // HR_CONFIG_MST 객체
+var empNoMakeRule = objConfigMst.COM001[0].CHAR_CD_VAL_DC; // [인사환경설정]의 '사번부여규칙'
+
+var gempNoMakeRule = "";  // 통합사원번호 채번규칙 통합(ci)환경설정 ['1' : 자동(통합자동채번등록), '2' : 자동(사원번호), '3' : 수기]
+getCiCtrlConfig('HR','HR00003', 'Y');  // 통합사원번호 채번규칙 통합(ci)환경설정 ['1' : 자동(통합자동채번등록), '2' : 자동(사원번호), '3' : 수기]
+
+
+
+
+]]></javascript>
+    <javascript id="598257d4-87d1-4956-8c49-a116d520cec6"><![CDATA[
+var dataSource = dews.ui.dataSource("dataSource", {
+  grid:true,
+  schema: {
+    model: {
+      id: 'dataSource',
+      fields: []
+    }
+  }
+});
+
+self.$excelCreateBtn.on('click', function(e) { // 엑셀파일생성 버튼
+  try {
+        var regCategory = self.regCategory.value();
+        var tableId = "";
+        if(regCategory == "1") {
+          tableId = "HR_EMP_MST";
+        }else if(regCategory == "2") {
+          tableId = "HR_EMPPAY_DTL";
+        }else if(regCategory == "3") {
+          tableId = "HR_EMPINFO_DTL";
+        }
+
+        // 초기데이터 설정
+        var initData = {
+          mode: 'single',
+          code: 'H_HR_MENUXLS_MST_C',
+          params: {
+            menuCd: self.menu.id,
+            tableId: tableId,
+
+            /*
+              * 파일명은 확장자는 제외합니다.
+              * 파일 이름을 지정하지 않으면 내부적으로 temp[menuCd]_년월일_시분초xx.xlsx파일로 생성됩니다.
+              */
+            fileName: dews.localize.get('사원등록엑셀업로드_', 'D0103385', '', 'PAMPHM00600') + dews.date.format(new Date(), 'yyyyMMdd'),
+            data: null
+          }
+        };
+
+        // 엑셀 다운로드 관련 코드도움창 호출
+        var dialog = dews.ui.dialog('H_HR_MENUXLS_MST_C', {
+          url: '~/codehelp/HR/H_HR_MENUXLS_MST_C',
+          size: 'extra',
+          buttons: 'close',
+          ok: function (data) {
+            dews.ui.snackbar.ok(dews.localize.get('엑셀 파일을 생성하였습니다.', 'M0003258', '', 'PAMPHM00600'));
+          }
+        })
+
+        dialog.setInitData(initData);
+        dialog.open();
+      } catch (error) {
+        console.log(error);
+      }
+});
+
+self.$errorCheckBtn.on('click', function(e) { // 오류검증 버튼
+  var checkedRows = self.grid1.getCheckedRows();
+  var checkedIndex = self.grid1.getCheckedIndex();
+
+  if(checkedRows.length > 0) {
+    // console.log("체크된 데이터:", checkedRows);
+    var regCategory = self.regCategory.value();
+    if(regCategory != null && regCategory != undefined && regCategory != "") {
+        dews.ui.loading.show({
+          text: '오류 검증이 시작되었습니다.'
+        });
+
+        var tableId = "";
+        if(regCategory == "1") {
+          tableId = "HR_EMP_MST";
+        }else if(regCategory == "2") {
+          tableId = "HR_EMPPAY_DTL";
+        }else if(regCategory == "3") {
+          tableId = "HR_EMPINFO_DTL";
+        }
+
+        errorCheck(checkedRows, checkedIndex, tableId);
+        dews.ui.loading.hide();
+        dews.ui.snackbar.ok('오류 검증이 완료되었습니다.');
+    }else {
+      dews.ui.snackbar.warning("등록구분을 선택해주세요.");
+    }
+
+  }else {
+    dews.ui.snackbar.warning('체크된 데이터가 없습니다.');
+    return false;
+  }
+});
+
+function errorCheck(checkedRowsParam, checkedIndexParam, tableId) {
+  var errorCheck = true;
+  for(idx = 0; idx < checkedRowsParam.length; idx++) {
+    errorCheck = true;
+    // console.log("checkedRowsParam[idx]:", checkedRowsParam[idx]);
+    
+    if(tableId == 'HR_EMP_MST') {
+      var empNo = checkedRowsParam[idx].EMP_NO;
+      if(checkedRowsParam[idx].hasOwnProperty('EMP_NO')) { // 사원번호 컬럼이 있으면
+        if(empNoMakeRule == '1') { // '1'(자동부여)
+          if(empNo != null) {
+            if(checkEmpNo(empNo)) { // 기준에 따라 자동으로 사원번호가 채번돼야 하므로 신규 사원의 경우
+              self.grid1.setCellValue(checkedIndexParam[idx], 'EMP_NO', null); // 사원번호를 NULL
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                            background: '#ffffff',
+                                        }); // 해당 cell '정상'으로 수정
+            }
+          }
+        }else if(empNoMakeRule == '3') { // '3'(채번규칙으로부여)
+          if(empNo != null) {
+            if(checkEmpNo(empNo)) { // 사원번호가 엑셀에 입력되어있으나 기존 HR_EMP_MST에 없는 경우, "오류"
+              errorCheck = false;
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                      background: '#faa733',
+                                                  }); // 해당 cell '오류'로 수정
+            }
+          }
+        }else if(empNoMakeRule == '2') { // '2'(수동부여)
+          if(emptyData(empNo)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                      background: '#faa733',
+                                                  }); // 해당 cell '오류'로 수정
+          }else {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                            background: '#ffffff',
+                                        }); // 해당 cell '정상'으로 수정
+          }
+        }
+      }else {
+        errorCheck = false;
+        dews.ui.snackbar.warning("EMP_NO 컬럼이 없습니다.");
+      }
+
+      var gempNo = checkedRowsParam[idx].GEMP_NO;
+      if(checkedRowsParam[idx].hasOwnProperty('GEMP_NO')) {
+        if(emptyData(empNo)) {
+          errorCheck = false;
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                    background: '#faa733',
+                                                }); // 해당 cell '오류'로 수정
+        }else {
+          if(!checkEmpNo(empNo)) { // HR_EMP_MST에 있는 경우
+            if(checkGempNoInExistEmpNo(empNo, gempNo)) { // 기존 사원(PK체크)인데, 통합사원번호가 다른 경우
+              errorCheck = false;
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'GEMP_NO', {
+                                                          background: '#faa733',
+                                                      }); // 해당 cell '오류'로 수정
+            }else {
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'GEMP_NO', {
+                                                        background: '#ffffff',
+                                                    }); // 해당 cell '정상'으로 수정
+            }
+          }else {
+            if(gempNoMakeRule == '3') { // 3:수동부여
+              if(emptyData(gempNo)) { // 엑셀에서 해당 컬럼 값 NULL인 경우
+                errorCheck = false;
+                self.grid1.setCellStyle(checkedIndexParam[idx], 'GEMP_NO', {
+                                                            background: '#faa733',
+                                                        }); // 해당 cell '오류'로 수정
+              }else if(checkGempNoInSameCompany(gempNo)) { // 엑셀의 통합사원번호로 같은 회사에 동일한 통합사원번호 데이터가 있는 경우
+                errorCheck = false;
+                self.grid1.setCellStyle(checkedIndexParam[idx], 'GEMP_NO', {
+                                                            background: '#faa733',
+                                                        }); // 해당 cell '오류'로 수정
+              }
+            }else if(gempNoMakeRule == '1' || gempNoMakeRule == '2') { // '1'(자동(통합자동채번등록)), '2'(자동(사원번호))
+              if(checkEmpNo(empNo)) { // 기준에 따라 자동으로 통합사원번호가 채번돼야 하므로 신규 사원의 경우
+                if(gempNo != null) {
+                  self.grid1.setCellStyle(checkedIndexParam[idx], 'GEMP_NO', {
+                                                background: '#ffffff',
+                                            }); // 해당 cell '정상'으로 수정
+                  self.grid1.setCellValue(checkedIndexParam[idx], 'GEMP_NO', null); // 통합사원번호를 NULL
+                }
+              }
+            }
+          }
+        }
+      }
+
+      var korNm = checkedRowsParam[idx].KOR_NM;
+      if(checkedRowsParam[idx].hasOwnProperty('KOR_NM')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'KOR_NM')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'KOR_NM', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(korNm)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'KOR_NM', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'KOR_NM', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('BIZAREA_CD')) {
+        var bizareaCd = checkedRowsParam[idx].BIZAREA_CD;
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'BIZAREA_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'BIZAREA_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(bizareaCd)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BIZAREA_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(checkBizareaCd(bizareaCd)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BIZAREA_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BIZAREA_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DEPT_CD')) {
+        var deptCd = checkedRowsParam[idx].DEPT_CD;
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DEPT_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DEPT_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(deptCd)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DEPT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(checkDeptCd(deptCd)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DEPT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DEPT_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }
+        }
+      }
+
+      var empTp = checkedRowsParam[idx].EMP_TP; // 사원유형
+      if(checkedRowsParam[idx].hasOwnProperty('EMP_TP')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'EMP_TP')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_TP', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(empTp)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_TP', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(checkMaCodedtl(tableId, 'EMP_TP', empTp)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_TP', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_TP', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var empTpCd = checkedRowsParam[idx].EMPY_TP_CD; // 고용유형코드
+      if(checkedRowsParam[idx].hasOwnProperty('EMPY_TP_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'EMPY_TP_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMPY_TP_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(empTpCd)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMPY_TP_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(checkMaCodedtl(tableId, 'EMPY_TP_CD', empTpCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMPY_TP_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMPY_TP_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var posiCd = checkedRowsParam[idx].POSI_CD; // 직위코드
+      if(checkedRowsParam[idx].hasOwnProperty('POSI_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'POSI_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'POSI_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'POSI_CD', posiCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'POSI_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'POSI_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var pstnCd = checkedRowsParam[idx].PSTN_CD; // 직급코드
+      if(checkedRowsParam[idx].hasOwnProperty('PSTN_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'PSTN_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'PSTN_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'PSTN_CD', pstnCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'PSTN_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'PSTN_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var slstCd = checkedRowsParam[idx].SLST_CD; // 호봉코드
+      if(checkedRowsParam[idx].hasOwnProperty('SLST_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'SLST_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'SLST_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'SLST_CD', slstCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SLST_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SLST_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var odtyCd = checkedRowsParam[idx].ODTY_CD; // 직책코드
+      if(checkedRowsParam[idx].hasOwnProperty('ODTY_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'ODTY_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'ODTY_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'ODTY_CD', odtyCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ODTY_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ODTY_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var dutyCd = checkedRowsParam[idx].DUTY_CD; // 직무코드
+      if(checkedRowsParam[idx].hasOwnProperty('DUTY_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DUTY_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DUTY_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'DUTY_CD', dutyCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DUTY_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DUTY_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var ogrpCd = checkedRowsParam[idx].OGRP_CD; // 직군코드
+      if(checkedRowsParam[idx].hasOwnProperty('OGRP_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'OGRP_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'OGRP_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'OGRP_CD', ogrpCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'OGRP_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'OGRP_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var jkndCd = checkedRowsParam[idx].JKND_CD; // 직종코드
+      if(checkedRowsParam[idx].hasOwnProperty('JKND_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'JKND_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'JKND_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'JKND_CD', jkndCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'JKND_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'JKND_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var sexCd = checkedRowsParam[idx].SEX_CD; // 성별코드
+      if(checkedRowsParam[idx].hasOwnProperty('SEX_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'SEX_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'SEX_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'SEX_CD', sexCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SEX_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SEX_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var groupecnyDt = checkedRowsParam[idx].GROUPECNY_DT; // 그룹입사일
+      if(checkedRowsParam[idx].hasOwnProperty('GROUPECNY_DT')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'GROUPECNY_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'GROUPECNY_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(groupecnyDt)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'GROUPECNY_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(validateDate(groupecnyDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'GROUPECNY_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'GROUPECNY_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var jncoDt = checkedRowsParam[idx].JNCO_DT; // 입사일
+      if(checkedRowsParam[idx].hasOwnProperty('JNCO_DT')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'JNCO_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'JNCO_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(jncoDt)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'JNCO_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(validateDate(jncoDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'JNCO_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'JNCO_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var retrDt = checkedRowsParam[idx].RETR_DT; // 퇴사일
+      if(checkedRowsParam[idx].hasOwnProperty('RETR_DT')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'RETR_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'RETR_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(retrDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RETR_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RETR_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      var retirestdrDt = checkedRowsParam[idx].RETIRESTDR_DT; // 퇴직기준일
+      if(checkedRowsParam[idx].hasOwnProperty('RETIRESTDR_DT')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'RETIRESTDR_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'RETIRESTDR_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(retirestdrDt)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RETIRESTDR_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(validateDate(retirestdrDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RETIRESTDR_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RETIRESTDR_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('HLOF_FG_CD')) {
+        var hlofFgCd = checkedRowsParam[idx].HLOF_FG_CD; // 재직구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'HLOF_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'HLOF_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(hlofFgCd)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HLOF_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(checkMaCodedtl(tableId, 'HLOF_FG_CD', hlofFgCd)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HLOF_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HLOF_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('APNTC_EXPY_DT')) {
+        var apntcExpyDt = checkedRowsParam[idx].APNTC_EXPY_DT; // 수습만료일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'APNTC_EXPY_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'APNTC_EXPY_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(apntcExpyDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'APNTC_EXPY_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'APNTC_EXPY_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('TKG_CD')) {
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'TKG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'TKG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkTkgCd(checkedRowsParam[idx].TKG_CD)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'TKG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'TKG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('LAST_MLTPLC_DT')) {
+        var lastMltplcDt = checkedRowsParam[idx].LAST_MLTPLC_DT; // 최종승호일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'LAST_MLTPLC_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_MLTPLC_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(lastMltplcDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_MLTPLC_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_MLTPLC_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('LAST_UGRD_DT')) {
+        var lastUgrdDt = checkedRowsParam[idx].LAST_UGRD_DT; // 최종승급일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'LAST_UGRD_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_UGRD_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(lastUgrdDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_UGRD_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_UGRD_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('SERI_CD')) {
+        var seriCd = checkedRowsParam[idx].SERI_CD; // 직렬코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'SERI_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'SERI_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'SERI_CD', seriCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SERI_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SERI_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('FRGNR_CD')) {
+        var frgnrCd = checkedRowsParam[idx].FRGNR_CD; // 내외국인코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'FRGNR_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'FRGNR_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(frgnrCd)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRGNR_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(checkMaCodedtl('HR_EMPINFO_DTL', 'FRGNR_CD', frgnrCd)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRGNR_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRGNR_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('RES_NO')) {
+        var resNo = checkedRowsParam[idx].RES_NO;
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'RES_NO')) {
+          var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(resNo);
+          self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkedRowsParam[idx].hasOwnProperty('FRGNR_CD')) { // 내외국인코드 컬럼 있으면
+            
+            var frgnrCd = checkedRowsParam[idx].FRGNR_CD; // 내외국인코드(FRGNR_CD)
+            if(frgnrCd == '1') { // 내국인 이면
+              if(emptyData(resNo)) {
+                errorCheck = false;
+                self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+                self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                      background: '#faa733',
+                                                  }); // 해당 cell '오류'로 수정
+              }else {
+                if(!checkValidResNo(resNo)) {
+                  errorCheck = false;
+                  self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+                  self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                        background: '#faa733',
+                                                    }); // 해당 cell '오류'로 수정
+                }else {
+                  var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(resNo);
+                  self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+                  self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                        background: '#ffffff',
+                                                    }); // 해당 cell '정상'으로 수정
+                }
+              }
+            }else if(frgnrCd == '2') { // '2'(외국인)일 때는 null로 저장
+              self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+              self.grid1.setCellValue(checkedIndexParam[idx], 'RES_NO', null); // 사원번호를 NULL
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                      background: '#ffffff',
+                                                  }); // 해당 cell '정상'으로 수정
+            }else {
+              if(!checkValidResNo(resNo)) {
+                errorCheck = false;
+                self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+                self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                      background: '#faa733',
+                                                  }); // 해당 cell '오류'로 수정
+              }else {
+                var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(resNo);
+                self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+                self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                      background: '#ffffff',
+                                                  }); // 해당 cell '정상'으로 수정
+              }
+            }
+          }else {
+            if(!checkValidResNo(resNo)) {
+              errorCheck = false;
+              self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                    background: '#faa733',
+                                                }); // 해당 cell '오류'로 수정
+            }else {
+              var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(resNo);
+              self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'RES_NO', {
+                                                    background: '#ffffff',
+                                                }); // 해당 cell '정상'으로 수정
+            }
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('FRNR_INSERT_NO')) { // 외국인등록번호
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'FRNR_INSERT_NO')) {
+          self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          var frnrInsertNo = checkedRowsParam[idx].FRNR_INSERT_NO;
+          if(checkedRowsParam[idx].hasOwnProperty('FRGNR_CD')) { // 내외국인코드 컬럼 있으면
+            var frgnrCd = checkedRowsParam[idx].FRGNR_CD; // 내외국인코드(FRGNR_CD)
+            if(frgnrCd == '2') { // '2'(외국인)이면
+              if(emptyData(frnrInsertNo)) {
+                errorCheck = false;
+                self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+                self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                      background: '#faa733',
+                                                  }); // 해당 cell '오류'로 수정
+              }else {
+                if (isFrnrInsertNoValid2(frnrInsertNo)) {
+                  var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(frnrInsertNo);
+
+                  self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+                }
+              }
+            }else if(frgnrCd == '1') { // 내국인 일 때는 null로 저장
+              self.grid1.setCellValue(checkedIndexParam[idx], 'FRNR_INSERT_NO', null); // 사원번호를 NULL
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                      background: '#ffffff',
+                                                  }); // 해당 cell '정상'으로 수정
+            }else {
+              if (isFrnrInsertNoValid2(frnrInsertNo)) {
+                var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(frnrInsertNo);
+
+                self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+              }
+            }
+          }else {
+            if (isFrnrInsertNoValid2(frnrInsertNo)) {
+              var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(frnrInsertNo);
+
+              self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+            }
+          }
+        }
+      }
+
+      if(errorCheck == true) {
+        self.grid1.setCellValue(checkedIndexParam[idx], 'ERR_YN', 2); // 해당 row '성공'으로 수정
+      }else if(errorCheck == false) {
+        self.grid1.setCellValue(checkedIndexParam[idx], 'ERR_YN', 1); // 해당 row '오류'로 수정
+      }
+    }else if(tableId == 'HR_EMPPAY_DTL') {
+      var empNo = checkedRowsParam[idx].EMP_NO;
+      if(checkedRowsParam[idx].hasOwnProperty('EMP_NO')) { // 사원번호 컬럼이 있으면
+        if(emptyData(empNo)) {
+          errorCheck = false;
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                    background: '#faa733',
+                                                }); // 해당 cell '오류'로 수정
+        }else if(checkEmpNo(empNo)) { // 사원번호가 엑셀에 입력되어있으나 기존 HR_EMP_MST에 없는 경우, "오류"
+          errorCheck = false;
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+        }else {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                background: '#ffffff',
+                                            }); // 해당 cell '정상'으로 수정
+        }
+      }else {
+        errorCheck = false;
+        dews.ui.snackbar.warning("EMP_NO 컬럼이 없습니다.");
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('ACCTTYPE_CD')) {
+        var accttypeCd = checkedRowsParam[idx].ACCTTYPE_CD; // 계정유형코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'ACCTTYPE_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'ACCTTYPE_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'ACCTTYPE_CD', accttypeCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ACCTTYPE_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ACCTTYPE_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('BANK1_CD')) {
+        var bank1Cd = checkedRowsParam[idx].BANK1_CD; // 은행1코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'BANK1_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK1_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkBankCd(bank1Cd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK1_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK1_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('BANK2_CD')) {
+        var bank2Cd = checkedRowsParam[idx].BANK2_CD; // 은행2코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'BANK2_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK2_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkBankCd(bank2Cd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK2_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK2_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('PR_DRCT_WKR_CD')) {
+        var prDrctWkrCd = checkedRowsParam[idx].PR_DRCT_WKR_CD; // 생산직근로자코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'PR_DRCT_WKR_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'PR_DRCT_WKR_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(prDrctWkrCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'PR_DRCT_WKR_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'PR_DRCT_WKR_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('EMPYINSFO_TARGNO_CD')) {
+        var empyinsfoTargnoCd = checkedRowsParam[idx].EMPYINSFO_TARGNO_CD; // 고용보험대상여부코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'EMPYINSFO_TARGNO_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMPYINSFO_TARGNO_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(empyinsfoTargnoCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMPYINSFO_TARGNO_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMPYINSFO_TARGNO_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('RESIDNT_CD')) {
+        var residntCd = checkedRowsParam[idx].RESIDNT_CD; // 거주자코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'RESIDNT_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'RESIDNT_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkOneAndTwo(residntCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RESIDNT_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RESIDNT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('INDUSAC_INSU_TRGT_CD')) {
+        var indusacInsuTrgtCd = checkedRowsParam[idx].INDUSAC_INSU_TRGT_CD; // 산재보험대상코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'INDUSAC_INSU_TRGT_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'INDUSAC_INSU_TRGT_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(indusacInsuTrgtCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'INDUSAC_INSU_TRGT_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'INDUSAC_INSU_TRGT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('HLTHINS_INS_CD')) {
+        var hlthinsInsCd = checkedRowsParam[idx].HLTHINS_INS_CD; // 건강보험해당유무코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'HLTHINS_INS_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'HLTHINS_INS_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(hlthinsInsCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HLTHINS_INS_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HLTHINS_INS_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('NPNCRRENNC_CD')) {
+        var npncrrenncCd = checkedRowsParam[idx].NPNCRRENNC_CD; // 국민연금해당유무코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'NPNCRRENNC_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'NPNCRRENNC_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYNS(npncrrenncCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'NPNCRRENNC_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'NPNCRRENNC_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('SPO_CD')) {
+        var spoCd = checkedRowsParam[idx].SPO_CD; // 배우자코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'SPO_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'SPO_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(spoCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SPO_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SPO_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('LADY_HSHR_CD')) {
+        var ladyHshrCd = checkedRowsParam[idx].LADY_HSHR_CD; // 부녀자세대주코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'LADY_HSHR_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'LADY_HSHR_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(ladyHshrCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LADY_HSHR_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LADY_HSHR_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('FRNR_SINGL_TRTE_CD')) {
+        var frnrSinglTrteCd = checkedRowsParam[idx].FRNR_SINGL_TRTE_CD; // 외국인단일세율코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'FRNR_SINGL_TRTE_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_SINGL_TRTE_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'FRNR_SINGL_TRTE_CD', frnrSinglTrteCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_SINGL_TRTE_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_SINGL_TRTE_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('OCW_CD')) {
+        var ocwCd = checkedRowsParam[idx].OCW_CD; // 국외근로여부코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'OCW_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'OCW_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(ocwCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'OCW_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'OCW_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('ODSN_RCPER_RDUCTTRGET_CD')) {
+        var odsnRcperRducttrgetCd = checkedRowsParam[idx].ODSN_RCPER_RDUCTTRGET_CD; // 노인요양경감대상코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'ODSN_RCPER_RDUCTTRGET_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'ODSN_RCPER_RDUCTTRGET_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(odsnRcperRducttrgetCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ODSN_RCPER_RDUCTTRGET_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ODSN_RCPER_RDUCTTRGET_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('NOABROD_CD')) {
+        var noabrodCd = checkedRowsParam[idx].NOABROD_CD; // 국외근로비과세코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'NOABROD_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'NOABROD_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkNoabrodCd(noabrodCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'NOABROD_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'NOABROD_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('HSHR_YN_CD')) {
+        var hshrynCd = checkedRowsParam[idx].HSHR_YN_CD; // 세대주여부코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'HSHR_YN_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'HSHR_YN_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(hshrynCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HSHR_YN_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HSHR_YN_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('SCEPREPAY_TRGT_CD')) {
+        var sceprepayTrgtCd = checkedRowsParam[idx].SCEPREPAY_TRGT_CD; // 학자금상환대상코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'SCEPREPAY_TRGT_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'SCEPREPAY_TRGT_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(sceprepayTrgtCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SCEPREPAY_TRGT_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SCEPREPAY_TRGT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('PR_FRMLA_M2500_YN')) {
+        var prFrmlaM2500Yn = checkedRowsParam[idx].PR_FRMLA_M2500_YN; // 생산식2500만여부
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'PR_FRMLA_M2500_YN')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'PR_FRMLA_M2500_YN', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(prFrmlaM2500Yn)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'PR_FRMLA_M2500_YN', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'PR_FRMLA_M2500_YN', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('REDUCT_TP_CD')) {
+        var reductTpCd = checkedRowsParam[idx].REDUCT_TP_CD; // 감면유형코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'REDUCT_TP_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_TP_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'REDUCT_TP_CD', reductTpCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_TP_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_TP_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('REDUCT_END_DT')) {
+        var reductEndDt = checkedRowsParam[idx].REDUCT_END_DT; // 감면종료일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'REDUCT_END_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_END_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(reductEndDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_END_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_END_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DSPTC_LABOR_YN')) {
+        var dsptcLaborYn = checkedRowsParam[idx].DSPTC_LABOR_YN; // 파견근로여부
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DSPTC_LABOR_YN')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DSPTC_LABOR_YN', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(dsptcLaborYn)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSPTC_LABOR_YN', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSPTC_LABOR_YN', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('BANK3_CD')) {
+        var bank3Cd = checkedRowsParam[idx].BANK3_CD; // 은행3코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'BANK3_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK3_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkBankCd(bank3Cd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK3_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BANK3_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('REDUCT_TRGT_FG')) {
+        var reductTrgtFg = checkedRowsParam[idx].REDUCT_TRGT_FG; // 감면대상구분
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'REDUCT_TRGT_FG')) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_TRGT_FG', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'REDUCT_TRGT_FG', reductTrgtFg)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_TRGT_FG', {
+                                                    background: '#ffffff',
+                                                }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_TRGT_FG', {
+                                                    background: '#faa733',
+                                                }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('REDUCT_APLY_FG')) {
+        var reductAplyFg = checkedRowsParam[idx].REDUCT_APLY_FG; // 감면적용구분
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'REDUCT_APLY_FG')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_APLY_FG', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'REDUCT_APLY_FG', reductAplyFg)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_APLY_FG', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'REDUCT_APLY_FG', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('SRC_TAX_BNEI_CD')) {
+        var srcTaxBneiCd = checkedRowsParam[idx].SRC_TAX_BNEI_CD; // 원천세사업기타소득코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'SRC_TAX_BNEI_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'SRC_TAX_BNEI_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'SRC_TAX_BNEI_CD', srcTaxBneiCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SRC_TAX_BNEI_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SRC_TAX_BNEI_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('SCEPREPAY_END_DT')) {
+        var sceprepayEndDt = checkedRowsParam[idx].SCEPREPAY_END_DT; // 학자금상환종료일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'SCEPREPAY_END_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'SCEPREPAY_END_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(sceprepayEndDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SCEPREPAY_END_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'SCEPREPAY_END_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DLGT_ACNT_CD')) {
+        var dlgtAcntCd = checkedRowsParam[idx].DLGT_ACNT_CD; // 대표계좌코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DLGT_ACNT_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DLGT_ACNT_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkOneAndTwo(dlgtAcntCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DLGT_ACNT_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DLGT_ACNT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(errorCheck == true) {
+        self.grid1.setCellValue(checkedIndexParam[idx], 'ERR_YN', 2); // 해당 row '성공'으로 수정
+      }else if(errorCheck == false) {
+        self.grid1.setCellValue(checkedIndexParam[idx], 'ERR_YN', 1); // 해당 row '오류'로 수정
+      }
+    }else if(tableId == 'HR_EMPINFO_DTL') {
+      if(checkedRowsParam[idx].hasOwnProperty('EMP_NO')) { // 사원번호 컬럼이 있으면
+        var empNo = checkedRowsParam[idx].EMP_NO;
+        if(emptyData(empNo)) {
+          errorCheck = false;
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                    background: '#faa733',
+                                                }); // 해당 cell '오류'로 수정
+        }else if(checkEmpNo(empNo)) { // 사원번호가 엑셀에 입력되어있으나 기존 HR_EMP_MST에 없는 경우, "오류"
+          errorCheck = false;
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+        }else {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMP_NO', {
+                                                background: '#ffffff',
+                                            }); // 해당 cell '정상'으로 수정
+        }
+      }else {
+        errorCheck = false;
+        dews.ui.snackbar.warning("EMP_NO 컬럼이 없습니다.");
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('CC_CD')) {
+        var ccCd = checkedRowsParam[idx].CC_CD; // 비용센터코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'CC_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'CC_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkCcCd(ccCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'CC_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'CC_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('LAST_LEDU_CD')) {
+        var lastLeduCd = checkedRowsParam[idx].LAST_LEDU_CD; // 최종학력코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'LAST_LEDU_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_LEDU_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'LAST_LEDU_CD', lastLeduCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_LEDU_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LAST_LEDU_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('BIRYYMM_DT')) {
+        var biryymmDt = checkedRowsParam[idx].BIRYYMM_DT; // 생년월일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'BIRYYMM_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'BIRYYMM_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(biryymmDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BIRYYMM_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BIRYYMM_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('ATSCOLC_CD')) {
+        var atscolcCd = checkedRowsParam[idx].ATSCOLC_CD; // 양음여부코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'ATSCOLC_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'ATSCOLC_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'ATSCOLC_CD', atscolcCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ATSCOLC_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ATSCOLC_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('EMAIL_NM')) {
+        var emailNm = checkedRowsParam[idx].EMAIL_NM; // 이메일명
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'EMAIL_NM')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EMAIL_NM', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkEmailAddress(emailNm)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMAIL_NM', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EMAIL_NM', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('VTRN_GRD_CD')) {
+        var vtrnGrdCd = checkedRowsParam[idx].VTRN_GRD_CD; // 보훈등급코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'VTRN_GRD_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_GRD_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'VTRN_GRD_CD', vtrnGrdCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_GRD_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_GRD_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('BLDTP_CD')) {
+        var bldtpCd = checkedRowsParam[idx].BLDTP_CD; // 혈액형코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'BLDTP_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'BLDTP_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'BLDTP_CD', bldtpCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BLDTP_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BLDTP_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('VTRN_TRGT_CD')) {
+        var vtrnTrgtCd = checkedRowsParam[idx].VTRN_TRGT_CD; // 보훈대상코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'VTRN_TRGT_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_TRGT_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'VTRN_TRGT_CD', vtrnTrgtCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_TRGT_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_TRGT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('MTRSC_FG_CD')) {
+        var mtrscfgcd = checkedRowsParam[idx].MTRSC_FG_CD; // 병역구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'MTRSC_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'MTRSC_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'MTRSC_FG_CD', mtrscfgcd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MTRSC_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MTRSC_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('EXMT_REASON_CD')) {
+        var exmtReasonCd = checkedRowsParam[idx].EXMT_REASON_CD; // 면제사유코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'EXMT_REASON_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EXMT_REASON_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'EXMT_REASON_CD', exmtReasonCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EXMT_REASON_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EXMT_REASON_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('LAYOFF_DT')) {
+        var layoffDt = checkedRowsParam[idx].LAYOFF_DT; // 군제대일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'LAYOFF_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'LAYOFF_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(layoffDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LAYOFF_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LAYOFF_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('VTRN_REL_CD')) {
+        var vtrnRelCd = checkedRowsParam[idx].VTRN_REL_CD; // 보훈관계코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'VTRN_REL_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_REL_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'VTRN_REL_CD', vtrnRelCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_REL_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_REL_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DSB_FG_CD')) {
+        var dsbFgCd = checkedRowsParam[idx].DSB_FG_CD; // 장애구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DSB_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'DSB_FG_CD', dsbFgCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('LIVE_FG_CD')) {
+        var liveFgCd = checkedRowsParam[idx].LIVE_FG_CD; // 거주구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'LIVE_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'LIVE_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'LIVE_FG_CD', liveFgCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LIVE_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LIVE_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('ENST_DT')) {
+        var enstDt = checkedRowsParam[idx].ENST_DT; // 입대일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'ENST_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'ENST_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(enstDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ENST_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ENST_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('HOB_CD')) {
+        var hobCd = checkedRowsParam[idx].HOB_CD; // 취미코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'HOB_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'HOB_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'HOB_CD', hobCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HOB_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HOB_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DSB_GRD_CD')) {
+        var dsbGrdCd = checkedRowsParam[idx].DSB_GRD_CD; // 장애등급코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DSB_GRD_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_GRD_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'DSB_GRD_CD', dsbGrdCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_GRD_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_GRD_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+      
+      if(checkedRowsParam[idx].hasOwnProperty('MRRG_DT')) {
+        var mrrgDt = checkedRowsParam[idx].MRRG_DT; // 결혼일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'MRRG_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'MRRG_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(mrrgDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MRRG_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MRRG_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('AMFT_CD')) {
+        var amftCd = checkedRowsParam[idx].AMFT_CD; // 군별코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'AMFT_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'AMFT_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'AMFT_CD', amftCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'AMFT_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'AMFT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DMBLZ_FG_CD')) {
+        var dmblzFgCd = checkedRowsParam[idx].DMBLZ_FG_CD; // 제대구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DMBLZ_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DMBLZ_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'DMBLZ_FG_CD', dmblzFgCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DMBLZ_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DMBLZ_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('BMS_CD')) {
+        var bmsCd = checkedRowsParam[idx].BMS_CD; // 병과코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'BMS_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'BMS_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'BMS_CD', bmsCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BMS_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'BMS_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('RLGN_FG_CD')) {
+        var rlgnFgCd = checkedRowsParam[idx].RLGN_FG_CD; // 종교구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'RLGN_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'RLGN_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'RLGN_FG_CD', rlgnFgCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RLGN_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RLGN_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('JNCO_FG_CD')) {
+        var jncoFgCd = checkedRowsParam[idx].JNCO_FG_CD; // 입사구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'JNCO_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'JNCO_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'JNCO_FG_CD', jncoFgCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'JNCO_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'JNCO_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('HIRE_FG_CD')) {
+        var hireFgCd = checkedRowsParam[idx].HIRE_FG_CD; // 채용구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'HIRE_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'HIRE_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'HIRE_FG_CD', hireFgCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HIRE_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'HIRE_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('MLH_CD')) {
+        var mlhCd = checkedRowsParam[idx].MLH_CD; // 계급코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'MLH_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'MLH_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'MLH_CD', mlhCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MLH_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MLH_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('FRGNR_CD')) {
+        var frgnrCd = checkedRowsParam[idx].FRGNR_CD; // 내외국인코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'FRGNR_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'FRGNR_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(emptyData(frgnrCd)) {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRGNR_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }else if(checkMaCodedtl(tableId, 'FRGNR_CD', frgnrCd)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRGNR_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRGNR_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('FRNR_INSERT_NO')) { // 외국인등록번호
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'FRNR_INSERT_NO')) {
+          var frnrInsertNo = checkedRowsParam[idx].FRNR_INSERT_NO;
+          // self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+          var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(frnrInsertNo);
+          self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          var frnrInsertNo = checkedRowsParam[idx].FRNR_INSERT_NO;
+          if(checkedRowsParam[idx].hasOwnProperty('FRGNR_CD')) { // 내외국인코드 컬럼 있으면
+            var frgnrCd = checkedRowsParam[idx].FRGNR_CD; // 내외국인코드(FRGNR_CD)
+            if(frgnrCd == '2') { // '2'(외국인)이면
+              if(emptyData(frnrInsertNo)) {
+                errorCheck = false;
+                self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', null); // 주민등록상생년월일
+                self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                      background: '#faa733',
+                                                  }); // 해당 cell '오류'로 수정
+              }else {
+                if (isFrnrInsertNoValid2(frnrInsertNo)) {
+                  var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(frnrInsertNo);
+
+                  self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+                }
+                self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                      background: '#ffffff',
+                                                  }); // 해당 cell '정상'으로 수정
+              }
+            }else if(frgnrCd == '1') { // 내국인 일 때는 null로 저장
+              self.grid1.setCellValue(checkedIndexParam[idx], 'FRNR_INSERT_NO', null); // 외국인등록번호를 NULL
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                      background: '#ffffff',
+                                                  }); // 해당 cell '정상'으로 수정
+            }else {
+              if (isFrnrInsertNoValid2(frnrInsertNo)) {
+                var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(frnrInsertNo);
+
+                self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+              }
+              self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                      background: '#ffffff',
+                                                  }); // 해당 cell '정상'으로 수정
+            }
+          }else {
+            if (isFrnrInsertNoValid2(frnrInsertNo)) {
+              var resUpptBiryymmDt_temp = getBirthAndSexFromResNo(frnrInsertNo);
+
+              self.grid1.setCellValue(checkedIndexParam[idx], 'RES_UPPT_BIRYYMM_DT', resUpptBiryymmDt_temp.birth); // 주민등록상생년월일
+            }
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'FRNR_INSERT_NO', {
+                                                      background: '#ffffff',
+                                                  }); // 해당 cell '정상'으로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('NTNL_CD')) {
+        var ntnlCd = checkedRowsParam[idx].NTNL_CD; // 국적코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'NTNL_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'NTNL_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'NTNL_CD', ntnlCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'NTNL_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'NTNL_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('MLTPLC_STD_DT')) {
+        var mltplcStdDt = checkedRowsParam[idx].MLTPLC_STD_DT; // 승호기준일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'MLTPLC_STD_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'MLTPLC_STD_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(mltplcStdDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MLTPLC_STD_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MLTPLC_STD_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('UGRD_STD_DT')) {
+        var ugrdStdDt = checkedRowsParam[idx].UGRD_STD_DT; // 승급기준일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'UGRD_STD_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'UGRD_STD_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(ugrdStdDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'UGRD_STD_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'UGRD_STD_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('RETR_REASON_CD')) {
+        var retrReasonCd = checkedRowsParam[idx].RETR_REASON_CD; // 퇴직사유코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'RETR_REASON_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'RETR_REASON_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'RETR_REASON_CD', retrReasonCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RETR_REASON_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RETR_REASON_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DSB_YN_CD')) {
+        var dsbYnCd = checkedRowsParam[idx].DSB_YN_CD; // 장애여부코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DSB_YN_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_YN_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(dsbYnCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_YN_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_YN_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DSPSN_INSERT_DT')) {
+        var dspsnInsertDt = checkedRowsParam[idx].DSPSN_INSERT_DT; // 장애인등록일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DSPSN_INSERT_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DSPSN_INSERT_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(dspsnInsertDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSPSN_INSERT_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSPSN_INSERT_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('CNWKSTDR_DT')) {
+        var cnwkstdrDt = checkedRowsParam[idx].CNWKSTDR_DT; // 근속기준일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'CNWKSTDR_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'CNWKSTDR_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(cnwkstdrDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'CNWKSTDR_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'CNWKSTDR_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DSB_ACK_DT')) {
+        var dsbAckDt = checkedRowsParam[idx].DSB_ACK_DT; // 장애인정일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DSB_ACK_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_ACK_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(dsbAckDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_ACK_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_ACK_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('RESDNC_CD')) {
+        var resdncCd = checkedRowsParam[idx].RESDNC_CD; // 거주지코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'RESDNC_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'RESDNC_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'RESDNC_CD', resdncCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RESDNC_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'RESDNC_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('TLNT_CD')) {
+        var tlntCd = checkedRowsParam[idx].TLNT_CD; // 특기코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'TLNT_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'TLNT_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'TLNT_CD', tlntCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'TLNT_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'TLNT_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('MRRG_YN')) {
+        var mrrgYn = checkedRowsParam[idx].MRRG_YN; // 결혼여부
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'MRRG_YN')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'MRRG_YN', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkYN(mrrgYn)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MRRG_YN', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'MRRG_YN', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('ANCT_RECKN_DT')) {
+        var anctRecknDt = checkedRowsParam[idx].ANCT_RECKN_DT; // 연차기산일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'ANCT_RECKN_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'ANCT_RECKN_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(anctRecknDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ANCT_RECKN_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'ANCT_RECKN_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('DSB_TP')) {
+        var dsbTp = checkedRowsParam[idx].DSB_TP; // 장애유형
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'DSB_TP')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_TP', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'DSB_TP', dsbTp)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_TP', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'DSB_TP', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('COSS_CD')) {
+        var cossCd = checkedRowsParam[idx].COSS_CD; // 역종코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'COSS_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'COSS_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'COSS_CD', cossCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'COSS_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'COSS_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('VTRN_FG_CD')) {
+        var vtrnFgCd = checkedRowsParam[idx].VTRN_FG_CD; // 보훈구분코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'VTRN_FG_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_FG_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'VTRN_FG_CD', vtrnFgCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_FG_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'VTRN_FG_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('EVAL_CSF_CD')) {
+        var evalCsfCd = checkedRowsParam[idx].EVAL_CSF_CD; // 평가분류코드
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'EVAL_CSF_CD')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'EVAL_CSF_CD', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(checkMaCodedtl(tableId, 'EVAL_CSF_CD', evalCsfCd)) {
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EVAL_CSF_CD', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'EVAL_CSF_CD', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(checkedRowsParam[idx].hasOwnProperty('LMTAG_RETR_DT')) {
+        var lmtagRetrDt = checkedRowsParam[idx].LMTAG_RETR_DT; // 정년퇴직일
+        if(checkExceptHandleCell(checkedIndexParam[idx], 'LMTAG_RETR_DT')) {
+          self.grid1.setCellStyle(checkedIndexParam[idx], 'LMTAG_RETR_DT', {
+                                                background: '#7eba95',
+                                            }); // 해당 cell '예외처리'로 수정
+        }else {
+          if(validateDate(lmtagRetrDt)){
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LMTAG_RETR_DT', {
+                                                  background: '#ffffff',
+                                              }); // 해당 cell '정상'으로 수정
+          }else {
+            errorCheck = false;
+            self.grid1.setCellStyle(checkedIndexParam[idx], 'LMTAG_RETR_DT', {
+                                                  background: '#faa733',
+                                              }); // 해당 cell '오류'로 수정
+          }
+        }
+      }
+
+      if(errorCheck == true) {
+        self.grid1.setCellValue(checkedIndexParam[idx], 'ERR_YN', 2); // 해당 row '성공'으로 수정
+      }else if(errorCheck == false) {
+        self.grid1.setCellValue(checkedIndexParam[idx], 'ERR_YN', 1); // 해당 row '오류'로 수정
+      }
+    }
+  }
+}
+
+// 주민번호 검사
+function checkValidResNo(res_no) {
+  if(res_no == undefined || res_no == null || res_no == '') {
+    return true;
+  }
+  let result = true;
+  if (res_no.length !== 13) {
+    result = false;
+  } else if (derp.HR.isResNoValid(res_no) === false) {
+    result = false;
+    // result = isResNoDuplicate(res_no); // 주민등록번호 중복된 사원 체크 (일용직, 상용직)
+  } else { // 주민번호가 옳바른 경우
+    result = true;
+    // result = isResNoDuplicate(res_no); // 주민등록번호 중복된 사원 체크 (일용직, 상용직)
+  }
+  
+  return result;
+}
+
+// 외국인식별번호 유효성 검사2
+function isFrnrInsertNoValid2(frnr_insert_no) {
+  if(frnr_insert_no == undefined || frnr_insert_no == null || frnr_insert_no == '') {
+    return true;
+  }
+  let result = true;
+  if (frnr_insert_no.length !== 13) {
+    result = false;
+  } else if (derp.HR.isResNoValid(frnr_insert_no) === false) {
+    result = false;
+  }
+  
+  return result;
+}
+
+// 외국인식별번호 유효성 검사 (외국인식별번호에 주민등록폼(XXXXXX-XXXXXXX 13자리)으로 값이 들어올 때)
+function isFrnrInsertNoValid(frnr_insert_no) {
+  var regExp = "";
+
+  // 게임빌 전용 정규식으로 해당 업체에서는 외국인식별번호가 주민번호랑 같을때 뒷자리의 첫번째 숫자가 5, 6, 7, 8 뿐만 아니라 1, 2 도 존재한다고함.
+  if(self.mainEnv.drsCode == '10031') {
+    regExp = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))([1-2]|[5-8])/;
+  }
+  else {
+    regExp = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))[5-8]/;
+  }
+
+  if (frnr_insert_no.match(regExp) !== null) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// 생년월일 from 주민등록번호
+function getBirthAndSexFromResNo(resNo) {
+  let result = null;
+  // if (isResNoValid(resNo)) {
+    result = extractDataFromResNo(resNo);
+  // }
+  return result;
+}
+
+// 주민등록번호로 부터 생년월일, 생일 추출
+function extractDataFromResNo(resNo) {
+  let century19 = ['1', '2', '5', '6'];
+  let century20 = ['3', '4', '7', '8'];
+  let maleArr = ['1', '3', '5', '7'];
+  let femaleArr = ['2', '4', '6', '8'];
+  let century;
+  let sex;
+  let age;
+  let fullDate;
+  let result = {};
+  try {
+    if (century19.indexOf(resNo.substring(6, 7)) !== -1) {
+      century = '19';
+    } else if (century20.indexOf(resNo.substring(6, 7)) !== -1) {
+      century = '20';
+    } else {
+      century = '19';
+    }
+
+    if (maleArr.indexOf(resNo.substring(6, 7)) !== -1) {
+      sex = '1';
+    } else if (femaleArr.indexOf(resNo.substring(6, 7)) !== -1) {
+      sex = '2';
+    } else {
+      sex = '1';
+    }
+
+    fullDate = century + resNo.substring(0, 6);
+    age = Math.trunc((((new Date() - new Date(fullDate.substring(0, 4), fullDate.substring(4, 6) - 1, fullDate.substring(6, 8)))/1000)/86400)/365);
+
+    result.birth = century.concat(resNo.substring(0, 6));
+    result.sex = sex;
+    result.age = age;
+  } catch (error) {
+    console.log('생년월일 형식에 맞지 않습니다.');
+  }
+
+  return result;
+}
+
+// 주민등록번호 중복된 사원 체크 (일용직, 상용직)
+function isResNoDuplicate(res_no) {
+  let result = true;
+  dews.api.get(dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00100_checkResNo"), {
+    async: false,
+    data: {
+      res_no: res_no
+    }
+  }).done(function (data) {
+    if(data.length > 0) {
+      result = false;
+    }else {
+      result = true;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+  });
+
+  return result;
+}
+
+function checkBizareaCd(bizarea_cd) {
+  var result = false;
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkBizareaCd'), {
+    async: false,
+    data: {
+      bizarea_cd: bizarea_cd
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = false;
+    }else {
+      result = true;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkDeptCd(dept_cd) {
+  var result = false;
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkDeptCd'), {
+    async: false,
+    data: {
+      dept_cd: dept_cd
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = false;
+    }else {
+      result = true;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkTkgCd(tkg_cd) {
+  if(tkg_cd == null || tkg_cd == undefined || tkg_cd == '') {
+    return false;
+  }
+
+  var result = false;
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkTkgCd'), {
+    async: false,
+    data: {
+      tkg_cd: tkg_cd
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = false;
+    }else {
+      result = true;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkEmpNo(emp_no) {
+  var result = false;
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkEmpNo'), {
+    async: false,
+    data: {
+      emp_no: emp_no
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = false;
+    }else {
+      result = true;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkGempNoInExistEmpNo(emp_no, gemp_no) {
+  if(emp_no == undefined || gemp_no == undefined) {
+    return false;
+  }
+
+  var result = false;
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkGempNoInExistEmpNo'), {
+    async: false,
+    data: {
+      emp_no: emp_no,
+      gemp_no: gemp_no
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = false; // 통합사원번호가 같은 경우
+    }else {
+      result = true; // 통합사원번호가 다른 경우
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkGempNoInSameCompany(gemp_no) {
+  var result = false;
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkGempNoInSameCompany'), {
+    async: false,
+    data: {
+      gemp_no: gemp_no
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = false;
+    }else {
+      result = true;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkCcCd(cc_cd) {
+  if(cc_cd == null || cc_cd == undefined || cc_cd == '') {
+    return true;
+  }
+
+  var result = false;
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkCcCd'), {
+    async: false,
+    data: {
+      cc_cd: cc_cd
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = true;
+    }else {
+      result = false;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkBankCd(bank_cd) {
+  var result = false;
+
+  if(bank_cd == null || bank_cd == undefined || bank_cd == '') {
+    return true;
+  }
+
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkBankCd'), {
+    async: false,
+    data: {
+      bank_cd: bank_cd
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = true;
+    }else {
+      result = false;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkYN(ynData) {
+  var result = false;
+
+  if(ynData == null || ynData == undefined || ynData == '') {
+    return true;
+  }
+
+  if(ynData == "Y" || ynData == "N") {
+    return true;
+  }else {
+    return false;
+  }
+
+  return result;
+}
+
+function checkYNS(ynData) {
+  var result = false;
+
+  if(ynData == null || ynData == undefined || ynData == '') {
+    return true;
+  }
+
+  if(ynData == "Y" || ynData == "N" || ynData == "S") {
+    return true;
+  }else {
+    return false;
+  }
+
+  return result;
+}
+
+
+function checkOneAndTwo(oneTwoCode) {
+  var result = false;
+
+  if(oneTwoCode == null || oneTwoCode == undefined || oneTwoCode == '') {
+    return true;
+  }
+
+  if(oneTwoCode == "1" || oneTwoCode == "2") {
+    return true;
+  }else {
+    return false;
+  }
+
+  return result;
+}
+
+function checkNoabrodCd(noabrod_cd) {
+  if(noabrod_cd == null || noabrod_cd == undefined || noabrod_cd == '') {
+    return true;
+  }
+
+  var result = false;
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkNoabrodCd'), {
+    async: false,
+    data: {
+      noabrod_cd: noabrod_cd
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = true;
+    }else {
+      result = false;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+function checkMaCodedtl(table_id, col_nm, sysdef_cd) {
+  var result = false;
+
+  if(sysdef_cd == null || sysdef_cd == undefined || sysdef_cd == '') {
+    return true;
+  }
+
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'checkMaCodedtl'), {
+    async: false,
+    data: {
+      table_id : table_id,
+      col_nm : col_nm,
+      sysdef_cd : sysdef_cd
+    }
+  }).done(function (data) {
+    if(data > 0) {
+      result = true;
+    }else {
+      result = false;
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+
+  return result;
+}
+
+// 메일주소 유효성 검사
+function checkEmailAddress(email) {
+  if(email == null || email == undefined || email == '') {
+    return true;
+  }
+
+  let result = false;
+  let regExp = /^[_]*[0-9a-zA-Z]([-_.]?[_]*[0-9a-zA-Z][_]*)*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  if (email.match(regExp) !== null) {
+    result = true;
+  } else {
+    result = false;
+  }
+
+  return result;
+}
+
+function validateDate(dateParam) {
+  if(dateParam == null || dateParam == undefined || dateParam == '') {
+    return true;
+  }
+
+  try {
+    if(dateParam.length == 8) {
+      var chkStyle = /^[0-9]+$/;
+      if(!chkStyle.test(dateParam)) { // 숫자인지 체크
+        return false;
+      }
+
+      var yy = parseInt(dateParam.substr(0, 4));
+      var mm = parseInt(dateParam.substr(4, 2));
+      var dd = parseInt(dateParam.substr(6, 2));
+
+      if(mm < 1 || mm > 12) {
+        return false;
+      }
+
+      var lastDay = (new Date(yy, mm ,0)).getDate();
+      if(dd < 1 || dd > lastDay) {
+        return false;
+      }
+
+      return true;
+    }else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+function emptyData(emptyDataParam) {
+  if(emptyDataParam == null || emptyDataParam == undefined || emptyDataParam == '') {
+    return true;
+  }else {
+    return false;
+  }
+}
+
+// 통합환경설정 가져오기 (회사아님 통합임)
+function getCiCtrlConfig(module_cd, ctrl_cd, use_yn) {
+  dews.api.get(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'common_ciCtrlConfig_string'), {
+    async: false,
+    data: {
+      module_cd: module_cd,
+      ctrl_cd: ctrl_cd,
+      use_yn: use_yn
+    }
+  }).done(function (data) {
+    gempNoMakeRule = data;
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+}
+
+self.$empApplyBtn.on('click', function(e) { // 사원반영 버튼
+  try {
+        var regCategory = self.regCategory.value();
+        var checkedRows = self.grid1.getCheckedRows();
+        var checkedIndex = self.grid1.getCheckedIndex();
+
+        var checkedRowsValidData = [];
+        var checkedRowsValidDataIdx = [];
+        if(regCategory != null && regCategory != undefined && regCategory != "") {
+          if(checkedRows.length > 0) {
+
+            for(checkedRowsIdx = 0; checkedRowsIdx < checkedRows.length; checkedRowsIdx++) {
+              if(checkedRows[checkedRowsIdx].ERR_YN == '2') {
+                checkedRowsValidData.push(checkedRows[checkedRowsIdx]);
+                checkedRowsValidDataIdx.push({
+                  'checkedIndex' : (checkedIndex[checkedRowsIdx]).toString(),
+                  'resultYN' : 'N'
+                });
+              }
+            }
+
+            if(checkedRowsValidData.length == 0) {
+              dews.ui.snackbar.warning('체크된 데이터 중 검증결과가 정상인 데이터가 없습니다.');
+              return false;
+            }
+
+            var tableId = "";
+            if(regCategory == "1") {
+              tableId = "HR_EMP_MST";
+            }else if(regCategory == "2") {
+              tableId = "HR_EMPPAY_DTL";
+            }else if(regCategory == "3") {
+              tableId = "HR_EMPINFO_DTL";
+            }
+
+            // 초기데이터 설정
+            var initData = {
+              code: 'PAMPHM00600_APPLY_POP',
+              params: {
+                menuCd: self.menu.id,
+                tableId: tableId,
+                checkedRows: checkedRowsValidData,
+                checkedIndex: checkedRowsValidDataIdx
+              }
+            };
+
+            // 사원반영 도움창 호출
+            var dialog = dews.ui.dialog('PAMPHM00600_APPLY_POP', {
+              url: '/view/HR/PAMPHM00600_APPLY_POP',
+              title: '사원반영 도움창',
+              // size: 'extra',
+              width: 500,
+              height: 150,
+              // buttons: 'close',
+              ok: function (data) {
+                // dews.ui.loading.show();
+
+                setTimeout(function() { // 시간 딜레이 안 하면 loading 창이 안떠서 0.1초 딜레이 시킴.
+                  dews.ui.loading.show({
+                    text: '사원반영 중입니다.'
+                  });
+                }, 0); // 0.0초 딜레이
+
+                var saveNullDataYN = data.checkedValue;
+                var applyCheckedRows = data.checkedRows;
+                var applyCheckedIndex = data.checkedIndex;
+
+                var regCategory = self.regCategory.value();
+                var tableId = "";
+                if(regCategory == "1") {
+                  tableId = "HR_EMP_MST";
+                }else if(regCategory == "2") {
+                  tableId = "HR_EMPPAY_DTL";
+                }else if(regCategory == "3") {
+                  tableId = "HR_EMPINFO_DTL";
+                }
+
+                var rptCnt = 1; // 반복 횟수
+            
+                if(applyCheckedRows.length > 1) { // 엑셀파일의 데이터 row가 1개 초과이면
+                  rptCnt = Math.ceil(applyCheckedRows.length / 1); // 소수점 올리기
+                }
+            
+                saveApplyData(applyCheckedRows, applyCheckedIndex, saveNullDataYN, tableId, 1, rptCnt, 0); 
+                // 파라미터: applyCheckedRows, applyCheckedIndex, saveNullDataYN, tableId, curRptCnt, totalRptCnt, excelRow
+                
+              }
+            })
+
+            dialog.setInitData(initData);
+            dialog.open();
+          }else {
+            dews.ui.snackbar.warning('체크된 데이터가 없습니다.');
+            return false;
+          }
+        }else {
+          dews.ui.snackbar.warning('조회조건의 등록구분을 먼저 선택해주세요.');
+          return false;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+});
+
+
+function saveApplyData(applyCheckedRows, applyCheckedIndex, saveNullDataYN, tableId, curRptCnt, totalRptCnt, excelRow) {
+  var sliceArr;
+  var sliceArr2;
+    
+  if(curRptCnt == totalRptCnt) { // 마지막 반복이면
+    sliceArr = applyCheckedRows.slice(excelRow, applyCheckedRows.length);
+    sliceArr2 = applyCheckedIndex.slice(excelRow, applyCheckedRows.length);
+  }else if(curRptCnt < totalRptCnt) {
+    sliceArr = applyCheckedRows.slice(excelRow, excelRow+1); // 엑셀 row 1개씩 자르기
+    sliceArr2 = applyCheckedIndex.slice(excelRow, excelRow+1); // 엑셀 row 1개씩 자르기
+  }
+
+  dews.api.post(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'Pamphm00600_saveApplyData'),{
+      async: false,
+      data: {
+          applyCheckedRows : JSON.stringify(sliceArr),
+          applyCheckedIndex : JSON.stringify(sliceArr2),
+          existColumns : JSON.stringify(fields),
+          saveNullDataYN : saveNullDataYN,
+          empNoMakeRule : empNoMakeRule,
+          gempNoMakeRule : gempNoMakeRule,
+          tableId : tableId
+      }
+  }).done(function (data) {
+    // console.log("사원 반영 결과:", data);
+
+    //////////
+    if(curRptCnt == totalRptCnt) { // 마지막 반복이면
+      for(var obj of data) {
+        if(obj.resultYN == "Y") {
+          self.grid1.setCellValue(obj.checkedIndex, 'APPLY_RESULT', '2'); // 반영결과 '성공'으로 수정
+        }else {
+          self.grid1.setCellValue(obj.checkedIndex, 'APPLY_RESULT', '1'); // 반영결과 '실패'로 수정
+        }
+      }
+
+      dews.ui.loading.hide();
+      dews.ui.snackbar.ok('사원반영이 완료되었습니다.');
+
+      setTimeout(function() { // 시간 딜레이
+        dews.ui.loading.hide();
+      }, 1500); // 1.5초 딜레이
+
+      setTimeout(function() { // 시간 딜레이
+        dews.ui.loading.hide();
+      }, 2500); // 2.5초 딜레이
+
+      setTimeout(function() { // 시간 딜레이
+        dews.ui.loading.hide();
+      }, 3500); // 3.5초 딜레이
+      
+    }else if(curRptCnt < totalRptCnt) {
+      for(var obj of data) {
+        if(obj.resultYN == "Y") {
+          self.grid1.setCellValue(obj.checkedIndex, 'APPLY_RESULT', '2'); // 반영결과 '성공'으로 수정
+        }else {
+          self.grid1.setCellValue(obj.checkedIndex, 'APPLY_RESULT', '1'); // 반영결과 '실패'로 수정
+        }
+      }
+
+      dews.ui.loading.hide();
+
+      dews.ui.loading.show({
+        text: dews.localize.get('엑셀파일의 ', 'D0078555')+ curRptCnt+'/'+totalRptCnt+dews.localize.get('이 저장되었습니다.', 'M0014721')
+      });
+
+      curRptCnt++;
+      excelRow += 1; // 현재 엑셀 row 1 증가하기
+      saveApplyData(applyCheckedRows, applyCheckedIndex, saveNullDataYN, tableId, curRptCnt, totalRptCnt, excelRow);
+    }
+    ////////////
+  }).fail(function (xhr,status,error) {
+    self.grid1.setCellValue(applyCheckedIndex[excelRow].checkedIndex, 'APPLY_RESULT', '1'); // 반영결과 '실패'로 수정
+
+    if(curRptCnt == totalRptCnt) { // 마지막 반복이면
+      dews.ui.loading.hide();
+      dews.ui.snackbar.ok('사원반영이 완료되었습니다.');
+
+      setTimeout(function() { // 시간 딜레이
+        dews.ui.loading.hide();
+      }, 1500); // 1.5초 딜레이
+
+      setTimeout(function() { // 시간 딜레이
+        dews.ui.loading.hide();
+      }, 2500); // 2.5초 딜레이
+
+      setTimeout(function() { // 시간 딜레이
+        dews.ui.loading.hide();
+      }, 3500); // 3.5초 딜레이
+      
+    }else if(curRptCnt < totalRptCnt) {
+      dews.ui.loading.hide();
+
+      dews.ui.loading.show({
+        text: dews.localize.get('엑셀파일의 ', 'D0078555')+ curRptCnt+'/'+totalRptCnt+dews.localize.get('이 저장되었습니다.', 'M0014721')
+      });
+
+      curRptCnt++;
+      excelRow += 1; // 현재 엑셀 row 1 증가하기
+      saveApplyData(applyCheckedRows, applyCheckedIndex, saveNullDataYN, tableId, curRptCnt, totalRptCnt, excelRow);
+    }
+  });
+}
+
+self.$excelUploadBtn.on('fileSelect', function (e) { // 엑셀파일업로드 버튼
+  var selectedRegCategory = self.regCategory.value();
+  if(selectedRegCategory != null && selectedRegCategory != undefined && selectedRegCategory != "") {
+    dews.confirm('조회조건에 선택한 등록구분과 일치하는 테이블의 데이터만 업로드 됩니다.\n계속하시겠습니까?').yes(function () {
+      dews.ui.loading.show({
+        text: '엑셀파일을 업로드 중입니다.'
+      });
+      import_excel(e);
+    }).no(function () {
+      dews.ui.snackbar.warning('취소되었습니다.');
+      self.excelUploadBtn.$input[0].value = '';
+      e.preventDefault();
+      return false;
+    });
+  }else {
+    dews.ui.snackbar.warning('조회조건의 등록구분을 먼저 선택해주세요.');
+    self.excelUploadBtn.$input[0].value = '';
+    e.preventDefault();
+    return false;
+  }
+});
+
+function import_excel(e) {
+  try {
+    self.grid1.importExcel({
+        file: e.file,
+        sheetName: 'PAMPHM00600',
+        rawConverter: function (data) {
+          // console.log("rawConverter data:", data);
+          var returnData = []; // 그리드에 바인딩할 데이터
+          var sameColumn = [];
+          var sameColumnIndex = [];
+          fields = [], columns = [];
+          var RES_UPPT_BIRYYMM_DT_FLAG = true;
+
+          if(data.length > 3) {
+            fields.push({field: 'ERR_YN'}); // 데이터소스에 필드 추가
+            fields.push({field: 'APPLY_RESULT'}); // 데이터소스에 필드 추가
+            columns.push({
+                          field: 'ERR_YN',
+                          title: '검증결과',
+                          width: 80,
+                          align: 'center',
+                          editable: false,
+                          formats: {
+                            type: 'dataSource',
+                            dataSource: dews.ui.dataSource('datasource', {
+                              data: errorCorrectDataSource
+                            }),
+                            dataValueField: 'ERR_YN',
+                            dataTextField: 'ERR_YN_NM'
+                          },
+                          style: function (e) {
+                            var styles = {};
+                            if (e.row.data.ERR_YN == '1') {
+                              styles.color = '#e45f88',
+                                styles.icon = {
+                                  image: '/view/images/TX/tx.error_ico.png',
+                                  location: 'left'
+                                }
+                            } else if (e.row.data.ERR_YN == '2') {
+                              styles.color = '#387c52',
+                                styles.icon = {
+                                  image: '/view/images/TX/tx.final_ico.png',
+                                  location: 'left'
+                                }
+                            } else {
+                              styles.color = '#faa733',
+                                styles.icon = {
+                                  image: '/view/images/TX/tx.ready_ico.png',
+                                  location: 'left'
+                                }
+                            }
+                            return styles;
+                          }
+                        });  // 그리드에 컬럼 추가
+
+            columns.push({
+                          field: 'APPLY_RESULT',
+                          title: '반영결과',
+                          width: 80,
+                          align: 'center',
+                          editable: false,
+                          formats: {
+                            type: 'dataSource',
+                            dataSource: dews.ui.dataSource('datasource', {
+                              data: applyResultDataSource
+                            }),
+                            dataValueField: 'APPLY_RESULT',
+                            dataTextField: 'APPLY_RESULT_NM'
+                          },
+                          style: function (e) {
+                            var styles = {};
+                            if (e.row.data.APPLY_RESULT == '1') {
+                              styles.color = '#e45f88',
+                                styles.icon = {
+                                  image: '/view/images/TX/tx.error_ico.png',
+                                  location: 'left'
+                                }
+                            } else if (e.row.data.APPLY_RESULT == '2') {
+                              styles.color = '#387c52',
+                                styles.icon = {
+                                  image: '/view/images/TX/tx.final_ico.png',
+                                  location: 'left'
+                                }
+                            } else {
+                              styles.color = '#faa733',
+                                styles.icon = {
+                                  image: '/view/images/TX/tx.ready_ico.png',
+                                  location: 'left'
+                                }
+                            }
+                            return styles;
+                          }
+                        });  // 그리드에 컬럼 추가
+
+            for(idx = 0; idx < data[0].length; idx++) {
+              for(columnsIdx = 0; columnsIdx < columnOfSelectedTable.length; columnsIdx++) {
+                if(columnOfSelectedTable[columnsIdx] == data[0][idx]) { // '등록구분'에서 선택한 테이블과 같은 컬럼 이면
+                  // console.log("같은 컬럼:", data[0][idx]);
+                  sameColumn.push(data[0][idx]);
+                  sameColumnIndex.push(idx);
+                  fields.push({field: data[0][idx]}); // 데이터소스에 필드 추가
+                  columns.push({
+                                field: data[0][idx],
+                                title: data[1][idx],
+                                align: "right",
+                                width: 100
+                              });  // 그리드에 컬럼 추가
+
+                  if(RES_UPPT_BIRYYMM_DT_FLAG) {
+                    if(data[0][idx] == 'RES_NO' || data[0][idx] == 'FRNR_INSERT_NO') { // '외국인등록번호' 컬럼이 있으면
+                      RES_UPPT_BIRYYMM_DT_FLAG = false;
+                      fields.push({field: 'RES_UPPT_BIRYYMM_DT'}); // 데이터소스에 필드 추가
+                      columns.push({
+                                    field: 'RES_UPPT_BIRYYMM_DT',
+                                    title: '주민등록상생년월일',
+                                    align: "right",
+                                    width: 100,
+                                    editable: false,
+                                    visible: false
+                                  });  // 그리드에 컬럼 추가
+                    }
+                  }
+                }
+              }
+            }
+
+            for(idx = 3; idx < data.length; idx++) {
+              var returnDataObj = {};
+              for(idx2 = 0; idx2 < sameColumn.length; idx2++) {
+                returnDataObj['ERR_YN'] = '0';
+                returnDataObj['APPLY_RESULT'] = '0';
+                returnDataObj[sameColumn[idx2]] = data[idx][sameColumnIndex[idx2]]; // 데이터 넣기
+              }
+              returnData.push(returnDataObj);
+            }
+          }else {
+            dews.ui.snackbar.warning("엑셀 파일 형식이 다릅니다.");
+          }
+
+          dataSource.setFields(fields);
+          self.grid1.setDataSource(dataSource); // dataSource 로 그리드 데이터소스 설정
+          self.grid1.setColumns(columns);
+
+          return returnData;
+        }
+    }).done(function (result) {
+      dews.ui.loading.hide();
+      dews.ui.snackbar.ok("엑셀 파일 업로드가 완료되었습니다.");
+      exceptHandle = [];
+
+      var arr = self.grid1.dataItems();
+      var rptCnt = 1; // 반복 횟수
+
+      if(arr.length > 500) { // 엑셀파일의 데이터 row가 500개 초과이면
+        rptCnt = Math.ceil(arr.length / 500); // 소수점 올리기
+      }
+
+      self.excelUploadBtn.$input[0].value = ''; // 입력값 ''로 초기화
+      e.preventDefault();
+    }).fail(function(error) {
+      dews.ui.loading.hide();
+      dews.ui.snackbar.warning("엑셀 업로드가 실패하였습니다.");
+      self.excelUploadBtn.$input[0].value = '';
+    });
+  }catch (error) {
+    dews.ui.loading.hide();
+    dews.ui.snackbar.warning("엑셀 업로드 중 오류가 발생하였습니다.");
+    self.excelUploadBtn.$input[0].value = '';
+  }
+}
+
+function getCodeData(module_cd, field_cd_pipe, syscode_yn, base_yn, foreign_yn, end_dt, keyword) {
+  if (!objCodeDtl.hasOwnProperty(module_cd)) {
+    objCodeDtl[module_cd] = {};
+  }
+  $.each(field_cd_pipe.split('|'), function (i, v) {
+    if (v != null && v != '') {
+      // objCodeDtl[cd_module][v] = [{ CD_SYSDEF: '', NM_SYSDEF: '' }];
+      objCodeDtl[module_cd][v] = [];
+    }
+  });
+  dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'), {
+    async: false,
+    data: {
+      module_cd: module_cd,
+      field_cd_pipe: field_cd_pipe,
+      syscode_yn: syscode_yn,
+      base_yn: base_yn,
+      foreign_yn: foreign_yn,
+      end_dt: end_dt,
+      keyword: keyword,
+    }
+  }).done(function (data) {
+    $.each(data, function (i, obj) {
+      objCodeDtl[module_cd][obj.FIELD_CD].push(obj);
+    });
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+}
+
+function getColumnOfSelectedTable() {
+  var selectedRegCategory = self.regCategory.value();
+  var selectedTableId = "";
+  if(selectedRegCategory == "1") {
+    selectedTableId = "HR_EMP_MST";
+  }else if(selectedRegCategory == "2") {
+    selectedTableId = "HR_EMPPAY_DTL";
+  }else if(selectedRegCategory == "3") {
+    selectedTableId = "HR_EMPINFO_DTL";
+  }
+
+  dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00600_SERVICE', 'getColumnOfSelectedTable'),{
+    async: false,
+    data: {
+        table_id : selectedTableId
+    }
+  }).done(function (data) {
+    columnOfSelectedTable = [];
+    // console.log("getColumnOfSelectedTable:", data);
+    for(idx = 0; idx < data.length; idx++) {
+      columnOfSelectedTable.push(data[idx].CONV_COL_NM);
+    }
+  }).fail(function (xhr, status, error) {
+    dews.ui.loading.hide();
+    dews.error(xhr.responseJSON.error);
+  });
+}
+
+self.grid1.setContextMenu([
+  {
+    id: 'except_handle',
+    text: '예외처리',
+    handler: function(e) {
+      // console.log("예외처리:", e);
+      exceptHandleObj = {'index' : e.row.index,
+                         'field' : e.cell.field};
+      exceptHandle.push(exceptHandleObj);
+      self.grid1.setCellStyle(e.row.index, e.cell.field, {
+                                              background: '#7eba95',
+                                          }); // 해당 cell '예외처리'로 수정
+    },
+    display: function(e) {
+      if(e.cell.field == 'ERR_YN' || e.cell.field == 'APPLY_RESULT') {
+        return false;
+      }else {
+        return true;
+      }
+    }
+  }
+]);
+
+function checkExceptHandleCell(index, field) { // 예최처리된 cell 인지 체크
+  var ExceptHandleResult = false;
+  for(exceptHandleIdx = 0; exceptHandleIdx < exceptHandle.length; exceptHandleIdx++) {
+    if(exceptHandle[exceptHandleIdx]['index'] == index && exceptHandle[exceptHandleIdx]['field'] == field) {
+      ExceptHandleResult = true;
+      break;
+    }
+  }
+
+  return ExceptHandleResult;
+}
+    
+//# sourceURL=PAMPHM00600.js]]></javascript>
+    <javascript id="6aff4011-b96e-4e6f-a265-f139798104b1"><![CDATA[function(e) {
+  getColumnOfSelectedTable();
+}]]></javascript>
+    <javascript id="f3622880-5ddf-46ec-a0bf-1770766b0e8b"><![CDATA[function(e) {
+
+}]]></javascript>
+    <javascript id="c3f60977-a6b9-4c51-be03-a267a2d11bcd"><![CDATA[function(e) {
+
+}]]></javascript>
+  </javascripts>
+  <settings />
+  <datas />
+</page>

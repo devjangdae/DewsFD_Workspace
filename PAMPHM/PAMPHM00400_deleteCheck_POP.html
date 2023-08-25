@@ -1,0 +1,134 @@
+<div class="dews-dialog-contents-area">
+  <div class="dews-container-panel">
+    <div class="dews-container-item">
+      <div id="checkGrid"></div>
+    </div>
+  </div>
+
+  <div class="dews-container-panel">
+    <div class="dews-container-item">
+      <div class="dews-ui-referbox" data-dews-title="관련 데이터 삭제">
+        <ol>
+          <li>선택한 사원번호로 위와 같은 데이터가 존재합니다.
+            관련 데이터를 모두 삭제한 다음 <span class="dews-text-warning">삭제</span>가 가능합니다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dews-dialog-button-group bottom">
+  <button id="btnSave" class="dews-ui-button">적용</button>
+  <button id="btnCancel" class="dews-ui-button">닫기</button>
+</div>
+
+<style>
+  @media screen and (max-width: 1486px) {}
+
+  @media screen and (min-width: 1487px) and (max-width: 1587px) {}
+
+  @media all and (min-width: 1588px) {}
+</style>
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    //▦▦▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦▦▦
+    {
+      var diaself = this;
+      // console.log("PAMPHM00100_deleteCheck_POP:", diaself);
+      var thisDialog = dews.ui.dialog(diaself.$content.prop("id"));
+      var checkGrid, checkGridDataSource;
+    }
+
+    {
+      checkGridDataSource = dews.ui.dataSource("checkGridDataSource", {
+        grid: true,
+        transport: {
+          read: {
+            //url 설정
+            url: dews.url.getApiUrl("HR", "PersonalAdministrationManagementPHMService", "pamphm00100_main_delete_list"),
+            data: function () {
+              dews.ui.loading.show();
+              return {
+                emp_no: diaself.initData.emp_no, /* #.# no_emp 변환됨 => emp_no */ /* #.# no_emp 변환됨 => emp_no */
+              }
+            }
+          }
+        },
+        error: function (data, message) {
+          dews.ui.loading.hide();
+          if (!message) {
+            dews.error(data.error);
+          } else {
+            dews.error(message);
+          }
+        },
+        schema: {
+          model: {
+            id: "MENU_ID", /* #.# ID_MENU 변환됨 => MENU_ID */
+            fields: [
+              { field: "TABLE_NAME" },
+              { field: "COUNT" },
+            ]
+          }
+        },
+      });
+
+      checkGrid = dews.ui.grid(diaself.$content.find("#checkGrid"), {
+        dataSource: checkGridDataSource,
+        autoBind: true,
+        checkable: false,
+        editable: false,
+        rowNo: true,
+        selectable: true,
+        sortable: false,
+        height: 382,
+        columns: [
+          {
+            field: "TABLE_NAME",
+            title: "메뉴명",
+            width: 130,
+            align: "left",
+            footer: {
+              text: '합계'
+            },
+            visible: true,
+          },
+          {
+            field: "COUNT",
+            title: "데이터건수",
+            width: 80,
+            align: "right",
+            formats: {
+              type: "number",
+              format: "#,##0",
+            },
+            footer: {
+              type: 'sum',
+              format: '#,##0'
+            },
+            visible: true,
+          },
+        ],
+        dataBound: function (e) {
+          dews.ui.loading.hide();
+        }
+      });
+    }
+
+    {
+      // 다이얼로그 적용
+      diaself.$btnSave.on("click", function (e) {
+        thisDialog.ok(checkGrid.getSummary('COUNT', 'SUM'));
+      });
+      // 다이얼로그 닫기
+      diaself.$btnCancel.on("click", function (e) {
+        e.preventDefault();
+        thisDialog.close();
+      });
+    }
+
+    // dews.ready end
+  });
+//# sourceURL=PAMPHM00100_deleteCheck_POP.js
+</script>

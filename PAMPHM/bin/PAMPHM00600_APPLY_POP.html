@@ -1,0 +1,89 @@
+<!--##56c91d7d-14c0-4abe-983b-38b1d108f7ff##-->
+<!--##PAMPHM00600_APPLY_POP##-->
+<!--##kjs6Q5FO76XAMKgEp/kRfNnrGxKl+2l3kHgo3Eoxh/g+qEA2aIqcBGqGTuY+8yx1##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: PAMPHM00600_APPLY_POP
+  # PageTitle: 사원반영 도움창
+  # Server: http://localhost:8090/
+-->
+<!--
+
+-->
+
+<div class="dews-ui-container-panel">
+  <div class="dews-container-item" data-dews-position="normal">
+    <h2 class="dews-ui-title" style="text-align: center;">검증결과가 정상인 데이터만 등록됩니다.</h2>
+    <div class="dews-ui-container-panel">
+      <div class="dews-container-item" data-dews-position="normal">
+        <div class="dews-ui-form-panel" style="position: center;">
+          <ul>
+            <li id="checkBoxFormItem">
+              <label>업로드한 컬럼 중 값이 NULL인 항목을 NULL로 INSERT/UPDATE</label>
+              <span>
+                <input id="checkbox1" name="checkbox1" type="checkbox" class="dews-ui-checkbox" />
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dews-dialog-button-group bottom" style="text-align: center;">
+  <button id="okBtn" class="dews-ui-button confirm">확인</button>
+  <button id="cancelBtn" class="dews-ui-button confirm">취소</button>
+</div>
+
+<style>
+    
+</style>
+
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.0';
+
+
+    /*d1870d3f-e7f5-48d4-892b-cc239c935249*/ //# sourceURL=PAMPHM00600_APPLY_POP.js
+    
+    var dialog = dews.ui.dialog(self.id);
+    var initData = dialog.getInitData();
+    var checkedRows = initData.params.checkedRows;
+    var checkedIndex = initData.params.checkedIndex;
+    var tableId = initData.params.tableId;
+    
+    console.log("initData:", initData);
+    
+    self.$content.find("#checkBoxFormItem").children().first().css('width', '369');
+    
+    var checkedValue = false;
+    
+    
+    
+    
+    
+    self.checkbox1.on('change', /*16bd28e3-e5f3-4034-9c45-7c033ee04c2f*/ function(e) {
+      checkedValue = e.target.checked;
+    });
+    self.$okBtn.on('click', /*f22601c4-dac5-422f-bec4-0366d35f06c3*/ function(e) {
+      dialog.ok({'checkedValue': checkedValue,
+                  'checkedRows': checkedRows,
+                  'checkedIndex': checkedIndex});
+    });
+    self.$cancelBtn.on('click', /*f274a97d-42db-410a-8d56-fd2257499f94*/ function(e) {
+      dialog.close();
+    });
+    
+    
+    
+    
+    
+
+  
+  });
+
+</script>

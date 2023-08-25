@@ -1,0 +1,193 @@
+﻿<div class="dews-dialog-contents-area">
+  <div class="dews-ui-condition-panel">
+    <ul class="required-area">
+      <li>
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000001">검색어</label>
+        <span>
+          <input id="cdt_keyword_tb" type="text" class="dews-ui-textbox" placeholder="사원번호 / 성명" data-dews-placeholder-localize-key="D0013537">
+        </span>
+      </li>
+    </ul>
+  </div>
+  <h4 class="dews-ui-title" id="reqlistTitle"></h4>
+  <div class="dews-ui-form-panel" id="reqlistFormpanel" style="min-width: 100%;">
+    <ul>
+      <li>
+        <span>
+          <textarea id="required_items" type="text" class="dews-ui-textbox readonly"></textarea>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div class="dews-container-panel">
+    <div class="dews-container-item">
+      <div id="referBox" class="dews-ui-referbox">
+        <ul>
+          <!-- <li id="referMessage1" data-dews-localize-key="D0080903">필수항목은 <span class="dews-text-warning dews-ui-multilingual" data-dews-localize-key="D0080904">인사환경설정</span></li>
+          <li id="referMessage2">> <span class="dews-text-care dews-ui-multilingual" data-dews-localize-key="D0080905">사원등록항목통제</span> 항목에서 변경할 수 있습니다.</li> -->
+          <li id="referMessage1"></li>
+          <li id="referMessage2"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- 컨테이너 패널 -->
+  <h4 class="dews-ui-title dews-ui-multilingual" data-dews-localize-key="D0080906">필수항목누락사원</h4>
+  <div class="dews-container-panel" data-dews-container-height="265">
+    <div class="dews-container-item" data-dews-position="left" style="width: 100%;">
+      <div class="dews-ui-grid" id="PopupGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 버튼 html 영역 -->
+<div class="dews-dialog-button-group bottom">
+  <button id="close" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000255">닫기</button>
+</div>
+<script src="/view/js/HR/hr.common.js"></script>
+<style>
+  #PAMPHM00100_requiredCheck_POP .dews-ui-form-panel.col-2 > .dews-form-panel-form {
+    min-width: 100%;
+  }
+  #PAMPHM00100_requiredCheck_POP .dews-ui-form-panel.col-2 > .dews-form-panel-form ul {
+    min-width: 100%;
+  }
+  #PAMPHM00100_requiredCheck_POP .dews-ui-form-panel.col-2 > .dews-form-panel-form li {
+    min-width: 100%;
+  }
+</style>
+
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      var objCodeDtl = {};
+      var dialog = dews.ui.dialog('PAMPHM00100_requiredCheck_POP');
+      var PopupGrid, PopupGridDataSource;
+      var initData = dialog.initData;
+      var requiredListArray = (initData.use) ? initData.configRequiredItemList : [];
+      console.log('initData', initData);
+      var reqlistTitle = dews.localize.get('필수항목은', 'D0004631');
+      var refText1 = dews.localize.get('필수항목은', 'D0080903') + '<span class="dews-text-warning">' + dews.localize.get('인사환경설정', 'D0080904') + '</span>';
+      var refText2 = '>' + '<span class="dews-text-care">' + dews.localize.get('사원등록항목통제', 'D0080905') + '</span>' + dews.localize.get('항목에서 변경할 수 있습니다.', 'M0015479');
+      dewself.$content.find('#reqlistTitle').html(reqlistTitle);
+      dewself.$content.find('#referMessage1').html(refText1);
+      dewself.$content.find('#referMessage2').html(refText2);
+      if (initData.use == false) {
+        dewself.$content.find('#reqlistTitle').css('display', 'none');
+        dewself.$content.find('#reqlistFormpanel').css('display', 'none');
+        dewself.$content.find('#referBox').css('display', 'none');
+      }
+    }
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      PopupGridDataSource = dews.ui.dataSource('items', {
+        grid: true,
+        error: function (data, message) {
+          if (!message) {
+            dews.error(data.error);
+          } else {
+            dews.error(message);
+          }
+        },
+        schema: {
+          model: {
+            //id: '',
+            fields: [
+              { field: 'BIZAREA_NM' },
+              { field: 'DEPT_NM' },
+              { field: 'EMP_NO' },
+              { field: 'GEMP_NO' },
+              { field: 'KOR_NM' },
+            ]
+          }
+        },
+      });
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+      PopupGrid = dews.ui.grid(dewself.$PopupGrid, {
+        dataSource: PopupGridDataSource,
+        rowNo: false,
+        checkable: false,
+        editable: false,
+        selectable: true,
+        sortable: false,
+        height: 265,
+        columns: [
+          { field: 'BIZAREA_NM', title: dews.localize.get('사업장', 'D0000069') },
+          { field: 'DEPT_NM', title: dews.localize.get('부서', 'D0000071') },
+          { field: 'EMP_NO', title: dews.localize.get('사원번호', 'D0000074') },
+          { field: 'GEMP_NO', title: '통합사원번호'},
+          { field: 'KOR_NM', title: dews.localize.get('성명', 'D0001231') },
+        ],
+        validationCheck: function(e) {
+        },
+        save: function(e) {
+        },
+        change: function(e) {
+        },
+        dataBound: function(e) {
+        },
+      });
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 닫기 버튼
+      dewself.$close.on('click', function (e) {
+        dews.ui.dialog('PAMPHM00100_requiredCheck_POP').cancel();
+      });
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+      // Enter Key 누를때 검색어 조회
+      dewself.$cdt_keyword_tb.keydown(function(key) {
+        if (key.keyCode === 13){
+          searchUser(dewself.cdt_keyword_tb.text());
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 실행 영역 ▦▦▦▦▦▦
+    {
+      PopupGridDataSource.data(initData.invalidEmpList);
+      PopupGridDataSource.read();
+      dewself.required_items.text(requiredListArray.join(', '));
+
+    }
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+    function searchUser(value) {
+      let options = {
+        fields:['EMP_NO', 'KOR_NM'],
+        value: value
+      };
+      dewself.PopupGrid.searchCell(options);
+    }
+  });
+//# sourceURL=PAMPHM00100_requiredCheck_POP.js
+</script>

@@ -1,0 +1,355 @@
+﻿<div class="dews-dialog-contents-area">
+  <!-- <div class="dews-button-group">
+    <button class="dews-ui-button dews-ui-multilingual" id="btn_search" data-dews-localize-key="D0000509">조회</button>
+  </div> -->
+
+  <!-- 컨디션 패널 -->
+  <div id="PAMPHM00100_countDependents_POP_conditionPanel" class="dews-ui-condition-panel">
+    <form class="dews-condition-panel-form">
+      <ul id="PAMPHM00100_countDependents_POP_ul" class="required-area">
+        <li>
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0009299">자료구분</label>
+          <span>
+            <select id="cdt_tpData_ddl" class="dews-ui-dropdownlist" data-dews-value-field="value" data-dews-text-field="text"></select>
+          </span>
+        </li>
+        <li id="calcBaseDate">
+            <label class="dews-ui-multilingual" data-dews-localize-key="D0015499">계산기준일</label>
+            <span>
+              <input type="text" id="cdt_baseDate_dp" class="dews-ui-datepicker">
+            </span>
+        </li>
+        <li id="yrendYear" style="display:none;">
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0015500">연말정산년도</label>
+          <span>
+            <input type="text" id="cdt_yrendBaseYear_yp" class="dews-ui-yearpicker">
+          </span>
+        </li>
+        <li>
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0000069">사업장</label>
+          <span>
+            <select type="text" id="cdt_bizareaCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="BIZAREA_CD" data-dews-text-field="BIZAREA_NM" data-dews-help-code="H_MA_BIZAREA_MST_S" data-dews-help-size="medium" data-dews-help-params="">
+            </select>
+          </span>
+        </li>
+        <li>
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0000071">부서</label>
+          <span>
+            <select type="text" id="cdt_deptCd_mcp" class="dews-ui-multicodepicker" data-dews-code-field="DEPT_CD" data-dews-text-field="DEPT_NM" data-dews-help-code="H_MA_DEPT_MST_S" data-dews-help-size="big" data-dews-help-params="">
+            </select>
+          </span>
+        </li>
+        <li class="col-1">
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0000070">재직구분</label>
+          <span>
+            <select id="cdt_hlofFgCd_ddl" class="dews-ui-dropdownlist" data-dews-selectable="SELECTABLE" data-dews-selectable-false-value="N" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM">
+            </select>
+          </span>
+        </li>
+        <li class="col-1">
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0000001">검색어</label>
+          <span>
+            <input id="cdt_keyword_tb" type="text" class="dews-ui-textbox">
+          </span>
+        </li>
+      </ul>
+    </form>
+  </div>
+
+  <!-- 컨테이너 패널 -->
+  <div class="dews-container-panel" data-dews-fit-bottom="true">
+    <div class="dews-container-item" data-dews-position="left" style="width: 100%;">
+      <div class="dews-ui-grid" id="PopupGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 버튼 html 영역 -->
+<div class="dews-dialog-button-group bottom">
+  <button id="apply" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000267">적용</button>
+  <button id="close" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000255">닫기</button>
+</div>
+<script src="/view/js/HR/hr.common.js"></script>
+
+
+<style>
+  /* label.custom-hidden-label {
+    width: 133px!important;
+    line-height: 27px;
+    float: left;
+    text-align: right;
+    padding-right: 6px;
+  } */
+
+  #PAMPHM00100_countDependents_POP_ul > li {
+    padding-right: 63px;
+  }
+</style>
+
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      var objCodeDtl = {};
+      var dialog = dews.ui.dialog('PAMPHM00100_countDependents_POP');
+      var PopupGrid, PopupGridDataSource;
+      var tpDataDdlDataSource;
+      var hlofFgCdDdlDataSource;
+    }
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      getCodeData('HR', 'P00750', null, null, null, null, null);
+
+      // 자료구분
+      tpDataDdlDataSource = dews.ui.dataSource('tpDataDdlDataSource', {
+        data: [
+          { value: '1', text: dews.localize.get('가족사항', 'D0014497') },
+          { value: '2', text: dews.localize.get('연말정산결과', 'D0015501') }
+        ]
+      });
+
+      // 재직구분
+      hlofFgCdDdlDataSource = dews.ui.dataSource('hlofFgCdDdlDataSource', {
+        data: objCodeDtl.HR.P00750
+      });
+
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+      dewself.cdt_tpData_ddl.setDataSource(tpDataDdlDataSource);
+      dewself.cdt_hlofFgCd_ddl.setDataSource(hlofFgCdDdlDataSource);
+      dewself.cdt_hlofFgCd_ddl.select(1);
+      console.log('dp', dewself.cdt_baseDate_dp);
+      dewself.cdt_baseDate_dp.value(dews.date.format(new Date(), 'yyyyMMdd'));
+      dewself.cdt_yrendBaseYear_yp.value(dews.date.format(new Date(), 'yyyy'));
+
+      dewself.$content.find("#PAMPHM00100_countDependents_POP_conditionPanel").removeClass("col-3");
+    }
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      PopupGridDataSource = dews.ui.dataSource('items', {
+        grid: true,
+        transport: {
+          read: {
+            type: 'post',
+            url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_calcDependents_list'),
+            data: function () {
+              dews.ui.loading.show();
+              return {
+                tp_data: dewself.cdt_tpData_ddl.value(),
+                base_date: dewself.cdt_baseDate_dp.value(),
+                yrend_base_year: dewself.cdt_yrendBaseYear_yp.value(),
+                bizarea_cd_pipe: dewself.cdt_bizareaCd_mcp.codes().join('|'),
+                dept_cd_pipe: dewself.cdt_deptCd_mcp.codes().join('|'),
+                hlof_fg_cd: dewself.cdt_hlofFgCd_ddl.value(),
+                keyword: dewself.cdt_keyword_tb.text()
+              }
+            }
+          }
+        },
+        error: function (data, message) {
+          if (!message) {
+            dews.error(data.error);
+          } else {
+            dews.error(message);
+          }
+        },
+        schema: {
+          model: {
+            //id: '',
+            fields: [
+              { field: 'BIZAREA_CD' },
+              { field: 'BIZAREA_NM' },
+              { field: 'DEPT_CD' },
+              { field: 'DEPT_NM' },
+              { field: 'EMP_NO' },
+              { field: 'KOR_NM' },
+            ]
+          }
+        },
+      });
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+      PopupGrid = dews.ui.grid(dewself.$PopupGrid, {
+        dataSource: PopupGridDataSource,
+        autoBind: true,
+        checkable: true,
+        editable: false,
+        rowNo: true,
+        selectable: true,
+        sortable: true,
+        height: 305,
+        noData: true,
+        noDataMessage: dews.localize.get('검색 결과가 없습니다.', 'M0000203'),
+        columns: [
+          {
+            field: 'BIZAREA_NM',
+            title: dews.localize.get('사업장', 'D0000069'),
+            width: 120,
+            align: 'left',
+          },
+          {
+            field: 'DEPT_NM',
+            title: dews.localize.get('부서', 'D0000071'),
+            width: 120,
+            align: 'left',
+          },
+          {
+            field: 'EMP_NO',
+            title: dews.localize.get('사원번호', 'D0000074'),
+            width: 100,
+            align: 'left',
+          },
+          {
+            field: 'KOR_NM',
+            title: dews.localize.get('성명', 'D0001231'),
+            width: 100,
+            align: 'left',
+          },
+        ],
+        validationCheck: function(e) {
+        },
+        save: function(e) {
+        },
+        change: function(e) {
+        },
+        dataBound: function(e) {
+          dews.ui.loading.hide();
+        },
+        rowAdd: function(e) {
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 조회 버튼
+      // dewself.$btn_search.on('click', function(e) {
+      //   PopupGridDataSource.read();
+      // });
+      // 적용 버튼
+      dewself.$apply.on('click', function (e) {
+        let checkedRows = dewself.PopupGrid.getCheckedRows();
+        if (0 < checkedRows.length) {
+          if (dewself.cdt_tpData_ddl.value() === '2') {
+            let dialog = dews.ui.dialog("PAMPHM00100_countDependents_POP2", {
+              url: "/view/HR/PAMPHM00100_countDependents_POP2",
+              title: dews.localize.get("부양가족계산", 'D0015422'),
+              width: 420,
+              height: 270,
+              ok: function (data) {
+                saveDependentData(data);
+              }
+            }).open();
+          } else {
+            saveDependentData('N');
+          }
+
+        } else {
+          dews.ui.snackbar.ok(dews.localize.get('체크된 사원이 없습니다.', 'M0007054'));
+        }
+      });
+      // 닫기 버튼
+      dewself.$close.on('click', function (e) {
+        dews.ui.dialog('PAMPHM00100_countDependents_POP').cancel();
+      });
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+      dewself.$cdt_tpData_ddl.on('change', function(e) {
+        if (dewself.cdt_tpData_ddl.value() === '1') {
+          dewself.$content.find('#calcBaseDate').css('display', 'block');
+          dewself.$content.find('#yrendYear').css('display', 'none');
+        } else {
+          dewself.$content.find('#calcBaseDate').css('display', 'none');
+          dewself.$content.find('#yrendYear').css('display', 'block');
+        }
+        PopupGridDataSource.read();
+        //dewself.$btn_search.click();
+      });
+
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+      // Enter Key 누를때 검색어 조회
+      dewself.$cdt_keyword_tb.keydown(function(key) {
+        if (key.keyCode === 13){
+          PopupGridDataSource.read();
+          //dewself.$btn_search.click();
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+    function saveDependentData(apply_yn) {
+      let checkedRows = dewself.PopupGrid.getCheckedRows();
+      let empArray = [];
+      $.each(checkedRows, function(i, rowData) {
+        empArray.push(rowData.EMP_NO);
+      });
+      dews.ui.loading.show();
+      dews.api.post(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_calcDependents_save'), {
+        data: {
+          tp_data: dewself.cdt_tpData_ddl.value(),
+          base_date: dewself.cdt_baseDate_dp.value() == null ? dews.date.format(new Date(), 'yyyyMMdd') : dewself.cdt_baseDate_dp.value(),
+          yrend_base_year: dewself.cdt_yrendBaseYear_yp.value(),
+          emp_no_pipe: empArray.join('|'),
+          apply_yn: apply_yn
+
+        }
+      }).done(function (data) {
+        dews.ui.loading.hide();
+        dews.ui.snackbar.ok(dews.localize.get('저장되었습니다.', 'M0000031'));
+        dialog.ok();
+      }).fail(function (xhr, status, error) {
+        dews.ui.loading.hide();
+        dews.ui.snackbar.error(dews.localize.get('저장에 실패했습니다.', 'M0005315'));
+        console.log(xhr, status, error);
+      });
+    }
+    function getCodeData(module_cd, field_cd_pipe, syscode_yn, base_yn, foreign_yn, end_dt, keyword) {
+
+      if (!objCodeDtl.hasOwnProperty(module_cd)) {
+        objCodeDtl[module_cd] = {};
+      }
+      $.each(field_cd_pipe.split('|'), function (i, v) {
+        if (v != null && v != '') {
+          objCodeDtl[module_cd][v] = [{ SYSDEF_CD: '', SYSDEF_NM: '' }];
+          // objCodeDtl[module_cd][v] = [];
+        }
+      });
+      dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'), {
+        async: false,
+        data: {
+          module_cd: module_cd,
+          field_cd_pipe: field_cd_pipe,
+          syscode_yn: syscode_yn,
+          base_yn: base_yn,
+          foreign_yn: foreign_yn,
+          end_dt: end_dt,
+          keyword: keyword,
+        }
+      }).done(function (data) {
+        $.each(data, function (i, obj) {
+          objCodeDtl[module_cd][obj.FIELD_CD].push(obj);
+        });
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+    }
+  });
+//# sourceURL=PAMPHM00100_countDependents_POP.js
+</script>

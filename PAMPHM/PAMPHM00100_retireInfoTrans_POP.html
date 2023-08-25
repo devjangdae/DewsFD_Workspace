@@ -1,0 +1,260 @@
+﻿<div class="dews-dialog-contents-area">
+
+  <!-- 컨디션 패널 -->
+  <div id="conditionPanel" class="dews-ui-condition-panel">
+    <form class="dews-condition-panel-form">
+      <ul class="required-area">
+        <li style="padding-left: 71px;">
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0015401">퇴직일자</label>
+            <span class="dews-ui-periodpicker required" id="pp_retire">
+          </span>
+        </li>
+        <li>
+          <label class="dews-ui-multilingual" data-dews-localize-key="D0000001">검색어</label>
+          <span>
+            <input class="dews-ui-textbox" id="txt_search" type="text">
+          </span>
+        </li>
+      </ul>
+    </form>
+  </div>
+
+  <!-- 컨테이너 패널 -->
+  <div class="dews-container-panel" data-dews-fit-bottom="true">
+    <div class="dews-container-item" data-dews-position="left" style="width: 100%;">
+      <div class="dews-ui-grid" id="PopupGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 버튼 html 영역 -->
+<div class="dews-dialog-button-group bottom">
+  <button id="apply" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000267">적용</button>
+  <button id="close" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0000255">닫기</button>
+</div>
+<script src="/view/js/HR/hr.common.js"></script>
+
+<style>
+</style>
+
+<script>
+  dews.ready(function () {
+    dews.ui.mainbuttons.delete.useDefaultConfirm = false;
+    // ▦▦▦▦▦▦ 변수선언 ▦▦▦▦▦▦
+    {
+      var dewself = this;
+      var dialog = dews.ui.dialog('PAMPHM00100_retireInfoTrans_POP');
+      var PopupGrid, PopupGridDataSource;
+    }
+
+    // ▦▦▦▦▦▦ 변수 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 드롭다운리스트 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 컨디션패널 데이터 초기화 ▦▦▦▦▦▦
+    {
+      dewself.pp_retire.setupToday();
+    }
+
+    // ▦▦▦▦▦▦ 그리드 데이터소스 초기화 ▦▦▦▦▦▦
+    {
+      PopupGridDataSource = dews.ui.dataSource('items', {
+        grid: true,
+        transport: {
+          read: {
+            type: 'get',
+            url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_retireInfoTrans_list'),
+            data: function () {
+              dews.ui.loading.show();
+              return {
+                start_dt: dewself.pp_retire.getStartDate(),
+                end_dt: dewself.pp_retire.getEndDate(),
+                keyword: dewself.txt_search.text()
+              }
+            }
+          }
+        },
+        error: function (data, message) {
+          if (!message) {
+            dews.error(data.error);
+          } else {
+            dews.error(message);
+          }
+        },
+        schema: {
+          model: {
+            //id: '',
+            fields: [
+              { field: 'COMPANY_CD' },
+              { field: 'BIZAREA_CD' },
+              { field: 'BIZAREA_NM' },
+              { field: 'DEPT_CD' },
+              { field: 'DEPT_NM' },
+              { field: 'EMP_NO' },
+              { field: 'KOR_NM' },
+              { field: 'RETR_DT' }
+            ]
+          }
+        },
+      });
+    }
+
+    // ▦▦▦▦▦▦ 그리드 초기화 ▦▦▦▦▦▦
+    {
+      PopupGrid = dews.ui.grid(dewself.$PopupGrid, {
+        dataSource: PopupGridDataSource,
+        autoBind: true,
+        checkable: true,
+        editable: false,
+        rowNo: true,
+        selectable: true,
+        sortable: true,
+        height: 305,
+        noData: true,
+        noDataMessage: dews.localize.get('검색 결과가 없습니다.', 'M0000203'),
+        columns: [
+          {
+            field: 'BIZAREA_NM',
+            title: dews.localize.get('사업장', 'D0000069'),
+            width: 120,
+            align: 'left'
+          },
+          {
+            field: 'DEPT_NM',
+            title: dews.localize.get('부서', 'D0000071'),
+            width: 120,
+            align: 'left'
+          },
+          {
+            field: 'EMP_NO',
+            title: dews.localize.get('사원번호', 'D0000074'),
+            width: 100,
+            align: 'left'
+          },
+          {
+            field: 'KOR_NM',
+            title: dews.localize.get('성명', 'D0001231'),
+            width: 100,
+            align: 'left'
+          },
+          {
+            field: 'RETR_DT',
+            title: dews.localize.get('퇴사일자', 'D0014236'),
+            width: 100,
+            align: 'left',
+            formats: {
+              type: 'date',
+              predefined : true,
+              format : 'MA00007'
+            }
+          }
+        ],
+        validationCheck: function(e) {
+        },
+        save: function(e) {
+        },
+        change: function(e) {
+        },
+        dataBound: function(e) {
+          dews.ui.loading.hide();
+        },
+        rowAdd: function(e) {
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 버튼 이벤트 ▦▦▦▦▦▦
+    {
+      // 적용 버튼
+      dewself.$apply.on('click', function (e) {
+        let checkedRows = dewself.PopupGrid.getCheckedRows();
+        if (0 < checkedRows.length) {
+          dews.confirm(dews.localize.get("퇴직자 정보 이관시, 성명이 마스킹처리되고", "D0084095") + "\n" + dews.localize.get("일부 데이터를 제외한 모든 데이터가 제거됩니다.", "M0016430") + "\n" + dews.localize.get("[퇴직사원조회]에서 데이터 복원은 가능합니다.", "M0016431") + "\n" + dews.localize.get("계속하시겠습니까?", "M0000534") ).yes(function () {
+            saveData();
+          }).no(function () {
+            //dews.ui.dialog('PAMPHM00100_retireInfoTrans_POP').cancel();
+          });
+        } else {
+          dews.ui.snackbar.ok(dews.localize.get('체크된 사원이 없습니다.', 'M0007054'));
+        }
+      });
+      // 닫기 버튼
+      dewself.$close.on('click', function (e) {
+        dews.ui.dialog('PAMPHM00100_retireInfoTrans_POP').cancel();
+      });
+    }
+
+    // ▦▦▦▦▦▦ 체인지 이벤트 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 기타 이벤트 ▦▦▦▦▦▦
+    {
+      // Enter Key 누를때 검색어 조회
+      dewself.$txt_search.keydown(function(key) {
+        if (key.keyCode === 13){
+          PopupGridDataSource.read();
+        }
+      });
+    }
+
+    // ▦▦▦▦▦▦ 실행 영역 ▦▦▦▦▦▦
+    {
+    }
+
+    // ▦▦▦▦▦▦ 사용자 정의 함수 ▦▦▦▦▦▦
+    function saveData() {
+      let checkedRows = dewself.PopupGrid.getCheckedRows();
+      dews.ui.loading.show();
+      dews.api.post(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_retireInfoTrans_save'), {
+        data: {
+          checkedRows: JSON.stringify(dewself.PopupGrid.getCheckedRows())
+        }
+      }).done(function (data) {
+        dews.ui.loading.hide();
+        dews.ui.snackbar.ok(dews.localize.get('저장되었습니다.', 'M0000031'));
+        dialog.ok();
+      }).fail(function (xhr, status, error) {
+        dews.ui.loading.hide();
+        dews.ui.snackbar.error(dews.localize.get('저장에 실패했습니다.', 'M0005315'));
+        console.log(xhr, status, error);
+      });
+    }
+
+    function getCodeData(module_cd, field_cd_pipe, syscode_yn, base_yn, foreign_yn, end_dt, keyword) {
+
+      if (!objCodeDtl.hasOwnProperty(module_cd)) {
+        objCodeDtl[module_cd] = {};
+      }
+      $.each(field_cd_pipe.split('|'), function (i, v) {
+        if (v != null && v != '') {
+          objCodeDtl[module_cd][v] = [{ SYSDEF_CD: '', SYSDEF_NM: '' }];
+          // objCodeDtl[module_cd][v] = [];
+        }
+      });
+      dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'), {
+        async: false,
+        data: {
+          module_cd: module_cd,
+          field_cd_pipe: field_cd_pipe,
+          syscode_yn: syscode_yn,
+          base_yn: base_yn,
+          foreign_yn: foreign_yn,
+          end_dt: end_dt,
+          keyword: keyword,
+        }
+      }).done(function (data) {
+        $.each(data, function (i, obj) {
+          objCodeDtl[module_cd][obj.FIELD_CD].push(obj);
+        });
+      }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+      });
+    }
+  });
+//# sourceURL=PAMPHM00100_retireInfoTrans_POP.js
+</script>

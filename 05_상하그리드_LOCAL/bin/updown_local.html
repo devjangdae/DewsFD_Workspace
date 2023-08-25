@@ -1,0 +1,291 @@
+<!--##52c35dea-59cc-491a-ab6e-aad989a5a306##-->
+<!--##updown_local##-->
+<!--##8LibxacWefwFm93sdgEE6ZygSK9kZ2Sq6898Isl2rfU=##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: updown_local
+  # PageTitle: 상하그리드
+  # Server: http://localhost:8080/
+-->
+<!--
+
+-->
+
+<div id="searchCondition" class="dews-ui-condition-panel">
+  <ul class="required-area">
+    <li>
+      <label class="dews-ui-multilingual">부서</label>
+      <span>
+        <input type="text" id="_DEPT_CD" name="_DEPT_CD" class="dews-ui-codepicker required" data-dews-help-code="H_MA_DEPT_MST_S" data-dews-code-field="DEPT_CD" data-dews-text-field="DEPT_NM" data-dews-help-title="부서도움창" data-dews-help-custom="false" data-dews-help-size="big" data-dews-ajax="true" />
+      </span>
+    </li>
+  </ul>
+</div>
+<div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="normal">
+    <h4 class="dews-ui-title">부서정보</h4>
+    <div id="grid1" class="dews-ui-grid"></div>
+    <div class="dews-button-group" style="text-align: right;">
+      <h4 class="dews-ui-title">사원정보</h4>
+      <button id="btnAdd" class="dews-ui-button">추가</button>
+      <button id="btnDel" class="dews-ui-button">삭제</button>
+    </div>
+    <div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+      <div class="dews-container-item" data-dews-position="normal">
+        <div id="grid2" class="dews-ui-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    
+</style>
+
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.4';
+
+
+    /*5dd783f5-d5c0-48d5-8d6c-d55469905be8*/ // self._DEPT_CD.setData({
+    //   DEPT_CD: self.user.deptCode,
+    //   DEPT_NM: self.user.deptName
+    // });
+    
+    
+    
+    self.mstGrid_ds = dews.ui.dataSource('mstGrid_ds', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'DepEmpService', 'depreg_list'),
+          data: function () {
+            return {
+              dept_cd: self._DEPT_CD.code()
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'COMPANY_CD', editable: false, dataType: 'string' }, 
+            { field: 'BIZAREA_CD', editable: false, dataType: 'string' }, 
+            { field: 'DEPT_CD', editable: false, dataType: 'string' }, 
+            { field: 'DEPT_NM', editable: false, dataType: 'string' }, 
+            { field: 'DEPT_START_DT', editable: false, dataType: 'string' }, 
+            { field: '_uid', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    self.dtlGrid_ds = dews.ui.dataSource('dtlGrid_ds', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'DepEmpService', 'empreg_list'),
+          data: function () {
+            return {
+              dept_cd: (self.grid1.select() > -1 ) ? self.grid1.dataItem(self.grid1.select()).DEPT_CD : ''
+            };
+          }
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'DEPT_CD', editable: false, dataType: 'string' }, 
+            { field: 'EMP_NO', editable: false, dataType: 'string' }, 
+            { field: 'KOR_NM', editable: false, dataType: 'string' }
+          ]
+    
+        }
+      }
+    });
+    
+    
+    dews.ui.mainbuttons.information.disable(true);
+    dews.ui.mainbuttons.localize.disable(true);
+    dews.ui.mainbuttons.add.click(/*f55f79ca-30a9-49f2-8c9b-4215d6e5bba6*/ function () {
+        // TODO: 그리드에 데이터를 추가합니다.
+        self.grid1.addRow();
+    });
+    dews.ui.mainbuttons.search.click(/*4471508f-2268-4ad9-9742-0ef6ef9422a2*/ function () {
+    
+        // TODO: 필수항목 입력을 체크한 후 데이터소스를 조회합니다.
+        if (self.searchCondition.validate({ tooltip: true, message: '필수 항목을 입력해 주십시요.' })) {
+            self.mstGrid_ds.read();
+        }
+    
+        // TODO: 저장여부를 확인한 후 데이터소스를 조회합니다.
+        // if (self.dataSource1.getDirtyDataCount() != 0) {
+        //   dews.confirm('저장하지 않은 데이터가 있습니다.\n조회를 계속하시겠습니까?', 'ico2').yes(function () {
+        //     self.dataSource1.read();
+        //   }).no(function () {
+        //     dews.ui.snackbar.warning('취소되었습니다.');
+        //     return false;
+        //   });
+        // } else {
+        //   self.dataSource1.read();
+        // }
+    });
+    dews.ui.mainbuttons.delete.click(/*0a1fdd56-0ea6-404f-8497-d10d32fb292d*/ function () {
+        // 데이터 행이 있는지
+        if (self.grid1.dataItems().length > 0) {
+            // 선택한 행을 삭제
+            self.grid1.removeRow(self.grid1.select());
+    
+            // 삭제 후 Master 그리드에 데이터 행이 없을 때
+            if (self.grid1.dataItems().length == 0) {
+                // 디테일 그리드 데이터소스 데이터를 초기화
+                self.dtlGrid_ds.data([]); // or self.grid2.dataSource.data([]);
+            }
+        }
+    });
+    dews.ui.mainbuttons.save.click(/*4c6ac149-a4eb-4eb9-9edc-be7b48773055*/ function () {
+        // 변경된 데이터 체크
+        if (self.mstGrid_ds.getDirtyDataCount() == 0 && self.dtlGrid_ds.getDirtyDataCount() == 0) {
+            dews.alert('변경된 데이터가 없습니다.');
+            return false;
+        }
+    
+        // 필수 입력 필드값 체크
+        if (!self.grid1.validate().result) {
+            dews.alert("필수입력값이 누락되었습니다.");
+            return false;
+        }
+    
+        if (!self.grid2.validate({ mode: true, showTooltip: true }).result) {
+            return false;
+        }
+    
+        // 저장 서비스 API 호출
+        // 서비스 파라미터명과 데이터소스명이 다른경우
+        dews.confirm('저장하시겠습니까 ? ', 'question').yes(function () {
+            dews.api.post(dews.url.getApiUrl('HR', 'DepEmpService', 'dep_emp_reg_save'), {
+                async: false,
+                data: {
+                    //ServiceParameterName : ServiceParameterValue
+                    depinfo: JSON.stringify(self.mstGrid_ds.getDirtyData()),
+                    empinfo: JSON.stringify(self.dtlGrid_ds.getDirtyData())
+                }
+            }).done(function (data) {
+                dews.ui.snackbar.ok('자료가 정상적으로 저장되었습니다.');
+                self.mstGrid_ds.read();
+            }).fail(function (xhr, status, error) {
+                //dews.error('저장이 실패하였습니다.', 'ico1');
+                dews.ui.snackbar.error(error);
+            });
+        });
+    
+        // Master-Detail 저장 서비스가 다를 경우 2개 api 호출
+    });
+    dews.ui.grid(self.$grid1, {
+      dataSource: self.mstGrid_ds,
+      height: 175,
+      editable: true,
+      selectable: true,
+      sortable: false,
+      checkable: false,
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'DEPT_CD',
+          title: '부서코드',
+          width: 80,
+          attributes: { class: 'required' }
+        },
+        {
+          field: 'DEPT_NM',
+          title: '부서명',
+          width: 90,
+          align: 'left'
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      }
+    });
+    self.$btnAdd.on('click', /*5272a6b7-2eb2-4ea6-ac4d-bad0fa5f21b2*/ function (e) {
+        if (self.grid1.getRowState(self.grid1.select()) === "added") {
+            dews.alert("부서 저장 후에 추가 가능합니다");
+            return;
+        }
+    
+        // 부서 정보 데이터가 있을 때 추가
+        if (self.grid1.dataItems().length > 0) {
+            self.grid2.addRow();
+        }
+    
+    });
+    self.$btnDel.on('click', /*681c8f79-de1d-468d-927b-cc01a613d13c*/ function (e) {
+        if (self.grid2.dataItems().length > 0) {
+            self.grid2.removeRow(self.grid2.select());
+        }
+    });
+    dews.ui.grid(self.$grid2, {
+      dataSource: self.dtlGrid_ds,
+      editable: true,
+      selectable: true,
+      sortable: false,
+      autoBind: false,
+      checkable: false,
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'DEPT_CD',
+          title: '부서코드',
+          width: 80,
+          attributes: { class: 'readonly' }
+        },
+        {
+          field: 'EMP_NO',
+          title: '사원번호',
+          width: 60,
+          attributes: { class: 'required' },
+          editor: { type: 'string', maxLength: 20, editable: /*8614371f-b02d-4abe-abcc-b8a6a70d50a3*/ function(e) {
+        //console.log(e.grid.getRowState(e.row.index));
+        //  none,added,updated,deleted (4가지)
+        if (e.grid.getRowState(e.row.index) == "added") {
+            return true;
+        } else {
+            return false;
+        } 
+    } }
+        },
+        {
+          field: 'KOR_NM',
+          title: '사원명',
+          width: 90,
+          align: 'left'
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      rowAdd: /*8d9862dc-3f9c-4e37-b25c-adc5a07c707e*/ function (e) {
+            e.grid.setCellValue(e.row.index, "DEPT_CD", self.grid1.getCellValue(self.grid1.select(), "DEPT_CD"));
+            // e.grid 그리드 객체
+            // e.row.index 그리드 현재 행의 index
+            
+        }
+    
+    });
+    
+    
+    self.grid1.setDetail(self.grid2);
+    
+    
+    
+
+  
+  });
+
+</script>

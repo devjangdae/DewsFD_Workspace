@@ -1,0 +1,43 @@
+<div class="dews-dialog-contents-area">
+    <div class="dews-ui-condition-panel">
+        <form class="dews-condition-panel-form">
+            <ul class="required-area">
+                <h4 class="dews-ui-multilingual" data-dews-localize-key="M0019561">연말정산결과 데이터를 [사원등록] 가족사항에 반영하시겠습니까?</h4>
+            </ul>
+        </form>
+    </div>
+
+    <div class="dews-ui-referbox">
+        <ul>
+          <li class="dews-ui-multilingual" data-dews-localize-key="D0089701">'예'를 선택하면 연말정산 결과 데이터를 반영 후</li>
+          <li class="dews-ui-multilingual" data-dews-localize-key="M0019562">가족사항을 기준으로 부양가족을 계산해줍니다.</li>
+          <li class="dews-ui-multilingual" data-dews-localize-key="D0089702">'아니요'를 선택하면 연말정산 결과 데이터를 반영하지 않고</li>
+          <li class="dews-ui-multilingual" data-dews-localize-key="M0019563">연말정산 결과를 기준으로 계산합니다.</li>
+        </ul>
+    </div>
+
+    <div class="dews-dialog-button-group bottom">
+        <button id="btnYes" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0009687">예</button>
+        <button id="btnNo" class="dews-ui-button confirm dews-ui-multilingual" data-dews-localize-key="D0010121">아니요</button>
+    </div>
+</div>
+
+  <script>
+    dews.ready(function () {
+        let dewself = this;
+        let thisDialog = dews.ui.dialog(dewself.$content.prop("id"));
+
+        dewself.$btnYes.on("click", function (e) {
+            e.preventDefault();
+            thisDialog.ok("Y");
+        });
+
+        dewself.$btnNo.on("click", function (e) {
+            e.preventDefault();
+            thisDialog.ok("N");
+        });  
+
+    });
+  //# sourceURL=PAMPHM00100_countDependents_POP2.js
+  </script>
+  

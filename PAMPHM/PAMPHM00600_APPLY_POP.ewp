@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page title="사원반영 도움창" name="PAMPHM00600_APPLY_POP" type="dialog">
+  <canvas uid="canvas-1485142915113" type="dialog" dialogsize="medium" title="사원반영 도움창" preReady="d1870d3f-e7f5-48d4-892b-cc239c935249" component="" function="">
+    <pageInformation>
+      <version>1.0</version>
+      <create>hjs0830</create>
+      <modify>hjs0830</modify>
+      <builddate>2022-07-28T10:48:33.3051482+09:00</builddate>
+      <createdate>2022-07-22T09:57:33.0148026+09:00</createdate>
+      <modifieddate>2022-07-28T10:48:33.3051482+09:00</modifieddate>
+    </pageInformation>
+    <containerPanel uid="containerPanel-1658451509665" height_type="px" containerResize="false">
+      <containerItem uid="containerItem-1658451510167" width_type="px" location="normal">
+        <title uid="title-1658451521725" style="text-align:center;" title="검증결과가 정상인 데이터만 등록됩니다." type="h2" />
+        <containerPanel uid="containerPanel-1658451587500" height_type="px" containerResize="false">
+          <containerItem uid="containerItem-1658451587988" width_type="px" location="normal">
+            <formPanel uid="formPanel-1658451606870" style="position:center;" columnLength="2" labelAlign="right">
+              <formGroup uid="formGroup-1658451607096">
+                <formItem uid="formItem-1658451613386" id="checkBoxFormItem" columnSize="1" text="업로드한 컬럼 중 값이 NULL인 항목을 NULL로 INSERT/UPDATE">
+                  <checkbox uid="checkbox-1658451613609" id="checkbox1" disabled="false" checked="false" change="16bd28e3-e5f3-4034-9c45-7c033ee04c2f" />
+                </formItem>
+              </formGroup>
+            </formPanel>
+          </containerItem>
+        </containerPanel>
+      </containerItem>
+    </containerPanel>
+    <buttonGroup uid="buttonGroup-1485142915200" align="center" bottom="true">
+      <button uid="button-1485142971064" id="okBtn" text="확인" buttonType="confirm" useemphasize="false" emphasize="" disabled="false" click="f22601c4-dac5-422f-bec4-0366d35f06c3" />
+      <button uid="button-1485142973000" id="cancelBtn" text="취소" buttonType="confirm" useemphasize="false" emphasize="" disabled="false" click="f274a97d-42db-410a-8d56-fd2257499f94" />
+    </buttonGroup>
+  </canvas>
+  <dataSources />
+  <pageMarkDown><![CDATA[]]></pageMarkDown>
+  <pageCssStyle><![CDATA[]]></pageCssStyle>
+  <stylesheets />
+  <javascripts>
+    <javascript id="f274a97d-42db-410a-8d56-fd2257499f94"><![CDATA[function(e) {
+  dialog.close();
+}]]></javascript>
+    <javascript id="d1870d3f-e7f5-48d4-892b-cc239c935249"><![CDATA[//# sourceURL=PAMPHM00600_APPLY_POP.js
+
+var dialog = dews.ui.dialog(self.id);
+var initData = dialog.getInitData();
+var checkedRows = initData.params.checkedRows;
+var checkedIndex = initData.params.checkedIndex;
+var tableId = initData.params.tableId;
+
+console.log("initData:", initData);
+
+self.$content.find("#checkBoxFormItem").children().first().css('width', '369');
+
+var checkedValue = false;
+]]></javascript>
+    <javascript id="f22601c4-dac5-422f-bec4-0366d35f06c3"><![CDATA[function(e) {
+  dialog.ok({'checkedValue': checkedValue,
+              'checkedRows': checkedRows,
+              'checkedIndex': checkedIndex});
+}]]></javascript>
+    <javascript id="16bd28e3-e5f3-4034-9c45-7c033ee04c2f"><![CDATA[function(e) {
+  checkedValue = e.target.checked;
+}]]></javascript>
+  </javascripts>
+  <settings />
+  <datas />
+</page>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PageInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <layout>
+    <selectedServer>http://localhost:8080</selectedServer>
+    <selectedModuleCode>HR</selectedModuleCode>
+    <projectName>pamphm</projectName>
+    <menuTitle>계약갱신관리</menuTitle>
+    <menuID>PAMPHM00500</menuID>
+  </layout>
+  <dataSources>
+    <datasource uid="datasource-a840b72741e449a8a99f306b27c45363" id="masterDataSource" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="localdata" module="HR" service="PAMPHM00500_SERVICE" urlpattern="PAMPHM00500_MSTLIST" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping />
+      <columns>
+        <column field="EMP_NO" unionfield="" dataType="string" editable="false" isID="false" description="사원번호" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-67705c97e8f1486884efa7214649bbfa" id="detailDataSource" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping />
+      <columns>
+        <column field="TEST_SCHEMA" unionfield="" dataType="string" editable="false" isID="false" description="동적그리드 출력을 위한 테스트 스키마" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-94ed9813a89047e791a1f21a43588089" id="ynDataSource" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="e4a9b4e7-3a29-4851-bdbf-14b64c8fff19" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+      <mapping />
+      <columns>
+        <column field="value" unionfield="" dataType="string" editable="false" isID="false" description="" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="text" unionfield="" dataType="string" editable="false" isID="false" description="" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-a5c3fa4a8f684218ae9fd3330e922c9d" id="gnfdDataSource" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PAMPHM00500_SERVICE" urlpattern="Pamphm00500_dropDownGnfd" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+      <mapping>
+        <param parameter="menu_cd" applyType="constant" dataType="string" value="11" />
+        <param parameter="mcls_cd" applyType="constant" dataType="string" value="H00" />
+        <param parameter="mcls_dc" applyType="constant" dataType="string" value="22" />
+      </mapping>
+      <columns>
+        <column field="HR_CD" unionfield="" dataType="string" editable="false" isID="false" description="코드명칭" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="HR_CD_NM" unionfield="" dataType="string" editable="false" isID="false" description="명칭" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-1933f7ddec414bc99849e2c19155b1e9" id="hlofCdDataSource" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+      <mapping />
+      <columns />
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-94376766698a49499f0e536ea0212030" id="empyTpCdDataSource" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+      <mapping />
+      <columns />
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-5f2e3ba443c8436cb6685b46c02a7f8e" id="empTpDataSource" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+      <mapping />
+      <columns />
+      <widgetSampleDatas />
+    </datasource>
+  </dataSources>
+</PageInfo>

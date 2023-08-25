@@ -1,0 +1,137 @@
+<!--##4c2e9fae-1c7d-4948-93b0-cdefc057434c##-->
+<!--##PAMPHM00100_empTp_POP##-->
+<!--##6o3Zbj2634teuYSsnz1RAXcgLuGudXa5WfeZDH5n3DK/fhCK5F0gxNp7HHCKj42V##-->
+<!--
+  DEWS UI/UX IDE - Build Result - v1.5
+  # PageID: PAMPHM00100_empTp_POP
+  # PageTitle: 사원구분
+  # Server: https://dev.comet.duzon.net/
+-->
+<!--
+
+-->
+
+<div class="dews-dialog-contents-area" id="">
+  <div id="conditionpanel1" class="dews-ui-condition-panel">
+    <ul class="required-area">
+      <li id="keyword" class="col-1">
+        <label class="dews-ui-multilingual" data-dews-localize-key="D0000001">검색어</label>
+        <span>
+          <input id="keyword" name="keyword" type="text" class="dews-ui-textbox basic">
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div id="containerpanel1" class="dews-ui-container-panel" data-dews-fit-bottom="true">
+    <div id="containerpanelitem1" class="dews-container-item" data-dews-position="normal">
+      <div id="grid1" class="dews-ui-grid"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+</style>
+
+
+
+<script>
+  dews.ready(function () {
+    var self = this;
+    self.version = self.version || {};
+    self.version.view='1.0';
+
+    self.ds1 = dews.ui.dataSource('ds1', {
+      grid: true,
+      transport: {
+        read: {
+          url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementPHMService', 'pamphm00100_pop_permission_use_list'),
+        }
+      },
+      schema: {
+        model: {
+          fields: [
+            { field: 'SYSDEF_CD', editable: false, dataType: 'string' },
+            { field: 'SYSDEF_NM', editable: false, dataType: 'string' }
+          ]
+
+        }
+      },
+      error: function (e) {
+        console.log(e);
+        // e.error 에러
+        // e.message 에러 메시지
+        // e.state 에러 상태 (ex) 400
+        dews.ui.loading.hide();
+        dews.error(e.message);
+    }
+    });
+
+
+    self.$keyword.on('keydown', function(e) {
+      try {
+            if (e.keyCode == 13) {
+              dews.ui.loading.show();
+              self.ds1.read();
+            }
+          } catch (error) {
+            dews.error(error);
+          }
+    });
+
+    dews.ui.grid(self.$grid1, {
+      dataSource: self.ds1,
+      sortable: 'multiple',
+      autoBind: false,
+      checkable: true,
+      copyMode: 'cell',
+      columns: [
+        {
+          field: 'SYSDEF_CD',
+          title: '코드',
+          width: 80
+        },
+        {
+          field: 'SYSDEF_NM',
+          title: '코드명',
+          align: 'left',
+          width: 80
+        }
+      ],
+      fixed: {
+        colCount: 0,
+        rightColCount: 0
+      },
+      dataBound: function(e) {
+      dews.ui.loading.hide();
+      if(e.row.data.length == 0) {
+        dews.ui.snackbar.warning("조회된 데이터가 없습니다.");
+      }
+    },
+      dblClicked: function(e) {
+      // self.ok(self.grid1.dataItem(self.grid1.select()));
+      self.ok(self.grid1.dataItems([self.grid1.select()]));
+    }
+    });
+
+    dews.ui.loading.show();
+    self.keyword.text(self.initData.params.keyword);
+    self.ds1.read();
+
+    self.buttons.ok.on('click', function (e) {
+        if(self.grid1.getCheckedIndex().length > 0) {
+            self.ok(self.grid1.getCheckedRows());
+        }else{
+          dews.alert('선택된 데이터가 없습니다.', 'warning');
+        }
+    });
+
+
+    //# sourceURL=PAMPHM00100_empTp_POP.js
+
+
+
+
+  });
+
+</script>

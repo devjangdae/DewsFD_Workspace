@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PageInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <layout>
+    <selectedServer>https://dev.comet.duzon.net</selectedServer>
+    <selectedModuleCode>HR</selectedModuleCode>
+    <projectName>PAMPHM</projectName>
+    <menuTitle>책정임금반영</menuTitle>
+    <menuID>PAMPHM00500_PAYFIX_APPLY</menuID>
+  </layout>
+  <dataSources>
+    <datasource uid="datasource-e5c1aa0f0e4447e282b94999073e4139" id="selectEmpDataSource" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping />
+      <columns>
+        <column field="TEST_SCHEMA" unionfield="" dataType="string" editable="false" isID="false" description="동적그리드 바인딩을 위한 임시 스키마" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-1487f8908a254080b94f9ed85e6fac02" id="empyTpCdDataSource" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+      <mapping />
+      <columns />
+      <widgetSampleDatas />
+    </datasource>
+  </dataSources>
+</PageInfo>
