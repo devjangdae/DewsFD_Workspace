@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-25T23:52:06.0531218+09:00</builddate>
+      <builddate>2023-08-25T23:56:50.9465203+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-25T23:52:06.0531218+09:00</modifieddate>
+      <modifieddate>2023-08-25T23:56:50.9465203+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -644,23 +644,7 @@ self.mainButtons.delete.useDefaultConfirm = false;
 
 ]]></javascript>
     <javascript id="b8e44014-9b48-4870-8e86-a9ef771175d3"><![CDATA[function(e) {
-    // self.MtnityidnfDtl_ds = dews.ui.dataSource('MtnityidnfDtl_ds', {
-    //   grid: true,
-    //   transport: {
-    //     read: {
-    //       url: dews.url.getApiUrl('HR', 'PersonalAdministrationManagementMPMService', 'Pammpm00200_selectHrMtnityidnfDtl'),
-    //       data: /*0376eab7-1e59-4c91-9947-6c02b98249ad*/ function() {
-    //   var currentRow = self.mtnityidnfMaster_grid.select();
-    //     return{
-    //     // doc_no: self.mtnityidnfMaster_grid.dataItems(self.mtnityidnfMaster_grid.select()).DOC_NO,
-    //     // doc_no: grid.getCellValue(grid.select(),'DOC_NO'),
-    //     // emp_no: grid.getCellValue(grid.select(),'EMP_NO')
-    //     doc_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'DOC_NO'),
-    //     emp_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'EMP_NO')
-    //   }
-    // }
-    console.log((typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'DOC_NO'));
-    console.log(typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'EMP_NO'));
+    console.log(1);
 }]]></javascript>
   </javascripts>
   <settings />
