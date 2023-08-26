@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-25T23:56:50.9465203+09:00</builddate>
+      <builddate>2023-08-26T14:56:05.7983045+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-25T23:56:50.9465203+09:00</modifieddate>
+      <modifieddate>2023-08-26T14:56:05.7983045+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -448,7 +448,7 @@
     </containerPanel>
   </canvas>
   <dataSources>
-    <datasource uid="datasource-b1909b743e384fbea1937aea33816a8e" id="mtnityidnfMaster_ds" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PAMMPM00200_Service" urlpattern="pammpm00200_selectAllData" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="true">
+    <datasource uid="datasource-b1909b743e384fbea1937aea33816a8e" id="mtnityidnfMaster_ds" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PAMMPM00200_Service" urlpattern="pammpm00200_selectAllData" params_type="mapping" params="c5154232-3b46-44e6-8af9-e810d55b082b" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="true">
       <mapping>
         <param parameter="wrtDt_start" applyType="control" dataType="s_WRT_DT" value="startDate" />
         <param parameter="wrtDt_end" applyType="control" dataType="s_WRT_DT" value="endDate" />
@@ -504,10 +504,10 @@
       </columns>
       <widgetSampleDatas />
     </datasource>
-    <datasource uid="datasource-81935a2df08b44a58f55345aaf2cd04c" id="MtnityidnfDtl_ds" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PAMMPM00200_Service" urlpattern="pammpm00200_selectHrMtnityidnfDtl" params_type="javascript" params="b8e44014-9b48-4870-8e86-a9ef771175d3" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="true">
+    <datasource uid="datasource-81935a2df08b44a58f55345aaf2cd04c" id="MtnityidnfDtl_ds" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="PAMMPM00200_Service" urlpattern="pammpm00200_selectHrMtnityidnfDtl" params_type="javascript" params="6c745ff6-5900-49ef-8e1a-6c59017267e4" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="true">
       <mapping>
-        <param parameter="emp_no" applyType="control" dataType="mtnityidnfMaster_grid" value="checkedRows.EMP_NO" defaultValue="1" />
-        <param parameter="doc_no" applyType="control" dataType="mtnityidnfMaster_grid" value="checkedRows.DOC_NO" defaultValue="2" />
+        <param parameter="emp_no" applyType="control" dataType="mtnityidnfMaster_grid" value="checkedRows.EMP_NO" defaultValue="2015020001" />
+        <param parameter="doc_no" applyType="control" dataType="mtnityidnfMaster_grid" value="checkedRows.DOC_NO" defaultValue="MPC2021060003" />
       </mapping>
       <columns>
         <column field="COMPANY_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="회사코드" useAggregate="false" aggregate="" useGroup="false" />
@@ -627,6 +627,7 @@
 ]]></javascript>
     <javascript id="d2692eed-91c6-4644-b7ca-3eed2f04ec7b"><![CDATA[
 
+
 ]]></javascript>
     <javascript id="686d6dfe-5aef-496d-847d-f8b9362d31da"><![CDATA[//# sourceURL=PAMMPM00200.js
 
@@ -642,9 +643,17 @@
 self.mainButtons.delete.useDefaultConfirm = false;
 
 
+
 ]]></javascript>
-    <javascript id="b8e44014-9b48-4870-8e86-a9ef771175d3"><![CDATA[function(e) {
+    <javascript id="c5154232-3b46-44e6-8af9-e810d55b082b"><![CDATA[function() {
     console.log(1);
+}]]></javascript>
+    <javascript id="6c745ff6-5900-49ef-8e1a-6c59017267e4"><![CDATA[function () {
+    var currentRow = self.mtnityidnfMaster_grid.select();
+    return {
+        doc_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'DOC_NO'),
+        emp_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'EMP_NO')
+    }
 }]]></javascript>
   </javascripts>
   <settings />

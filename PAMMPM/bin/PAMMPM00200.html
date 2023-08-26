@@ -1,6 +1,6 @@
-<!--##4647e484-c568-4bac-b054-0088250c181d##-->
+<!--##b57590c0-34ae-4069-a50f-8d8c3d98db76##-->
 <!--##PAMMPM00200##-->
-<!--##UP8ZfrwXmAgc53xxEatXe+DgJbwgTR9UkFfNRto8Oxg=##-->
+<!--##02aJSsVCZcNrWTrUZTz0t514GaWbpSvPvSBcihUsHk0=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -272,6 +272,7 @@
     
     
     
+    
     self.mtnityidnfMaster_ds = dews.ui.dataSource('mtnityidnfMaster_ds', {
       grid: true,
       transport: {
@@ -347,8 +348,12 @@
         read: {
           type: 'post',
           url: dews.url.getApiUrl('HR', 'PAMMPM00200_Service', 'pammpm00200_selectHrMtnityidnfDtl'),
-          data: /*b8e44014-9b48-4870-8e86-a9ef771175d3*/ function(e) {
-        console.log(1);
+          data: /*6c745ff6-5900-49ef-8e1a-6c59017267e4*/ function () {
+        var currentRow = self.mtnityidnfMaster_grid.select();
+        return {
+            doc_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'DOC_NO'),
+            emp_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'EMP_NO')
+        }
     }
         }
       },
