@@ -1,6 +1,6 @@
-<!--##24a72cbd-73b3-4384-b2f9-d578de09abdd##-->
+<!--##05263cee-c443-42b6-8be7-898d49705320##-->
 <!--##PAMMPM00200##-->
-<!--##ee8XteH47UpCUh+noRopEfHinRixJgOwOF8gFxqIf20=##-->
+<!--##Q0Td+enS0MCotItzUDdOvDKWrgCGsOwpHJigbveU3nQ=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -205,8 +205,7 @@
               <li>
                 <label>통상임금산정기준</label>
                 <span>
-                  <select id="USL_WAGE_CD" name="USL_WAGE_CD" class="dews-ui-dropdownlist basic" data-dews-show-tooltip="true" style="width: 71px;" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
-                  <input id="xx" name="xx" type="text" class="dews-ui-textbox" style="width: 101px;" />
+                  <select id="USL_WAGE_CD" name="USL_WAGE_CD" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-show-tooltip="true" style="width: 71px;" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
                 </span>
               </li>
               <li>
@@ -416,7 +415,7 @@
       data: {
           end_dt: '',
           foreign_yn: '',
-          field_cd_pipe: 'P00520|P02010|P03500|P03510',
+          field_cd_pipe: 'P00520|P02010|P03500|P03510|P03520',
           module_cd: 'HR',
           syscode_yn: '',
           keyword: '',
@@ -427,6 +426,7 @@
       var ar_P02010 = new Array();
       var ar_P03500 = new Array();
       var ar_P03510 = new Array();
+      var ar_P03520 = new Array();
     
       for (var i = 0; i < data.length; i++) {
         if (data[i].FIELD_CD == "P00520") { 
@@ -445,11 +445,16 @@
           ar_P03510.push(data[i]); 
     
         }
+        else if (data[i].FIELD_CD == "P03520") { 
+          ar_P03520.push(data[i]); 
+    
+        }
       }
       self.pipeDataSource1_P00520 = dews.ui.dataSource('pipeDataSource1_P00520',  { data: ar_P00520 });
       self.pipeDataSource1_P02010 = dews.ui.dataSource('pipeDataSource1_P02010',  { data: ar_P02010 });
       self.pipeDataSource1_P03500 = dews.ui.dataSource('pipeDataSource1_P03500',  { data: ar_P03500 });
       self.pipeDataSource1_P03510 = dews.ui.dataSource('pipeDataSource1_P03510',  { data: ar_P03510 });
+      self.pipeDataSource1_P03520 = dews.ui.dataSource('pipeDataSource1_P03520',  { data: ar_P03520 });
       self.pipeDataSource1 = dews.ui.dataSource('pipeDataSource1', { data: data });
       
     });
@@ -540,19 +545,22 @@
         {
           field: 'CLOSE_YN',
           title: '마감여부',
-          width: 80
+          width: 80,
+          attributes: { class: 'readonly' }
         },
         {
           field: 'REQ_KND_FG',
           title: '신청종류',
           width: 80,
-          align: 'left'
+          align: 'left',
+          attributes: { class: 'readonly' }
         },
         {
           field: 'EMP_NO',
           title: '사원번호',
           width: 80,
           align: 'left',
+          attributes: { class: 'readonly' },
           editor: {
             type: 'codepicker',
             helpCode: 'H_HR_EMP_MST_S02',
@@ -566,7 +574,8 @@
           field: 'KOR_NM',
           title: '한글명',
           width: 90,
-          align: 'left'
+          align: 'left',
+          attributes: { class: 'readonly' }
         },
         {
           field: 'DEPT_NM',
@@ -631,8 +640,11 @@
         var grid = self.mtnityidnfMaster_grid;
         grid.setCellValue(grid.select(), 'MLTPPRGN_YN', self.MLTPPRGN_YN.value(), false);
     });
+    self.USL_WAGE_CD.setDataSource(self.pipeDataSource1_P03520);
     dews.ui.grid(self.$MtnityidnfDtl_grid, {
       dataSource: self.MtnityidnfDtl_ds,
+      editable: true,
+      selectable: true,
       sortable: false,
       autoBind: false,
       checkable: false,

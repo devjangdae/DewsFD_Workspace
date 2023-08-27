@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-27T19:21:05.5400215+09:00</builddate>
+      <builddate>2023-08-27T19:35:45.6546387+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-27T19:21:05.5400215+09:00</modifieddate>
+      <modifieddate>2023-08-27T19:35:45.6546387+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -55,15 +55,11 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats>
-                <DesignerControl />
-              </formats>
-              <editor>
-                <DesignerControl />
-              </editor>
+              <formats />
+              <editor />
               <customExport check="" />
             </column>
-            <column uid="561a2fe0-8aac-4884-9b4f-73884879755c" field="CLOSE_YN" title="마감여부" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="561a2fe0-8aac-4884-9b4f-73884879755c" field="CLOSE_YN" title="마감여부" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -74,15 +70,11 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats>
-                <DesignerControl />
-              </formats>
-              <editor>
-                <DesignerControl />
-              </editor>
+              <formats />
+              <editor />
               <customExport check="" />
             </column>
-            <column uid="b0d68e2b-0d24-42c9-a274-bda82fa3f4b3" field="REQ_KND_FG" title="신청종류" width="80" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="b0d68e2b-0d24-42c9-a274-bda82fa3f4b3" field="REQ_KND_FG" title="신청종류" width="80" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -93,15 +85,11 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats>
-                <DesignerControl />
-              </formats>
-              <editor>
-                <DesignerControl />
-              </editor>
+              <formats />
+              <editor />
               <customExport check="" />
             </column>
-            <column uid="87445365-df9b-4e52-a402-53acc9db6df0" field="EMP_NO" title="사원번호" width="80" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="87445365-df9b-4e52-a402-53acc9db6df0" field="EMP_NO" title="사원번호" width="80" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -112,9 +100,7 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats>
-                <DesignerControl />
-              </formats>
+              <formats />
               <editor>
                 <codepicker helpCode="H_HR_EMP_MST_S02" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpTitle="사원도움창" helpSize="big" useAjax="true" validation="true" editable_type="value">
                   <mapping>
@@ -128,7 +114,7 @@
               </editor>
               <customExport check="" />
             </column>
-            <column uid="6b3f747e-d276-429a-a638-29c19c6718a2" field="KOR_NM" title="한글명" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="6b3f747e-d276-429a-a638-29c19c6718a2" field="KOR_NM" title="한글명" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -139,12 +125,8 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats>
-                <DesignerControl />
-              </formats>
-              <editor>
-                <DesignerControl />
-              </editor>
+              <formats />
+              <editor />
               <customExport check="" />
             </column>
             <column uid="a3a95b1a-6d2b-4176-a827-8b2d96291aee" field="DEPT_NM" title="부서명" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -158,12 +140,8 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats>
-                <DesignerControl />
-              </formats>
-              <editor>
-                <DesignerControl />
-              </editor>
+              <formats />
+              <editor />
               <customExport check="" />
             </column>
             <column uid="b9828932-7716-49d2-8cca-0b5d52b8c19b" field="DOC_NO" title="문서번호" align="center" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="false" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -177,12 +155,8 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats>
-                <DesignerControl />
-              </formats>
-              <editor>
-                <DesignerControl />
-              </editor>
+              <formats />
+              <editor />
               <customExport check="" />
             </column>
           </columns>
@@ -283,7 +257,7 @@
               </formGroup>
               <formGroup uid="formGroup-1579672217137">
                 <formItem uid="formItem-1579672246314" columnSize="1" text="사원">
-                  <codepicker uid="codepicker-1579672246584" id="KOR_NM" disabled="false" readonly="true" state="basic" helpCustom="false" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
+                  <codepicker uid="codepicker-1579672246584" id="KOR_NM" disabled="false" readonly="true" state="basic" helpCode="H_HR_EMP_MST_S" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사원 도움창" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
                     <mapping />
                   </codepicker>
                 </formItem>
@@ -315,8 +289,7 @@
               </formGroup>
               <formGroup uid="formGroup-1579672229219">
                 <formItem uid="formItem-2adc4afa562e4b0eb1a676b227b7853a" columnSize="1" text="통상임금산정기준">
-                  <dropdownlist uid="dropdownlist-9cbcaddbb0c34917a968d1326b478427" id="USL_WAGE_CD" autoBind="true" pipeparam="" useDefault="false" defaultValue="" defaultText="" width_type="px" width="71" disabled="false" readonly="false" autoOpen="false" useNumkey="false" showTooltip="true" showValueTooltip="true" state="basic" />
-                  <textbox uid="textbox-5f58164d67474789a282b86e73b1970f" id="xx" disabled="false" readonly="false" predefined="false" useSecureMask="false" multiline="false" width_type="px" width="101" height_type="px" height="" rows="0" maxlength="0" password="false" />
+                  <dropdownlist uid="dropdownlist-9cbcaddbb0c34917a968d1326b478427" id="USL_WAGE_CD" autoBind="true" dataSource="pipeDataSource1" valueField="SYSDEF_CD" textField="SYSDEF_NM" pipeparam="P03520" useDefault="false" defaultValue="" defaultText="" width_type="px" width="71" disabled="false" readonly="false" autoOpen="false" useNumkey="false" showTooltip="true" showValueTooltip="true" state="basic" />
                 </formItem>
                 <formItem uid="formItem-1579757894166" columnSize="1" text="통상임금">
                   <numerictextbox uid="numerictextbox-1579757894532" id="USL_WAGE_AMT" disabled="false" readonly="false" state="basic" spinners="false" step="1" predefined="false" format="#,##0.##" currency="" increaseValue="1000" increaseType="multiple" restrictDecimals="false" selectOnFocus="false" round="round" width_type="px" />
@@ -336,7 +309,7 @@
               <button uid="button-1579672585493" text="추가" buttonType="small" useemphasize="false" emphasize="" disabled="false" />
               <button uid="button-1579672587763" text="삭제" buttonType="small" useemphasize="false" emphasize="" disabled="false" />
             </buttonGroup>
-            <grid uid="grid-1579672607629" mockupData="" id="MtnityidnfDtl_grid" dataSource="MtnityidnfDtl_ds" height_type="px" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" masterGrid="mtnityidnfMaster_grid" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+            <grid uid="grid-1579672607629" mockupData="" id="MtnityidnfDtl_grid" dataSource="MtnityidnfDtl_ds" height_type="px" editable="false" movable="false" rowNo="true" selectable="true" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" masterGrid="mtnityidnfMaster_grid" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
               <mockupText>MjAxOS0xMS0wMSwyMDE5LTExLTMwLDMwLE5vLA0KMjAxOS0xMi0wMSwyMDE5LTEyLTMxLDMxLE5vLA0KMjAyMC0wMS0wMSwyMDIwLTAxLTI5LDI5LFllcywzMDAwMDAw</mockupText>
               <columns>
                 <column uid="cefc6a66-f8a1-43b3-b28a-eb0336832cd9" field="TERMFG_CD" title="기간구분" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -350,12 +323,8 @@
                   <footerCollection />
                   <headerSummary predefined="false" currency_type="value" currency="" align="center" />
                   <headerSummaryCollection />
-                  <formats>
-                    <DesignerControl />
-                  </formats>
-                  <editor>
-                    <DesignerControl />
-                  </editor>
+                  <formats />
+                  <editor />
                   <customExport check="" />
                 </column>
                 <column uid="a54d8bda-ddaf-4edc-a1fc-30d3f00b3380" field="START_DT" title="시작일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="required" footerType="object" headerType="object">
@@ -428,9 +397,7 @@
                   <footerCollection />
                   <headerSummary predefined="false" currency_type="value" currency="" align="center" />
                   <headerSummaryCollection />
-                  <formats>
-                    <DesignerControl />
-                  </formats>
+                  <formats />
                   <editor>
                     <textbox maxLength="0" editable_type="value" />
                   </editor>
@@ -451,7 +418,7 @@
                     <number predefined="true" format="MA00003" currency_type="value" negativeColor="false" currency="" />
                   </formats>
                   <editor>
-                    <numerictextbox predefined="false" currency_type="value" currency="" increaseType="multiple" increaseValue="" round="round" maxLength="" editable_type="value" />
+                    <numerictextbox predefined="false" currency_type="value" currency="" increaseType="multiple" increaseValue="" round="round" maxLength="" editable_type="value" editable="true" />
                   </editor>
                   <customExport check="" />
                 </column>
@@ -595,7 +562,7 @@
       <mapping>
         <param parameter="end_dt" applyType="constant" dataType="string" />
         <param parameter="foreign_yn" applyType="constant" dataType="string" />
-        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P00520|P02010|P03500|P03510" />
+        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P00520|P02010|P03500|P03510|P03520" />
         <param parameter="module_cd" applyType="constant" dataType="string" value="HR" />
         <param parameter="syscode_yn" applyType="constant" dataType="string" />
         <param parameter="keyword" applyType="constant" dataType="string" />
