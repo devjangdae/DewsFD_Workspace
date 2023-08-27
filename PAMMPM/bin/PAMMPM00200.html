@@ -1,6 +1,6 @@
-<!--##fd9875db-da9e-4754-b4a8-b29c00bf33e3##-->
+<!--##24a72cbd-73b3-4384-b2f9-d578de09abdd##-->
 <!--##PAMMPM00200##-->
-<!--##kceeBTV2FqwhsRUVWOreP66DO9gFBLkb4CdX/b0HrKU=##-->
+<!--##ee8XteH47UpCUh+noRopEfHinRixJgOwOF8gFxqIf20=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -82,7 +82,7 @@
               <li>
                 <label>사업장</label>
                 <span>
-                  <input type="text" id="BIZAREA_CD" name="BIZAREA_CD" class="dews-ui-codepicker basic" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-use-keyword="false" />
+                  <input type="text" id="BIZAREA_CD" name="BIZAREA_CD" class="dews-ui-codepicker basic" data-dews-help-code="H_MA_BIZAREA_MST_S" data-dews-code-field="BIZAREA_CD" data-dews-text-field="BIZAREA_NM" data-dews-help-title="사업장 도움창" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-use-keyword="false" />
                 </span>
               </li>
             </ul>
@@ -116,7 +116,7 @@
               <li>
                 <label>담당자</label>
                 <span>
-                  <input type="text" id="RSPT_EMP_NO" name="RSPT_EMP_NO" class="dews-ui-codepicker basic" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
+                  <input type="text" id="RSPT_EMP_NO" name="RSPT_EMP_NO" class="dews-ui-codepicker basic" data-dews-help-code="H_HR_EMP_MST_S" data-dews-code-field="EMP_NO" data-dews-text-field="KOR_NM" data-dews-help-title="사원 도움창" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
                 </span>
               </li>
             </ul>
@@ -157,7 +157,7 @@
               <li>
                 <label>사원</label>
                 <span>
-                  <input type="text" id="KOR_NM" name="KOR_NM" class="dews-ui-codepicker basic" readonly="readonly" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
+                  <input type="text" id="KOR_NM" name="KOR_NM" class="dews-ui-codepicker basic" readonly="readonly" data-dews-help-code="H_HR_EMP_MST_S" data-dews-code-field="EMP_NO" data-dews-text-field="KOR_NM" data-dews-help-title="사원 도움창" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
                 </span>
               </li>
               <li>
@@ -416,7 +416,7 @@
       data: {
           end_dt: '',
           foreign_yn: '',
-          field_cd_pipe: 'P00520|P02010|P03500',
+          field_cd_pipe: 'P00520|P02010|P03500|P03510',
           module_cd: 'HR',
           syscode_yn: '',
           keyword: '',
@@ -426,6 +426,7 @@
       var ar_P00520 = new Array();
       var ar_P02010 = new Array();
       var ar_P03500 = new Array();
+      var ar_P03510 = new Array();
     
       for (var i = 0; i < data.length; i++) {
         if (data[i].FIELD_CD == "P00520") { 
@@ -440,10 +441,15 @@
           ar_P03500.push(data[i]); 
     
         }
+        else if (data[i].FIELD_CD == "P03510") { 
+          ar_P03510.push(data[i]); 
+    
+        }
       }
       self.pipeDataSource1_P00520 = dews.ui.dataSource('pipeDataSource1_P00520',  { data: ar_P00520 });
       self.pipeDataSource1_P02010 = dews.ui.dataSource('pipeDataSource1_P02010',  { data: ar_P02010 });
       self.pipeDataSource1_P03500 = dews.ui.dataSource('pipeDataSource1_P03500',  { data: ar_P03500 });
+      self.pipeDataSource1_P03510 = dews.ui.dataSource('pipeDataSource1_P03510',  { data: ar_P03510 });
       self.pipeDataSource1 = dews.ui.dataSource('pipeDataSource1', { data: data });
       
     });

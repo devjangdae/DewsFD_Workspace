@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-27T17:39:29.564329+09:00</builddate>
+      <builddate>2023-08-27T19:21:05.5400215+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-27T17:39:29.564329+09:00</modifieddate>
+      <modifieddate>2023-08-27T19:21:05.5400215+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -230,7 +230,7 @@
                   <textbox uid="textbox-1579669258905" id="BIZAREA_MNG_NO" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" change="80a5e535-39fd-4b43-b3d7-4be44e510524" />
                 </formItem>
                 <formItem uid="formItem-1579669262408" columnSize="1" text="사업장">
-                  <codepicker uid="codepicker-904da65305f2496daff77f7ff5a6d66d" id="BIZAREA_CD" disabled="false" readonly="false" state="basic" helpCustom="false" helpSize="medium" useKeyword="false" clearKeyword="false" ajax="false" width_type="px">
+                  <codepicker uid="codepicker-904da65305f2496daff77f7ff5a6d66d" id="BIZAREA_CD" disabled="false" readonly="false" state="basic" helpCode="H_MA_BIZAREA_MST_S" codeField="BIZAREA_CD" textField="BIZAREA_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사업장 도움창" helpSize="medium" useKeyword="false" clearKeyword="false" ajax="false" width_type="px">
                     <mapping />
                   </codepicker>
                 </formItem>
@@ -254,7 +254,7 @@
                   </radiogroup>
                 </formItem>
                 <formItem uid="formItem-1579669507807" columnSize="1" text="담당자">
-                  <codepicker uid="codepicker-1579669508114" id="RSPT_EMP_NO" disabled="false" readonly="false" state="basic" helpCustom="false" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
+                  <codepicker uid="codepicker-1579669508114" id="RSPT_EMP_NO" disabled="false" readonly="false" state="basic" helpCode="H_HR_EMP_MST_S" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사원 도움창" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
                     <mapping />
                   </codepicker>
                 </formItem>
@@ -283,7 +283,7 @@
               </formGroup>
               <formGroup uid="formGroup-1579672217137">
                 <formItem uid="formItem-1579672246314" columnSize="1" text="사원">
-                  <codepicker uid="codepicker-1579672246584" id="KOR_NM" disabled="false" readonly="true" state="basic" helpCustom="false" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
+                  <codepicker uid="codepicker-1579672246584" id="KOR_NM" disabled="false" readonly="true" state="basic" helpCode="H_HR_EMP_MST_S" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사원 도움창" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
                     <mapping />
                   </codepicker>
                 </formItem>
@@ -595,7 +595,7 @@
       <mapping>
         <param parameter="end_dt" applyType="constant" dataType="string" />
         <param parameter="foreign_yn" applyType="constant" dataType="string" />
-        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P00520|P02010|P03500" />
+        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P00520|P02010|P03500|P03510" />
         <param parameter="module_cd" applyType="constant" dataType="string" value="HR" />
         <param parameter="syscode_yn" applyType="constant" dataType="string" />
         <param parameter="keyword" applyType="constant" dataType="string" />

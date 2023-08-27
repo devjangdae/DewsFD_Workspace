@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-27T17:32:34.8952072+09:00</builddate>
+      <builddate>2023-08-27T19:21:05.5400215+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-27T17:32:34.8952072+09:00</modifieddate>
+      <modifieddate>2023-08-27T19:21:05.5400215+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -41,7 +41,7 @@
     </buttonGroup>
     <containerPanel uid="containerPanel-1579481711463" height_type="px" containerResize="false">
       <containerItem uid="containerItem-1579481711859" width_type="px" width="495" location="left">
-        <grid uid="grid-1579581960515" mockupData="" id="mtnityidnfMaster_grid" dataSource="mtnityidnfMaster_ds" height_type="px" height="889" editable="false" movable="false" rowNo="true" selectable="true" checkable="true" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false" change="1b69d239-e35d-48dc-8154-cd450b87c595" dataBound="fe8a81f9-acaa-4741-996c-4cdbae80d367">
+        <grid uid="grid-1579581960515" mockupData="" id="mtnityidnfMaster_grid" dataSource="mtnityidnfMaster_ds" height_type="px" height="889" editable="false" movable="false" rowNo="true" selectable="true" checkable="true" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false" change="1b69d239-e35d-48dc-8154-cd450b87c595" dataBound="fe8a81f9-acaa-4741-996c-4cdbae80d367" save="1b25120e-fd4d-4d5b-92a1-9db105397f42">
           <mockupText>MjAyMC0wMS0yMSxZZXMs7Lac7IKw7KCE7Zy07Zy06rCALDExMTExLO2Zjeq4uOuPmQ==</mockupText>
           <columns>
             <column uid="deae003c-248b-44d6-a7e3-b4cc5ccc1fb3" field="WRT_DT" title="등록일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="required" footerType="object" headerType="object">
@@ -230,7 +230,7 @@
                   <textbox uid="textbox-1579669258905" id="BIZAREA_MNG_NO" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" change="80a5e535-39fd-4b43-b3d7-4be44e510524" />
                 </formItem>
                 <formItem uid="formItem-1579669262408" columnSize="1" text="사업장">
-                  <codepicker uid="codepicker-904da65305f2496daff77f7ff5a6d66d" id="BIZAREA_CD" disabled="false" readonly="false" state="basic" helpCustom="false" helpSize="medium" useKeyword="false" clearKeyword="false" ajax="false" width_type="px">
+                  <codepicker uid="codepicker-904da65305f2496daff77f7ff5a6d66d" id="BIZAREA_CD" disabled="false" readonly="false" state="basic" helpCode="H_MA_BIZAREA_MST_S" codeField="BIZAREA_CD" textField="BIZAREA_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사업장 도움창" helpSize="medium" useKeyword="false" clearKeyword="false" ajax="false" width_type="px">
                     <mapping />
                   </codepicker>
                 </formItem>
@@ -254,7 +254,7 @@
                   </radiogroup>
                 </formItem>
                 <formItem uid="formItem-1579669507807" columnSize="1" text="담당자">
-                  <codepicker uid="codepicker-1579669508114" id="RSPT_EMP_NO" disabled="false" readonly="false" state="basic" helpCustom="false" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
+                  <codepicker uid="codepicker-1579669508114" id="RSPT_EMP_NO" disabled="false" readonly="false" state="basic" helpCode="H_HR_EMP_MST_S" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사원 도움창" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
                     <mapping />
                   </codepicker>
                 </formItem>
@@ -595,7 +595,7 @@
       <mapping>
         <param parameter="end_dt" applyType="constant" dataType="string" />
         <param parameter="foreign_yn" applyType="constant" dataType="string" />
-        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P00520|P02010|P03500" />
+        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P00520|P02010|P03500|P03510" />
         <param parameter="module_cd" applyType="constant" dataType="string" value="HR" />
         <param parameter="syscode_yn" applyType="constant" dataType="string" />
         <param parameter="keyword" applyType="constant" dataType="string" />
@@ -775,6 +775,10 @@ self.mainButtons.delete.useDefaultConfirm = false;
     var grid = self.mtnityidnfMaster_grid;
     grid.setCellValue(grid.select(), 'TERM_CD', self.TERM_CD.value(), false);
 }]]></javascript>
+    <javascript id="1b25120e-fd4d-4d5b-92a1-9db105397f42"><![CDATA[function (e) {
+        console.log("ㅂㅈㄷㅂㅈㄷㅈㅂㄷ");
+    }
+]]></javascript>
   </javascripts>
   <settings />
   <datas />
