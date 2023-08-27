@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page title="출산휴가확인서등록" name="PAMMPM00200" type="page">
+<page title="출산휴가확인서등록" name="PAMMPM00200_2" type="page">
   <canvas uid="canvas-1485142915100" type="page" title="출산휴가확인서등록" ready="d2692eed-91c6-4644-b7ca-3eed2f04ec7b" postDesignSummary="f6ef59c6-4047-41c2-befd-0244374ad770" component="" function="">
     <pageInformation>
       <version>1.0</version>
@@ -331,7 +331,9 @@
                   <footerCollection />
                   <headerSummary predefined="false" currency_type="value" currency="" align="center" />
                   <headerSummaryCollection />
-                  <formats />
+                  <formats>
+                    <DesignerControl />
+                  </formats>
                   <editor>
                     <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" dataPipe="P00520" useDefault="false" defaultValue="" defaultText="">
                       <dataSelectable />
@@ -411,7 +413,9 @@
                   <footerCollection />
                   <headerSummary predefined="false" currency_type="value" currency="" align="center" />
                   <headerSummaryCollection />
-                  <formats />
+                  <formats>
+                    <DesignerControl />
+                  </formats>
                   <editor>
                     <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" useDefault="false" defaultValue="" defaultText="">
                       <dataSelectable />

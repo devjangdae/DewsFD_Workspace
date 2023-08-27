@@ -1,9 +1,9 @@
-<!--##fd9875db-da9e-4754-b4a8-b29c00bf33e3##-->
-<!--##PAMMPM00200##-->
-<!--##kceeBTV2FqwhsRUVWOreP66DO9gFBLkb4CdX/b0HrKU=##-->
+<!--##f5f03b53-4c41-447e-8596-16e17950b477##-->
+<!--##PAMMPM00200_2##-->
+<!--##d0BiLfuAU88WCltPoW9WhtXqDD+e7NyLOVGdEww/tWY=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
-  # PageID: PAMMPM00200
+  # PageID: PAMMPM00200_2
   # PageTitle: 출산휴가확인서등록
   # Server: http://localhost:8090/
 -->
@@ -11,7 +11,7 @@
 
 -->
 
-<div id="conditionPanel" class="dews-ui-condition-panel">
+<div class="dews-ui-condition-panel">
   <ul class="required-area">
     <li>
       <label class="dews-ui-multilingual">등록일</label>
@@ -38,17 +38,17 @@
   <button class="dews-ui-button">마감</button>
   <button class="dews-ui-button">마감취소</button>
 </div>
-<div class="dews-ui-container-panel">
-  <div class="dews-container-item" data-dews-position="left" data-dews-width="495px">
+<div class="dews-ui-container-panel" data-dews-fit-bottom="true">
+  <div class="dews-container-item" data-dews-position="left" data-dews-width="287px">
     <div id="mtnityidnfMaster_grid" class="dews-ui-grid"></div>
   </div>
-  <div class="dews-container-item" data-dews-position="normal">
-    <div id="topReqPanel" class="dews-ui-form-panel">
+  <div class="dews-container-item" data-dews-position="normal" data-dews-width="600px">
+    <div class="dews-ui-form-panel" data-dews-item-width="723">
       <ul>
         <li>
           <label>신청번호</label>
           <span>
-            <input id="DOC_NO" name="DOC_NO" type="text" class="dews-ui-textbox" readonly="readonly" style="width: 132px;" />
+            <input id="REQNO" name="REQNO" type="text" class="dews-ui-textbox" readonly="readonly" style="width: 132px;" />
             <button id="REQNO_B" class="dews-ui-button">?</button>
           </span>
         </li>
@@ -57,32 +57,32 @@
         <li>
           <label>등록일</label>
           <span>
-            <input type="text" id="WRT_DT" name="WRT_DT" class="dews-ui-datepicker required" />
+            <input type="text" id="datepicker2" name="datepicker2" class="dews-ui-datepicker required" style="text-align: right;" />
           </span>
         </li>
         <li>
           <label>신고일</label>
           <span>
-            <input type="text" id="DECL_DT" name="DECL_DT" class="dews-ui-datepicker basic" />
+            <input type="text" id="datepicker3" name="datepicker3" class="dews-ui-datepicker basic" />
           </span>
         </li>
       </ul>
     </div>
-    <div id="xxx" class="dews-ui-arcodien" data-dews-arcodien-height="0" data-dews-item-height="0">
+    <div class="dews-ui-arcodien" data-dews-arcodien-height="0" data-dews-item-height="0">
       <ul>
         <li class="dews-arcodien-item" data-dews-item-title="사업장정보" data-dews-item-height="0" data-dews-item-open="true">
-          <div id="bizareaInfoPanel" class="dews-ui-form-panel">
+          <div class="dews-ui-form-panel">
             <ul>
               <li>
                 <label>사업장관리번호</label>
                 <span>
-                  <input id="BIZAREA_MNG_NO" name="BIZAREA_MNG_NO" type="text" class="dews-ui-textbox basic" />
+                  <input id="textbox10" name="textbox10" type="text" class="dews-ui-textbox basic" />
                 </span>
               </li>
               <li>
                 <label>사업장</label>
                 <span>
-                  <input type="text" id="BIZAREA_CD" name="BIZAREA_CD" class="dews-ui-codepicker basic" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-use-keyword="false" />
+                  <input type="text" id="textbox11" name="textbox11" class="dews-ui-codepicker basic" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-use-keyword="false" />
                 </span>
               </li>
             </ul>
@@ -99,7 +99,7 @@
               <li class="col-2">
                 <label>상세주소</label>
                 <span>
-                  <input id="DTL_ADDR" name="DTL_ADDR" type="text" class="dews-ui-textbox basic" />
+                  <input id="textbox12" name="textbox12" type="text" class="dews-ui-textbox basic" />
                 </span>
               </li>
             </ul>
@@ -107,16 +107,16 @@
               <li>
                 <label>우선지원대상기업</label>
                 <span>
-                  <select id="PSPTCOM_YN" class="dews-ui-radio-group">
-                    <option class="dews-ui-multilingual" value="1">해당</option>
-                    <option class="dews-ui-multilingual" value="2">비해당</option>
+                  <select id="radiogroup5" class="dews-ui-radio-group">
+                    <option class="dews-ui-multilingual" value="">해당</option>
+                    <option class="dews-ui-multilingual" value="">비해당</option>
                   </select>
                 </span>
               </li>
               <li>
                 <label>담당자</label>
                 <span>
-                  <input type="text" id="RSPT_EMP_NO" name="RSPT_EMP_NO" class="dews-ui-codepicker basic" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
+                  <input type="text" id="codepicker3" name="codepicker3" class="dews-ui-codepicker basic" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
                 </span>
               </li>
             </ul>
@@ -124,13 +124,13 @@
               <li>
                 <label>전화번호</label>
                 <span>
-                  <input id="RSPT_TEL_NO" name="RSPT_TEL_NO" type="text" class="dews-ui-textbox basic" />
+                  <input id="textbox13" name="textbox13" type="text" class="dews-ui-textbox basic" />
                 </span>
               </li>
               <li>
                 <label>이메일</label>
                 <span>
-                  <input id="RSPT_EMAIL_NM" name="RSPT_EMAIL_NM" type="text" class="dews-ui-textbox basic" />
+                  <input id="textbox14" name="textbox14" type="text" class="dews-ui-textbox basic" />
                 </span>
               </li>
             </ul>
@@ -138,17 +138,17 @@
         </li>
       </ul>
     </div>
-    <div id="xxxx" class="dews-ui-arcodien" data-dews-arcodien-height="0" data-dews-item-height="0">
+    <div class="dews-ui-arcodien" data-dews-arcodien-height="0" data-dews-item-height="0">
       <ul>
         <li class="dews-arcodien-item" data-dews-item-title="대상자정보" data-dews-item-height="0" data-dews-item-open="true">
-          <div id="trgtpInfoPanel" class="dews-ui-form-panel">
+          <div class="dews-ui-form-panel">
             <ul>
               <li class="col-2">
                 <label>신청종류</label>
                 <span>
-                  <select id="REQ_KND_FG" class="dews-ui-radio-group">
-                    <option class="dews-ui-multilingual" value="1">출산전후휴가</option>
-                    <option class="dews-ui-multilingual" value="3">유산,사산휴가</option>
+                  <select id="radiogroup6" class="dews-ui-radio-group">
+                    <option class="dews-ui-multilingual" value="">출산전후휴가</option>
+                    <option class="dews-ui-multilingual" value="">유산,사산휴가</option>
                   </select>
                 </span>
               </li>
@@ -157,13 +157,13 @@
               <li>
                 <label>사원</label>
                 <span>
-                  <input type="text" id="KOR_NM" name="KOR_NM" class="dews-ui-codepicker basic" readonly="readonly" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
+                  <input type="text" id="codepicker4" name="codepicker4" class="dews-ui-codepicker basic" readonly="readonly" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
                 </span>
               </li>
               <li>
                 <label>주민등록번호</label>
                 <span>
-                  <input id="RES_NO" name="RES_NO" type="text" class="dews-ui-textbox basic" readonly="readonly" />
+                  <input id="textbox15" name="textbox15" type="text" class="dews-ui-textbox basic" readonly="readonly" />
                 </span>
               </li>
             </ul>
@@ -171,15 +171,15 @@
               <li>
                 <label>출산(예정)일</label>
                 <span>
-                  <input type="text" id="CHLDBRTH_DT" name="CHLDBRTH_DT" class="dews-ui-datepicker basic" />
+                  <input type="text" id="datepicker4" name="datepicker4" class="dews-ui-datepicker basic" />
                 </span>
               </li>
               <li>
                 <label>분할사용여부</label>
                 <span>
-                  <select id="DIVD_YN" class="dews-ui-radio-group">
-                    <option class="dews-ui-multilingual" value="Y">예</option>
-                    <option class="dews-ui-multilingual" value="N">아니오</option>
+                  <select id="radiogroup7" class="dews-ui-radio-group">
+                    <option class="dews-ui-multilingual" value="">예</option>
+                    <option class="dews-ui-multilingual" value="">아니오</option>
                   </select>
                 </span>
               </li>
@@ -188,15 +188,15 @@
               <li>
                 <label>임신기간(유산,사산)</label>
                 <span>
-                  <select id="TERM_CD" name="TERM_CD" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-show-tooltip="true" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+                  <select id="dropdownlist5" name="dropdownlist5" class="dews-ui-dropdownlist basic" data-dews-show-tooltip="true" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
                 </span>
               </li>
               <li>
                 <label>다태아여부</label>
                 <span>
-                  <select id="MLTPPRGN_YN" class="dews-ui-radio-group">
-                    <option class="dews-ui-multilingual" value="Y">예</option>
-                    <option class="dews-ui-multilingual" value="N">아니오</option>
+                  <select id="radiogroup8" class="dews-ui-radio-group">
+                    <option class="dews-ui-multilingual" value="">예</option>
+                    <option class="dews-ui-multilingual" value="">아니오</option>
                   </select>
                 </span>
               </li>
@@ -205,14 +205,14 @@
               <li>
                 <label>통상임금산정기준</label>
                 <span>
-                  <select id="USL_WAGE_CD" name="USL_WAGE_CD" class="dews-ui-dropdownlist basic" data-dews-show-tooltip="true" style="width: 71px;" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
-                  <input id="xx" name="xx" type="text" class="dews-ui-textbox" style="width: 101px;" />
+                  <select id="WAGE_CD" name="WAGE_CD" class="dews-ui-dropdownlist basic" data-dews-show-tooltip="true" style="width: 71px;" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
+                  <input id="WAGE_DC" name="WAGE_DC" type="text" class="dews-ui-textbox" style="width: 101px;" />
                 </span>
               </li>
               <li>
                 <label>통상임금</label>
                 <span>
-                  <input id="USL_WAGE_AMT" name="USL_WAGE_AMT" type="text" class="dews-ui-numerictextbox basic" data-dews-increase-type="multiple" data-dews-increase-value="1000" data-dews-round="round" />
+                  <input id="numerictextbox7" name="numerictextbox7" type="text" class="dews-ui-numerictextbox basic" data-dews-increase-type="multiple" data-dews-increase-value="1000" data-dews-round="round" />
                 </span>
               </li>
             </ul>
@@ -220,7 +220,7 @@
               <li>
                 <label>월소정근로시간</label>
                 <span>
-                  <input id="MM_FIXED_LABORTM_DY" name="MM_FIXED_LABORTM_DY" type="text" class="dews-ui-numerictextbox basic" data-dews-increase-type="multiple" data-dews-increase-value="1000" data-dews-round="round" />
+                  <input id="numerictextbox6" name="numerictextbox6" type="text" class="dews-ui-numerictextbox basic" data-dews-increase-type="multiple" data-dews-increase-value="1000" data-dews-round="round" />
                 </span>
               </li>
             </ul>
@@ -255,22 +255,6 @@
     self.version.view='1.0';
 
 
-    /*686d6dfe-5aef-496d-847d-f8b9362d31da*/ //# sourceURL=PAMMPM00200.js
-    
-    /* 
-      * 출산휴가확인서등록
-      * 작성자 : 서장대
-      * 작성일 : 2023-08-25
-      */
-    //self.cdp1~~~
-    
-    
-    // 메인버튼 삭제 버튼의 기본 확인 메시지 사용 여부 설정
-    self.mainButtons.delete.useDefaultConfirm = false;
-    
-    
-    
-    
     
     
     self.mtnityidnfMaster_ds = dews.ui.dataSource('mtnityidnfMaster_ds', {
@@ -348,13 +332,12 @@
         read: {
           type: 'post',
           url: dews.url.getApiUrl('HR', 'PAMMPM00200_Service', 'pammpm00200_selectHrMtnityidnfDtl'),
-          data: /*6c745ff6-5900-49ef-8e1a-6c59017267e4*/ function () {
-        var currentRow = self.mtnityidnfMaster_grid.select();
-        return {
-            doc_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'DOC_NO'),
-            emp_no: (typeof currentRow === 'undefined' || currentRow < 0) ? '' : self.mtnityidnfMaster_grid.getCellValue(currentRow, 'EMP_NO')
-        }
-    }
+          data: function () {
+            return {
+              emp_no: '2015020001',
+              doc_no: 'MPC2021060003'
+            };
+          }
         }
       },
       schema: {
@@ -411,7 +394,7 @@
         }
       }
     });
-    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_ci_codeDtl_list'),{
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'),{
       async: false,
       data: {
           end_dt: '',
@@ -479,35 +462,18 @@
     dews.ui.mainbuttons.etnapproval.hide();
     dews.ui.mainbuttons.add.click(/*1a3067fb-7e4f-4c2c-a900-7f6dfa9d490d*/ function () {
     
-        self.grid1.addRow();
+        self.grid2.addRow();
     
     }
     );
     dews.ui.mainbuttons.search.click(/*3dceaecc-319c-43e3-a6bb-327bcace4a48*/ function () {
-        var mstCnt = self.mtnityidnfMaster_ds.getDirtyDataCount();
-        var dtlCnt = self.MtnityidnfDtl_ds.getDirtyDataCount();
-    
-        //dews.ui.loading.show();
-        //self.mtnityidnfMaster_ds.read();
-    
-        //self.mtnityidnfMaster_ds.read();
-        //self.MtnityidnfDtl_ds.read();
-    
-        if (isThisValidCondition()) { // 필수체크
-            if (mstCnt + dtlCnt >= 1) { // 수정한 데이터가 있으면
-                dews.confirm(dews.localize.get('저장되지 않은 데이터가 있습니다.\n그래도 조회 하시겠습니까?', 'M0012822', '', 'PAMMPM00200'), "question").yes(function () {
-                    SearchData();
-                }).no(function () {
-                });
-            } else {
-                SearchData();
-            }
-        }
+        self.mtnityidnfMaster_ds.read();
+        self.MtnityidnfDtl_ds.read();
     }
     );
     dews.ui.mainbuttons.delete.click(/*1703f0ef-4051-4ffd-962e-11990ff25225*/ function () {
     
-        self.grid1.removeRow(self.grid1.select());
+        self.grid2.removeRow(self.grid2.select());
     
     }
     );
@@ -520,7 +486,7 @@
     self.s_IDNFR_FG.setDataSource(self.pipeDataSource1_P03500);
     dews.ui.grid(self.$mtnityidnfMaster_grid, {
       dataSource: self.mtnityidnfMaster_ds,
-      height: 889,
+      height: 691,
       selectable: true,
       sortable: false,
       copyMode: 'cell',
@@ -528,24 +494,23 @@
         {
           field: 'WRT_DT',
           title: '등록일',
-          width: 80,
-          attributes: { class: 'required' }
+          width: 60
         },
         {
           field: 'CLOSE_YN',
           title: '마감여부',
-          width: 80
+          width: 60
         },
         {
           field: 'REQ_KND_FG',
           title: '신청종류',
-          width: 80,
+          width: 60,
           align: 'left'
         },
         {
           field: 'EMP_NO',
           title: '사원번호',
-          width: 80,
+          width: 60,
           align: 'left',
           editor: {
             type: 'codepicker',
@@ -559,7 +524,7 @@
         {
           field: 'KOR_NM',
           title: '한글명',
-          width: 90,
+          width: 60,
           align: 'left'
         },
         {
@@ -568,67 +533,16 @@
           width: 90,
           align: 'left',
           visible: false
-        },
-        {
-          field: 'DOC_NO',
-          title: '문서번호',
-          visible: false
         }
       ],
       fixed: {
         colCount: 0,
         rightColCount: 0
-      },
-      change: /*1b69d239-e35d-48dc-8154-cd450b87c595*/ function (e) {
-            self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
-            self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
-            self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
-        }
-    ,
-      dataBound: /*fe8a81f9-acaa-4741-996c-4cdbae80d367*/ function (e) {
-            dews.ui.loading.hide();
-            self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
-            self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
-            self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
-        }
-    ,
-      save: /*1b25120e-fd4d-4d5b-92a1-9db105397f42*/ function (e) {
-            console.log("ㅂㅈㄷㅂㅈㄷㅈㅂㄷ");
-        }
-    
-    });
-    self.$REQNO_B.on('click', /*f1bb4539-d221-4c33-a05a-3c3980a96d87*/ function (e) {
-        alert(dews.localize.get("신청서를 조회합니다.\n현재 신청서가 없는 상태로 추후 구현", "D0072084", '', 'PAMMPM00200'));
-    });
-    self.$BIZAREA_MNG_NO.on('change', /*80a5e535-39fd-4b43-b3d7-4be44e510524*/ function (e) {
-        var grid = self.mtnityidnfMaster_grid;
-        grid.setCellValue(grid.select(), 'BIZAREA_MNG_NO', self.BIZAREA_MNG_NO.text(), false);
-    });
-    self.PSPTCOM_YN.on('change', /*0cc05dc7-8ea0-41c7-a6e3-8b6e252eb9a7*/ function (e) {
-        var grid = self.mtnityidnfMaster_grid;
-        grid.setCellValue(grid.select(), 'PSPTCOM_YN', self.PSPTCOM_YN.value(), false); // 선택된 라디오 버튼 값으로 변경
-    });
-    self.REQ_KND_FG.on('change', /*8459e248-1de1-498b-8d7c-2935dcc72f9f*/ function (e) {
-        var grid = self.mtnityidnfMaster_grid;
-        grid.setCellValue(grid.select(), 'REQ_KND_FG', self.REQ_KND_FG_radioBtn.value(), false);
-    });
-    self.DIVD_YN.on('change', /*05f9eda3-3df3-4c59-953d-883514827393*/ function (e) {
-        var grid = self.mtnityidnfMaster_grid;
-        grid.setCellValue(grid.select(), 'DIVD_YN', self.DIVD_YN.value(), false);
-    });
-    self.TERM_CD.setDataSource(self.pipeDataSource1_P03510);
-    self.TERM_CD.on('change', /*ced356d4-f3c2-421e-beb9-cd287835cc01*/ function (e) {
-        var grid = self.mtnityidnfMaster_grid;
-        grid.setCellValue(grid.select(), 'TERM_CD', self.TERM_CD.value(), false);
-    });
-    self.MLTPPRGN_YN.on('change', /*37350323-402c-4f4f-84bf-a12ba0594113*/ function (e) {
-        var grid = self.mtnityidnfMaster_grid;
-        grid.setCellValue(grid.select(), 'MLTPPRGN_YN', self.MLTPPRGN_YN.value(), false);
+      }
     });
     dews.ui.grid(self.$MtnityidnfDtl_grid, {
       dataSource: self.MtnityidnfDtl_ds,
       sortable: false,
-      autoBind: false,
       checkable: false,
       copyMode: 'cell',
       columns: [
@@ -636,13 +550,18 @@
           field: 'TERMFG_CD',
           title: '기간구분',
           width: 80,
-          visible: false
+          visible: false,
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P00520,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
         },
         {
           field: 'START_DT',
           title: '시작일',
           width: 80,
-          attributes: { class: 'required' },
           formats: {
             type: 'date',
             format: 'yyyy-MM-dd'
@@ -656,7 +575,6 @@
           field: 'END_DT',
           title: '종료일',
           width: 80,
-          attributes: { class: 'required' },
           formats: {
             type: 'date',
             format: 'yyyy-MM-dd'
@@ -669,23 +587,31 @@
           }
         },
         {
-          field: 'BWRK_DY',
+          field: 'DT_CNT',
           title: '일수',
           width: 80,
-          attributes: { class: 'readonly' },
+          align: 'right',
           formats: {
             type: 'date',
             format: 'yyyy-MM-dd'
           },
           editor: {
-            type: 'number'
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1_P02010,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
           }
         },
         {
           field: 'PAY_YN',
           title: '급여지급여부',
           width: 80,
-          editor: { type: 'string', maxLength: 0 }
+          editor: {
+            type: 'dropDown',
+            dataSource: self.pipeDataSource1,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
         },
         {
           field: 'USL_WAGE_AMT',
@@ -709,43 +635,11 @@
     });
     
     
-    self.mtnityidnfMaster_grid.setDetail(self.MtnityidnfDtl_grid);
     
     
     /*d2692eed-91c6-4644-b7ca-3eed2f04ec7b*/ 
-    self.s_WRT_DT.setStartDate(getStartDate());
-    self.s_WRT_DT.setEndDate(new Date());
-    
-    function isThisValidCondition() {
-        return self.conditionPanel.validate({ tooltip: true, message: dews.localize.get('필수입력 항목입니다.', 'M0005595', '', 'PAMMPM00200') });
-    }
-    
-    function SearchData() {
-        dews.ui.loading.show();
-        self.mtnityidnfMaster_ds.read();
-    }
-    
-    function getStartDate() {
-        var date = new Date();
-        var year = date.getFullYear();              //yyyy
-        var month = (1 + date.getMonth());          //M
-        month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-        return year + '' + month + '01';
-    }
-    
-    function getTodayDate() {
-        var date = new Date();
-        var year = date.getFullYear();              //yyyy
-        var month = (1 + date.getMonth());          //M
-        month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-        var date = date.getDate();
-        date = date >= 10 ? date : '0' + date; // 날짜
-        return year + '' + month + '' + date;
-    }
-    
-    
-    
-    
+    //# sourceURL=PAMMPM0200.js
+    self.mainButtons.delete.useDefaultConfirm = false;
     
     
 
