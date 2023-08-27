@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-27T19:35:45.6546387+09:00</builddate>
+      <builddate>2023-08-27T20:36:04.7124104+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-27T19:35:45.6546387+09:00</modifieddate>
+      <modifieddate>2023-08-27T20:36:04.7124104+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -361,9 +361,7 @@
                     <date predefined="false" format="yyyy-MM-dd" />
                   </formats>
                   <editor>
-                    <dropdownlist dataSource_type="value" dataSource="pipeDataSource2" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" dataPipe="S00320" useDefault="false" defaultValue="" defaultText="">
-                      <dataSelectable />
-                    </dropdownlist>
+                    <datepicker predefined="false" format="yyyy-MM-dd" editable_type="value" />
                   </editor>
                   <customExport check="" />
                 </column>
@@ -399,7 +397,9 @@
                   <headerSummaryCollection />
                   <formats />
                   <editor>
-                    <textbox maxLength="0" editable_type="value" />
+                    <dropdownlist dataSource_type="value" dataSource="YNPIPE" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" editable="true" dataPipe="P03280" useDefault="false" defaultValue="" defaultText="">
+                      <dataSelectable />
+                    </dropdownlist>
                   </editor>
                   <customExport check="" />
                 </column>
@@ -562,7 +562,7 @@
       <mapping>
         <param parameter="end_dt" applyType="constant" dataType="string" />
         <param parameter="foreign_yn" applyType="constant" dataType="string" />
-        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P00520|P02010|P03500|P03510|P03520" />
+        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P00520|P02010|P03500|P03510|P03520|P03280" />
         <param parameter="module_cd" applyType="constant" dataType="string" value="HR" />
         <param parameter="syscode_yn" applyType="constant" dataType="string" />
         <param parameter="keyword" applyType="constant" dataType="string" />
@@ -593,6 +593,47 @@
         <column field="SYSDEF_NM" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="코드디테일명" useAggregate="false" aggregate="" useGroup="false" />
         <column field="FLAG_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="참조코드" useAggregate="false" aggregate="" useGroup="false" />
         <column field="END_DT" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="종료일" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-3b469a1a17644b3982a9f66e47d07e9c" id="YNPIPE" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="dataservice" module="CM" service="CommonCodeDtlService" urlpattern="common_codeDtl_list" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="true" pipeparam="field_cd_pipe" pipecolumn="FIELD_CD" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+      <mapping>
+        <param parameter="dept_cd" applyType="constant" dataType="string" />
+        <param parameter="base_dt" applyType="constant" dataType="string" />
+        <param parameter="end_dt" applyType="constant" dataType="string" />
+        <param parameter="crud_fg" applyType="constant" dataType="string" />
+        <param parameter="menu_cd" applyType="constant" dataType="string" />
+        <param parameter="foreign_yn" applyType="constant" dataType="string" />
+        <param parameter="up_sysdef_cd" applyType="constant" dataType="string" />
+        <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P03280" />
+        <param parameter="module_cd" applyType="constant" dataType="string" value="HR" />
+        <param parameter="company_cd" applyType="constant" dataType="string" />
+        <param parameter="syscode_yn" applyType="constant" dataType="string" />
+        <param parameter="keyword" applyType="constant" dataType="string" />
+        <param parameter="base_yn" applyType="constant" dataType="string" />
+      </mapping>
+      <columns>
+        <column field="MODULE_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="모듈코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="FIELD_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="디테일코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="SYSDEF_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="코드디테일코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="SYSDEF_NM" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="코드디테일명" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="FLAG_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="참조코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="END_DT" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="종료일" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="BASE_YN" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="기본사용여부" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="SYSCODE_YN" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="DRS_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="DRS 코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="SELECTABLE" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="SELECTABLE" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="DISP_SQ" unionfield="" dataType="number" editable="false" useType="true" isID="false" isChildren="false" description="표시순번" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="RMK_DC" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="비고" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="REL_FLAG_1_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="참조코드1" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="REL_FLAG_2_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="참조코드2" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="REL_FLAG_3_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="참조코드3" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="REL_FLAG_4_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="참조코드4" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="REL_FLAG_5_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="참조코드5" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="UP_SYSDEF_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="상위코드디테일코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="UP_MODULE_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="상위모듈코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="UP_FIELD_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="상위필드코드" useAggregate="false" aggregate="" useGroup="false" />
+        <column field="HIKEY_YN" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="계층구조사용여부" useAggregate="false" aggregate="" useGroup="false" />
       </columns>
       <widgetSampleDatas />
     </datasource>

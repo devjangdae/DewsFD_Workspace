@@ -1,6 +1,6 @@
-<!--##05263cee-c443-42b6-8be7-898d49705320##-->
+<!--##f8a42845-9f5d-47c3-a66d-6b12cff9504f##-->
 <!--##PAMMPM00200##-->
-<!--##Q0Td+enS0MCotItzUDdOvDKWrgCGsOwpHJigbveU3nQ=##-->
+<!--##/rtmeSG5Hph27O9RLIHnmxQVzuYgZ+e51e3L/l9f6VM=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -415,7 +415,7 @@
       data: {
           end_dt: '',
           foreign_yn: '',
-          field_cd_pipe: 'P00520|P02010|P03500|P03510|P03520',
+          field_cd_pipe: 'P00520|P02010|P03500|P03510|P03520|P03280',
           module_cd: 'HR',
           syscode_yn: '',
           keyword: '',
@@ -427,6 +427,7 @@
       var ar_P03500 = new Array();
       var ar_P03510 = new Array();
       var ar_P03520 = new Array();
+      var ar_P03280 = new Array();
     
       for (var i = 0; i < data.length; i++) {
         if (data[i].FIELD_CD == "P00520") { 
@@ -449,12 +450,17 @@
           ar_P03520.push(data[i]); 
     
         }
+        else if (data[i].FIELD_CD == "P03280") { 
+          ar_P03280.push(data[i]); 
+    
+        }
       }
       self.pipeDataSource1_P00520 = dews.ui.dataSource('pipeDataSource1_P00520',  { data: ar_P00520 });
       self.pipeDataSource1_P02010 = dews.ui.dataSource('pipeDataSource1_P02010',  { data: ar_P02010 });
       self.pipeDataSource1_P03500 = dews.ui.dataSource('pipeDataSource1_P03500',  { data: ar_P03500 });
       self.pipeDataSource1_P03510 = dews.ui.dataSource('pipeDataSource1_P03510',  { data: ar_P03510 });
       self.pipeDataSource1_P03520 = dews.ui.dataSource('pipeDataSource1_P03520',  { data: ar_P03520 });
+      self.pipeDataSource1_P03280 = dews.ui.dataSource('pipeDataSource1_P03280',  { data: ar_P03280 });
       self.pipeDataSource1 = dews.ui.dataSource('pipeDataSource1', { data: data });
       
     });
@@ -480,6 +486,36 @@
       }
       self.pipeDataSource2_S00320 = dews.ui.dataSource('pipeDataSource2_S00320',  { data: ar_S00320 });
       self.pipeDataSource2 = dews.ui.dataSource('pipeDataSource2', { data: data });
+      
+    });
+    dews.api.get(dews.url.getApiUrl('CM', 'CommonCodeDtlService', 'common_codeDtl_list'),{
+      async: false,
+      data: {
+          dept_cd: '',
+          base_dt: '',
+          end_dt: '',
+          crud_fg: '',
+          menu_cd: '',
+          foreign_yn: '',
+          up_sysdef_cd: '',
+          field_cd_pipe: 'P03280',
+          module_cd: 'HR',
+          company_cd: '',
+          syscode_yn: '',
+          keyword: '',
+          base_yn: ''
+      }
+    }).done(function (data) {
+      var ar_P03280 = new Array();
+    
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].FIELD_CD == "P03280") { 
+          ar_P03280.push(data[i]); 
+    
+        }
+      }
+      self.YNPIPE_P03280 = dews.ui.dataSource('YNPIPE_P03280',  { data: ar_P03280 });
+      self.YNPIPE = dews.ui.dataSource('YNPIPE', { data: data });
       
     });
     
@@ -680,10 +716,8 @@
             format: 'yyyy-MM-dd'
           },
           editor: {
-            type: 'dropDown',
-            dataSource: self.pipeDataSource2_S00320,
-            dataValueField: 'SYSDEF_CD',
-            dataTextField: 'SYSDEF_NM'
+            type: 'date',
+            format: 'yyyy-MM-dd'
           }
         },
         {
@@ -703,7 +737,12 @@
           field: 'PAY_YN',
           title: '급여지급여부',
           width: 80,
-          editor: { type: 'string', maxLength: 0 }
+          editor: {
+            type: 'dropDown',
+            dataSource: self.YNPIPE_P03280,
+            dataValueField: 'SYSDEF_CD',
+            dataTextField: 'SYSDEF_NM'
+          }
         },
         {
           field: 'USL_WAGE_AMT',
