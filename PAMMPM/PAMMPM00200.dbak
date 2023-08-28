@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-27T20:36:04.7124104+09:00</builddate>
+      <builddate>2023-08-28T20:13:29.6573076+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-27T20:36:04.7124104+09:00</modifieddate>
+      <modifieddate>2023-08-28T20:13:29.6573076+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -211,7 +211,7 @@
               </formGroup>
               <formGroup uid="formGroup-1579669268193">
                 <formItem uid="formItem-eca31af6c7294048883a7da833728c17" columnSize="2" text="사업장소재지">
-                  <zipcodepicker uid="zipcodepicker-12c4cc953c294ec0861f1865c0eec86e" id="POST_NO" disabled="false" state="basic" addressType="street" />
+                  <zipcodepicker uid="zipcodepicker-12c4cc953c294ec0861f1865c0eec86e" id="POST_NO" disabled="false" state="basic" addressType="street" setData="392222fa-4e11-4858-8c7a-abb26d2e619b" />
                   <textbox uid="textbox-b85935a9409a452db59d018a17be7449" id="BASE_ADDR" disabled="false" readonly="false" predefined="false" useSecureMask="false" multiline="false" width_type="px" width="419" height_type="px" height="" rows="0" maxlength="0" password="false" />
                 </formItem>
               </formGroup>
@@ -228,17 +228,17 @@
                   </radiogroup>
                 </formItem>
                 <formItem uid="formItem-1579669507807" columnSize="1" text="담당자">
-                  <codepicker uid="codepicker-1579669508114" id="RSPT_EMP_NO" disabled="false" readonly="false" state="basic" helpCode="H_HR_EMP_MST_S" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사원 도움창" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px">
+                  <codepicker uid="codepicker-1579669508114" id="RSPT_EMP_NO" disabled="false" readonly="false" state="basic" helpCode="H_HR_EMP_MST_S" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사원 도움창" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px" setData="b6d4444c-8352-41a6-a1e3-ea4e78892482">
                     <mapping />
                   </codepicker>
                 </formItem>
               </formGroup>
               <formGroup uid="formGroup-1579669620985">
                 <formItem uid="formItem-1579669625264" columnSize="1" text="전화번호">
-                  <textbox uid="textbox-1579669625525" id="RSPT_TEL_NO" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" />
+                  <textbox uid="textbox-1579669625525" id="RSPT_TEL_NO" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" change="0f81bd29-7edc-4f6c-a083-9d0d3a4f50a9" />
                 </formItem>
                 <formItem uid="formItem-1579669629034" columnSize="1" text="이메일">
-                  <textbox uid="textbox-1579669629300" id="RSPT_EMAIL_NM" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" />
+                  <textbox uid="textbox-1579669629300" id="RSPT_EMAIL_NM" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" change="6bce4692-42f7-4732-9a70-7483aa8cfcae" />
                 </formItem>
               </formGroup>
             </formPanel>
@@ -262,12 +262,12 @@
                   </codepicker>
                 </formItem>
                 <formItem uid="formItem-1579672252265" columnSize="1" text="주민등록번호">
-                  <textbox uid="textbox-1579672252512" id="RES_NO" disabled="false" readonly="true" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" />
+                  <textbox uid="textbox-1579672252512" id="RES_NO" disabled="false" readonly="true" state="basic" predefined="false" useSecureMask="true" secureMask="B,0,5" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" />
                 </formItem>
               </formGroup>
               <formGroup uid="formGroup-1579672221606">
                 <formItem uid="formItem-1579672285702" columnSize="1" text="출산(예정)일">
-                  <datepicker uid="datepicker-1579672286016" id="CHLDBRTH_DT" disabled="false" readonly="false" state="basic" min_type="value" max_type="value" predefined="false" width_type="px" />
+                  <datepicker uid="datepicker-1579672286016" id="CHLDBRTH_DT" disabled="false" readonly="false" state="basic" min_type="value" max_type="value" predefined="false" width_type="px" change="d32ab5c0-5190-469b-9d93-71840b86a847" />
                 </formItem>
                 <formItem uid="formItem-1579672301266" columnSize="1" text="분할사용여부">
                   <radiogroup uid="radiogroup-1579672301587" id="DIVD_YN" disabled="false" align="horizontal" change="05f9eda3-3df3-4c59-953d-883514827393">
@@ -289,15 +289,15 @@
               </formGroup>
               <formGroup uid="formGroup-1579672229219">
                 <formItem uid="formItem-2adc4afa562e4b0eb1a676b227b7853a" columnSize="1" text="통상임금산정기준">
-                  <dropdownlist uid="dropdownlist-9cbcaddbb0c34917a968d1326b478427" id="USL_WAGE_CD" autoBind="true" dataSource="pipeDataSource1" valueField="SYSDEF_CD" textField="SYSDEF_NM" pipeparam="P03520" useDefault="false" defaultValue="" defaultText="" width_type="px" width="71" disabled="false" readonly="false" autoOpen="false" useNumkey="false" showTooltip="true" showValueTooltip="true" state="basic" />
+                  <dropdownlist uid="dropdownlist-9cbcaddbb0c34917a968d1326b478427" id="USL_WAGE_CD" autoBind="true" dataSource="pipeDataSource1" valueField="SYSDEF_CD" textField="SYSDEF_NM" pipeparam="P03520" useDefault="false" defaultValue="" defaultText="" width_type="px" width="71" disabled="false" readonly="false" autoOpen="false" useNumkey="false" showTooltip="true" showValueTooltip="true" state="basic" change="5649b48e-81bc-49a4-a9e8-2cf3f9cd710f" />
                 </formItem>
                 <formItem uid="formItem-1579757894166" columnSize="1" text="통상임금">
-                  <numerictextbox uid="numerictextbox-1579757894532" id="USL_WAGE_AMT" disabled="false" readonly="false" state="basic" spinners="false" step="1" predefined="false" format="#,##0.##" currency="" increaseValue="1000" increaseType="multiple" restrictDecimals="false" selectOnFocus="false" round="round" width_type="px" />
+                  <numerictextbox uid="numerictextbox-1579757894532" id="USL_WAGE_AMT" disabled="false" readonly="false" state="basic" spinners="false" step="1" predefined="false" format="#,##0.##" currency="" increaseValue="1000" increaseType="multiple" restrictDecimals="false" selectOnFocus="false" round="round" width_type="px" change="32fdaa12-a104-4c1a-bac6-75a2d6f34a0c" />
                 </formItem>
               </formGroup>
               <formGroup uid="formGroup-1579672434578">
                 <formItem uid="formItem-1579672442129" columnSize="1" text="월소정근로시간">
-                  <numerictextbox uid="numerictextbox-1579672442389" id="MM_FIXED_LABORTM_DY" disabled="false" readonly="false" state="basic" spinners="false" step="1" predefined="false" format="#,##0.##" currency="" increaseValue="1000" increaseType="multiple" restrictDecimals="false" selectOnFocus="false" round="round" width_type="px" />
+                  <numerictextbox uid="numerictextbox-1579672442389" id="MM_FIXED_LABORTM_DY" disabled="false" readonly="false" state="basic" spinners="false" step="1" predefined="false" format="#,##0.##" currency="" increaseValue="1000" increaseType="multiple" restrictDecimals="false" selectOnFocus="false" round="round" width_type="px" change="2b41a048-e8ad-4d3d-94d3-af150947c0af" />
                 </formItem>
               </formGroup>
             </formPanel>
@@ -306,10 +306,10 @@
         <arcodienPanel uid="arcodienPanel-1579668672150" arcodien_height="0" item_height="0" arcodien_type="single" itemPadding="false">
           <arcodienItem uid="arcodienItem-1579668672574" item_title="대상기간급여내역" item_height="0" item_disabled="false" item_open="true" item_hide="false">
             <buttonGroup uid="buttonGroup-1579672582545" align="right" bottom="false">
-              <button uid="button-1579672585493" text="추가" buttonType="small" useemphasize="false" emphasize="" disabled="false" />
-              <button uid="button-1579672587763" text="삭제" buttonType="small" useemphasize="false" emphasize="" disabled="false" />
+              <button uid="button-1579672585493" id="dtl_grid_add" text="추가" buttonType="small" useemphasize="false" emphasize="" disabled="false" click="83964e89-d24d-4646-823e-cb546edecfa4" />
+              <button uid="button-1579672587763" id="dtl_grid_delete" text="삭제" buttonType="small" useemphasize="false" emphasize="" disabled="false" click="c5932274-a431-441d-ac89-efca2a7d61ef" />
             </buttonGroup>
-            <grid uid="grid-1579672607629" mockupData="" id="MtnityidnfDtl_grid" dataSource="MtnityidnfDtl_ds" height_type="px" editable="true" movable="false" rowNo="true" selectable="true" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" masterGrid="mtnityidnfMaster_grid" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+            <grid uid="grid-1579672607629" mockupData="" id="MtnityidnfDtl_grid" dataSource="MtnityidnfDtl_ds" height_type="px" editable="true" movable="false" rowNo="true" selectable="true" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" masterGrid="mtnityidnfMaster_grid" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false" save="69d0324f-9d3b-40fa-b2c7-98860320e18b">
               <mockupText>MjAxOS0xMS0wMSwyMDE5LTExLTMwLDMwLE5vLA0KMjAxOS0xMi0wMSwyMDE5LTEyLTMxLDMxLE5vLA0KMjAyMC0wMS0wMSwyMDIwLTAxLTI5LDI5LFllcywzMDAwMDAw</mockupText>
               <columns>
                 <column uid="cefc6a66-f8a1-43b3-b28a-eb0336832cd9" field="TERMFG_CD" title="기간구분" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -606,7 +606,7 @@
         <param parameter="foreign_yn" applyType="constant" dataType="string" />
         <param parameter="up_sysdef_cd" applyType="constant" dataType="string" />
         <param parameter="field_cd_pipe" applyType="constant" dataType="string" value="P03280" />
-        <param parameter="module_cd" applyType="constant" dataType="string" />
+        <param parameter="module_cd" applyType="constant" dataType="string" value="HR" />
         <param parameter="company_cd" applyType="constant" dataType="string" />
         <param parameter="syscode_yn" applyType="constant" dataType="string" />
         <param parameter="keyword" applyType="constant" dataType="string" />
@@ -648,7 +648,7 @@
 
     //dews.ui.loading.show();
     //self.mtnityidnfMaster_ds.read();
-
+    console.log("awdwadwadwaadwadawd@@@@@@");
     //self.mtnityidnfMaster_ds.read();
     //self.MtnityidnfDtl_ds.read();
 
@@ -785,6 +785,103 @@ self.mainButtons.delete.useDefaultConfirm = false;
 }]]></javascript>
     <javascript id="1b25120e-fd4d-4d5b-92a1-9db105397f42"><![CDATA[function (e) {
         console.log("ㅂㅈㄷㅂㅈㄷㅈㅂㄷ");
+    }
+]]></javascript>
+    <javascript id="392222fa-4e11-4858-8c7a-abb26d2e619b"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+
+    grid.setCellValue(grid.select(), 'POST_NO', e.zonecode, false);
+    grid.setCellValue(grid.select(), 'ADDR_TP', e.userSelectedType, false); // 주소 타입
+
+    if (e.userSelectedType == 'R') {
+        $("#BASE_ADDR").val(e.roadAddress);
+        grid.setCellValue(grid.select(), 'BASE_ADDR', e.roadAddress, false);
+        // console.log("주소 변경시 R 선택됨");
+    } else if (e.userSelectedType == 'J') {
+        $("#BASE_ADDR").val(e.jibunAddress);
+        grid.setCellValue(grid.select(), 'BASE_ADDR', e.jibunAddress, false);
+        // console.log("주소 변경시 J 선택됨");
+    }
+}]]></javascript>
+    <javascript id="b6d4444c-8352-41a6-a1e3-ea4e78892482"><![CDATA[function (e) {
+    //console.log('e.code  : ' + e.code + '   // e.text  : ' + e.text  + '  //  pickerData : ' + pickerData);
+    var mstGrid = self.mtnityidnfMaster_grid;
+    // console.log("담당자 변경시 이벤트 객체e:", e);
+    // console.log("담당자 변경시 이벤트 객체pickerData:", pickerData);
+    mstGrid.setCellValue(mstGrid.select(), 'RSPT_EMP_NO', pickerData.EMP_NO, false); // 담당자 사원번호 변경
+    mstGrid.setCellValue(mstGrid.select(), 'RSPT_EMP_NM', pickerData.KOR_NM, false); // 담당자 사원명 변경
+    GetLoginMemberInfo(pickerData.EMP_NO); // 담당자 전화번호, 이메일 변경
+
+    self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
+    self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
+    self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
+}]]></javascript>
+    <javascript id="0f81bd29-7edc-4f6c-a083-9d0d3a4f50a9"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+    grid.setCellValue(grid.select(), 'RSPT_TEL_NO', self.RSPT_TEL_NO.text(), false);
+}]]></javascript>
+    <javascript id="6bce4692-42f7-4732-9a70-7483aa8cfcae"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+    grid.setCellValue(grid.select(), 'RSPT_EMAIL_NM', self.RSPT_EMAIL_NM.text(), false);
+}]]></javascript>
+    <javascript id="d32ab5c0-5190-469b-9d93-71840b86a847"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+    grid.setCellValue(grid.select(), 'CHLDBRTH_DT', self.CHLDBRTH_DT.value(), false);
+}]]></javascript>
+    <javascript id="5649b48e-81bc-49a4-a9e8-2cf3f9cd710f"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+    grid.setCellValue(grid.select(), 'USL_WAGE_CD', self.USL_WAGE_CD.value(), false);
+}]]></javascript>
+    <javascript id="32fdaa12-a104-4c1a-bac6-75a2d6f34a0c"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+    grid.setCellValue(grid.select(), 'USL_WAGE_AMT', self.USL_WAGE_AMT.value(), false);
+}]]></javascript>
+    <javascript id="2b41a048-e8ad-4d3d-94d3-af150947c0af"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+    grid.setCellValue(grid.select(), 'MM_FIXED_LABORTM_DY', self.MM_FIXED_LABORTM_DY.text(), false);
+}]]></javascript>
+    <javascript id="83964e89-d24d-4646-823e-cb546edecfa4"><![CDATA[function (e) {
+    var dtl_grid = self.MtnityidnfDtl_grid;
+    dtl_grid.addRow(); // 해당 grid에 row 추가하기
+    dtl_grid.setCellValue(dtl_grid.select(), 'PAY_YN', 'N', false); // 추가된 row의 PAY_YN을 디폴트 N으로 설정
+
+
+    // 문서번호, 사원번호는  마스터그리드에서 가져와서 저장
+    var mst_grid = self.mtnityidnfMaster_grid;
+    dtl_grid.setCellValue(dtl_grid.select(), 'DOC_NO', mst_grid.getCellValue(mst_grid.select(), 'DOC_NO'), false); // 마스터그리드에서 현재 row의 문서번호 가져와 저장
+    dtl_grid.setCellValue(dtl_grid.select(), 'EMP_NO', mst_grid.getCellValue(mst_grid.select(), 'EMP_NO'), false); // 마스터그리드에서 현재 row의 사원번호 가져와 저장 
+    // SQ_NO를 하나 증가시킨다. (현재 있는 쿼리문에서 max+1(grid의 행중에 가장 큰 SQ_NO) 써서 사용한다.)
+    // 서브쿼리 사용 시 : (select max(SQ_NO) from 테이블명)
+}]]></javascript>
+    <javascript id="c5932274-a431-441d-ac89-efca2a7d61ef"><![CDATA[function (e) {
+    var grid = self.MtnityidnfDtl_grid;
+    grid.removeRow(grid.select());
+}]]></javascript>
+    <javascript id="69d0324f-9d3b-40fa-b2c7-98860320e18b"><![CDATA[function (e) {
+        console.log("저장실행함");
+        // var thisGrid = e.grid; // 지금 이벤트 발생하는 그리드 선택
+
+        // // var grid=self.MtnityidnfDtl_grid;
+        // // var data1=grid.getCellValue(grid.select(), 'START_DT');
+        // // console.log('data1', data1);
+
+        // var startDate = e.row.data.START_DT; // 변경된 시작일
+        // var endDate = e.row.data.END_DT; // 변경된 종료일
+
+
+
+        // if (startDate != null && endDate != null) { // 둘 다 선택되면
+        //     var diff = ((endDate - startDate) / (60 * 60 * 24 * 1000)) + 1; // 시작일과 종료일의 일수 계산
+        //     if (diff > 0) {
+        //         thisGrid.setCellValue(e.row.index, 'BWRK_DY', diff, false);
+        //     } else if (diff <= 0) {
+        //         dews.ui.snackbar.warning(dews.localize.get("시작일은 종료일과 같거나 이전날짜를 선택해야 합니다.", "M0012831", '', 'PAMMPM00200'));
+        //         // console.log('e.row.index:', e.row.index);
+        //         // console.log('변경된 컬럼 이름:', e.cell.field);
+        //         thisGrid.setCellValue(e.row.index, 'BWRK_DY', 0, false); // 일수 0으로 초기화
+        //         thisGrid.setCellValue(e.row.index, e.cell.field, '', false); // 변경된 날짜 피커 초기화
+        //     }
+        // }
     }
 ]]></javascript>
   </javascripts>

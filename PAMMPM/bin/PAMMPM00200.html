@@ -1,6 +1,6 @@
-<!--##f8a42845-9f5d-47c3-a66d-6b12cff9504f##-->
+<!--##b133e6fd-d2d5-49f8-9a3c-0dd9007203c6##-->
 <!--##PAMMPM00200##-->
-<!--##/rtmeSG5Hph27O9RLIHnmxQVzuYgZ+e51e3L/l9f6VM=##-->
+<!--##i1SH+WOfabgXFcdRYeU3/pu8lBaKNZ9jVo+AHqsh5Bs=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -163,7 +163,7 @@
               <li>
                 <label>주민등록번호</label>
                 <span>
-                  <input id="RES_NO" name="RES_NO" type="text" class="dews-ui-textbox basic" readonly="readonly" />
+                  <input id="RES_NO" name="RES_NO" type="text" class="dews-ui-textbox basic" readonly="readonly" data-dews-use-secure-mask="true" data-dews-secure-mask="B,0,5" />
                 </span>
               </li>
             </ul>
@@ -231,8 +231,8 @@
       <ul>
         <li class="dews-arcodien-item" data-dews-item-title="대상기간급여내역" data-dews-item-height="0" data-dews-item-open="true">
           <div class="dews-button-group" style="text-align: right;">
-            <button class="dews-ui-button small">추가</button>
-            <button class="dews-ui-button small">삭제</button>
+            <button id="dtl_grid_add" class="dews-ui-button small">추가</button>
+            <button id="dtl_grid_delete" class="dews-ui-button small">삭제</button>
           </div>
           <div id="MtnityidnfDtl_grid" class="dews-ui-grid"></div>
         </li>
@@ -536,7 +536,7 @@
     
         //dews.ui.loading.show();
         //self.mtnityidnfMaster_ds.read();
-    
+        console.log("awdwadwadwaadwadawd@@@@@@");
         //self.mtnityidnfMaster_ds.read();
         //self.MtnityidnfDtl_ds.read();
     
@@ -655,13 +655,54 @@
         var grid = self.mtnityidnfMaster_grid;
         grid.setCellValue(grid.select(), 'BIZAREA_MNG_NO', self.BIZAREA_MNG_NO.text(), false);
     });
+    self.POST_NO.on('setData', /*392222fa-4e11-4858-8c7a-abb26d2e619b*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+    
+        grid.setCellValue(grid.select(), 'POST_NO', e.zonecode, false);
+        grid.setCellValue(grid.select(), 'ADDR_TP', e.userSelectedType, false); // 주소 타입
+    
+        if (e.userSelectedType == 'R') {
+            $("#BASE_ADDR").val(e.roadAddress);
+            grid.setCellValue(grid.select(), 'BASE_ADDR', e.roadAddress, false);
+            // console.log("주소 변경시 R 선택됨");
+        } else if (e.userSelectedType == 'J') {
+            $("#BASE_ADDR").val(e.jibunAddress);
+            grid.setCellValue(grid.select(), 'BASE_ADDR', e.jibunAddress, false);
+            // console.log("주소 변경시 J 선택됨");
+        }
+    });
     self.PSPTCOM_YN.on('change', /*0cc05dc7-8ea0-41c7-a6e3-8b6e252eb9a7*/ function (e) {
         var grid = self.mtnityidnfMaster_grid;
         grid.setCellValue(grid.select(), 'PSPTCOM_YN', self.PSPTCOM_YN.value(), false); // 선택된 라디오 버튼 값으로 변경
     });
+    self.RSPT_EMP_NO.on('setData', /*b6d4444c-8352-41a6-a1e3-ea4e78892482*/ function (e) {
+        //console.log('e.code  : ' + e.code + '   // e.text  : ' + e.text  + '  //  pickerData : ' + pickerData);
+        var mstGrid = self.mtnityidnfMaster_grid;
+        // console.log("담당자 변경시 이벤트 객체e:", e);
+        // console.log("담당자 변경시 이벤트 객체pickerData:", pickerData);
+        mstGrid.setCellValue(mstGrid.select(), 'RSPT_EMP_NO', pickerData.EMP_NO, false); // 담당자 사원번호 변경
+        mstGrid.setCellValue(mstGrid.select(), 'RSPT_EMP_NM', pickerData.KOR_NM, false); // 담당자 사원명 변경
+        GetLoginMemberInfo(pickerData.EMP_NO); // 담당자 전화번호, 이메일 변경
+    
+        self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
+        self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
+        self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
+    });
+    self.$RSPT_TEL_NO.on('change', /*0f81bd29-7edc-4f6c-a083-9d0d3a4f50a9*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+        grid.setCellValue(grid.select(), 'RSPT_TEL_NO', self.RSPT_TEL_NO.text(), false);
+    });
+    self.$RSPT_EMAIL_NM.on('change', /*6bce4692-42f7-4732-9a70-7483aa8cfcae*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+        grid.setCellValue(grid.select(), 'RSPT_EMAIL_NM', self.RSPT_EMAIL_NM.text(), false);
+    });
     self.REQ_KND_FG.on('change', /*8459e248-1de1-498b-8d7c-2935dcc72f9f*/ function (e) {
         var grid = self.mtnityidnfMaster_grid;
         grid.setCellValue(grid.select(), 'REQ_KND_FG', self.REQ_KND_FG_radioBtn.value(), false);
+    });
+    self.CHLDBRTH_DT.on('change', /*d32ab5c0-5190-469b-9d93-71840b86a847*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+        grid.setCellValue(grid.select(), 'CHLDBRTH_DT', self.CHLDBRTH_DT.value(), false);
     });
     self.DIVD_YN.on('change', /*05f9eda3-3df3-4c59-953d-883514827393*/ function (e) {
         var grid = self.mtnityidnfMaster_grid;
@@ -677,6 +718,35 @@
         grid.setCellValue(grid.select(), 'MLTPPRGN_YN', self.MLTPPRGN_YN.value(), false);
     });
     self.USL_WAGE_CD.setDataSource(self.pipeDataSource1_P03520);
+    self.USL_WAGE_CD.on('change', /*5649b48e-81bc-49a4-a9e8-2cf3f9cd710f*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+        grid.setCellValue(grid.select(), 'USL_WAGE_CD', self.USL_WAGE_CD.value(), false);
+    });
+    self.$USL_WAGE_AMT.on('change', /*32fdaa12-a104-4c1a-bac6-75a2d6f34a0c*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+        grid.setCellValue(grid.select(), 'USL_WAGE_AMT', self.USL_WAGE_AMT.value(), false);
+    });
+    self.$MM_FIXED_LABORTM_DY.on('change', /*2b41a048-e8ad-4d3d-94d3-af150947c0af*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+        grid.setCellValue(grid.select(), 'MM_FIXED_LABORTM_DY', self.MM_FIXED_LABORTM_DY.text(), false);
+    });
+    self.$dtl_grid_add.on('click', /*83964e89-d24d-4646-823e-cb546edecfa4*/ function (e) {
+        var dtl_grid = self.MtnityidnfDtl_grid;
+        dtl_grid.addRow(); // 해당 grid에 row 추가하기
+        dtl_grid.setCellValue(dtl_grid.select(), 'PAY_YN', 'N', false); // 추가된 row의 PAY_YN을 디폴트 N으로 설정
+    
+    
+        // 문서번호, 사원번호는  마스터그리드에서 가져와서 저장
+        var mst_grid = self.mtnityidnfMaster_grid;
+        dtl_grid.setCellValue(dtl_grid.select(), 'DOC_NO', mst_grid.getCellValue(mst_grid.select(), 'DOC_NO'), false); // 마스터그리드에서 현재 row의 문서번호 가져와 저장
+        dtl_grid.setCellValue(dtl_grid.select(), 'EMP_NO', mst_grid.getCellValue(mst_grid.select(), 'EMP_NO'), false); // 마스터그리드에서 현재 row의 사원번호 가져와 저장 
+        // SQ_NO를 하나 증가시킨다. (현재 있는 쿼리문에서 max+1(grid의 행중에 가장 큰 SQ_NO) 써서 사용한다.)
+        // 서브쿼리 사용 시 : (select max(SQ_NO) from 테이블명)
+    });
+    self.$dtl_grid_delete.on('click', /*c5932274-a431-441d-ac89-efca2a7d61ef*/ function (e) {
+        var grid = self.MtnityidnfDtl_grid;
+        grid.removeRow(grid.select());
+    });
     dews.ui.grid(self.$MtnityidnfDtl_grid, {
       dataSource: self.MtnityidnfDtl_ds,
       editable: true,
@@ -762,7 +832,34 @@
       fixed: {
         colCount: 0,
         rightColCount: 0
-      }
+      },
+      save: /*69d0324f-9d3b-40fa-b2c7-98860320e18b*/ function (e) {
+            console.log("저장실행함");
+            // var thisGrid = e.grid; // 지금 이벤트 발생하는 그리드 선택
+    
+            // // var grid=self.MtnityidnfDtl_grid;
+            // // var data1=grid.getCellValue(grid.select(), 'START_DT');
+            // // console.log('data1', data1);
+    
+            // var startDate = e.row.data.START_DT; // 변경된 시작일
+            // var endDate = e.row.data.END_DT; // 변경된 종료일
+    
+    
+    
+            // if (startDate != null && endDate != null) { // 둘 다 선택되면
+            //     var diff = ((endDate - startDate) / (60 * 60 * 24 * 1000)) + 1; // 시작일과 종료일의 일수 계산
+            //     if (diff > 0) {
+            //         thisGrid.setCellValue(e.row.index, 'BWRK_DY', diff, false);
+            //     } else if (diff <= 0) {
+            //         dews.ui.snackbar.warning(dews.localize.get("시작일은 종료일과 같거나 이전날짜를 선택해야 합니다.", "M0012831", '', 'PAMMPM00200'));
+            //         // console.log('e.row.index:', e.row.index);
+            //         // console.log('변경된 컬럼 이름:', e.cell.field);
+            //         thisGrid.setCellValue(e.row.index, 'BWRK_DY', 0, false); // 일수 0으로 초기화
+            //         thisGrid.setCellValue(e.row.index, e.cell.field, '', false); // 변경된 날짜 피커 초기화
+            //     }
+            // }
+        }
+    
     });
     
     
