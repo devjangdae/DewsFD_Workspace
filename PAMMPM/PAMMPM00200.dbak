@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-29T12:07:10.8133634+09:00</builddate>
+      <builddate>2023-08-29T13:48:24.4066266+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-29T12:07:10.8133634+09:00</modifieddate>
+      <modifieddate>2023-08-29T13:48:24.4066266+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -204,7 +204,7 @@
                   <textbox uid="textbox-1579669258905" id="BIZAREA_MNG_NO" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" change="80a5e535-39fd-4b43-b3d7-4be44e510524" />
                 </formItem>
                 <formItem uid="formItem-1579669262408" columnSize="1" text="사업장">
-                  <codepicker uid="codepicker-904da65305f2496daff77f7ff5a6d66d" id="BIZAREA_CD" disabled="false" readonly="false" state="basic" helpCode="H_MA_BIZAREA_MST_S" codeField="BIZAREA_CD" textField="BIZAREA_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사업장 도움창" helpSize="medium" useKeyword="false" clearKeyword="false" ajax="false" width_type="px">
+                  <codepicker uid="codepicker-904da65305f2496daff77f7ff5a6d66d" id="BIZAREA_CD" disabled="false" readonly="false" state="basic" helpCode="H_MA_BIZAREA_MST_S" codeField="BIZAREA_CD" textField="BIZAREA_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사업장 도움창" helpSize="medium" useKeyword="false" clearKeyword="false" ajax="false" width_type="px" setData="0220a72c-8826-4737-bfeb-c8d50b571ed2">
                     <mapping />
                   </codepicker>
                 </formItem>
@@ -744,6 +744,28 @@ function Is_validate() { // 그리드 필수값 검사
     return self.mtnityidnfMaster_grid.validate().result && self.MtnityidnfDtl_grid.validate().result;
 }
 
+function GetBizareaInfo(bizarea_cd) {
+    dews.api.get(dews.url.getApiUrl("HR", "PAMMPM00200_Service", "pammpm00200_BizareaInfo"), {
+        async: false,
+        data: {
+            bizarea_cd: bizarea_cd
+        }
+    }).done(function (data) {
+        var grid = self.mtnityidnfMaster_grid;
+        // $("#BIZAREA_NM").val(data[0].BIZAREA_NM);
+        // $("#POST_NO").val(data[0].POST_NO);
+        // $("#BASE_ADDR").val(data[0].BASE_ADDR);
+        // $("#DTL_ADDR").val(data[0].DTL_ADDR);
+        grid.setCellValue(grid.select(), 'BIZAREA_NM', data[0].BIZAREA_NM, false); // 사업장명
+        grid.setCellValue(grid.select(), 'POST_NO', data[0].POST_NO, false); // 우편번호
+        grid.setCellValue(grid.select(), 'ADDR_TP', data[0].ADDR_TP, false); // 주소타입
+        grid.setCellValue(grid.select(), 'BASE_ADDR', data[0].BASE_ADDR, false); // 기본주소
+        grid.setCellValue(grid.select(), 'DTL_ADDR', data[0].DTL_ADDR, false); // 상세주소
+    }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+    });
+}
+
 
 ]]></javascript>
     <javascript id="686d6dfe-5aef-496d-847d-f8b9362d31da"><![CDATA[//# sourceURL=PAMMPM00200.js
@@ -833,7 +855,7 @@ self.s_WRT_DT.setEndDate(new Date());
         // console.log("주소 변경시 J 선택됨");
     }
 }]]></javascript>
-    <javascript id="b6d4444c-8352-41a6-a1e3-ea4e78892482"><![CDATA[function (e) {
+    <javascript id="b6d4444c-8352-41a6-a1e3-ea4e78892482"><![CDATA[function (e, pickerData) {
     //console.log('e.code  : ' + e.code + '   // e.text  : ' + e.text  + '  //  pickerData : ' + pickerData);
     var mstGrid = self.mtnityidnfMaster_grid;
     // console.log("담당자 변경시 이벤트 객체e:", e);
@@ -955,6 +977,16 @@ self.s_WRT_DT.setEndDate(new Date());
     <javascript id="7318eb01-244f-4a84-8c1c-87d24b1f2bd5"><![CDATA[function (e) {
     var grid = self.mtnityidnfMaster_grid;
     grid.setCellValue(grid.select(), 'DTL_ADDR', self.DTL_ADDR.text(), false); // grid에 상세주소 저장
+}]]></javascript>
+    <javascript id="0220a72c-8826-4737-bfeb-c8d50b571ed2"><![CDATA[function (e, pickerData) {
+    var mstGrid = self.mtnityidnfMaster_grid;
+    mstGrid.setCellValue(mstGrid.select(), 'BIZAREA_CD', pickerData.BIZAREA_CD, false);
+
+    GetBizareaInfo(pickerData.BIZAREA_CD); // 다른 주소 정보 변경
+
+    self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
+    self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
+    self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
 }]]></javascript>
   </javascripts>
   <settings />

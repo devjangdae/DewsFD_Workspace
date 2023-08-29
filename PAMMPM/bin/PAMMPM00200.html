@@ -1,6 +1,6 @@
-<!--##870a6376-16ec-4c4c-8fa1-36b1071cddf8##-->
+<!--##a2333f37-e899-4c8a-8733-2523bedf96d5##-->
 <!--##PAMMPM00200##-->
-<!--##TPIhSVMP8ckTXH1shfDVuEpLy3IwwxDg4q8dVd7t9Xs=##-->
+<!--##AIH10nM+C4Y8jVqkReb0fqGFduORVt7KtCsSUJPo0x0=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -721,6 +721,16 @@
         var grid = self.mtnityidnfMaster_grid;
         grid.setCellValue(grid.select(), 'BIZAREA_MNG_NO', self.BIZAREA_MNG_NO.text(), false);
     });
+    self.BIZAREA_CD.on('setData', /*0220a72c-8826-4737-bfeb-c8d50b571ed2*/ function (e, pickerData) {
+        var mstGrid = self.mtnityidnfMaster_grid;
+        mstGrid.setCellValue(mstGrid.select(), 'BIZAREA_CD', pickerData.BIZAREA_CD, false);
+    
+        GetBizareaInfo(pickerData.BIZAREA_CD); // 다른 주소 정보 변경
+    
+        self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
+        self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
+        self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
+    });
     self.POST_NO.on('setData', /*392222fa-4e11-4858-8c7a-abb26d2e619b*/ function (e) {
         var grid = self.mtnityidnfMaster_grid;
     
@@ -745,7 +755,7 @@
         var grid = self.mtnityidnfMaster_grid;
         grid.setCellValue(grid.select(), 'PSPTCOM_YN', self.PSPTCOM_YN.value(), false); // 선택된 라디오 버튼 값으로 변경
     });
-    self.RSPT_EMP_NO.on('setData', /*b6d4444c-8352-41a6-a1e3-ea4e78892482*/ function (e) {
+    self.RSPT_EMP_NO.on('setData', /*b6d4444c-8352-41a6-a1e3-ea4e78892482*/ function (e, pickerData) {
         //console.log('e.code  : ' + e.code + '   // e.text  : ' + e.text  + '  //  pickerData : ' + pickerData);
         var mstGrid = self.mtnityidnfMaster_grid;
         // console.log("담당자 변경시 이벤트 객체e:", e);
@@ -969,6 +979,28 @@
     
     function Is_validate() { // 그리드 필수값 검사
         return self.mtnityidnfMaster_grid.validate().result && self.MtnityidnfDtl_grid.validate().result;
+    }
+    
+    function GetBizareaInfo(bizarea_cd) {
+        dews.api.get(dews.url.getApiUrl("HR", "PAMMPM00200_Service", "pammpm00200_BizareaInfo"), {
+            async: false,
+            data: {
+                bizarea_cd: bizarea_cd
+            }
+        }).done(function (data) {
+            var grid = self.mtnityidnfMaster_grid;
+            // $("#BIZAREA_NM").val(data[0].BIZAREA_NM);
+            // $("#POST_NO").val(data[0].POST_NO);
+            // $("#BASE_ADDR").val(data[0].BASE_ADDR);
+            // $("#DTL_ADDR").val(data[0].DTL_ADDR);
+            grid.setCellValue(grid.select(), 'BIZAREA_NM', data[0].BIZAREA_NM, false); // 사업장명
+            grid.setCellValue(grid.select(), 'POST_NO', data[0].POST_NO, false); // 우편번호
+            grid.setCellValue(grid.select(), 'ADDR_TP', data[0].ADDR_TP, false); // 주소타입
+            grid.setCellValue(grid.select(), 'BASE_ADDR', data[0].BASE_ADDR, false); // 기본주소
+            grid.setCellValue(grid.select(), 'DTL_ADDR', data[0].DTL_ADDR, false); // 상세주소
+        }).fail(function (xhr, status, error) {
+            dews.error(xhr.responseJSON.message);
+        });
     }
     
     
