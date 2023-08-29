@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-28T20:13:29.6573076+09:00</builddate>
+      <builddate>2023-08-29T12:07:10.8133634+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-28T20:13:29.6573076+09:00</modifieddate>
+      <modifieddate>2023-08-29T12:07:10.8133634+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -36,7 +36,7 @@
     </conditionPanel>
     <buttonGroup uid="buttonGroup-1579582702781" align="right" bottom="false">
       <button uid="button-1579656038421" text="신청서조회" buttonType="normal" useemphasize="false" emphasize="" disabled="false" />
-      <button uid="button-1579582718434" text="마감" buttonType="normal" useemphasize="false" emphasize="" disabled="false" />
+      <button uid="button-1579582718434" id="finish" text="마감" buttonType="normal" useemphasize="false" emphasize="" disabled="false" click="57640b1f-0dc2-4e42-93bd-f427ceb07f87" />
       <button uid="button-1579582732532" text="마감취소" buttonType="normal" useemphasize="false" emphasize="" disabled="false" />
     </buttonGroup>
     <containerPanel uid="containerPanel-1579481711463" height_type="px" containerResize="false">
@@ -217,7 +217,7 @@
               </formGroup>
               <formGroup uid="formGroup-1579669408171">
                 <formItem uid="formItem-1579669414239" columnSize="2" text="상세주소">
-                  <textbox uid="textbox-1579669414509" id="DTL_ADDR" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" />
+                  <textbox uid="textbox-1579669414509" id="DTL_ADDR" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" change="7318eb01-244f-4a84-8c1c-87d24b1f2bd5" />
                 </formItem>
               </formGroup>
               <formGroup uid="formGroup-1579669435281">
@@ -666,8 +666,35 @@
 ]]></javascript>
     <javascript id="fe04b2fe-5748-44f6-9628-3e179f56225b"><![CDATA[function () {
 
-    dews.confirm('수정된 데이터를 저장하시겠습니까 ? ', 'question').yes(function () {
-    });
+    self.mtnityidnfMaster_grid.commitCell();
+    self.MtnityidnfDtl_grid.commitCell();
+
+    var mstCnt = self.mtnityidnfMaster_ds.getDirtyDataCount();
+    var dtlCnt = self.MtnityidnfDtl_ds.getDirtyDataCount();
+
+
+
+    if (mstCnt + dtlCnt <= 0) {
+        dews.ui.snackbar.warning(dews.localize.get("변경된 내용이 없습니다.", "M0000053", '', 'PAMMPM00200'));
+    } else {
+        if (Is_validate()) {
+
+            console.log("qweqwe1"); //주석 시작
+
+            dews.api.batchSave(dews.url.getApiUrl('HR', 'PAMMPM00200_Service', 'pammpm00200_MasterData_save'), self.mtnityidnfMaster_ds, self.MtnityidnfDtl_ds).done(function (data) {
+
+                console.log("qweqwe2"); //주석 끝
+
+                dews.ui.snackbar.ok(dews.localize.get("저장 되었습니다.", "M0002498", '', 'PAMMPM00200'));
+                SearchData(); // 재조회
+                console.log("qweqwe3"); //주석 끝
+            }).fail(function (message) {
+                dews.ui.snackbar.warning(dews.localize.get("저장을 실패하였습니다.", "M0001114", '', 'PAMMPM00200'));
+            });
+        } else {
+            dews.ui.snackbar.warning(dews.localize.get("필수값을 입력해주세요.", "M0001726", '', 'PAMMPM00200'));
+        }
+    }
 }
 ]]></javascript>
     <javascript id="1a3067fb-7e4f-4c2c-a900-7f6dfa9d490d"><![CDATA[function () {
@@ -713,7 +740,9 @@ function getTodayDate() {
     return year + '' + month + '' + date;
 }
 
-
+function Is_validate() { // 그리드 필수값 검사
+    return self.mtnityidnfMaster_grid.validate().result && self.MtnityidnfDtl_grid.validate().result;
+}
 
 
 ]]></javascript>
@@ -730,7 +759,8 @@ function getTodayDate() {
 // 메인버튼 삭제 버튼의 기본 확인 메시지 사용 여부 설정
 self.mainButtons.delete.useDefaultConfirm = false;
 
-
+self.s_WRT_DT.setStartDate(getStartDate());
+self.s_WRT_DT.setEndDate(new Date());
 
 ]]></javascript>
     <javascript id="c5154232-3b46-44e6-8af9-e810d55b082b"><![CDATA[function() {
@@ -884,6 +914,48 @@ self.mainButtons.delete.useDefaultConfirm = false;
         // }
     }
 ]]></javascript>
+    <javascript id="57640b1f-0dc2-4e42-93bd-f427ceb07f87"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+    var checkedFg = false;  // 체크 여부
+
+    // grid.setCellValue(grid.select(), 'CLOSE_YN', 'Y', false);
+    // if($("#DECL_DT_datepicker").val()==null) {
+    //   grid.setCellValue(grid.select(), 'DECL_DT', getTodayDate(), false); // 신고일 시스템일자로 업데이트
+    //   self.DECL_DT_datepicker.value(getTodayDate());
+    // }
+
+    $.each(grid.getCheckedIndex(), function (idx, value) {
+        grid.setCellValue(value, 'CLOSE_YN', 'Y', false); // 현재 ROW의 마감여부 Y로 변경
+        if (grid.getCellValue(value, "DECL_DT") === null || grid.getCellValue(value, "DECL_DT") === undefined) { // 현재 ROW의 DECL_DT(신고일)가 NULL이면
+            grid.setCellValue(value, 'DECL_DT', getTodayDate(), false); // 현재 ROW의 신고일 시스템일자로 변경
+        }
+
+        checkedFg = true;
+    })
+
+
+
+    if (checkedFg == true) {
+        disableEdit(); // 수정 불가능하게 설정
+
+        self.mtnityidnfMaster_ds.batchSave(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementMPMService', 'Pammpm00200_MasterData_finish'), {  // 선택된 row만 저장
+            async: false,
+            callback: function (result) {
+            }
+        }).done(function (data) {
+            self.mtnityidnfMaster_ds.read();
+            dews.ui.snackbar.ok(dews.localize.get('마감되었습니다.', 'M0005177', '', 'PAMMPM00200'));
+        }).fail(function (data) {
+            dews.ui.snackbar.warning(dews.localize.get("마감을 실패하였습니다.", "M0012827", '', 'PAMMPM00200'));
+        })
+    } else if (checkedFg == false) {
+        dews.ui.snackbar.warning(dews.localize.get("마감할 사원을 체크헤주세요.", "M0012828", '', 'PAMMPM00200'));
+    }
+}]]></javascript>
+    <javascript id="7318eb01-244f-4a84-8c1c-87d24b1f2bd5"><![CDATA[function (e) {
+    var grid = self.mtnityidnfMaster_grid;
+    grid.setCellValue(grid.select(), 'DTL_ADDR', self.DTL_ADDR.text(), false); // grid에 상세주소 저장
+}]]></javascript>
   </javascripts>
   <settings />
   <datas />

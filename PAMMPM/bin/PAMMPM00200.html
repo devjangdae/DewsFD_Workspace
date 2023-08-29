@@ -1,6 +1,6 @@
-<!--##b133e6fd-d2d5-49f8-9a3c-0dd9007203c6##-->
+<!--##870a6376-16ec-4c4c-8fa1-36b1071cddf8##-->
 <!--##PAMMPM00200##-->
-<!--##i1SH+WOfabgXFcdRYeU3/pu8lBaKNZ9jVo+AHqsh5Bs=##-->
+<!--##TPIhSVMP8ckTXH1shfDVuEpLy3IwwxDg4q8dVd7t9Xs=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -35,7 +35,7 @@
 </div>
 <div class="dews-button-group" style="text-align: right;">
   <button class="dews-ui-button">신청서조회</button>
-  <button class="dews-ui-button">마감</button>
+  <button id="finish" class="dews-ui-button">마감</button>
   <button class="dews-ui-button">마감취소</button>
 </div>
 <div class="dews-ui-container-panel">
@@ -267,7 +267,8 @@
     // 메인버튼 삭제 버튼의 기본 확인 메시지 사용 여부 설정
     self.mainButtons.delete.useDefaultConfirm = false;
     
-    
+    self.s_WRT_DT.setStartDate(getStartDate());
+    self.s_WRT_DT.setEndDate(new Date());
     
     
     
@@ -560,11 +561,76 @@
     );
     dews.ui.mainbuttons.save.click(/*fe04b2fe-5748-44f6-9628-3e179f56225b*/ function () {
     
-        dews.confirm('수정된 데이터를 저장하시겠습니까 ? ', 'question').yes(function () {
-        });
+        self.mtnityidnfMaster_grid.commitCell();
+        self.MtnityidnfDtl_grid.commitCell();
+    
+        var mstCnt = self.mtnityidnfMaster_ds.getDirtyDataCount();
+        var dtlCnt = self.MtnityidnfDtl_ds.getDirtyDataCount();
+    
+    
+    
+        if (mstCnt + dtlCnt <= 0) {
+            dews.ui.snackbar.warning(dews.localize.get("변경된 내용이 없습니다.", "M0000053", '', 'PAMMPM00200'));
+        } else {
+            if (Is_validate()) {
+    
+                console.log("qweqwe1"); //주석 시작
+    
+                dews.api.batchSave(dews.url.getApiUrl('HR', 'PAMMPM00200_Service', 'pammpm00200_MasterData_save'), self.mtnityidnfMaster_ds, self.MtnityidnfDtl_ds).done(function (data) {
+    
+                    console.log("qweqwe2"); //주석 끝
+    
+                    dews.ui.snackbar.ok(dews.localize.get("저장 되었습니다.", "M0002498", '', 'PAMMPM00200'));
+                    SearchData(); // 재조회
+                    console.log("qweqwe3"); //주석 끝
+                }).fail(function (message) {
+                    dews.ui.snackbar.warning(dews.localize.get("저장을 실패하였습니다.", "M0001114", '', 'PAMMPM00200'));
+                });
+            } else {
+                dews.ui.snackbar.warning(dews.localize.get("필수값을 입력해주세요.", "M0001726", '', 'PAMMPM00200'));
+            }
+        }
     }
     );
     self.s_IDNFR_FG.setDataSource(self.pipeDataSource1_P03500);
+    self.$finish.on('click', /*57640b1f-0dc2-4e42-93bd-f427ceb07f87*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+        var checkedFg = false;  // 체크 여부
+    
+        // grid.setCellValue(grid.select(), 'CLOSE_YN', 'Y', false);
+        // if($("#DECL_DT_datepicker").val()==null) {
+        //   grid.setCellValue(grid.select(), 'DECL_DT', getTodayDate(), false); // 신고일 시스템일자로 업데이트
+        //   self.DECL_DT_datepicker.value(getTodayDate());
+        // }
+    
+        $.each(grid.getCheckedIndex(), function (idx, value) {
+            grid.setCellValue(value, 'CLOSE_YN', 'Y', false); // 현재 ROW의 마감여부 Y로 변경
+            if (grid.getCellValue(value, "DECL_DT") === null || grid.getCellValue(value, "DECL_DT") === undefined) { // 현재 ROW의 DECL_DT(신고일)가 NULL이면
+                grid.setCellValue(value, 'DECL_DT', getTodayDate(), false); // 현재 ROW의 신고일 시스템일자로 변경
+            }
+    
+            checkedFg = true;
+        })
+    
+    
+    
+        if (checkedFg == true) {
+            disableEdit(); // 수정 불가능하게 설정
+    
+            self.mtnityidnfMaster_ds.batchSave(dews.url.getApiUrl('HR', 'PersonalAdministrationManagementMPMService', 'Pammpm00200_MasterData_finish'), {  // 선택된 row만 저장
+                async: false,
+                callback: function (result) {
+                }
+            }).done(function (data) {
+                self.mtnityidnfMaster_ds.read();
+                dews.ui.snackbar.ok(dews.localize.get('마감되었습니다.', 'M0005177', '', 'PAMMPM00200'));
+            }).fail(function (data) {
+                dews.ui.snackbar.warning(dews.localize.get("마감을 실패하였습니다.", "M0012827", '', 'PAMMPM00200'));
+            })
+        } else if (checkedFg == false) {
+            dews.ui.snackbar.warning(dews.localize.get("마감할 사원을 체크헤주세요.", "M0012828", '', 'PAMMPM00200'));
+        }
+    });
     dews.ui.grid(self.$mtnityidnfMaster_grid, {
       dataSource: self.mtnityidnfMaster_ds,
       height: 889,
@@ -670,6 +736,10 @@
             grid.setCellValue(grid.select(), 'BASE_ADDR', e.jibunAddress, false);
             // console.log("주소 변경시 J 선택됨");
         }
+    });
+    self.$DTL_ADDR.on('change', /*7318eb01-244f-4a84-8c1c-87d24b1f2bd5*/ function (e) {
+        var grid = self.mtnityidnfMaster_grid;
+        grid.setCellValue(grid.select(), 'DTL_ADDR', self.DTL_ADDR.text(), false); // grid에 상세주소 저장
     });
     self.PSPTCOM_YN.on('change', /*0cc05dc7-8ea0-41c7-a6e3-8b6e252eb9a7*/ function (e) {
         var grid = self.mtnityidnfMaster_grid;
@@ -897,7 +967,9 @@
         return year + '' + month + '' + date;
     }
     
-    
+    function Is_validate() { // 그리드 필수값 검사
+        return self.mtnityidnfMaster_grid.validate().result && self.MtnityidnfDtl_grid.validate().result;
+    }
     
     
     
