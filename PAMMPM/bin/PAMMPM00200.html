@@ -1,6 +1,6 @@
-<!--##59d4a63f-07c0-4ca3-80a3-8064bbe99fd2##-->
+<!--##b87f4139-3ad5-4371-8398-b15fb076380b##-->
 <!--##PAMMPM00200##-->
-<!--##+gXLQWz5qXOv8Lw1doxm+kTlGK4w28vLFwfGQy+s/Z4=##-->
+<!--##3PFngGsUogy9F8cs2/XQDVn6GJjvxDqMwbxsdqxx4v4=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -910,30 +910,27 @@
         rightColCount: 0
       },
       save: /*69d0324f-9d3b-40fa-b2c7-98860320e18b*/ function (e) {
-            console.log("저장실행함");
-            // var thisGrid = e.grid; // 지금 이벤트 발생하는 그리드 선택
+            var thisGrid = e.grid; // 지금 이벤트 발생하는 그리드 선택
     
-            // // var grid=self.MtnityidnfDtl_grid;
-            // // var data1=grid.getCellValue(grid.select(), 'START_DT');
-            // // console.log('data1', data1);
+            // var grid=self.MtnityidnfDtl_grid;
+            // var data1=grid.getCellValue(grid.select(), 'START_DT');
+            // console.log('data1', data1);
     
-            // var startDate = e.row.data.START_DT; // 변경된 시작일
-            // var endDate = e.row.data.END_DT; // 변경된 종료일
+            var startDate = e.row.data.START_DT; // 변경된 시작일
+            var endDate = e.row.data.END_DT; // 변경된 종료일
     
-    
-    
-            // if (startDate != null && endDate != null) { // 둘 다 선택되면
-            //     var diff = ((endDate - startDate) / (60 * 60 * 24 * 1000)) + 1; // 시작일과 종료일의 일수 계산
-            //     if (diff > 0) {
-            //         thisGrid.setCellValue(e.row.index, 'BWRK_DY', diff, false);
-            //     } else if (diff <= 0) {
-            //         dews.ui.snackbar.warning(dews.localize.get("시작일은 종료일과 같거나 이전날짜를 선택해야 합니다.", "M0012831", '', 'PAMMPM00200'));
-            //         // console.log('e.row.index:', e.row.index);
-            //         // console.log('변경된 컬럼 이름:', e.cell.field);
-            //         thisGrid.setCellValue(e.row.index, 'BWRK_DY', 0, false); // 일수 0으로 초기화
-            //         thisGrid.setCellValue(e.row.index, e.cell.field, '', false); // 변경된 날짜 피커 초기화
-            //     }
-            // }
+            if (startDate != null && endDate != null) { // 둘 다 선택되면
+                var diff = ((endDate - startDate) / (60 * 60 * 24 * 1000)) + 1; // 시작일과 종료일의 일수 계산
+                if (diff > 0) {
+                    thisGrid.setCellValue(e.row.index, 'BWRK_DY', diff, false);
+                } else if (diff <= 0) {
+                    dews.ui.snackbar.warning(dews.localize.get("시작일은 종료일과 같거나 이전날짜를 선택해야 합니다.", "M0012831", '', 'PAMMPM00200'));
+                    // console.log('e.row.index:', e.row.index);
+                    // console.log('변경된 컬럼 이름:', e.cell.field);
+                    thisGrid.setCellValue(e.row.index, 'BWRK_DY', 0, false); // 일수 0으로 초기화
+                    thisGrid.setCellValue(e.row.index, e.cell.field, '', false); // 변경된 날짜 피커 초기화
+                }
+            }
         }
     
     });
