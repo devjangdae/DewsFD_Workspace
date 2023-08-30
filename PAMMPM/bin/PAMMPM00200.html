@@ -1,6 +1,6 @@
-<!--##a2333f37-e899-4c8a-8733-2523bedf96d5##-->
+<!--##59d4a63f-07c0-4ca3-80a3-8064bbe99fd2##-->
 <!--##PAMMPM00200##-->
-<!--##AIH10nM+C4Y8jVqkReb0fqGFduORVt7KtCsSUJPo0x0=##-->
+<!--##+gXLQWz5qXOv8Lw1doxm+kTlGK4w28vLFwfGQy+s/Z4=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -116,7 +116,7 @@
               <li>
                 <label>담당자</label>
                 <span>
-                  <input type="text" id="RSPT_EMP_NO" name="RSPT_EMP_NO" class="dews-ui-codepicker basic" data-dews-help-code="H_HR_EMP_MST_S" data-dews-code-field="EMP_NO" data-dews-text-field="KOR_NM" data-dews-help-title="사원 도움창" data-dews-help-custom="false" data-dews-help-size="medium" data-dews-ajax="true" />
+                  <input type="text" id="RSPT_EMP_NO" name="RSPT_EMP_NO" class="dews-ui-codepicker basic" data-dews-help-code="H_HR_EMP_MST_S" data-dews-code-field="EMP_NO" data-dews-text-field="KOR_NM" data-dews-help-title="사원 도움창" data-dews-help-custom="false" data-dews-help-size="big" data-dews-ajax="true" />
                 </span>
               </li>
             </ul>
@@ -567,22 +567,13 @@
         var mstCnt = self.mtnityidnfMaster_ds.getDirtyDataCount();
         var dtlCnt = self.MtnityidnfDtl_ds.getDirtyDataCount();
     
-    
-    
         if (mstCnt + dtlCnt <= 0) {
             dews.ui.snackbar.warning(dews.localize.get("변경된 내용이 없습니다.", "M0000053", '', 'PAMMPM00200'));
         } else {
             if (Is_validate()) {
-    
-                console.log("qweqwe1"); //주석 시작
-    
                 dews.api.batchSave(dews.url.getApiUrl('HR', 'PAMMPM00200_Service', 'pammpm00200_MasterData_save'), self.mtnityidnfMaster_ds, self.MtnityidnfDtl_ds).done(function (data) {
-    
-                    console.log("qweqwe2"); //주석 끝
-    
                     dews.ui.snackbar.ok(dews.localize.get("저장 되었습니다.", "M0002498", '', 'PAMMPM00200'));
                     SearchData(); // 재조회
-                    console.log("qweqwe3"); //주석 끝
                 }).fail(function (message) {
                     dews.ui.snackbar.warning(dews.localize.get("저장을 실패하였습니다.", "M0001114", '', 'PAMMPM00200'));
                 });
@@ -907,6 +898,11 @@
           editor: {
             type: 'number'
           }
+        },
+        {
+          field: 'SQ_NO',
+          title: '순번',
+          visible: false
         }
       ],
       fixed: {
@@ -1002,7 +998,37 @@
             dews.error(xhr.responseJSON.message);
         });
     }
+    function GetLoginMemberInfo(emp_no) {
+        dews.api.get(dews.url.getApiUrl("HR", "PAMMPM00200_Service", "pammpm00200_LoginMemberInfo"), {
+            async: false,
+            data: {
+                emp_no: emp_no
+            }
+        }).done(function (data) {
+            var grid = self.mtnityidnfMaster_grid;
     
+    
+            if (data != null) {
+                // $("#RSPT_TEL_NO").val(data['TEL_NO']); // 화면상 전화번호 변경
+                // $("#RSPT_EMAIL_NM").val(data['EMAIL_NM']); // 화면상 이메일 변경
+                grid.setCellValue(grid.select(), 'RSPT_EMP_NM', data[0]['RSPT_EMP_NM'], false); // 사원명
+                grid.setCellValue(grid.select(), 'RSPT_TEL_NO', data[0]['TEL_NO'], false); // 전화번호
+                grid.setCellValue(grid.select(), 'RSPT_EMAIL_NM', data[0]['EMAIL_NM'], false); // 이메일
+                console.log("성공");
+            } else {
+                // $("#RSPT_TEL_NO").val(''); // 화면상 전화번호 변경
+                // $("#RSPT_EMAIL_NM").val(''); // 화면상 이메일 변경
+                grid.setCellValue(grid.select(), 'RSPT_TEL_NO', '', false); // 전화번호
+                grid.setCellValue(grid.select(), 'RSPT_EMAIL_NM', '', false); // 이메일
+                console.log("실패");
+            }
+    
+    
+        }).fail(function (xhr, status, error) {
+            dews.error(xhr.responseJSON.message);
+        });
+        console.log("완룟");
+    }
     
     
     

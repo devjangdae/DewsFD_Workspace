@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <page title="출산휴가확인서등록" name="PAMMPM00200" type="page">
-  <canvas uid="canvas-1485142915100" type="page" title="출산휴가확인서등록" preReady="686d6dfe-5aef-496d-847d-f8b9362d31da" ready="d2692eed-91c6-4644-b7ca-3eed2f04ec7b" preDesignSummary="1da32f7e-0821-4a3b-875a-fda0fea8d22a" postDesignSummary="f6ef59c6-4047-41c2-befd-0244374ad770" component="" function="">
+  <canvas uid="canvas-1485142915100" type="page" title="출산휴가확인서등록" preReady="686d6dfe-5aef-496d-847d-f8b9362d31da" ready="d2692eed-91c6-4644-b7ca-3eed2f04ec7b" postDesignSummary="f6ef59c6-4047-41c2-befd-0244374ad770" component="" function="">
     <pageInformation>
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-08-29T13:48:24.4066266+09:00</builddate>
+      <builddate>2023-08-29T18:16:10.3891759+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-08-29T13:48:24.4066266+09:00</modifieddate>
+      <modifieddate>2023-08-29T18:16:10.3891759+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -228,7 +228,7 @@
                   </radiogroup>
                 </formItem>
                 <formItem uid="formItem-1579669507807" columnSize="1" text="담당자">
-                  <codepicker uid="codepicker-1579669508114" id="RSPT_EMP_NO" disabled="false" readonly="false" state="basic" helpCode="H_HR_EMP_MST_S" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사원 도움창" helpSize="medium" useKeyword="true" clearKeyword="false" ajax="true" width_type="px" setData="b6d4444c-8352-41a6-a1e3-ea4e78892482">
+                  <codepicker uid="codepicker-1579669508114" id="RSPT_EMP_NO" disabled="false" readonly="false" state="basic" helpCode="H_HR_EMP_MST_S" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpParams_type="mapping" helpTitle="사원 도움창" helpSize="big" useKeyword="true" clearKeyword="false" ajax="true" width_type="px" setData="b6d4444c-8352-41a6-a1e3-ea4e78892482">
                     <mapping />
                   </codepicker>
                 </formItem>
@@ -420,6 +420,21 @@
                   <editor>
                     <numerictextbox predefined="false" currency_type="value" currency="" increaseType="multiple" increaseValue="" round="round" maxLength="" editable_type="value" editable="true" />
                   </editor>
+                  <customExport check="" />
+                </column>
+                <column uid="031e2e4c-ff3b-49d1-958e-354b4532cb8d" field="SQ_NO" title="순번" align="center" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="false" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+                  <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
+                    <referenceFieldArray />
+                  </mergeObject>
+                  <headerCheck used="false" location="right" />
+                  <footer predefined="false" currency_type="value" currency="" align="center">
+                    <group predefined="false" />
+                  </footer>
+                  <footerCollection />
+                  <headerSummary predefined="false" currency_type="value" currency="" align="center" />
+                  <headerSummaryCollection />
+                  <formats />
+                  <editor />
                   <customExport check="" />
                 </column>
               </columns>
@@ -672,22 +687,13 @@
     var mstCnt = self.mtnityidnfMaster_ds.getDirtyDataCount();
     var dtlCnt = self.MtnityidnfDtl_ds.getDirtyDataCount();
 
-
-
     if (mstCnt + dtlCnt <= 0) {
         dews.ui.snackbar.warning(dews.localize.get("변경된 내용이 없습니다.", "M0000053", '', 'PAMMPM00200'));
     } else {
         if (Is_validate()) {
-
-            console.log("qweqwe1"); //주석 시작
-
             dews.api.batchSave(dews.url.getApiUrl('HR', 'PAMMPM00200_Service', 'pammpm00200_MasterData_save'), self.mtnityidnfMaster_ds, self.MtnityidnfDtl_ds).done(function (data) {
-
-                console.log("qweqwe2"); //주석 끝
-
                 dews.ui.snackbar.ok(dews.localize.get("저장 되었습니다.", "M0002498", '', 'PAMMPM00200'));
                 SearchData(); // 재조회
-                console.log("qweqwe3"); //주석 끝
             }).fail(function (message) {
                 dews.ui.snackbar.warning(dews.localize.get("저장을 실패하였습니다.", "M0001114", '', 'PAMMPM00200'));
             });
@@ -765,7 +771,37 @@ function GetBizareaInfo(bizarea_cd) {
         dews.error(xhr.responseJSON.message);
     });
 }
+function GetLoginMemberInfo(emp_no) {
+    dews.api.get(dews.url.getApiUrl("HR", "PAMMPM00200_Service", "pammpm00200_LoginMemberInfo"), {
+        async: false,
+        data: {
+            emp_no: emp_no
+        }
+    }).done(function (data) {
+        var grid = self.mtnityidnfMaster_grid;
 
+
+        if (data != null) {
+            // $("#RSPT_TEL_NO").val(data['TEL_NO']); // 화면상 전화번호 변경
+            // $("#RSPT_EMAIL_NM").val(data['EMAIL_NM']); // 화면상 이메일 변경
+            grid.setCellValue(grid.select(), 'RSPT_EMP_NM', data[0]['RSPT_EMP_NM'], false); // 사원명
+            grid.setCellValue(grid.select(), 'RSPT_TEL_NO', data[0]['TEL_NO'], false); // 전화번호
+            grid.setCellValue(grid.select(), 'RSPT_EMAIL_NM', data[0]['EMAIL_NM'], false); // 이메일
+            console.log("성공");
+        } else {
+            // $("#RSPT_TEL_NO").val(''); // 화면상 전화번호 변경
+            // $("#RSPT_EMAIL_NM").val(''); // 화면상 이메일 변경
+            grid.setCellValue(grid.select(), 'RSPT_TEL_NO', '', false); // 전화번호
+            grid.setCellValue(grid.select(), 'RSPT_EMAIL_NM', '', false); // 이메일
+            console.log("실패");
+        }
+
+
+    }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+    });
+    console.log("완룟");
+}
 
 ]]></javascript>
     <javascript id="686d6dfe-5aef-496d-847d-f8b9362d31da"><![CDATA[//# sourceURL=PAMMPM00200.js
