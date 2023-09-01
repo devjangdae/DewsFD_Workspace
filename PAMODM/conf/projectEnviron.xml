@@ -8,7 +8,7 @@
   </serverdbsearch>
   <module>
     <name>HR</name>
-    <desc>인사관리</desc>
+    <desc>Human Resource Management</desc>
   </module>
   <BaseInfo>
     <UID>1d3e012c-6857-4f51-8ee3-fc02a94af380</UID>

@@ -8,7 +8,7 @@
   </serverdbsearch>
   <module>
     <name>HR</name>
-    <desc>인사관리</desc>
+    <desc>Human Resource Management</desc>
   </module>
   <BaseInfo>
     <UID>3bc02e8c-ae03-4e3f-87f6-9b030151971e</UID>
@@ -16,7 +16,7 @@
   <variables />
   <outputs>
     <output>
-      <outputPath>C:\Users\admin\gerp-front-bootstrap\view\HR\PAMPMP</outputPath>
+      <outputPath>C:\Users\admin\gerp-front-bootstrap\view\HR\PAMMPM</outputPath>
       <outputUse>True</outputUse>
     </output>
   </outputs>

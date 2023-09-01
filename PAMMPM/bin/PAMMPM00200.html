@@ -1,6 +1,6 @@
-<!--##b87f4139-3ad5-4371-8398-b15fb076380b##-->
+<!--##b5e61b78-7e89-46e5-b694-38efc0aa4829##-->
 <!--##PAMMPM00200##-->
-<!--##3PFngGsUogy9F8cs2/XQDVn6GJjvxDqMwbxsdqxx4v4=##-->
+<!--##K6omXjRR4Gjmr2ouZ/bkoNugYwx+upG3SIHK68OcHe0=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -527,7 +527,71 @@
     dews.ui.mainbuttons.etnapproval.hide();
     dews.ui.mainbuttons.add.click(/*1a3067fb-7e4f-4c2c-a900-7f6dfa9d490d*/ function () {
     
-        self.grid1.addRow();
+        var dialog, initData;
+        initData = {
+            mode: 'multi',
+            code: 'H_HR_EMP_MST_S11',
+            params: {},
+            data: null
+        }
+        dialog = dews.ui.dialog("H_HR_EMP_MST_S11", {
+            url: '~/CODEHELP.html',
+            title: dews.localize.get('사원 도움창', 'D0010047', '', 'PAMMPM00200'),
+            width: 746,
+            height: 540,
+            buttons: 'applyAndClose',
+            ok: function (data) {
+                // callback 받아서 그리드에 셋팅해주는 부분
+                var idx;
+                $.each(data, function (idx, obj) {
+                    var mstGrid = self.mtnityidnfMaster_grid;
+                    var dupleFlag = false;
+                    $.each(mstGrid.dataItems(), function (idx2, val2) {
+                        if (val2.EMP_NO == obj.EMP_NO) { // 추가하는 사원이 마스터 그리드에 있으면
+                            dews.ui.snackbar.warning(dews.localize.get('마스터 그리드에 똑같은 사원이 있습니다.', 'M0012821', '', 'PAMMPM00200'));
+                            dupleFlag = true;
+                            return false; // break
+                        }
+                    });
+                    if (dupleFlag == false) { // 중복되는 사원이 없으면
+                        // 마스터 그리드에 추가
+                        mstGrid.addRow();
+                        idx = mstGrid.select();
+                        mstGrid.setCellValue(idx, 'WRT_DT', getCurrentDateFormatted(), false); // 등록일
+                        mstGrid.setCellValue(idx, 'CLOSE_YN', 'N', false); // 마감여부
+                        mstGrid.setCellValue(idx, 'REQ_KND_FG', '1', false); // 신청종류
+                        mstGrid.setCellValue(idx, 'EMP_NO', obj.EMP_NO, false); // 사원번호
+                        mstGrid.setCellValue(idx, 'KOR_NM', obj.KOR_NM, false); // 사원명
+                        mstGrid.setCellValue(idx, 'BIZAREA_CD', obj.BIZAREA_CD, false); // 사업장코드
+                        GetMngNo(obj.BIZAREA_CD);
+                        GetBizareaInfo(obj.BIZAREA_CD);
+                        GetPsptComYn();
+                        GetResNo(obj.EMP_NO); // 주민번호 조회
+    
+    
+                        mstGrid.setCellValue(idx, "RSPT_EMP_NO", self.user['empCode'], false); // 담당자
+    
+                        GetLoginMemberInfo(self.user['empCode']);
+    
+                        mstGrid.setCellValue(idx, "DIVD_YN", 'N', false); // 분할여부
+                        mstGrid.setCellValue(idx, "TERM_CD", '1', false); // 임신기간
+                        mstGrid.setCellValue(idx, "MLTPPRGN_YN", 'N', false); // 다태아여부
+                        mstGrid.setCellValue(idx, "USL_WAGE_CD", '1', false); // 통상임금산정기준
+    
+                        if (!obj.hasOwnProperty('DECL_DT')) {
+                            mstGrid.setCellValue(idx, 'DECL_DT', getTodayDate(), false); // 신고일
+                        }
+    
+                        self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
+                        self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
+                        self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
+                        enableEdit();
+                    }
+                });
+            }
+        });
+        dialog.setInitData(initData);
+        dialog.open();
     
     }
     );
@@ -1026,7 +1090,114 @@
         });
         console.log("완룟");
     }
+    function GetMngNo(bizarea_cd) {
+        dews.api.get(dews.url.getApiUrl("HR", "PAMMPM00200_Service", "pammpm00200_InsuValDc"), {
+            async: false,
+            data: {
+                bizarea_cd: bizarea_cd
+            }
+        }).done(function (data) {
+            var grid = self.mtnityidnfMaster_grid;
+            grid.setCellValue(grid.select(), 'BIZAREA_MNG_NO', data[0].INSU_VAL_DC, false);
+        }).fail(function (xhr, status, error) {
+            dews.error(xhr.responseJSON.message);
+        });
+    }
+    function GetPsptComYn() {
+        dews.api.get(dews.url.getApiUrl("HR", "PAMMPM00200_Service", "pammpm00200_CharCdValDc"), {
+            async: false,
+            data: {
+            }
+        }).done(function (data) {
+            var grid = self.mtnityidnfMaster_grid;
+            grid.setCellValue(grid.select(), 'PSPTCOM_YN', data, false); // 우선지원대상기업 여부
+        }).fail(function (xhr, status, error) {
+            dews.error(xhr.responseJSON.message);
+        });
+    }
+    function GetResNo(emp_no) {
+        dews.api.get(dews.url.getApiUrl("HR", "PAMMPM00200_Service", "pammpm00200_ResNo"), {
+            async: false,
+            data: {
+                emp_no: emp_no
+            }
+        }).done(function (data) {
+            var grid = self.mtnityidnfMaster_grid;
+            grid.setCellValue(grid.select(), 'RES_NO', data, false);
+        }).fail(function (xhr, status, error) {
+            dews.error(xhr.responseJSON.message);
+        });
+    }
+    function enableEdit() {
+        self.s_WRT_DT.readonly(false); // 등록일 수정 가능
+        self.DECL_DT.readonly(false); // 신고일 수정 가능
+        self.BIZAREA_MNG_NO.readonly(false); // 사업장관리번호 수정 가능
+        self.BIZAREA_CD.readonly(false); // 사업장 수정 가능  
+        self.POST_NO.readonly(false); // 우편번호 수정 가능
+        self.BASE_ADDR.readonly(false); // 기본주소 수정 가능
+        self.DTL_ADDR.readonly(false); // 상세주소 수정 가능
+        self.PSPTCOM_YN.disable(false); // 우선지원대상기업 수정 가능
+        self.RSPT_EMP_NO.readonly(false); // 담당자 수정 가능
+        self.RSPT_TEL_NO.readonly(false); // 전화번호 수정 가능
+        self.RSPT_EMAIL_NM.readonly(false); // 이메일 수정 가능
     
+        self.s_IDNFR_FG.readonly(false); // 신청종류 수정 가능
+        self.CHLDBRTH_DT.readonly(false); // 출산일 수정 가능
+        self.DIVD_YN.disable(false); // 분할사용여부 수정 가능
+        self.TERM_CD.readonly(false); // 임신기간 수정 가능
+        self.MLTPPRGN_YN.disable(false); // 다태아여부 수정 가능
+        self.USL_WAGE_CD.readonly(false); // 통상임금산정기준 수정 가능
+        self.USL_WAGE_AMT.readonly(false); // 통상임금 수정 가능
+        self.MM_FIXED_LABORTM_DY.readonly(false); // 월소정근로시간 수정 가능
+    
+        $("#dtl_grid_add").removeAttr('disabled'); // 추가 버튼 활성화
+        $("#dtl_grid_add").removeClass('k-state-disabled'); // 추가 버튼 비활성화 클래스 삭제
+        $("#dtl_grid_delete").removeAttr('disabled'); // 삭제 버튼 활성화
+        $("#dtl_grid_delete").removeClass('k-state-disabled'); // 추가 버튼 비활성화 클래스 삭제
+    
+        self.MtnityidnfDtl_grid.enable(true); // 디테일 그리드 활성화
+    }
+    
+    function disableEdit() {
+        self.WRT_DT_datepicker.readonly(true); // 등록일 수정 불가
+        self.DECL_DT_datepicker.readonly(true); // 신고일 수정 불가
+        self.BIZAREA_MNG_NO.readonly(true); // 사업장관리번호 수정 불가
+        self.BIZAREA_CD.readonly(true); // 사업장 수정 불가  
+        self.BIZAREA_MNG_NO.readonly(true); // 사업장관리번호 수정 불가
+        self.BIZAREA_CD.readonly(true); // 사업장 수정 불가
+        self.POST_NO.readonly(true); // 우편번호 수정 불가
+        self.BASE_ADDR.readonly(true); // 기본주소 수정 불가
+        self.DTL_ADDR.readonly(true); // 상세주소 수정 불가
+        self.PSPTCOM_YN.disable(true); // 우선지원대상기업 수정 불가
+        self.RSPT_EMP_NO.readonly(true); // 담당자 수정 불가
+        self.RSPT_TEL_NO.readonly(true); // 전화번호 수정 불가
+        self.RSPT_EMAIL_NM.readonly(true); // 이메일 수정 불가
+    
+        self.REQ_KND_FG_radioBtn.disable(true); // 신청종류 수정 불가
+        self.CHLDBRTH_DT.readonly(true); // 출산일 수정 불가
+        self.DIVD_YN.disable(true); // 분할사용여부 수정 불가
+        self.TERM_CD.readonly(true); // 임신기간 수정 불가
+        self.MLTPPRGN_YN.disable(true); // 다태아여부 수정 불가
+        self.USL_WAGE_CD.readonly(true); // 통상임금산정기준 수정 불가
+        self.USL_WAGE_AMT.readonly(true); // 통상임금 수정 불가
+        self.MM_FIXED_LABORTM_DY.readonly(true); // 월소정근로시간 수정 불가
+    
+        $("#dtl_grid_add").attr('disabled', true); // 추가 버튼 비활성화
+        $("#dtl_grid_add").addClass('k-state-disabled'); // 추가 버튼 비활성화 클래스 추가
+        $("#dtl_grid_delete").attr('disabled', true); // 삭제 버튼 비활성화
+        $("#dtl_grid_delete").addClass('k-state-disabled'); // 삭제 버튼 비활성화 클래스 추가
+    
+        self.MtnityidnfDtl_grid.enable(false); // 디테일 그리드 비활성화
+    }
+    function getCurrentDateFormatted() {
+        const today = new Date();
+    
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+        const dd = String(today.getDate()).padStart(2, '0');
+    
+        return `${yyyy}${mm}${dd}`;
+    }
     
     
 
