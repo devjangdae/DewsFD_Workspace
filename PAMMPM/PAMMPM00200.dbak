@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-01T16:11:52.5734844+09:00</builddate>
+      <builddate>2023-09-04T15:10:40.2534318+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-09-01T16:11:52.5734844+09:00</modifieddate>
+      <modifieddate>2023-09-04T15:10:40.2534318+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -771,7 +771,7 @@
                     // 마스터 그리드에 추가
                     mstGrid.addRow();
                     idx = mstGrid.select();
-                    mstGrid.setCellValue(idx, 's_WRT_DT', new Date(), false); // 등록일
+                    mstGrid.setCellValue(idx, 'WRT_DT', getCurrentDateFormatted(), false); // 등록일
                     mstGrid.setCellValue(idx, 'CLOSE_YN', 'N', false); // 마감여부
                     mstGrid.setCellValue(idx, 'REQ_KND_FG', '1', false); // 신청종류
                     mstGrid.setCellValue(idx, 'EMP_NO', obj.EMP_NO, false); // 사원번호
@@ -811,7 +811,32 @@
 ]]></javascript>
     <javascript id="1703f0ef-4051-4ffd-962e-11990ff25225"><![CDATA[function () {
 
-    self.grid1.removeRow(self.grid1.select());
+    var mstGrid = self.mtnityidnfMaster_grid;
+
+    if (mstGrid.getCheckedIndex().length == 0) { // 체크된 row가 0개 이면
+        dews.ui.snackbar.warning(dews.localize.get("삭제할 사원을 체크해주세요.", "M0012824", '', 'PAMMPM00200')); // 경고창 띄어주기
+        return null; // 함수 종료
+    }
+
+    dews.confirm(dews.localize.get('삭제하시겠습니까?', 'M0000120', '', 'PAMMPM00200'), "question").yes(function () {
+        $.each(mstGrid.getCheckedIndex(), function (idx, value) {
+            var curIndex = mstGrid.getCheckedIndex()[0]; // 체크된 현재 인덱스
+
+            // console.log("curIndex:" + curIndex);
+            // console.log("mstGrid.getCheckedIndex():", mstGrid.getCheckedIndex());
+            // console.log("mstGrid.getCheckedIndex(), idx:", idx);
+            // console.log("mstGrid.getCheckedIndex(), value:", value);
+
+            if (mstGrid.getCellValue(curIndex, 'CLOSE_YN') == 'N') {
+                mstGrid.removeRow(curIndex); // 체크된 row 삭제
+            } else if (mstGrid.getCellValue(curIndex, 'CLOSE_YN') == 'Y') {
+                dews.ui.snackbar.warning(dews.localize.get("마감된 자료는 삭제할 수 없습니다.", "M0012825", '', 'PAMMPM00200')); // 경고창 띄어주기
+            }
+        })
+
+
+    }).no(function () {
+    });
 
 }
 ]]></javascript>
@@ -1000,6 +1025,15 @@ function disableEdit() {
     $("#dtl_grid_delete").addClass('k-state-disabled'); // 삭제 버튼 비활성화 클래스 추가
 
     self.MtnityidnfDtl_grid.enable(false); // 디테일 그리드 비활성화
+}
+function getCurrentDateFormatted() {
+    const today = new Date();
+
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줍니다.
+    const dd = String(today.getDate()).padStart(2, '0');
+
+    return `${yyyy}${mm}${dd}`;
 }
 ]]></javascript>
     <javascript id="686d6dfe-5aef-496d-847d-f8b9362d31da"><![CDATA[//# sourceURL=PAMMPM00200.js

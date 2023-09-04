@@ -1,6 +1,6 @@
-<!--##b5e61b78-7e89-46e5-b694-38efc0aa4829##-->
+<!--##140a3d4f-4c93-4f9d-83bf-b1a07773ff9d##-->
 <!--##PAMMPM00200##-->
-<!--##K6omXjRR4Gjmr2ouZ/bkoNugYwx+upG3SIHK68OcHe0=##-->
+<!--##eDSIVz9jYZEeyLHjkJXysc7c7M1TPc07lFDpMwXBMJM=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -619,7 +619,32 @@
     );
     dews.ui.mainbuttons.delete.click(/*1703f0ef-4051-4ffd-962e-11990ff25225*/ function () {
     
-        self.grid1.removeRow(self.grid1.select());
+        var mstGrid = self.mtnityidnfMaster_grid;
+    
+        if (mstGrid.getCheckedIndex().length == 0) { // 체크된 row가 0개 이면
+            dews.ui.snackbar.warning(dews.localize.get("삭제할 사원을 체크해주세요.", "M0012824", '', 'PAMMPM00200')); // 경고창 띄어주기
+            return null; // 함수 종료
+        }
+    
+        dews.confirm(dews.localize.get('삭제하시겠습니까?', 'M0000120', '', 'PAMMPM00200'), "question").yes(function () {
+            $.each(mstGrid.getCheckedIndex(), function (idx, value) {
+                var curIndex = mstGrid.getCheckedIndex()[0]; // 체크된 현재 인덱스
+    
+                // console.log("curIndex:" + curIndex);
+                // console.log("mstGrid.getCheckedIndex():", mstGrid.getCheckedIndex());
+                // console.log("mstGrid.getCheckedIndex(), idx:", idx);
+                // console.log("mstGrid.getCheckedIndex(), value:", value);
+    
+                if (mstGrid.getCellValue(curIndex, 'CLOSE_YN') == 'N') {
+                    mstGrid.removeRow(curIndex); // 체크된 row 삭제
+                } else if (mstGrid.getCellValue(curIndex, 'CLOSE_YN') == 'Y') {
+                    dews.ui.snackbar.warning(dews.localize.get("마감된 자료는 삭제할 수 없습니다.", "M0012825", '', 'PAMMPM00200')); // 경고창 띄어주기
+                }
+            })
+    
+    
+        }).no(function () {
+        });
     
     }
     );
