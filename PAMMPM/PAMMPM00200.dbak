@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-04T15:10:40.2534318+09:00</builddate>
+      <builddate>2023-09-04T17:46:36.6982398+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-09-04T15:10:40.2534318+09:00</modifieddate>
+      <modifieddate>2023-09-04T17:46:36.6982398+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -947,7 +947,7 @@ function GetPsptComYn() {
         }
     }).done(function (data) {
         var grid = self.mtnityidnfMaster_grid;
-        grid.setCellValue(grid.select(), 'PSPTCOM_YN', data, false); // 우선지원대상기업 여부
+        grid.setCellValue(grid.select(), 'PSPTCOM_YN', data[0].PSPTCOM_YN, false); // 우선지원대상기업 여부
     }).fail(function (xhr, status, error) {
         dews.error(xhr.responseJSON.message);
     });

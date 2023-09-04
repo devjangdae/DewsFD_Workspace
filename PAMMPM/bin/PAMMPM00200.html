@@ -1,6 +1,6 @@
-<!--##140a3d4f-4c93-4f9d-83bf-b1a07773ff9d##-->
+<!--##527b083f-bc23-444f-b86c-08c4b1885d8b##-->
 <!--##PAMMPM00200##-->
-<!--##eDSIVz9jYZEeyLHjkJXysc7c7M1TPc07lFDpMwXBMJM=##-->
+<!--##nH3My5wb+Zy1sp/xGh9yOMvKbM8Pdcbo7XepWEwR3L4=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -1135,7 +1135,7 @@
             }
         }).done(function (data) {
             var grid = self.mtnityidnfMaster_grid;
-            grid.setCellValue(grid.select(), 'PSPTCOM_YN', data, false); // 우선지원대상기업 여부
+            grid.setCellValue(grid.select(), 'PSPTCOM_YN', data[0].PSPTCOM_YN, false); // 우선지원대상기업 여부
         }).fail(function (xhr, status, error) {
             dews.error(xhr.responseJSON.message);
         });
