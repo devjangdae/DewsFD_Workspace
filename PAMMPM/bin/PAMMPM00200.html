@@ -1,6 +1,6 @@
-<!--##527b083f-bc23-444f-b86c-08c4b1885d8b##-->
+<!--##e4a9380a-d7b7-4498-a27c-8cdb03179215##-->
 <!--##PAMMPM00200##-->
-<!--##nH3My5wb+Zy1sp/xGh9yOMvKbM8Pdcbo7XepWEwR3L4=##-->
+<!--##o8CbAFyxhgXRugWb05o/R4jrwNJGSeuZDbZsIqNEtzE=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -527,13 +527,15 @@
     dews.ui.mainbuttons.etnapproval.hide();
     dews.ui.mainbuttons.add.click(/*1a3067fb-7e4f-4c2c-a900-7f6dfa9d490d*/ function () {
     
-        var dialog, initData;
-        initData = {
+        // 초기 데이터 설정
+        var dialog, initData = {
             mode: 'multi',
             code: 'H_HR_EMP_MST_S11',
             params: {},
             data: null
-        }
+        };
+    
+        // 도움창 설정
         dialog = dews.ui.dialog("H_HR_EMP_MST_S11", {
             url: '~/CODEHELP.html',
             title: dews.localize.get('사원 도움창', 'D0010047', '', 'PAMMPM00200'),
@@ -541,60 +543,38 @@
             height: 540,
             buttons: 'applyAndClose',
             ok: function (data) {
-                // callback 받아서 그리드에 셋팅해주는 부분
+    
+                // 선택된 데이터를 그리드에 추가하는 로직
                 var idx;
                 $.each(data, function (idx, obj) {
                     var mstGrid = self.mtnityidnfMaster_grid;
                     var dupleFlag = false;
+    
+                    // 중복 체크: 마스터 그리드에 동일한 사원이 있는지 확인
                     $.each(mstGrid.dataItems(), function (idx2, val2) {
-                        if (val2.EMP_NO == obj.EMP_NO) { // 추가하는 사원이 마스터 그리드에 있으면
+                        if (val2.EMP_NO == obj.EMP_NO) {
                             dews.ui.snackbar.warning(dews.localize.get('마스터 그리드에 똑같은 사원이 있습니다.', 'M0012821', '', 'PAMMPM00200'));
                             dupleFlag = true;
-                            return false; // break
+                            return false; // 중복 발견시 반복 종료
                         }
                     });
-                    if (dupleFlag == false) { // 중복되는 사원이 없으면
-                        // 마스터 그리드에 추가
+    
+                    // 중복이 없을 경우에만 그리드에 추가
+                    if (!dupleFlag) {
                         mstGrid.addRow();
                         idx = mstGrid.select();
-                        mstGrid.setCellValue(idx, 'WRT_DT', getCurrentDateFormatted(), false); // 등록일
-                        mstGrid.setCellValue(idx, 'CLOSE_YN', 'N', false); // 마감여부
-                        mstGrid.setCellValue(idx, 'REQ_KND_FG', '1', false); // 신청종류
-                        mstGrid.setCellValue(idx, 'EMP_NO', obj.EMP_NO, false); // 사원번호
-                        mstGrid.setCellValue(idx, 'KOR_NM', obj.KOR_NM, false); // 사원명
-                        mstGrid.setCellValue(idx, 'BIZAREA_CD', obj.BIZAREA_CD, false); // 사업장코드
-                        GetMngNo(obj.BIZAREA_CD);
-                        GetBizareaInfo(obj.BIZAREA_CD);
-                        GetPsptComYn();
-                        GetResNo(obj.EMP_NO); // 주민번호 조회
-    
-    
-                        mstGrid.setCellValue(idx, "RSPT_EMP_NO", self.user['empCode'], false); // 담당자
-    
-                        GetLoginMemberInfo(self.user['empCode']);
-    
-                        mstGrid.setCellValue(idx, "DIVD_YN", 'N', false); // 분할여부
-                        mstGrid.setCellValue(idx, "TERM_CD", '1', false); // 임신기간
-                        mstGrid.setCellValue(idx, "MLTPPRGN_YN", 'N', false); // 다태아여부
-                        mstGrid.setCellValue(idx, "USL_WAGE_CD", '1', false); // 통상임금산정기준
-    
-                        if (!obj.hasOwnProperty('DECL_DT')) {
-                            mstGrid.setCellValue(idx, 'DECL_DT', getTodayDate(), false); // 신고일
-                        }
-    
-                        self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
-                        self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
-                        self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
+                        setCellValuesForEmployee(mstGrid, obj, idx);
+                        bindPanelsToGrid();
                         enableEdit();
                     }
                 });
             }
         });
+    
+        // 도움창을 초기화하고 열기
         dialog.setInitData(initData);
         dialog.open();
-    
-    }
-    );
+    });
     dews.ui.mainbuttons.search.click(/*3dceaecc-319c-43e3-a6bb-327bcace4a48*/ function () {
         var mstCnt = self.mtnityidnfMaster_ds.getDirtyDataCount();
         var dtlCnt = self.MtnityidnfDtl_ds.getDirtyDataCount();
@@ -618,36 +598,32 @@
     }
     );
     dews.ui.mainbuttons.delete.click(/*1703f0ef-4051-4ffd-962e-11990ff25225*/ function () {
-    
         var mstGrid = self.mtnityidnfMaster_grid;
+        var checkedIndices = mstGrid.getCheckedIndex();
     
-        if (mstGrid.getCheckedIndex().length == 0) { // 체크된 row가 0개 이면
-            dews.ui.snackbar.warning(dews.localize.get("삭제할 사원을 체크해주세요.", "M0012824", '', 'PAMMPM00200')); // 경고창 띄어주기
-            return null; // 함수 종료
+        if (checkedIndices.length == 0) {
+            showWarning("삭제할 사원을 체크해주세요.", "M0012824");
+            return;
         }
     
-        dews.confirm(dews.localize.get('삭제하시겠습니까?', 'M0000120', '', 'PAMMPM00200'), "question").yes(function () {
-            $.each(mstGrid.getCheckedIndex(), function (idx, value) {
-                var curIndex = mstGrid.getCheckedIndex()[0]; // 체크된 현재 인덱스
-    
-                // console.log("curIndex:" + curIndex);
-                // console.log("mstGrid.getCheckedIndex():", mstGrid.getCheckedIndex());
-                // console.log("mstGrid.getCheckedIndex(), idx:", idx);
-                // console.log("mstGrid.getCheckedIndex(), value:", value);
-    
-                if (mstGrid.getCellValue(curIndex, 'CLOSE_YN') == 'N') {
-                    mstGrid.removeRow(curIndex); // 체크된 row 삭제
-                } else if (mstGrid.getCellValue(curIndex, 'CLOSE_YN') == 'Y') {
-                    dews.ui.snackbar.warning(dews.localize.get("마감된 자료는 삭제할 수 없습니다.", "M0012825", '', 'PAMMPM00200')); // 경고창 띄어주기
-                }
+        dews.confirm(dews.localize.get('삭제하시겠습니까?', 'M0000120', '', 'PAMMPM00200'), "question")
+            .yes(function () {
+                $.each(checkedIndices, function (idx, rowIndex) {
+                    var cellValue = mstGrid.getCellValue(rowIndex, 'CLOSE_YN');
+                    
+                    if (cellValue == 'N') {
+                        mstGrid.removeRow(rowIndex);
+                    } else if (cellValue == 'Y') {
+                        showWarning("마감된 자료는 삭제할 수 없습니다.", "M0012825");
+                    }
+                });
             })
+            .no(function () {});
     
-    
-        }).no(function () {
-        });
-    
-    }
-    );
+        function showWarning(message, code) {
+            dews.ui.snackbar.warning(dews.localize.get(message, code, '', 'PAMMPM00200'));
+        }
+    });
     dews.ui.mainbuttons.save.click(/*fe04b2fe-5748-44f6-9628-3e179f56225b*/ function () {
     
         self.mtnityidnfMaster_grid.commitCell();
@@ -1223,6 +1199,39 @@
     
         return `${yyyy}${mm}${dd}`;
     }
+    
+    function bindPanelsToGrid() {
+        self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
+        self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
+        self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
+    }
+    
+    function setCellValuesForEmployee(mstGrid, obj, idx) {
+        mstGrid.setCellValue(idx, 'WRT_DT', getCurrentDateFormatted(), false); // 등록일
+        mstGrid.setCellValue(idx, 'CLOSE_YN', 'N', false);                     // 마감여부
+        mstGrid.setCellValue(idx, 'REQ_KND_FG', '1', false);                  // 신청종류
+        mstGrid.setCellValue(idx, 'EMP_NO', obj.EMP_NO, false);               // 사원번호
+        mstGrid.setCellValue(idx, 'KOR_NM', obj.KOR_NM, false);                // 사원명
+        mstGrid.setCellValue(idx, 'BIZAREA_CD', obj.BIZAREA_CD, false);       // 사업장코드
+    
+        GetMngNo(obj.BIZAREA_CD);
+        GetBizareaInfo(obj.BIZAREA_CD);
+        GetPsptComYn();
+        GetResNo(obj.EMP_NO); // 주민번호 조회
+    
+        mstGrid.setCellValue(idx, "RSPT_EMP_NO", self.user['empCode'], false); // 담당자
+        GetLoginMemberInfo(self.user['empCode']);
+    
+        mstGrid.setCellValue(idx, "DIVD_YN", 'N', false);                     // 분할여부
+        mstGrid.setCellValue(idx, "TERM_CD", '1', false);                     // 임신기간
+        mstGrid.setCellValue(idx, "MLTPPRGN_YN", 'N', false);                 // 다태아여부
+        mstGrid.setCellValue(idx, "USL_WAGE_CD", '1', false);                 // 통상임금산정기준
+    
+        if (!obj.hasOwnProperty('DECL_DT')) {
+            mstGrid.setCellValue(idx, 'DECL_DT', getTodayDate(), false);      // 신고일
+        }
+    }
+    
     
     
 
