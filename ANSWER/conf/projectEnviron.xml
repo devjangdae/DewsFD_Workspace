@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Environment>
+  <server>
+    <url>http://localhost:8090</url>
+  </server>
+  <serverdbsearch>
+    <url>http://localhost:8090</url>
+  </serverdbsearch>
+  <module>
+    <name>HR</name>
+    <desc>Human Resource Management</desc>
+  </module>
+  <BaseInfo>
+    <UID>17f85df4-ddca-4035-b526-7e8801e18e58</UID>
+  </BaseInfo>
+  <GitInfo>
+    <ProjectName>PAMODM</ProjectName>
+    <ServerUrl>https://git.comet.duzon.net/ewp-front-end-ui/douzone-comet-ui-hr-pamodm-x10005.git</ServerUrl>
+    <UserID>Bed4iUvxbBO5oBVcHR+IXA==</UserID>
+    <Password>idFgYaFe90czvsww53MmsQ==</Password>
+    <EMail>VriEhFCraYaPMyiYbDKHMRh2wo9gVIrUVJ59KvCq/C0=</EMail>
+    <IsSecurity>True</IsSecurity>
+  </GitInfo>
+  <variables />
+  <outputs />
+</Environment>

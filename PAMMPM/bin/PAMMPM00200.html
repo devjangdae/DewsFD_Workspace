@@ -1,6 +1,6 @@
-<!--##a8a8c51d-88c6-406d-ac73-9eb5a58638f8##-->
+<!--##2c1a8ce2-17d8-458d-a2de-3011f2ddb239##-->
 <!--##PAMMPM00200##-->
-<!--##Ct7XK9PlZYw3OszYgURV5P6trcTH1Mge3cZDTACUCdo=##-->
+<!--##IG6QQQABR18M3Cl/LDKaX8NZCd9H1WVW3zO/24VJLGc=##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMMPM00200
@@ -610,7 +610,7 @@
             .yes(function () {
                 $.each(checkedIndices, function (idx, rowIndex) {
                     var cellValue = mstGrid.getCellValue(rowIndex, 'CLOSE_YN');
-                    
+    
                     if (cellValue == 'N') {
                         mstGrid.removeRow(rowIndex);
                     } else if (cellValue == 'Y') {
@@ -618,7 +618,7 @@
                     }
                 });
             })
-            .no(function () {});
+            .no(function () { });
     
         function showWarning(message, code) {
             dews.ui.snackbar.warning(dews.localize.get(message, code, '', 'PAMMPM00200'));
@@ -753,9 +753,9 @@
         rightColCount: 0
       },
       change: /*1b69d239-e35d-48dc-8154-cd450b87c595*/ function (e) {
-            self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
-            self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
-            self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
+            // self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
+            // self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
+            // self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
         }
     ,
       dataBound: /*fe8a81f9-acaa-4741-996c-4cdbae80d367*/ function (e) {

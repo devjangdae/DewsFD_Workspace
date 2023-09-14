@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-06T15:12:16.4922036+09:00</builddate>
+      <builddate>2023-09-11T15:57:46.1323375+09:00</builddate>
       <createdate>2023-08-25T21:45:06.411373+09:00</createdate>
-      <modifieddate>2023-09-06T15:12:16.4922036+09:00</modifieddate>
+      <modifieddate>2023-09-11T15:57:46.1323375+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="disabled" type="information" />
@@ -802,7 +802,7 @@
         .yes(function () {
             $.each(checkedIndices, function (idx, rowIndex) {
                 var cellValue = mstGrid.getCellValue(rowIndex, 'CLOSE_YN');
-                
+
                 if (cellValue == 'N') {
                     mstGrid.removeRow(rowIndex);
                 } else if (cellValue == 'Y') {
@@ -810,7 +810,7 @@
                 }
             });
         })
-        .no(function () {});
+        .no(function () { });
 
     function showWarning(message, code) {
         dews.ui.snackbar.warning(dews.localize.get(message, code, '', 'PAMMPM00200'));
@@ -1084,9 +1084,9 @@ self.s_WRT_DT.setEndDate(new Date());
     grid.setCellValue(grid.select(), 'BIZAREA_MNG_NO', self.BIZAREA_MNG_NO.text(), false);
 }]]></javascript>
     <javascript id="1b69d239-e35d-48dc-8154-cd450b87c595"><![CDATA[function (e) {
-        self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
-        self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
-        self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
+        // self.mtnityidnfMaster_grid.bindPanel(self.topReqPanel);
+        // self.mtnityidnfMaster_grid.bindPanel(self.bizareaInfoPanel);
+        // self.mtnityidnfMaster_grid.bindPanel(self.trgtpInfoPanel);
     }
 ]]></javascript>
     <javascript id="f1bb4539-d221-4c33-a05a-3c3980a96d87"><![CDATA[function (e) {

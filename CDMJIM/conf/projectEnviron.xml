@@ -8,10 +8,11 @@
   </serverdbsearch>
   <module>
     <name>AD</name>
-    <desc>Advertising</desc>
+    <desc>광고</desc>
   </module>
-  <variables />
   <BaseInfo>
     <UID>9688f942-6b4d-4916-b0f1-6f6e7874dc05</UID>
   </BaseInfo>
+  <variables />
+  <outputs />
 </Environment>

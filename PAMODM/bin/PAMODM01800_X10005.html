@@ -1,10 +1,10 @@
-<!--##7de357f9-939d-4e39-98c7-0cbd99135525##-->
-<!--##PAMODM01800##-->
-<!--##bN/XEX5b3O+Br94TV2Y8ITsiaD/prRdZ00znC1UfOYM=##-->
+<!--##ca37cb6d-4071-4ad2-bd48-d60c297d589c##-->
+<!--##PAMODM01800_X10005##-->
+<!--##fbpUGc1v+tE8ApHDIUdnFyxSOpEymbbCm8FCTRCANuHjL/2y/J6wX7Ov6vftNeKW##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
-  # PageID: PAMODM01800
-  # PageTitle: [한국동서발전]행사참가직원등록
+  # PageID: PAMODM01800_X10005
+  # PageTitle: 행사참가직원등록
   # Server: http://localhost:8090/
 -->
 <!--
@@ -39,7 +39,7 @@
         <select id="s_DOF_TP" name="s_DOF_TP" class="dews-ui-dropdownlist basic" data-dews-value-field="SYSDEF_CD" data-dews-text-field="SYSDEF_NM" data-dews-show-tooltip="true" data-dews-option-label-value="" data-dews-option-label-text="" data-dews-show-value-tooltip="true" data-dews-use-numkey="false"></select>
       </span>
     </li>
-    <li style="display: none;">
+    <li>
       <label class="dews-ui-multilingual">사원</label>
       <span>
         <input type="text" id="s_EMP_NO" name="s_EMP_NO" class="dews-ui-codepicker basic" data-dews-help-code="H_HR_EMP_MST_S" data-dews-code-field="EMP_NO" data-dews-text-field="KOR_NM" data-dews-help-title="사원 도움창" data-dews-help-custom="false" data-dews-help-size="big" data-dews-ajax="true" />
@@ -72,12 +72,12 @@
     /* 
       * 행사참가직원등록
       * 작성자 : 서장대
-      * 작성일 : 2023-08-22
+      * 작성일 : 2023-09-13
       */
     //self.cdp1~~~
     
     
-    // 메인버튼 삭제 버튼의 기본 확인 메시지 사용 여부 설정
+    // 메인버튼 삭제 버튼의 기본 확인 메시지 사용 여부 설정 
     self.mainButtons.delete.useDefaultConfirm = false;
     
     
@@ -89,7 +89,7 @@
       transport: {
         read: {
           type: 'post',
-          url: dews.url.getApiUrl('HR', 'PAMODM01800Service', 'pamodm01800_listMaster'),
+          url: dews.url.getApiUrl('HR', 'HRPamodm01800_X10005Service', 'list_HR_STRK_INFO_X10005MST'),
           data: function () {
             return {
               dof_tp: self.s_DOF_TP.value(),
@@ -200,7 +200,7 @@
     dews.ui.mainbuttons.localize.disable(true);
     dews.ui.mainbuttons.add.click(/*d1cbdcb0-8f4b-4a3e-9937-683f712ca116*/ function () {
         try {
-            self.grid1.addRow();
+    
             self.s_EMP_NO.open(); // 행 추가 후 사원도움창 오픈
             //self.grid1.setCellValue(self.grid1.select(), "COMPANY_CD", '5000');
             // self.grid1.setCellValue(self.grid1.select(), "EMP_NO", 'jueunp'); // 사원번호
@@ -307,7 +307,7 @@
                     // // 서비스 파라미터명과 데이터소스명이 다른경우
                     // @dzParam (key를 serviceParameter라고 부름) //dews.api.post 하면 Promise 객체 반환
     
-                    dews.api.post(dews.url.getApiUrl('HR', 'PAMODM01800Service', 'pamodm01800_save'), { // dews.url.getApiUrl
+                    dews.api.post(dews.url.getApiUrl('HR', 'HRPamodm01800_X10005Service', 'save_HR_STRK_INFO_X10005MST'), { // dews.url.getApiUrl
                         async: false,
                         data: {
                             //ServiceParameterName : ServiceParameterValue
@@ -340,6 +340,7 @@
     self.s_DOF_TP.setDataSource(self.pipeData_ZC01_10005);
     self.s_EMP_NO.on('codedialog', /*cb79863b-31a6-46cd-b298-9bc53ff1a028*/ function (e) {
         e.callback = function (s) {
+            self.grid1.addRow();
             self.grid1.setCellValue(self.grid1.select(), 'EMP_NO', s.EMP_NO)
             self.grid1.setCellValue(self.grid1.select(), 'KOR_NM', s.KOR_NM)
             self.grid1.setCellValue(self.grid1.select(), 'JNCO_DT', s.JNCO_DT)
@@ -442,7 +443,7 @@
         },
         {
           field: 'RETM_DT',
-          title: '퇴직예정일',
+          title: '퇴직\n예정일',
           width: 60,
           attributes: { class: 'readonly' },
           formats: {

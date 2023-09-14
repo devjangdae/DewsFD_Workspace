@@ -75,7 +75,7 @@
     </buttonGroup>
     <containerPanel uid="containerPanel-1505787729725" height_type="px" fitBottom="true" containerResize="false">
       <containerItem uid="containerItem-1505787729727" width_type="px" location="normal">
-        <grid uid="grid-1505787733564" designSummary="7dfd040a-d7f3-4a02-ac96-c14588c4f882" mockupData="" id="grid1" dataSource="dataSource2" height_type="px" height="295" editable="false" movable="false" rowNo="true" selectable="false" checkable="true" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+        <grid uid="grid-1505787733564" mockupData="" id="jobClassGrid" dataSource="dataSource2" height_type="px" height="295" editable="false" movable="false" rowNo="true" selectable="false" checkable="true" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
           <mockupText>WWVzLE5DU+yngeustCwwMjAyMDIwMTAxLDE5djIgLDAyICzqsr3smIHCt+2ajOqzhMK37IKs66y0LCAwMiwg7LSd66y044aN7J247IKsLCAwMiwg7J247IKswrfsobDsp4EgLDAxICzsnbjsgqwsMDEgLOyduOyCrOq4sO2ajSw2LA0KWWVzLO2ajOyCrOqzoOycoOyngeustCwwMjAyMDIwMTAxLDE5djIsMDIgLOqyveyYgcK37ZqM6rOEwrfsgqzrrLQsIDAyLCDstJ3rrLTjho3snbjsgqwsIDAyLCDsnbjsgqzCt+yhsOyngSwgMDEsIOyduOyCrCwgMDIsIOyduOyCrO2YgeyLoCw2LA==</mockupText>
           <columns>
             <column uid="cc77e313-fedc-421e-bca0-e727be09c05b" field="USE_YN" title="사용여부" width="60" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -392,7 +392,9 @@
             </column>
           </columns>
           <filter filterType="Boolean" filter="true" iconVisible="false" />
-          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="" />
+          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+            <gridContextItems />
+          </contextObject>
           <detailGrid addedRowDataSourceRead="true" />
           <gridGroupColumns />
           <fixed colCount="0" rightColCount="0" />
@@ -416,7 +418,7 @@
     </buttonGroup>
     <containerPanel uid="containerPanel-1596587420123" height_type="px" containerResize="false">
       <containerItem uid="containerItem-1596587420623" width_type="px" width="443" location="left">
-        <grid uid="grid-1596588238855" mockupData="" id="grid2" dataSource="dataSource3" height_type="px" height="200" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+        <grid uid="grid-1596588238855" mockupData="" id="classDtlGrid" dataSource="dataSource3" height_type="px" height="200" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
           <mockupText>MSwg7J247IKs7KCE6561IOyImOumve2VmOq4sCw2DQoyLCDsnbjroKXsmrTsmIHqs4Ttmo0g7IiY66a97ZWY6riwLDY=</mockupText>
           <columns>
             <column uid="816adc3b-7ca1-4d71-811e-d7ceb3922fde" field="ABIILITY_NM" title="능력단위명" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -535,7 +537,9 @@
             </column>
           </columns>
           <filter filterType="Boolean" filter="true" iconVisible="false" />
-          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="" />
+          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+            <gridContextItems />
+          </contextObject>
           <detailGrid addedRowDataSourceRead="true" />
           <gridGroupColumns />
           <fixed colCount="0" rightColCount="0" />
@@ -554,7 +558,7 @@
       <containerItem uid="containerItem-1596588204933" width_type="px" width="" location="normal">
         <arcodienPanel uid="arcodienPanel-1596708446178" arcodien_height="0" item_height="0" arcodien_type="single" itemPadding="false">
           <arcodienItem uid="arcodienItem-1596708446703" item_title="수행준거내역" item_height="0" item_disabled="false" item_open="false" item_hide="false">
-            <grid uid="grid-1596708503222" mockupData="" id="grid4" dataSource="dataSource3" height_type="px" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+            <grid uid="grid-1596708503222" mockupData="" id="perfHistGrid" dataSource="dataSource3" height_type="px" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
               <mockupText>MSAs7KGw7KeB7J2YIOu5hOyghOqzvCDspJHjho3snqXquLAg7IKs7JeF7KCE65617JeQIOuUsOudvCDsnbjsgqzsoITrnrUg7ZmY6rK97J2EIOu2hOyEne2VoCDsiJgg7J6I64ukLg0KMiAs7J247IKs7KCE6561IO2ZmOqyveu2hOyEnSDqsrDqs7zsl5Ag65Sw6528IOykkeOGjeyepeq4sCDsnbjsgqzsoITrnrXsnZgg67Cp7Zal7ISx7J2EIOyImOumve2VoCDsiJgg7J6I64ukLg0KMyAs7KSR44aN7J6l6riwIOuwqe2WpeyEseyXkCDrlLDrnbwg64u57ZW0IOyXsOuPhOydmCDsnbjsgqzsoITrnrXsnYQg7IiY66a97ZWgIOyImCDsnojri6Qu</mockupText>
               <columns>
                 <column uid="5ecef3cf-5935-4c86-82fe-3646e65bb2eb" field="ABIILITY_NM" title="능력단위명" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -673,7 +677,9 @@
                 </column>
               </columns>
               <filter filterType="Boolean" filter="true" iconVisible="false" />
-              <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="" />
+              <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+                <gridContextItems />
+              </contextObject>
               <detailGrid addedRowDataSourceRead="true" />
               <gridGroupColumns />
               <fixed colCount="0" rightColCount="0" />
@@ -690,7 +696,7 @@
             </grid>
           </arcodienItem>
         </arcodienPanel>
-        <grid uid="grid-1596588392880" mockupData="" id="grid3" dataSource="dataSource4" height_type="px" height="161" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+        <grid uid="grid-1596588392880" mockupData="" id="rqmtsGrid" dataSource="dataSource4" height_type="px" height="161" editable="false" movable="false" rowNo="true" selectable="false" checkable="false" pasteAddRowEvent="false" sortable="false" shiftCheck="false" autoBind="true" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다" fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
           <mockupText>7KCE65617KCBIOyduOyggeyekOybkOq0gOumrCwg7ZmY6rK967aE7ISdIOuKpeugpSzsoITrnrXsoIEg7IKs6rOgDQrsnbjsgqzsoITrnrUg7ZmY6rK967aE7ISd67KVLOu5hOyghOqzvCDspJHsnqXquLAg7IKs7JeFIOyghOuetSDrtoTshJ0s7Y+s6rSE7KCBIOyLnOqwgQ0K6rSA66as7ZqM6rOELCzqsbDsi5zsoIEg7Iuc6rCB</mockupText>
           <columns>
             <column field="NEED1_NM" title="필요지식" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -752,7 +758,9 @@
             </column>
           </columns>
           <filter filterType="Boolean" filter="true" iconVisible="false" />
-          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="" />
+          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+            <gridContextItems />
+          </contextObject>
           <detailGrid addedRowDataSourceRead="true" />
           <gridGroupColumns />
           <fixed colCount="0" rightColCount="0" />

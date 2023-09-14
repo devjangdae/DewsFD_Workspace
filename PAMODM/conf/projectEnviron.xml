@@ -19,5 +19,9 @@
       <outputPath>C:\Users\admin\gerp-front-bootstrap\view\HR\PAMODM</outputPath>
       <outputUse>True</outputUse>
     </output>
+    <output>
+      <outputPath>C:\Users\admin\Documents\Team4_kosa_final\devjangdae\front</outputPath>
+      <outputUse>True</outputUse>
+    </output>
   </outputs>
 </Environment>
