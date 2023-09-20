@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-20T09:25:20.154243+09:00</builddate>
+      <builddate>2023-09-20T11:48:59.630914+09:00</builddate>
       <createdate>2023-08-19T16:24:30.0402565+09:00</createdate>
-      <modifieddate>2023-09-20T09:25:20.1552401+09:00</modifieddate>
+      <modifieddate>2023-09-20T11:48:59.630914+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="normal" type="information" />
@@ -24,7 +24,7 @@
     <conditionPanel uid="conditionPanel-fc07f1d2" id="conditionpanel1" margin="false" optional="true" optionalcollapsed="true" columnLength="3" labelAlign="right">
       <conditionGroup uid="conditionGroup-5a26ef4a" type="required">
         <conditionItem uid="conditionItem-dc78f77f" columnSize="1" text="사업장" state="basic">
-          <multicodepicker uid="multicodepicker-5a2dcc6d" id="s_BIZAREA_CD" disabled="false" readonly="false" ajax="false" state="basic" helpCode="H_MA_BIZAREA_MST_S" codeField="BIZAREA_CD" textField="BIZAREA_NM" virtualScroll="false" helpCustom="false" helpParams_type="mapping" helpTitle="사업장 도움창" helpSize="medium" width_type="px">
+          <multicodepicker uid="multicodepicker-5a2dcc6d" id="s_BIZAREA_CD" disabled="false" readonly="false" ajax="false" state="basic" helpCode="custom" codeField="BIZAREA_CD" textField="BIZAREA_NM" virtualScroll="false" helpCustom="true" helpURLCustom="~/view/HR/PAMODM01800_bizCode_X10005" helpParams_type="mapping" helpTitle="사업장 도움창" helpSize="medium" helpHeight="400" helpWidth="300" width_type="px">
             <mapping>
               <param parameter="company_cd" applyType="constant" />
               <param parameter="cd_company_exc" applyType="constant" />

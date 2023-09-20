@@ -55,7 +55,9 @@
             </column>
           </columns>
           <filter filterType="Boolean" filter="true" iconVisible="false" />
-          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="" />
+          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+            <gridContextItems />
+          </contextObject>
           <detailGrid addedRowDataSourceRead="true" />
           <gridGroupColumns />
           <fixed colCount="0" rightColCount="0" />
@@ -90,10 +92,12 @@
   <pageCssStyle><![CDATA[]]></pageCssStyle>
   <stylesheets />
   <javascripts>
-    <javascript id="7fc97d16-ddd3-48ea-853d-5ee6474250cd"><![CDATA[var thisDlg = dews.ui.dialog(self.$content.prop("id"));]]></javascript>
+    <javascript id="7fc97d16-ddd3-48ea-853d-5ee6474250cd"><![CDATA[var thisDlg = dews.ui.dialog(self.$content.prop("id"));
+]]></javascript>
     <javascript id="b480bc46-5075-4494-95f6-a1efdef7890b"><![CDATA[thisDlg.buttons.ok.on('click', function (e) {
   thisDlg.ok(self.grid1.dataItems(self.grid1.getCheckedIndex()));
-});]]></javascript>
+});
+]]></javascript>
   </javascripts>
   <settings />
   <datas />
