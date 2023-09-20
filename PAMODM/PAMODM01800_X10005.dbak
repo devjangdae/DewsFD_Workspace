@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-20T11:48:59.630914+09:00</builddate>
+      <builddate>2023-09-20T13:59:49.9211864+09:00</builddate>
       <createdate>2023-08-19T16:24:30.0402565+09:00</createdate>
-      <modifieddate>2023-09-20T11:48:59.630914+09:00</modifieddate>
+      <modifieddate>2023-09-20T13:59:49.9211864+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="normal" type="information" />
@@ -724,15 +724,16 @@ self.version.service = 'HRPamodm01800_X10005Service';
     }
 }]]></javascript>
     <javascript id="cb79863b-31a6-46cd-b298-9bc53ff1a028"><![CDATA[function (e) {
-    // if (self.s_BIZAREA_CD.codes() == "" || self.s_BIZAREA_CD.codes() == undefined || self.s_BIZAREA_CD.codes() == null) {
-    //     dews.alert("사업장은 필수입력 항목입니다.", 'warning');
-    //     return false;
-    // }
+    console.log(1);
+    if (self.s_BIZAREA_CD.codes() == "" || self.s_BIZAREA_CD.codes() == undefined || self.s_BIZAREA_CD.codes() == null) {
+        dews.alert("사업장은 필수입력 항목입니다.", 'warning');
+        return false;
+    }
 
-    // if (self.s_DEPT_CD.codes() == "" || self.s_DEPT_CD.codes() == undefined || self.s_DEPT_CD.codes() == null) {
-    //     dews.alert("부서는 필수입력 항목입니다.", 'warning');
-    //     return false;
-    // }
+    if (self.s_DEPT_CD.codes() == "" || self.s_DEPT_CD.codes() == undefined || self.s_DEPT_CD.codes() == null) {
+        dews.alert("부서는 필수입력 항목입니다.", 'warning');
+        return false;
+    }
     e.callback = function (s) {
         self.grid1.addRow();
         self.grid1.setCellValue(self.grid1.select(), 'EMP_NO', s.EMP_NO)
