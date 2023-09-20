@@ -1,6 +1,6 @@
-<!--##ca37cb6d-4071-4ad2-bd48-d60c297d589c##-->
+<!--##9358498d-43fe-42cb-824b-5af7b68fd304##-->
 <!--##PAMODM01800_X10005##-->
-<!--##fbpUGc1v+tE8ApHDIUdnFyxSOpEymbbCm8FCTRCANuHjL/2y/J6wX7Ov6vftNeKW##-->
+<!--##6B2GP7vjcZ8oDKrAcduBjlAZTF6qwgc+3Jpl7VGcVkRXkvAbKZVVIHWP9FGpXk1p##-->
 <!--
   DEWS UI/UX IDE - Build Result - v1.5
   # PageID: PAMODM01800_X10005
@@ -14,9 +14,9 @@
 <div id="conditionpanel1" class="dews-ui-condition-panel">
   <ul class="required-area">
     <li>
-      <label class="dews-ui-multilingual">회사</label>
+      <label class="dews-ui-multilingual">사업장</label>
       <span>
-        <select id="s_COMPANY_CD" name="s_COMPANY_CD" class="dews-ui-multicodepicker basic" data-dews-help-code="H_MA_COMPANY_S" data-dews-code-field="COMPANY_CD" data-dews-text-field="COMPANY_NM" data-dews-help-title="회사 도움창" data-dews-help-custom="false" data-dews-help-size="medium" />
+        <select id="s_BIZAREA_CD" name="s_BIZAREA_CD" class="dews-ui-multicodepicker basic" data-dews-help-code="H_MA_BIZAREA_MST_S" data-dews-code-field="BIZAREA_CD" data-dews-text-field="BIZAREA_NM" data-dews-help-title="사업장 도움창" data-dews-help-custom="false" data-dews-help-size="medium" />
       </span>
     </li>
     <li>
@@ -80,6 +80,9 @@
     // 메인버튼 삭제 버튼의 기본 확인 메시지 사용 여부 설정 
     self.mainButtons.delete.useDefaultConfirm = false;
     
+    var self = this;
+    self.version.view = '1.0.23091501';
+    self.version.service = 'HRPamodm01800_X10005Service';
     
     
     
@@ -96,7 +99,7 @@
               start_dt: self.s_START_DT.getStartDate(),
               end_dt: self.s_START_DT.getEndDate(),
               dept_cd: self.s_DEPT_CD.codes().join('|'),
-              company_cd: self.s_COMPANY_CD.codes().join('|')
+              bizarea_cd: self.s_BIZAREA_CD.codes().join('|')
             };
           }
         }
@@ -115,7 +118,9 @@
             { field: 'PRMT_DT', editable: false, dataType: 'string' }, 
             { field: 'RETM_DT', editable: false, dataType: 'string' }, 
             { field: 'START_DT', editable: false, dataType: 'string' }, 
+            { field: 'ORIG_START_DT', editable: false, dataType: 'string' }, 
             { field: 'END_DT', editable: false, dataType: 'string' }, 
+            { field: 'ORIG_END_DT', editable: false, dataType: 'string' }, 
             { field: 'TM_CD_NM', editable: false, dataType: 'string' }, 
             { field: 'DOF_TP', editable: false, dataType: 'string' }, 
             { field: 'START_TM', editable: false, dataType: 'string' }, 
@@ -198,6 +203,8 @@
     
     
     dews.ui.mainbuttons.localize.disable(true);
+    dews.ui.mainbuttons.approval.hide();
+    dews.ui.mainbuttons.etnapproval.hide();
     dews.ui.mainbuttons.add.click(/*d1cbdcb0-8f4b-4a3e-9937-683f712ca116*/ function () {
         try {
     
@@ -288,6 +295,7 @@
             dews.error(error);
         }
     });
+    dews.ui.mainbuttons.print.hide();
     dews.ui.mainbuttons.save.click(/*78e0612d-4142-4edb-9167-158e5496e7a0*/ function () {
         // // TODO: 데이터소스를 저장합니다.
         if (self.ds1.getDirtyDataCount() == 0) {
@@ -329,7 +337,7 @@
             dews.error(error);
         }
     });
-    self.s_COMPANY_CD.setHelpParams(function () {
+    self.s_BIZAREA_CD.setHelpParams(function () {
       return {
         company_cd: '',
         cd_company_exc: '',
@@ -339,6 +347,15 @@
     });
     self.s_DOF_TP.setDataSource(self.pipeData_ZC01_10005);
     self.s_EMP_NO.on('codedialog', /*cb79863b-31a6-46cd-b298-9bc53ff1a028*/ function (e) {
+        // if (self.s_BIZAREA_CD.codes() == "" || self.s_BIZAREA_CD.codes() == undefined || self.s_BIZAREA_CD.codes() == null) {
+        //     dews.alert("사업장은 필수입력 항목입니다.", 'warning');
+        //     return false;
+        // }
+    
+        // if (self.s_DEPT_CD.codes() == "" || self.s_DEPT_CD.codes() == undefined || self.s_DEPT_CD.codes() == null) {
+        //     dews.alert("부서는 필수입력 항목입니다.", 'warning');
+        //     return false;
+        // }
         e.callback = function (s) {
             self.grid1.addRow();
             self.grid1.setCellValue(self.grid1.select(), 'EMP_NO', s.EMP_NO)
@@ -470,6 +487,12 @@
           }
         },
         {
+          field: 'ORIG_START_DT',
+          title: 'ORIG_시작일',
+          width: 60,
+          visible: false
+        },
+        {
           field: 'END_DT',
           title: '종료일',
           width: 80,
@@ -482,6 +505,12 @@
             type: 'date',
             format: 'yyyy-MM-dd'
           }
+        },
+        {
+          field: 'ORIG_END_DT',
+          title: 'ORIG_종료일',
+          width: 60,
+          visible: false
         },
         {
           field: 'TM_CD_NM',
@@ -507,6 +536,10 @@
           formats: {
             type: 'time',
             format: 'HH:MM'
+          },
+          editor: {
+            type: 'time',
+            format: 'HH:mm'
           }
         },
         {
@@ -516,6 +549,10 @@
           formats: {
             type: 'time',
             format: 'HH:MM'
+          },
+          editor: {
+            type: 'time',
+            format: 'HH:mm'
           }
         },
         {
@@ -523,11 +560,16 @@
           title: '휴무\n시간',
           width: 60,
           formats: {
-            type: 'number'
+            type: 'number',
+            format: '###,###'
           },
           editor: {
             type: 'number',
-            max: 99999
+            format: '###,###',
+            min: 0,
+            max: 99998.99,
+            increaseType: 'plus',
+            increaseValue: 1
           }
         },
         {
@@ -535,20 +577,95 @@
           title: '이탈\n시간',
           width: 60,
           formats: {
-            type: 'number'
+            type: 'number',
+            format: '###,###'
           },
           editor: {
             type: 'number',
-            max: 99999
+            format: '###,###',
+            min: 0,
+            max: 99998.99,
+            increaseType: 'plus',
+            increaseValue: 1
           }
         }
       ],
       fixed: {
         colCount: 0,
         rightColCount: 0
-      }
+      },
+      save: /*30543e75-538d-43ed-b711-570a2e8757d6*/ function (e) {
+            var thisGrid = e.grid;
+    
+            var startDate = e.row.data.START_DT; // 시작일
+            var endDate = e.row.data.END_DT; // 종료일
+            var startTime = e.row.data.START_TM; // 시작시간
+            var endTime = e.row.data.END_TM; // 종료시간
+    
+            if (startDate != null) { // 시작일이 변경 되면
+                var p_startDate = getFormatDate(startDate);
+                thisGrid.setCellValue(e.row.index, 'START_DT', startDate, false);
+            }
+    
+            if (startDate != null && endDate != null) { // 둘 다 입력 되면
+                var dateDiff = ((endDate - startDate) / (60 * 60 * 24 * 1000)); // 시작일과 종료일의 일수 계산
+                if (dateDiff < 0) {
+                    var fieldName = e.cell.field;
+                    if (fieldName == 'START_DT') {
+                        dews.ui.snackbar.warning("시작일은 종료일과 같거나 이전 날짜이어야 합니다.");
+                    } else if (fieldName == 'END_DT') {
+                        dews.ui.snackbar.warning("종료일은 시작일과 같거나 이후 날짜이어야 합니다.");
+                    }
+                    thisGrid.setCellValue(e.row.index, fieldName, '', false); // 변경된 날짜 피커 초기화
+                } else if (dateDiff == 0) { // 같은 날짜를 선택하면
+                    if ((startTime != null && startTime != '' && startTime != undefined) && (endTime != null && endTime != '' && endTime != undefined)) { // 둘 다 입력 되면
+                        var timeDiff = (endTime - startTime);
+                        if (timeDiff <= 0) {
+                            var fieldName = e.cell.field;
+                            if (fieldName == 'START_TM') {
+                                dews.ui.snackbar.warning("시작시간은 반드시 종료시간 이전으로 설정되어야 합니다.");
+                                thisGrid.setCellValue(e.row.index, fieldName, '', false); // 현재 선택한 피커 초기화
+                            } else if (fieldName == 'END_TM') {
+                                dews.ui.snackbar.warning("종료시간은 반드시 시작시간 이후로 설정되어야 합니다.");
+                                thisGrid.setCellValue(e.row.index, fieldName, '', false); // 현재 선택한 피커 초기화
+                            } else {
+                                dews.ui.snackbar.warning("날짜를 변경했습니다. 시작시간과 종료시간을 다시 입력하세요.");
+                                thisGrid.setCellValue(e.row.index, 'START_TM', '', false); // 시간 피커 초기화
+                                thisGrid.setCellValue(e.row.index, 'END_TM', '', false); // 시간 피커 초기화
+                            }
+                        }
+                    }
+                } else {
+                    thisGrid.setCellValue(e.row.index, 'START_DT', startDate, false);
+                    thisGrid.setCellValue(e.row.index, 'END_DT', endDate, false);
+                }
+            }
+        }
+    
     });
     
+    
+    
+    
+    /*07b6a485-770a-4d2f-9798-f0234f07f1fb*/ 
+    function getFormatDate(date) {
+        var year = date.getFullYear();              //yyyy
+        console.log("year: " + year);
+    
+        var month = (1 + date.getMonth());          //M
+        console.log("month: " + month);
+        month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+        console.log("CC month: " + month);
+    
+        var day = date.getDate();                   //d
+        console.log("day" + day);
+        day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+        console.log("CCday: " + day);
+    
+        console.log("return: " + year + '' + month + '' + day);
+    
+        return year + '' + month + '' + day;
+    }
     
     
     
