@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-20T13:59:49.9211864+09:00</builddate>
+      <builddate>2023-09-21T10:10:06.905217+09:00</builddate>
       <createdate>2023-08-19T16:24:30.0402565+09:00</createdate>
-      <modifieddate>2023-09-20T13:59:49.9211864+09:00</modifieddate>
+      <modifieddate>2023-09-21T10:10:06.905217+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="normal" type="information" />
@@ -734,11 +734,16 @@ self.version.service = 'HRPamodm01800_X10005Service';
         dews.alert("부서는 필수입력 항목입니다.", 'warning');
         return false;
     }
-    e.callback = function (s) {
+    e.callback = function (data) {
         self.grid1.addRow();
-        self.grid1.setCellValue(self.grid1.select(), 'EMP_NO', s.EMP_NO)
-        self.grid1.setCellValue(self.grid1.select(), 'KOR_NM', s.KOR_NM)
-        self.grid1.setCellValue(self.grid1.select(), 'JNCO_DT', s.JNCO_DT)
+        self.grid1.setCellValue(self.grid1.select(), 'EMP_NO', data.EMP_NO);
+        self.grid1.setCellValue(self.grid1.select(), 'KOR_NM', data.KOR_NM);
+        self.grid1.setCellValue(self.grid1.select(), 'JNCO_DT', data.JNCO_DT);
+
+        //추가 행 데이터 setCellValue
+        get_org(data.COMPANY_CD, data.DEPT_CD);
+        get_ogrp_cd_pstn_cd(data.COMPANY_CD, data.OGRP_CD, data.PSTN_CD);
+        get_prmt_dt_retm_dt(data.COMPANY_CD, data.EMP_NO);
     }
 }]]></javascript>
     <javascript id="30543e75-538d-43ed-b711-570a2e8757d6"><![CDATA[function (e) {
@@ -750,8 +755,14 @@ self.version.service = 'HRPamodm01800_X10005Service';
         var endTime = e.row.data.END_TM; // 종료시간
 
         if (startDate != null) { // 시작일이 변경 되면
-            var p_startDate = getFormatDate(startDate);
+
             thisGrid.setCellValue(e.row.index, 'START_DT', startDate, false);
+
+            //추가 행 시작일 변경 시간코드 setCellValue
+            //console.log(thisGrid.getCellValue(self.grid1.select(), 'START_DT'));
+            var bwrk_dt = getFormatDate(thisGrid.getCellValue(self.grid1.select(), 'START_DT'));
+            // data.COMPANY_CD   data.BIZAREA_CD 모름 이거 해결해야함.
+            get_tm_cd_nm(e.row.data.EMP_NO, bwrk_dt);
         }
 
         if (startDate != null && endDate != null) { // 둘 다 입력 되면
@@ -792,21 +803,80 @@ self.version.service = 'HRPamodm01800_X10005Service';
     <javascript id="07b6a485-770a-4d2f-9798-f0234f07f1fb"><![CDATA[
 function getFormatDate(date) {
     var year = date.getFullYear();              //yyyy
-    console.log("year: " + year);
+    //console.log("year: " + year);
 
     var month = (1 + date.getMonth());          //M
-    console.log("month: " + month);
+    //console.log("month: " + month);
     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-    console.log("CC month: " + month);
+    //console.log("CC month: " + month);
 
     var day = date.getDate();                   //d
-    console.log("day" + day);
+    //console.log("day" + day);
     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-    console.log("CCday: " + day);
+    //console.log("CCday: " + day);
 
-    console.log("return: " + year + '' + month + '' + day);
+    //console.log("return: " + year + '' + month + '' + day);
 
     return year + '' + month + '' + day;
+}
+
+function get_org(company_cd, dept_cd) {
+    dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_org"), {
+        async: false,
+        data: {
+            company_cd: company_cd,
+            dept_cd: dept_cd
+        }
+    }).done(function (data) {
+        self.grid1.setCellValue(self.grid1.select(), 'ORG', data);
+    }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+    });
+}
+
+function get_ogrp_cd_pstn_cd(company_cd, ogrp_cd, pstn_cd) {
+    dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_ogrp_cd_pstn_cd"), {
+        async: false,
+        data: {
+            company_cd: company_cd,
+            ogrp_cd: ogrp_cd,
+            pstn_cd: pstn_cd
+        }
+    }).done(function (data) {
+        self.grid1.setCellValue(self.grid1.select(), 'OGRP_CD', data[0].SYSDEF_NM);
+        self.grid1.setCellValue(self.grid1.select(), 'PSTN_CD', data[1].SYSDEF_NM);
+    }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+    });
+}
+
+function get_prmt_dt_retm_dt(company_cd, emp_no) {
+    dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_prmt_dt_retm_dt"), {
+        async: false,
+        data: {
+            company_cd: company_cd,
+            emp_no: emp_no
+        }
+    }).done(function (data) {
+        self.grid1.setCellValue(self.grid1.select(), 'PRMT_DT', data[0].DATE_VALUE);
+        self.grid1.setCellValue(self.grid1.select(), 'RETM_DT', data[1].DATE_VALUE);
+    }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+    });
+}
+
+function get_tm_cd_nm(emp_no, bwrk_dt) {
+    dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_tm_cd_nm"), {
+        async: false,
+        data: {
+            emp_no: emp_no,
+            bwrk_dt: bwrk_dt
+        }
+    }).done(function (data) {
+        self.grid1.setCellValue(self.grid1.select(), 'TM_CD_NM', data);
+    }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+    });
 }
 
 

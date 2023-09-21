@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page title="계약상태 도움창" name="PAMODM01800_bizCode_X10005" type="codehelpdlg">
-  <canvas uid="canvas-1485142915113" type="codehelpdlg" dialogsize="big" title="계약상태 도움창" preReady="7fc97d16-ddd3-48ea-853d-5ee6474250cd" ready="b480bc46-5075-4494-95f6-a1efdef7890b" component="" function="">
+<page title="사업장 도움창" name="PAMODM01800_bizCode_X10005" type="codehelpdlg">
+  <canvas uid="canvas-1485142915113" type="codehelpdlg" dialogsize="big" title="사업장 도움창" preReady="7fc97d16-ddd3-48ea-853d-5ee6474250cd" ready="b480bc46-5075-4494-95f6-a1efdef7890b" component="" function="">
     <pageInformation>
       <version>1.0</version>
       <create>hyerin0306</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-20T11:45:24.7442064+09:00</builddate>
+      <builddate>2023-09-20T11:51:59.0330202+09:00</builddate>
       <createdate>2020-08-10T16:33:20.7412803+09:00</createdate>
-      <modifieddate>2023-09-20T11:45:24.7442064+09:00</modifieddate>
+      <modifieddate>2023-09-20T11:51:59.0330202+09:00</modifieddate>
     </pageInformation>
     <containerPanel uid="containerPanel-1597044858185" height_type="px" fitBottom="true" containerResize="false">
       <containerItem uid="containerItem-1597044859188" width_type="px" location="normal">
