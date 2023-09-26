@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page title="사원선정 도움창" name="PAMPHM00500_EMP_POP" type="dialog">
+  <canvas uid="canvas-1485142915200" type="dialog" dialogsize="except" title="사원선정 도움창" preReady="e83a54e5-fccb-400f-a8bd-7fdc4a41b326" ready="304396a5-fcf1-48eb-aafb-837d14f1583c" component="" function="">
+    <pageInformation>
+      <version>1.0</version>
+      <create>shindong</create>
+      <modify>hjs0830</modify>
+      <builddate>2023-02-22T17:44:16.34529+09:00</builddate>
+      <createdate>2021-06-29T10:24:40.8320275+09:00</createdate>
+      <modifieddate>2023-02-22T17:44:16.34529+09:00</modifieddate>
+    </pageInformation>
+    <conditionPanel uid="conditionPanel-1624929933187" id="pamphm00500_emp_pop_cp" margin="false" optional="false" optionalcollapsed="true" columnLength="3" labelAlign="right">
+      <conditionGroup uid="conditionGroup-1624929933314" type="required">
+        <conditionItem uid="conditionItem-1624929960942" style="margin-right:25px;margin-left:42px;" columnSize="1" text="입사일자">
+          <periodpicker uid="periodpicker-1624929961039" id="pp_startDate" disabled="false" readonly="false" state="required" startDate_type="value" endDate_type="value" predefined="false" buttons="true" width_type="px" />
+        </conditionItem>
+        <conditionItem uid="conditionItem-1624929991159" style="margin-right:25px;" columnSize="1" text="고용형태">
+          <dropdownlist uid="dropdownlist-1624929991269" id="dd_empyTpCd" autoBind="true" dataSource="empyTpCdDataSource" valueField="SYSDEF_CD" textField="SYSDEF_NM" pipeparam="" useDefault="false" defaultValue="" defaultText="" width_type="px" disabled="false" readonly="false" autoOpen="false" useNumkey="false" showTooltip="true" showValueTooltip="true" state="basic" />
+        </conditionItem>
+        <conditionItem uid="conditionItem-1624930024318" columnSize="1" text="검색어">
+          <textbox uid="textbox-1624930024444" id="txt_search" disabled="false" readonly="false" state="basic" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false" />
+        </conditionItem>
+      </conditionGroup>
+    </conditionPanel>
+    <containerPanel uid="containerPanel-1574656735968" height_type="px" fitBottom="true" containerResize="false">
+      <containerItem uid="containerItem-1574656736365" width_type="px" location="normal">
+        <grid uid="grid-1574764074090" mockupData="" id="selectEmpGrid" dataSource="selectEmpDataSource" height_type="px" height="290" editable="false" movable="false" rowNo="true" selectable="false" checkable="true" pasteAddRowEvent="false" sortable="multiple" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+          <columns>
+            <column field="TEST_SCHEMA" title="동적그리드 바인딩을 위한 임시 스키마" width="60" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+              <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
+                <referenceFieldArray />
+              </mergeObject>
+              <headerCheck used="false" location="right" />
+              <footer predefined="false" currency_type="value" currency="" align="center">
+                <group predefined="false" />
+              </footer>
+              <footerCollection />
+              <headerSummary predefined="false" currency_type="value" currency="" align="center" />
+              <headerSummaryCollection />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
+              <customExport check="" />
+            </column>
+          </columns>
+          <filter filterType="Boolean" filter="true" iconVisible="false" />
+          <contextObject excelDownload="true" fixed="true" search="true" excelDownloadExpandAll="true" excelFileNameSuffixDate="false" excelFileNameSuffixDateFormat="">
+            <gridContextItems />
+          </contextObject>
+          <detailGrid addedRowDataSourceRead="true" />
+          <gridGroupColumns />
+          <fixed colCount="0" rightColCount="0" />
+          <styles heightTyp="string">
+            <rowNo />
+            <cellBorder />
+            <font bold="false" />
+            <padding />
+            <heightObject />
+          </styles>
+          <note>
+            <keys />
+          </note>
+        </grid>
+      </containerItem>
+    </containerPanel>
+    <buttonGroup uid="buttonGroup-1485142915211" align="center" bottom="true">
+      <button uid="button-1574670609998" id="btnOk" text="적용" buttonType="confirm" useemphasize="false" emphasize="" disabled="false" click="5c7a8f7e-3374-4db4-bdc8-0c18ebc56862" />
+      <button uid="button-1574670611203" id="btnCancel" text="취소" buttonType="confirm" useemphasize="false" emphasize="" disabled="false" click="850773bc-8368-4dc6-86e0-4282c68f93ce" />
+    </buttonGroup>
+  </canvas>
+  <dataSources>
+    <datasource uid="datasource-e5c1aa0f0e4447e282b94999073e4139" id="selectEmpDataSource" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping />
+      <columns>
+        <column field="TEST_SCHEMA" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="동적그리드 바인딩을 위한 임시 스키마" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-6bc8e1c286c94c22ae68f3c49b02cf71" id="empyTpCdDataSource" isTreeGrid="false" grid="false" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="None" isPost="false">
+      <mapping />
+      <columns />
+      <widgetSampleDatas />
+    </datasource>
+    <datasource uid="datasource-a0547144be3f4fd98d91dbbf03a2d4b1" id="selectEmpDataSource1" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="localdata" module="" service="" urlpattern="" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping />
+      <columns>
+        <column field="TEST_SCHEMA" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="동적그리드 바인딩을 위한 임시 스키마" useAggregate="false" aggregate="" useGroup="false" />
+      </columns>
+      <widgetSampleDatas />
+    </datasource>
+  </dataSources>
+  <pageMarkDown><![CDATA[]]></pageMarkDown>
+  <pageCssStyle><![CDATA[#pamphm00500_emp_pop_cp{
+  margin-top: 5px;
+}]]></pageCssStyle>
+  <stylesheets />
+  <javascripts>
+    <javascript id="304396a5-fcf1-48eb-aafb-837d14f1583c"><![CDATA[
+initPageData();
+
+//검색어 컨트롤에서 ENTER키 입력
+{
+    self.$txt_search.on('keydown', function (e) {
+        var keycode = event.keyCode ? event.keyCode : e.which;
+        if (keycode == 13) {
+
+            if (self.pp_startDate.getStartDate() == "" || self.pp_startDate.getStartDate() == null || self.pp_startDate.getStartDate() == undefined ||
+                self.pp_startDate.getEndDate() == "" || self.pp_startDate.getEndDate() == null || self.pp_startDate.getEndDate() == undefined) {
+
+                dews.ui.requiredTooltip.show(self.$pp_startDate);
+                return false;
+            }
+
+
+            //사원선정
+            dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00500_SERVICE', 'Pamphm00500_pop_selectEmp'), {
+                async: false,
+                data: {
+                    pp_start: self.pp_startDate.getStartDate(),
+                    pp_end: self.pp_startDate.getEndDate(),
+                    empy_tp_cd: self.dd_empyTpCd.value(),
+                    txt_search: self.txt_search.text(),
+                }
+            }).done(function (data) {
+                var masterTempGrid = self.selectEmpGrid;
+                var masterTempDataSource = self.selectEmpDataSource;
+
+                console.log("11");
+                console.log("22");
+
+                masterTempDataSource.data(data);
+                //detailTempDataSource.data(data);
+            });
+        }
+    });
+}
+
+//페이지 초기화
+function initPageData() {
+
+    //계약종료일 디폴트 셋팅
+    {
+        self.pp_startDate.setMonth();
+    }
+
+    //고용형태 컨트롤 셋팅
+    {
+        objCodeDtl.HR.P00010.unshift({
+            SYSDEF_CD: "",
+            SYSDEF_NM: ""
+        });
+        self.empyTpCdDataSource.data(objCodeDtl.HR.P00010);
+        self.dd_empyTpCd.value("0");
+    }
+
+    //그리드(Master, Detail) 셋팅
+    {
+        settingSelectEmpGridFieldAndColumn();
+    }
+
+    //오토바인드
+    {
+        masterGridRead();
+    }
+}
+
+function masterGridRead() {
+    //사원선정
+    dews.api.get(dews.url.getApiUrl('HR', 'PAMPHM00500_SERVICE', 'Pamphm00500_pop_selectEmp'), {
+        async: false,
+        data: {
+            pp_start: self.pp_startDate.getStartDate(),
+            pp_end: self.pp_startDate.getEndDate(),
+            empy_tp_cd: self.dd_empyTpCd.value(),
+            txt_search: self.txt_search.text(),
+        }
+    }).done(function (data) {
+        var masterTempGrid = self.selectEmpGrid;
+        var masterTempDataSource = self.selectEmpDataSource;
+
+        console.log("11");
+        console.log("22");
+
+        masterTempDataSource.data(data);
+        //detailTempDataSource.data(data);
+    });
+}
+
+//동적으로 selectEmpGrid 컬럼 셋팅
+function settingSelectEmpGridFieldAndColumn() {
+
+    var payFixDataSource = objCodeDtl.HR.P00200;
+
+    if (payFixDataSource) {
+        fields = [];
+        columns = [];
+
+        fields.push(
+            { field: 'DEPT_CD', editable: false, dataType: 'string' },
+            { field: 'DEPT_NM', editable: false, dataType: 'string' },
+            { field: 'EMP_NO', editable: false, dataType: 'string' },
+            { field: 'KOR_NM', editable: false, dataType: 'string' },
+            { field: 'EMP_TP', editable: false, dataType: 'string' },
+            { field: 'EMP_TP_NM', editable: false, dataType: 'string' },
+            { field: 'POSI_CD', editable: false, dataType: 'string' },
+            { field: 'POSI_NM', editable: false, dataType: 'string' },
+            { field: 'PSTN_CD', editable: false, dataType: 'string' },
+            { field: 'PSTN_NM', editable: false, dataType: 'string' },
+            { field: 'SLST_CD', editable: false, dataType: 'string' },
+            { field: 'JNCO_DT', editable: false, dataType: 'string' },
+            { field: 'CONT_START_DT', editable: false, dataType: 'string' },
+            { field: 'CONT_END_DT', editable: false, dataType: 'string' }
+        );
+
+        columns.push(
+            {
+                field: 'DEPT_CD',
+                title: '부서코드',
+                width: 80,
+                visible: false
+            },
+            {
+                field: 'DEPT_NM',
+                title: '부서명',
+                width: 90,
+                align: 'left'
+            },
+            {
+                field: 'EMP_NO',
+                title: '사원번호',
+                width: 110
+            },
+            {
+                field: 'KOR_NM',
+                title: '사원명',
+                width: 90,
+                align: 'left'
+            },
+            {
+                field: 'EMP_TP',
+                title: '사원구분코드',
+                width: 60,
+                visible: false,
+                formats: {
+                    type: 'dropDown',
+                    dataSource: objCodeDtl.HR.P00220,
+                    dataValueField: 'SYSDEF_CD',
+                    dataTextField: 'SYSDEF_NM'
+                },
+            },
+            {
+                field: 'EMP_TP_NM',
+                title: '사원구분',
+                width: 80,
+                editor: {
+                    type: 'string',
+                    editable: false
+                }
+                /*
+                formats: {
+                  type: 'dropDown',
+                  dataSource: objCodeDtl.HR.P00220,
+                  dataValueField: 'SYSDEF_CD',
+                  dataTextField: 'SYSDEF_NM'
+                },
+                */
+            },
+            {
+                field: 'POSI_CD',
+                title: '직위코드',
+                width: 80,
+                visible: false,
+                formats: {
+                    type: 'dropDown',
+                    dataSource: objCodeDtl.HR.P00640,
+                    dataValueField: 'SYSDEF_CD',
+                    dataTextField: 'SYSDEF_NM'
+                }
+            },
+            {
+                field: 'POSI_NM',
+                title: '직위',
+                width: 80,
+                editor: {
+                    type: 'string',
+                    editable: false
+                }
+                /*
+                formats: {
+                  type: 'dropDown',
+                  dataSource: objCodeDtl.HR.P00640,
+                  dataValueField: 'SYSDEF_CD',
+                  dataTextField: 'SYSDEF_NM'
+                }
+                */
+            },
+            {
+                field: 'PSTN_CD',
+                title: '직급코드',
+                width: 80,
+                visible: false,
+                formats: {
+                    type: 'dropDown',
+                    dataSource: objCodeDtl.HR.P00650,
+                    dataValueField: 'SYSDEF_CD',
+                    dataTextField: 'SYSDEF_NM'
+                }
+            },
+            {
+                field: 'PSTN_NM',
+                title: '직급',
+                width: 80,
+                editor: {
+                    type: 'string',
+                    editable: false
+                }
+                /*
+                formats: {
+                  type: 'dropDown',
+                  dataSource: objCodeDtl.HR.P00650,
+                  dataValueField: 'SYSDEF_CD',
+                  dataTextField: 'SYSDEF_NM'
+                }
+                */
+            },
+            {
+                field: 'SLST_CD',
+                title: '호봉',
+                width: 80,
+                editor: {
+                    type: 'string',
+                    editable: false
+                }
+            },
+            {
+                field: 'JNCO_DT',
+                title: '입사일자',
+                width: 80,
+                formats: {
+                    type: 'date',
+                    format: 'yyyy-MM-dd'
+                }
+            },
+            {
+                field: 'CONT_START_DT',
+                title: '계약시작일',
+                width: 80,
+                visible: false,
+                formats: {
+                    type: 'date',
+                    format: 'yyyy-MM-dd'
+                }
+            },
+            {
+                field: 'CONT_END_DT',
+                title: '계약종료일',
+                width: 80,
+                visible: false,
+                formats: {
+                    type: 'date',
+                    format: 'yyyy-MM-dd'
+                }
+            }
+        );
+
+        self.selectEmpDataSource.setFields(fields);
+        self.selectEmpGrid.setColumns(columns);
+    }
+    else {
+        dews.ui.snackbar.error('공통입력코드에 책정임금 코드가 등록되어 있지 않습니다.');
+        return false;
+    }
+}
+
+//# sourceURL=PAMPHM00500_EMP_POP.js
+
+]]></javascript>
+    <javascript id="e83a54e5-fccb-400f-a8bd-7fdc4a41b326"><![CDATA[//필수셋팅
+{
+    var objCodeDtl = {};
+    self._cgo = {}; // custom global object
+    self._cgo.loadJS = function (moduleName, js) { // load JS
+        self.$content.append('<script src=\'/view/js/' + moduleName + '/' + js + '\'><\/script>');
+    }
+    self._cgo.loadJS('HR', 'hr.getCodeData.js');
+}
+
+//변수선언
+{
+    var dialog = dews.ui.dialog(self.$content.prop("id"));
+    var empDataSource;
+}
+
+//codeDtl 가져오기.
+{
+    objCodeDtl = derp.HR.codeData('HR', 'P00200|P00220|P00630|P00640|P00650|P00750|P00010|');   // 책정임금, 사원구분, 남녀구분, 직위, 직급, 재직구분, 고용형태
+}
+
+
+
+]]></javascript>
+    <javascript id="5c7a8f7e-3374-4db4-bdc8-0c18ebc56862"><![CDATA[function (e) {
+    // TODO: 데이터소스를 저장합니다.
+    if (self.selectEmpGrid.getCheckedRows().length < 1) {
+        dews.alert('체크된 데이터가 없습니다.', 'warning');
+        return false;
+    }
+
+    // 서비스 파라미터명과 데이터소스명이 다른경우
+    dews.confirm('체크된 데이터로 사원선정을 진행하시겠습니까?', 'question').yes(function () {
+        dews.api.post(dews.url.getApiUrl('HR', 'PAMPHM00500_SERVICE', 'Pamphm00500_pop_saveEmp'), {
+            async: false,
+            data: {
+                checkDataSource: JSON.stringify(self.selectEmpGrid.getCheckedRows())
+            }
+        }).done(function (data) {
+            dialog.ok();
+            dews.ui.snackbar.ok('이미 생성된 사원들을 제외하고 대상자를 생성하였습니다.');
+        }).fail(function (xhr, status, error) {
+            //dews.error('저장이 실패하였습니다.', 'ico1');
+            dews.ui.snackbar.error(error);
+        });
+    });
+}]]></javascript>
+    <javascript id="850773bc-8368-4dc6-86e0-4282c68f93ce"><![CDATA[function (e) {
+    dialog.close();
+}]]></javascript>
+  </javascripts>
+  <settings />
+  <datas />
+</page>
