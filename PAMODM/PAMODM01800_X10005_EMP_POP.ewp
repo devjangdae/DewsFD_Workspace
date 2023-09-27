@@ -5,19 +5,19 @@
       <version>1.0</version>
       <create>shindong</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-26T15:29:56.5628925+09:00</builddate>
+      <builddate>2023-09-27T10:26:38.5796512+09:00</builddate>
       <createdate>2021-06-29T10:24:40.8320275+09:00</createdate>
-      <modifieddate>2023-09-26T15:29:56.5628925+09:00</modifieddate>
+      <modifieddate>2023-09-27T10:26:38.5796512+09:00</modifieddate>
     </pageInformation>
     <conditionPanel uid="conditionPanel-1624929933187" id="conditionpanel1" margin="false" optional="false" optionalcollapsed="true" columnLength="3" labelAlign="right">
       <conditionGroup uid="conditionGroup-1624929933314" type="required">
         <conditionItem uid="conditionItem-c5d6cf2b65b64032a694025b47cbaa5c" columnSize="1" text="고용형태">
-          <dropdownlist uid="dropdownlist-51797269d5814366b57790c18fc587a7" id="ddl2" autoBind="true" dataSource="pipeDataSource1" valueField="SYSDEF_CD" textField="SYSDEF_NM" pipeparam="P00010" useDefault="false" defaultValue="" defaultText="" width_type="px" disabled="false" readonly="false" autoOpen="false" useNumkey="false" showTooltip="true" showValueTooltip="true" state="basic">
+          <dropdownlist uid="dropdownlist-51797269d5814366b57790c18fc587a7" id="s_HLOF_FG_CD" autoBind="true" dataSource="pipeDataSource1" valueField="SYSDEF_CD" textField="SYSDEF_NM" pipeparam="P00010" useDefault="false" defaultValue="" defaultText="" width_type="px" disabled="false" readonly="false" autoOpen="false" useNumkey="false" showTooltip="true" showValueTooltip="true" state="basic">
             <designerComment>고용형태</designerComment>
           </dropdownlist>
         </conditionItem>
         <conditionItem uid="conditionItem-82cae4417c6644cc940be7990cbe46d9" columnSize="1" text="검색어">
-          <textbox uid="textBox-13b8343a981d48a19beeb66c92a5fd8a" id="txt1" disabled="false" readonly="false" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false">
+          <textbox uid="textBox-13b8343a981d48a19beeb66c92a5fd8a" id="s_TXT_SEARCH" disabled="false" readonly="false" predefined="false" useSecureMask="false" multiline="false" width_type="px" height_type="px" rows="0" maxlength="0" password="false">
             <designerComment>검색어</designerComment>
           </textbox>
         </conditionItem>
@@ -25,7 +25,7 @@
     </conditionPanel>
     <containerPanel uid="containerPanel-1574656735968" height_type="px" fitBottom="true" containerResize="false">
       <containerItem uid="containerItem-1574656736365" width_type="px" location="normal">
-        <grid uid="grid-1574764074090" mockupData="" id="grid1" dataSource="ds1" height_type="px" height="400" editable="false" movable="false" rowNo="true" selectable="false" checkable="true" pasteAddRowEvent="false" sortable="multiple" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
+        <grid uid="grid-1574764074090" mockupData="" id="grid1" dataSource="ds1" height_type="px" editable="false" movable="false" rowNo="true" selectable="false" checkable="true" pasteAddRowEvent="false" sortable="multiple" shiftCheck="false" autoBind="false" requiredCheck="false" stateColumn="false" noData="false" noDataMessage="데이터가 없습니다." fillWidth="true" resizable="true" contextType="Boolean" context="false" contextex="true" skipEdit="false" copyMode="cell" multiFooterCnt="0" multiHeaderSummaryCnt="0" useGridUserGroup="false">
           <columns>
             <column uid="83e8e9e9-d7a5-4039-9180-7b04384c9aaa" field="DEPT_CD" title="부서코드" width="0" align="center" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
@@ -38,7 +38,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <codepicker helpCode="H_MA_DEPT_MST_S" codeField="DEPT_CD" textField="DEPT_NM" helpCustom="false" helpTitle="부서 도움창" helpSize="big" useAjax="true" validation="true" editable_type="value">
                   <mapping>
@@ -53,7 +55,7 @@
               </editor>
               <customExport check="" />
             </column>
-            <column uid="8a0b947f-3f5d-4022-b670-643e26e1bfd3" field="EMP_NO" title="사번코드" width="60" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="8a0b947f-3f5d-4022-b670-643e26e1bfd3" field="EMP_NO" title="사번코드" width="30" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -64,7 +66,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <codepicker helpCode="H_ME_SHEMP_MST_C" codeField="EMP_NO" textField="KOR_NM" helpCustom="false" helpTitle="작업자별 레시피 조회 도움창" helpSize="largebig" useAjax="true" validation="true" editable_type="value">
                   <mapping />
@@ -72,7 +76,7 @@
               </editor>
               <customExport check="" />
             </column>
-            <column uid="85d5cab7-f62d-4b0b-9a94-b89d280b1200" field="KOR_NM" title="사원성명" width="90" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="85d5cab7-f62d-4b0b-9a94-b89d280b1200" field="KOR_NM" title="사원성명" width="30" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -83,11 +87,15 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
-            <column uid="e50bff4b-d8ec-43fe-ad23-0cff577ba885" field="JNCO_DT" title="입사일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
+            <column uid="e50bff4b-d8ec-43fe-ad23-0cff577ba885" field="JNCO_DT" title="입사일" width="30" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
               <mergeObject innerFocus="true" verticalTop="false" referenceFieldType="String" referenceField="">
                 <referenceFieldArray />
               </mergeObject>
@@ -117,7 +125,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <codepicker helpCode="H_MA_COMPANY_S01" codeField="COMPANY_CD" textField="COMPANY_NM" helpCustom="false" helpTitle="회사 도움창" helpSize="medium" useAjax="true" validation="true" editable_type="value">
                   <mapping />
@@ -136,7 +146,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" dataPipe="P00660" useDefault="false" defaultValue="" defaultText="">
                   <dataSelectable />
@@ -155,7 +167,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" dataPipe="P00650" useDefault="false" defaultValue="" defaultText="">
                   <dataSelectable />
@@ -190,8 +204,11 @@
     </buttonGroup>
   </canvas>
   <dataSources>
-    <datasource uid="datasource-90e4cfa5d94d4f148bc46924276826dd" id="ds1" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="HRPamodm01800_X10005Service" urlpattern="list_HR_EMP_MST" params_type="none" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
-      <mapping />
+    <datasource uid="datasource-90e4cfa5d94d4f148bc46924276826dd" id="ds1" isTreeGrid="false" grid="true" aggregate="false" group="false" userGroup="false" type="dataservice" module="HR" service="HRPamodm01800_X10005Service" urlpattern="list_HR_EMP_MST" params_type="mapping" params="" preview_type="none" preview="" localdata="" url="" useGroup="false" isMultiPipe="false" pipeparam="" pipecolumn="" paging="false" pagingCount="500" error="" DSType="Grid" isPost="false">
+      <mapping>
+        <param parameter="hlof_fg_cd" applyType="control" dataType="s_HLOF_FG_CD" value="value" />
+        <param parameter="txt_search" applyType="control" dataType="s_TXT_SEARCH" value="text" />
+      </mapping>
       <columns>
         <column field="DEPT_CD" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="부서코드" useAggregate="false" aggregate="" useGroup="false" />
         <column field="EMP_NO" unionfield="" dataType="string" editable="false" useType="true" isID="false" isChildren="false" description="사번코드" useAggregate="false" aggregate="" useGroup="false" />
@@ -246,6 +263,33 @@
 
 ]]></javascript>
     <javascript id="0c171119-0e8c-41e0-b1b6-31697718e20d"><![CDATA[self.ds1.read();
+//검색어 컨트롤에서 ENTER키 입력
+{
+    self.$s_TXT_SEARCH.on('keydown', function (e) {
+        var keycode = event.keyCode ? event.keyCode : e.which;
+        if (keycode == 13) {
+            // alert("enter입력!");
+            self.ds1.read();
+        }
+    });
+}
+
+function list_HR_EMP_MST(hlof_fg_cd, txt_search) {
+    dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "list_HR_EMP_MST"), {
+        async: false,
+        data: {
+            hlof_fg_cd: hlof_fg_cd,
+            txt_search: txt_search
+        }
+    }).done(function (data) {
+
+        console.log(data);
+        // self.grid1.setCellValue(self.grid1.select(), 'OGRP_CD', data[0].SYSDEF_NM);
+        // self.grid1.setCellValue(self.grid1.select(), 'PSTN_CD', data[1].SYSDEF_NM);
+    }).fail(function (xhr, status, error) {
+        dews.error(xhr.responseJSON.message);
+    });
+}
 
 
 ]]></javascript>

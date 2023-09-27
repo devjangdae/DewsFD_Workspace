@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-09-26T16:10:11.3587571+09:00</builddate>
+      <builddate>2023-09-27T11:04:01.3580612+09:00</builddate>
       <createdate>2023-08-19T16:24:30.0402565+09:00</createdate>
-      <modifieddate>2023-09-26T16:10:11.3587571+09:00</modifieddate>
+      <modifieddate>2023-09-27T11:04:01.3580612+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="normal" type="information" />
@@ -70,8 +70,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="d466331a-9dcd-40c8-a4a9-ab53aa923970" field="EMP_NO" title="사원번호" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
@@ -85,8 +89,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="17236a05-8784-4399-b745-1989e9f30603" field="KOR_NM" title="사원명" width="75" align="left" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
@@ -100,8 +108,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="baef8ea9-75cc-4bfe-a261-52791dad6c63" field="ORG" title="소속" width="210" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="false" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
@@ -115,8 +127,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="d3c90575-2a01-434a-9f65-7e00287e208f" field="DEPT_CD" title="부서코드" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="false" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
@@ -130,8 +146,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="80d576aa-869c-4b48-8652-7985337f823f" field="OGRP_CD" title="직군" width="60" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
@@ -145,7 +165,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" editable="false" useDefault="false" defaultValue="" defaultText="">
                   <dataSelectable />
@@ -164,7 +186,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <dropdownlist dataSource_type="value" dataSource="pipeDataSource1" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" editable="false" useDefault="false" defaultValue="" defaultText="">
                   <dataSelectable />
@@ -259,8 +283,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="8db8f8f6-fe7d-409d-9bf8-8c2179db3915" field="END_DT" title="종료일" width="80" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="required" footerType="object" headerType="object">
@@ -293,8 +321,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="8ceac1eb-9123-490d-94ad-e454c589f14c" field="TM_CD_NM" title="시간\n코드" width="90" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="readonly" footerType="object" headerType="object">
@@ -308,8 +340,12 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
-              <editor />
+              <formats>
+                <DesignerControl />
+              </formats>
+              <editor>
+                <DesignerControl />
+              </editor>
               <customExport check="" />
             </column>
             <column uid="bea8446b-edfc-4806-a725-b44d4823416a" field="DOF_TP" title="휴무\n유형" width="60" align="center" editSkip="false" sortable="true" filter="true" visible="true" hideChildHeaders="false" mergeType="Boolean" merge="false" mergeString="" editingMergedRow="false" grouping="false" groupable="true" movable="true" showTooltip="false" attributes="none" footerType="object" headerType="object">
@@ -323,7 +359,9 @@
               <footerCollection />
               <headerSummary predefined="false" currency_type="value" currency="" align="center" />
               <headerSummaryCollection />
-              <formats />
+              <formats>
+                <DesignerControl />
+              </formats>
               <editor>
                 <dropdownlist dataSource_type="value" dataSource="pipeData" dataValueField="SYSDEF_CD" dataTextField="SYSDEF_NM" autoOpen="false" editable_type="value" editable="true" useDefault="false" defaultValue="" defaultText="">
                   <dataSelectable />
@@ -579,11 +617,16 @@ self.version.service = 'HRPamodm01800_X10005Service';
     var dialog;
     dialog = dews.ui.dialog('PAMODM01800_X10005_EMP_POP', {
         url: '/view/HR/PAMODM01800_X10005_EMP_POP',
-        title: '커커커1 도움창',
-        width: 800,
-        height: 400,
+        title: '사원 도움창',
+        width: 650,
+        height: 600,
         //initData: initData,
         ok: function (data) {
+            console.log("시간체크1");
+            dews.ui.loading.show({ // 로딩화면 보여주기
+                text: '조회중입니다.'
+            });
+
             console.log(data);
 
             for (i = 0; i < data.length; i++) {
@@ -597,7 +640,8 @@ self.version.service = 'HRPamodm01800_X10005Service';
                 get_ogrp_cd_pstn_cd(data[i].COMPANY_CD, data[i].OGRP_CD, data[i].PSTN_CD);
                 get_prmt_dt_retm_dt(data[i].COMPANY_CD, data[i].EMP_NO);
             }
-
+            dews.ui.loading.hide();
+            console.log("시간체크2");
         }
     });
     dialog.open();
@@ -746,7 +790,7 @@ function getFormatDate(date) {
 
 function get_org(company_cd, dept_cd) {
     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_org"), {
-        async: false,
+        async: true,
         data: {
             company_cd: company_cd,
             dept_cd: dept_cd
@@ -760,7 +804,7 @@ function get_org(company_cd, dept_cd) {
 
 function get_ogrp_cd_pstn_cd(company_cd, ogrp_cd, pstn_cd) {
     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_ogrp_cd_pstn_cd"), {
-        async: false,
+        async: true,
         data: {
             company_cd: company_cd,
             ogrp_cd: ogrp_cd,
@@ -776,7 +820,7 @@ function get_ogrp_cd_pstn_cd(company_cd, ogrp_cd, pstn_cd) {
 
 function get_prmt_dt_retm_dt(company_cd, emp_no) {
     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_prmt_dt_retm_dt"), {
-        async: false,
+        async: true,
         data: {
             company_cd: company_cd,
             emp_no: emp_no
@@ -791,7 +835,7 @@ function get_prmt_dt_retm_dt(company_cd, emp_no) {
 
 function get_tm_cd_nm(emp_no, bwrk_dt) {
     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_tm_cd_nm"), {
-        async: false,
+        async: true,
         data: {
             emp_no: emp_no,
             bwrk_dt: bwrk_dt
