@@ -5,9 +5,9 @@
       <version>1.0</version>
       <create>tjqkd0912</create>
       <modify>tjqkd0912</modify>
-      <builddate>2023-10-04T11:32:23.4950282+09:00</builddate>
+      <builddate>2023-10-09T18:25:45.3568583+09:00</builddate>
       <createdate>2023-08-19T16:24:30.0402565+09:00</createdate>
-      <modifieddate>2023-10-04T11:32:23.4950282+09:00</modifieddate>
+      <modifieddate>2023-10-09T18:25:45.3578563+09:00</modifieddate>
     </pageInformation>
     <mainButtons uid="mainButtons-1385142915113">
       <mainButton uid="mainButton-1485142971049" id="information" buttonAttr="normal" type="information" />
@@ -590,6 +590,16 @@ self.version.service = 'HRPamodm01800_X10005Service';
 ]]></javascript>
     <javascript id="3516b08b-047a-4054-b023-cb9f10a0b781"><![CDATA[function () {
     // conditionPanel의 조회조건의 필수값 검사가 필요한경우
+    if (self.s_BIZAREA_CD.codes() == "" || self.s_BIZAREA_CD.codes() == undefined || self.s_BIZAREA_CD.codes() == null) {
+        dews.alert("사업장은 필수입력 항목입니다.", 'warning');
+        return false;
+    }
+
+    if (self.s_DEPT_CD.codes() == "" || self.s_DEPT_CD.codes() == undefined || self.s_DEPT_CD.codes() == null) {
+        dews.alert("부서는 필수입력 항목입니다.", 'warning');
+        return false;
+    }
+
     if (!self.conditionpanel1.validate()) {
         return;
     }
@@ -614,6 +624,16 @@ self.version.service = 'HRPamodm01800_X10005Service';
     }
 }]]></javascript>
     <javascript id="d1cbdcb0-8f4b-4a3e-9937-683f712ca116"><![CDATA[function () {
+    if (self.s_BIZAREA_CD.codes() == "" || self.s_BIZAREA_CD.codes() == undefined || self.s_BIZAREA_CD.codes() == null) {
+        dews.alert("사업장은 필수입력 항목입니다.", 'warning');
+        return false;
+    }
+
+    if (self.s_DEPT_CD.codes() == "" || self.s_DEPT_CD.codes() == undefined || self.s_DEPT_CD.codes() == null) {
+        dews.alert("부서는 필수입력 항목입니다.", 'warning');
+        return false;
+    }
+
     var dialog;
     dialog = dews.ui.dialog('PAMODM01800_X10005_EMP_POP', {
         url: '/view/HR/PAMODM01800_X10005_EMP_POP',
@@ -654,6 +674,19 @@ self.version.service = 'HRPamodm01800_X10005Service';
                 dews.ui.loading.hide();
                 console.error(error);
             });
+
+            // for (i = 0; i < data.length; i++) {
+            //     self.grid1.addRow();
+            //     self.grid1.setCellValue(self.grid1.select(), 'EMP_NO', data[i].EMP_NO);
+            //     self.grid1.setCellValue(self.grid1.select(), 'KOR_NM', data[i].KOR_NM);
+            //     self.grid1.setCellValue(self.grid1.select(), 'JNCO_DT', data[i].JNCO_DT);
+
+            //     //추가 행 데이터 setCellValue
+            //     get_org(data[i].COMPANY_CD, data[i].DEPT_CD);
+            //     get_ogrp_cd_pstn_cd(data[i].COMPANY_CD, data[i].OGRP_CD, data[i].PSTN_CD);
+            //     get_prmt_dt_retm_dt(data[i].COMPANY_CD, data[i].EMP_NO);
+            // }
+            // dews.ui.loading.hide();
         }
     });
     dialog.open();
@@ -806,6 +839,65 @@ function getFormatDate(date) {
     return year + '' + month + '' + day;
 }
 
+// function get_org(company_cd, dept_cd) {
+//     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_org"), {
+//         async: false,
+//         data: {
+//             company_cd: company_cd,
+//             dept_cd: dept_cd
+//         }
+//     }).done(function (data) {
+//         self.grid1.setCellValue(self.grid1.select(), 'ORG', data);
+//     }).fail(function (xhr, status, error) {
+//         dews.error(xhr.responseJSON.message);
+//     });
+// }
+
+// function get_ogrp_cd_pstn_cd(company_cd, ogrp_cd, pstn_cd) {
+//     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_ogrp_cd_pstn_cd"), {
+//         async: false,
+//         data: {
+//             company_cd: company_cd,
+//             ogrp_cd: ogrp_cd,
+//             pstn_cd: pstn_cd
+//         }
+//     }).done(function (data) {
+//         self.grid1.setCellValue(self.grid1.select(), 'OGRP_CD', data[0].SYSDEF_NM);
+//         self.grid1.setCellValue(self.grid1.select(), 'PSTN_CD', data[1].SYSDEF_NM);
+//     }).fail(function (xhr, status, error) {
+//         dews.error(xhr.responseJSON.message);
+//     });
+// }
+
+// function get_prmt_dt_retm_dt(company_cd, emp_no) {
+//     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_prmt_dt_retm_dt"), {
+//         async: false,
+//         data: {
+//             company_cd: company_cd,
+//             emp_no: emp_no
+//         }
+//     }).done(function (data) {
+//         self.grid1.setCellValue(self.grid1.select(), 'PRMT_DT', data[0].DATE_VALUE);
+//         self.grid1.setCellValue(self.grid1.select(), 'RETM_DT', data[1].DATE_VALUE);
+//     }).fail(function (xhr, status, error) {
+//         dews.error(xhr.responseJSON.message);
+//     });
+// }
+
+// function get_tm_cd_nm(emp_no, bwrk_dt) {
+//     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_tm_cd_nm"), {
+//         async: false,
+//         data: {
+//             emp_no: emp_no,
+//             bwrk_dt: bwrk_dt
+//         }
+//     }).done(function (data) {
+//         self.grid1.setCellValue(self.grid1.select(), 'TM_CD_NM', data);
+//     }).fail(function (xhr, status, error) {
+//         dews.error(xhr.responseJSON.message);
+//     });
+// }
+
 function get_org(company_cd, dept_cd) {
     return new Promise((resolve, reject) => {
         dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_org"), {
@@ -865,6 +957,7 @@ function get_prmt_dt_retm_dt(company_cd, emp_no) {
 
 
 function get_tm_cd_nm(index, emp_no, bwrk_dt) {
+    if (bwrk_dt == '') return false;
     dews.api.get(dews.url.getApiUrl("HR", "HRPamodm01800_X10005Service", "get_tm_cd_nm"), {
         async: true,
         data: {
@@ -877,6 +970,13 @@ function get_tm_cd_nm(index, emp_no, bwrk_dt) {
         dews.error(xhr.responseJSON.message);
     });
 }
+
+self.$s_DEPT_CD.siblings('.dews-multicodepicker-wrap').find('.dews-icon.icon-search').on('click', function (e) {
+    if (self.s_BIZAREA_CD.codes() == null || self.s_BIZAREA_CD.codes() == '') {
+        dews.alert('사업장은 필수입력 항목입니다.', 'warning');
+        e.stopImmediatePropagation(); // 이벤트 전파 막음 return false
+    }
+});
 
 
 ]]></javascript>
